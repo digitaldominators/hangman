@@ -1,7 +1,7 @@
 # Setup
 requirements python 3.12(anything past 3.9 should be fine), npm, git
 
-git clone ...
+git clone https://github.com/smark-1/hangman.git
 
 ## backend
 install dependencies

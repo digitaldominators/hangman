@@ -52,15 +52,16 @@ class Guess(models.Model):
         verbose_name_plural = "guesses"
 
 class GameMap(models.Model):
-    player_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+    player_1 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
     player_2 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
 
-    game_1 = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='+')
+    game_1 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
     game_2 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
 
     game_slug = models.SlugField(unique=True, blank=True, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
+    is_multiplayer = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.game_slug:

@@ -91,3 +91,10 @@ linux/mac
 migrate database
 
     python manage.py migrate
+
+### django admin
+The admin panel is an easy way to view the relevant data in the database. It allows you to create, edit, and delete the data. This is very useful for testing.
+ 
+To view the admin you must have an administrator account. To create an account activate the virtual environment
+Then in the backend directory run `python manage.py createsuperuser` and follow the prompts.
+Make sure the backend server is running then visit http://localhost:8000/admin

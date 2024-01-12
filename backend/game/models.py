@@ -30,6 +30,9 @@ class Game(models.Model):
     def add_incorrect_guess(self, guess):
         return Guess.objects.create(guess=guess, game=self, correct=False)
 
+    class Meta:
+        ordering = ["created"]
+
 
 class Guess(models.Model):
     # longest english word is 45 letters so max_length should be big enough
@@ -44,6 +47,9 @@ class Guess(models.Model):
     def __str__(self):
         return self.guess
 
+    class Meta:
+        ordering = ["game","created"]
+        verbose_name_plural = "guesses"
 
 class GameMap(models.Model):
     player_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
@@ -57,5 +63,11 @@ class GameMap(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)
+        if not self.game_slug:
+            self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.game_slug
+    class Meta:
+        ordering = ['created']

@@ -48,8 +48,9 @@ class Guess(models.Model):
         return self.guess
 
     class Meta:
-        ordering = ["game","created"]
+        ordering = ["game", "created"]
         verbose_name_plural = "guesses"
+
 
 class GameMap(models.Model):
     player_1 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
@@ -63,6 +64,11 @@ class GameMap(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_multiplayer = models.BooleanField(default=False)
 
+    # since users can be anonymous we can't rely on checking if player_1 and player_2 are not None
+    # since the player can be set with a session token instead so we have to use full to check
+    # if all users are set not player_1, player_2
+    full = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         if not self.game_slug:
             self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)
@@ -70,5 +76,6 @@ class GameMap(models.Model):
 
     def __str__(self):
         return self.game_slug
+
     class Meta:
         ordering = ['created']

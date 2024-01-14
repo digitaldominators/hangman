@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Guess, Game, GameMap
 
 
@@ -33,9 +34,10 @@ class GameAdmin(admin.ModelAdmin):
     def num_incorrect_guesses(self, obj):
         return obj.guesses.filter(correct=False).count()
 
+
 class GameMapAdmin(admin.ModelAdmin):
-    list_filter = ['created']
-    list_display = ['game_slug','player_1', 'player_2', "game_1", "game_2",  'created']
+    list_filter = ['created', 'full']
+    list_display = ['game_slug', 'player_1', 'player_2', "game_1", "game_2", 'created', 'full']
     search_fields = ["game_slug"]
     readonly_fields = ["created"]
 

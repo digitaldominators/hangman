@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -9,16 +10,19 @@ from rest_framework.response import Response
 
 from generate_random_word import generate_random_word
 
-from .serializers import JoinGameSerializer
+from .serializers import JoinGameSerializer, GameSerializer
 
 
 # Create your views here.
 class GameViewSet(viewsets.GenericViewSet):
+    queryset = GameMap.objects.all()
     def get_serializer_class(self):
         if self.action == 'create':
             return NewGameSerializer
         elif self.action == 'join_game':
             return JoinGameSerializer
+
+        return GameSerializer
 
     def get_current_game(self, request, slug):
         game_map = GameMap.objects.get(slug=slug)
@@ -58,9 +62,12 @@ class GameViewSet(viewsets.GenericViewSet):
             else:
                 game_map = GameMap.objects.create(game_1=game, is_multiplayer=False, full=True)
                 request.session[f'game__{game_map.game_slug}'] = 1
-        return Response({"game_slug"     : game_map.game_slug,
-                         "is_multiplayer": game_map.is_multiplayer,
-                         "is_logged_in"  : request.user.is_authenticated},
+
+        game_serializer = GameSerializer(game_map)
+        # add if user is logged in or not
+        data = game_serializer.data
+        data['is_logged_in'] = request.user.is_authenticated
+        return Response(data,
                         status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=['post'])
@@ -82,7 +89,26 @@ class GameViewSet(viewsets.GenericViewSet):
         game_map.full = True
         game_map.save()
 
-        return Response({"game_slug"     : game_map.game_slug,
-                         "is_multiplayer": game_map.is_multiplayer,
-                         "is_logged_in"  : request.user.is_authenticated},
-                        status=status.HTTP_201_CREATED)
+        game_serializer = GameSerializer(game_map)
+        # add if user is logged in or not
+        data = game_serializer.data
+        data['is_logged_in'] = request.user.is_authenticated
+        return Response(data, status=status.HTTP_201_CREATED)
+
+
+    def list(self, request):
+        if request.user.is_authenticated:
+            games = GameMap.objects.filter(Q(player_1=request.user) | Q(player_2=request.user))
+            serializer = GameSerializer(games, many=True)
+            return Response(serializer.data)
+        else:
+            games = request.session.keys()
+            # filter list of all the session keys to be just the sessions for games
+            games = [game for game in games if game.startswith("game__")]
+            # remove the game__ prefix from each string
+            games = [game[6:] for game in games]
+
+            # get game objects from database
+            games = GameMap.objects.filter(game_slug__in=games)
+            serializer = GameSerializer(games, many=True)
+            return Response(serializer.data)

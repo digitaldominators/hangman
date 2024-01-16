@@ -3,7 +3,7 @@ export default defineConfig({
     // config options
     server: {
         proxy: {
-            // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
+            // proxy http://localhost:5173/api -> http://localhost:8000/api
             '/api': {
                 target:'http://localhost:8000',
                 changeOrigin: true,

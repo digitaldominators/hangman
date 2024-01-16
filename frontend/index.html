@@ -4,10 +4,41 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Hangman</title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/index.js"></script>
+    <button id="new_game_button">new game</button>
+    <button id="join_game_button">join game</button>
+
+    <dialog id="new_game_modal">
+        <p>New Game</p>
+        <form id="new_game_form">
+            <label>
+                single player
+                <input type="checkbox" name="single_player">
+            </label>
+            <label id="new_game_word">
+                Other players guess word
+                <input type="text" name="word">
+            </label>
+            <input type="submit">
+        </form>
+    </dialog>
+    <dialog id="join_game_modal">
+        <p>Join Game</p>
+        <form id="join_game_form">
+            <label>
+                join code
+                <input type="text" name="join_code">
+            </label>
+            <label>
+                Other players guess word
+                <input type="text" name="word">
+            </label>
+            <input type="submit">
+        </form>
+    </dialog>
   </body>
 </html>

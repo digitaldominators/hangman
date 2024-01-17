@@ -4,11 +4,53 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script type="module" src="/index.js"></script>
+      <link rel="stylesheet" href="/style.css">
     <title>Hangman</title>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/index.js"></script>
+  <body class="bg-background-color mx-auto">
+  <div style="width: 1024px; height: 1440px; position: relative;">
+      {{> navbar }}
+
+      <div class="w-[1000px] h-[85%] relative m-auto p-10" style="background: linear-gradient(180deg, #A8E0E3 0%, rgba(9.61, 145.79, 152.95, 0) 100%); border-radius: 22px">
+
+          <div class="absolute w-5 h-5 top-5 left-5 rounded-full bg-circle" ></div>
+          <div class="absolute w-5 h-5 top-5 right-5 rounded-full bg-circle"></div>
+          <div class="absolute w-5 h-5 bottom-5 left-5 rounded-full bg-circle"></div>
+          <div class="absolute w-5 h-5 bottom-5 right-5 rounded-full bg-circle"></div>
+
+          <div class="relative m-auto flex">
+              <img class="m-auto rounded-2xl border-[14px] border-landing-image-border" src="https://via.placeholder.com/662x637" />
+              <div class="absolute bottom-10 left-0 right-0">
+                  <div class="flex justify-center gap-5">
+                      <div style="width: 293px; height: 64px; position: relative">
+                          <div style="width: 293px; height: 64px; left: 0px; top: 0px; position: absolute; background: #C6EAF0; border-radius: 13px; border: 5px #032F2F solid"></div>
+                          <div style="width: 248px; height: 35px; left: 23px; top: 14px; position: absolute; text-align: center; color: #032F2F; font-size: 32px; font-family: Shojumaru; font-weight: 400; word-wrap: break-word">Start Game</div>
+                      </div>
+                      <div style="width: 293px; height: 64px; position: relative">
+                          <div style="width: 293px; height: 64px; left: 0px; top: 0px; position: absolute; background: #C6EAF0; border-radius: 13px; border: 5px #032F2F solid"></div>
+                          <div style="width: 253px; height: 35px; left: 17px; top: 14px; position: absolute; text-align: center; color: #023939; font-size: 32px; font-family: Shojumaru; font-weight: 400; word-wrap: break-word">Join Game</div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+          <div class="bg-white p-7 w-[690px] m-auto border border-black my-10">
+              <div style="font-family: Short Stack;font-size: 22.40px; font-weight: 400; letter-spacing: 1.60px;">How To Play Hangman</div>
+              <div style="font-size: 16px; font-family: Short Stack; font-weight: 400; word-wrap: break-word">
+                  Press start game or join game to join another player to solve the puzzle.
+                  You will be presented with a number of blank spaces representing the missing word.
+                  Use the keyboard to guess a letter (I recommend starting with vowels).
+                  If your chosen letter exists in the answer, then all places in the answer where that letter appear will be revealed.
+                  After you've revealed several letters, you may be able to guess what the answer is and fill in the remaining letters.
+                  The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece.
+                  Solve the puzzle before the hangman dies.
+              </div>
+          </div>
+      </div>
+  </div>
+
     <button id="new_game_button">new game</button>
     <button id="join_game_button">join game</button>
 
@@ -40,5 +82,6 @@
             <input type="submit">
         </form>
     </dialog>
+  {{> footer }}
   </body>
 </html>

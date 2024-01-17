@@ -14,7 +14,8 @@ export default {
         'footer-background':"#555555",
         'footer-link-color':"#F6F6F6",
         'circle':"#D9D9D9",
-        'landing-image-border':"#074D4D"
+        'landing-image-border':"#074D4D",
+        "button-outline":"#032F2F",
       },fontFamily:{
         'shortStack':['Short Stack'],
         'shojumaru':['Shojumaru']

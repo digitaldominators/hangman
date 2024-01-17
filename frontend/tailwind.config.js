@@ -16,6 +16,7 @@ export default {
         'circle':"#D9D9D9",
         'landing-image-border':"#074D4D",
         "button-outline":"#032F2F",
+        "nav-icon":"#FF4747"
       },fontFamily:{
         'shortStack':['Short Stack'],
         'shojumaru':['Shojumaru']

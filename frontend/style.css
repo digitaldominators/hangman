@@ -5,6 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 body{
+    @apply bg-background-color mx-auto;
     height: 100vh;
     display: grid;
     grid-template:

@@ -28,3 +28,8 @@ footer{
     grid-area: footer;
 }
 
+.home-game-button{
+    @apply w-3/5 relative p-1 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[22px] text-center;
+    @apply hover:bg-[#4AA8A8] hover:text-white hover:shadow-inner hover:border-[#032F2F] duration-300;
+
+}

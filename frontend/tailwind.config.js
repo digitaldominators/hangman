@@ -19,7 +19,8 @@ export default {
         "nav-icon":"#FF4747"
       },fontFamily:{
         'shortStack':['Short Stack'],
-        'shojumaru':['Shojumaru']
+        'shojumaru':['Shojumaru'],
+        'titanOne': ['Titan One']
       }
     },
   },

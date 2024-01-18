@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body{
+    height: 100vh;
+    display: grid;
+    grid-template:
+        "navbar" 60px
+        "body" 1fr
+        "footer" 50px
+}
+nav{
+    grid-area: navbar;
+}
+main{
+    overflow: auto;
+    grid-area: body;
+    @apply mx-32 my-5 p-10 relative;
+    background: rgb(168,224,227);
+    background: linear-gradient(180deg, rgba(168,224,227,1) 0%, rgba(10,145,152,0) 100%);
+    border-radius: 22px;
+}
+footer{
+    grid-area: footer;
+}
+

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <script type="module" src="/index.js"></script>
-      <link rel="stylesheet" href="/style.css">
+      <script type="module" src="/js/index.js"></script>
+      <link rel="stylesheet" href="/css/style.css">
     <title>Hangman</title>
   </head>
   <body>
@@ -13,12 +13,12 @@
   <main>
       <div class="relative h-3/5 w-1/3 border-landing-image-border border-[14px] bg-cover rounded-2xl mx-auto bg-[url('/hangman.png')]">
           <div class="flex justify-center gap-5 absolute bottom-5 left-0 right-0 mx-2.5">
-              <button id="new_game_button" class="home-game-button">
+              <a href="/new" id="new_game_button" class="home-game-button">
                   Start Game
-              </button>
-              <button id="join_game_button" class="home-game-button">
+              </a>
+              <a href="/join" id="join_game_button" class="home-game-button">
                  Join Game
-              </button>
+              </a>
           </div>
       </div>
 
@@ -35,7 +35,6 @@
           </p>
       </div>
   </main>
-
     <dialog id="new_game_modal">
         <p>New Game</p>
         <form id="new_game_form">

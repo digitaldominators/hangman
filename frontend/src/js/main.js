@@ -2,6 +2,8 @@
 import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
 import {gsap} from "gsap";
+import loadJoinPage from './join.js';
+import loadNewPage from './new.js';
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
@@ -20,5 +22,19 @@ barba.init({
                 opacity: 0
             });
         }
-    }]
+    }],
+    views: [
+        {
+            namespace: 'new',
+            afterEnter({next}) {
+                loadNewPage()
+            }
+        },{
+            namespace: 'join',
+            afterEnter({next}) {
+                loadJoinPage()
+            }
+        }
+
+    ]
 });

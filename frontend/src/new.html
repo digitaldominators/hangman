@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Hangman - new game</title>
+</head>
+<body data-barba="wrapper">
+{{> navbar }}
+<div id="main-container">
+    <main data-barba="container" data-barba-namespace="new">
+    new game
+    <dialog id="new_game_modal" open>
+        <p>New Game</p>
+        <form id="new_game_form">
+            <label class="switch">
+                single player
+                <input type="checkbox" name="single_player">
+                <span></span>
+            </label>
+            <label id="new_game_word">
+                Other players guess word
+                <input type="text" name="word">
+            </label>
+            <input type="submit">
+        </form>
+    </dialog>
+</main>
+</div>
+{{> footer }}
+</body>
+</html>

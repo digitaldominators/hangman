@@ -4,66 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <script type="module" src="/js/index.js"></script>
+      <script type="module" src="/js/main.js"></script>
       <link rel="stylesheet" href="/css/style.css">
     <title>Hangman</title>
   </head>
-  <body>
+  <body data-barba="wrapper">
   {{> navbar }}
-  <main>
-      <div class="relative h-3/5 w-1/3 border-landing-image-border border-[14px] bg-cover rounded-2xl mx-auto bg-[url('/hangman.png')]">
-          <div class="flex justify-center gap-5 absolute bottom-5 left-0 right-0 mx-2.5">
-              <a href="/new" id="new_game_button" class="home-game-button">
-                  Start Game
-              </a>
-              <a href="/join" id="join_game_button" class="home-game-button">
-                 Join Game
-              </a>
+  <div id="main-container">
+      <main data-barba="container">
+          <div class="relative aspect-[4/3] w-full md:w-2/4 xl:w-1/3 border-landing-image-border border-[14px] bg-cover rounded-2xl mx-auto bg-[url('/hangman.png')]">
+              <div class="flex justify-center gap-5 absolute bottom-5 left-0 right-0 mx-2.5">
+                  <a href="/new" id="new_game_button" class="home-game-button">
+                      Start Game
+                  </a>
+                  <a href="/join" id="join_game_button" class="home-game-button">
+                      Join Game
+                  </a>
+              </div>
           </div>
-      </div>
 
-      <div class="w-[400px] 2xl:w-1/3 m-auto mt-6">
-          <h3 class="font-shortStack text-[20px] tracking-wider">How To Play Hangman</h3>
-          <p class="font-shortStack mt-2 text-xs 2xl:text-sm">
-              Press start game or join game to join another player to solve the puzzle.
-              You will be presented with a number of blank spaces representing the missing word.
-              Use the keyboard to guess a letter (I recommend starting with vowels).
-              If your chosen letter exists in the answer, then all places in the answer where that letter appear will be revealed.
-              After you've revealed several letters, you may be able to guess what the answer is and fill in the remaining letters.
-              The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece.
-              Solve the puzzle before the hangman dies.
-          </p>
-      </div>
-  </main>
-    <dialog id="new_game_modal">
-        <p>New Game</p>
-        <form id="new_game_form">
-            <label class="switch">
-                single player
-                <input type="checkbox" name="single_player">
-                <span></span>
-            </label>
-            <label id="new_game_word">
-                Other players guess word
-                <input type="text" name="word">
-            </label>
-            <input type="submit">
-        </form>
-    </dialog>
-    <dialog id="join_game_modal">
-        <p>Join Game</p>
-        <form id="join_game_form">
-            <label>
-                join code
-                <input type="text" name="join_code">
-            </label>
-            <label>
-                Other players guess word
-                <input type="text" name="word">
-            </label>
-            <input type="submit">
-        </form>
-    </dialog>
+          <div class="w-full md:w-2/3 xl:w-1/3 m-auto mt-6">
+              <h3 class="font-shortStack text-[20px] tracking-wider">How To Play Hangman</h3>
+              <p class="font-shortStack mt-2 text-xs 2xl:text-sm">
+                  Press start game or join game to join another player to solve the puzzle.
+                  You will be presented with a number of blank spaces representing the missing word.
+                  Use the keyboard to guess a letter (I recommend starting with vowels).
+                  If your chosen letter exists in the answer, then all places in the answer where that letter appear will be revealed.
+                  After you've revealed several letters, you may be able to guess what the answer is and fill in the remaining letters.
+                  The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece.
+                  Solve the puzzle before the hangman dies.
+              </p>
+          </div>
+      </main>
+  </div>
+
   {{> footer }}
   </body>
 </html>

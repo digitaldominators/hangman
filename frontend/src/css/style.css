@@ -16,7 +16,7 @@ body{
 nav{
     grid-area: navbar;
 }
-main{
+#main-container{
     overflow: auto;
     grid-area: body;
     @apply mx-32 my-5 p-10 relative;

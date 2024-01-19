@@ -16,11 +16,21 @@ export default {
         'circle':"#D9D9D9",
         'landing-image-border':"#074D4D",
         "button-outline":"#032F2F",
-        "nav-icon":"#FF4747"
+        "hover-button":"#4AA8A8",
+        "hover-button-border":"#032F2F",
+        "nav-icon":"#FF4747",
+        'switch-background':"#2A595C",
+        'switch-knob':"#91d0d5",
+        'timer-select':"#003939"
+
       },fontFamily:{
         'shortStack':['Short Stack'],
         'shojumaru':['Shojumaru'],
-        'titanOne': ['Titan One']
+        'titanOne': ['Titan One'],
+        'VT323': ['VT323'],
+        'inika':['Inika'],
+        'wallpoet':['Wallpoet'],
+        'unlock':['Unlock']
       }
     },
   },

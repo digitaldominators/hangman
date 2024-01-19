@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>Hangman - settings</title>
+</head>
+<body>
+    {{> navbar }}
+    <main>
+        <h1 class="font-titanOne text-center m-auto text-[#003939] text-[48px]">SETTINGS</h1>
+
+        <table class="table-auto mx-auto border-separate border-spacing-x-12">
+            <tbody>
+                <tr>
+                    <td class="settings-label">Sounds</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="settings-label">Level</td>
+                    <td>
+                        <div class="button-section">
+                            <button class="active">Easy</button>
+                            <button>Medium</button>
+                            <button>Hard</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="settings-label">Timer</td>
+                    <td>
+                        <div class="flex items-center my-4">
+                            <button class="block rounded-full bg-black text-background-color m-5 w-5 h-5 scale-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div class="px-10 text-[50px] bg-background-color rounded-full text-timer-select font-wallpoet">
+                                10<span class="font-unlock text-[20px]">sec</span>
+                            </div>
+                            <button class="block rounded-full bg-black text-background-color m-5 w-5 h-5 scale-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </main>
+    {{> footer }}
+</body>
+</html>

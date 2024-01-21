@@ -69,6 +69,12 @@ class GameMap(models.Model):
     # if all users are set not player_1, player_2
     full = models.BooleanField(default=False)
 
+    # game settings
+    # difficulty level number 1-3
+    level = models.PositiveSmallIntegerField(default=1)
+    # number of seconds before tern is skipped.
+    timer = models.PositiveSmallIntegerField(default=0)
+
     def save(self, *args, **kwargs):
         if not self.game_slug:
             self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)

@@ -18,17 +18,21 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 from game.views import GameViewSet
-from accounts.views import AccountViewSet
+from accounts import views
 
 router = routers.DefaultRouter()
 router.register(r'game', GameViewSet, basename='game')
-router.register(r'accounts', AccountViewSet, basename='account')
+#router.register(r'accounts', AccountViewSet, basename='account')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('register/', views.user_registration_view, name='register'),
+    path('login/', obtain_auth_token, name='login'),
+    path('logout/', views.logout, name='logout'),
 ]
 
 if settings.DEBUG:

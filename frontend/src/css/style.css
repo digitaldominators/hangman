@@ -1,67 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inika&family=Unlock&family=VT323&family=Wallpoet&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
+
+body {
     @apply bg-background-color mx-auto;
     height: 100vh;
     display: grid;
     grid-template:
         "navbar" 60px
         "body" 1fr
-        "footer" 50px
+        "footer" 50px;
 }
-nav{
+
+nav {
     grid-area: navbar;
 }
-#main-container{
+
+#main-container {
     overflow: auto;
     grid-area: body;
     @apply mx-32 my-5 p-10 relative;
     background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
     border-radius: 22px;
 }
-footer{
+
+footer {
     grid-area: footer;
 }
 
-.home-game-button{
-    @apply w-3/5 relative p-1 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[22px] text-center;
+.home-game-button {
+    @apply w-2/4 relative p-0.5 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[18px] text-center;
     @apply hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
-
 }
 
-.settings-label{
+.settings-label {
     @apply font-VT323 text-[48px];
 }
 
 .switch {
     @apply relative inline-block w-[60px] h-[34px];
-
-    input{
-        @apply w-0 h-0 opacity-0;
-    }
-
-    input:checked + span{
-        @apply bg-switch-background;
-        @apply before:bg-switch-knob before:translate-x-[26px];
-    }
-
-    span{
-        @apply bg-[#ccc] duration-300 rounded-full absolute cursor-pointer top-0 left-0 right-0 bottom-0;
-        @apply before:absolute before:content-[''] before:rounded-full before:h-[26px] before:w-[26px] before:left-[4px] before:bottom-[4px] before:bg-switch-background before:duration-300;
-    }
 }
 
-.button-section{
-    @apply w-[500px] bg-background-color rounded-[60px] p-4 flex flex-row gap-6;
+.switch input {
+    @apply w-0 h-0 opacity-0;
+}
 
-    button{
-        @apply bg-switch-knob rounded-[60px] font-inika grow p-1 text-[25px];
-    }
-    button.active{
-        border: 3px black solid;
-    }
+.switch input:checked + span {
+    @apply bg-switch-background;
+    @apply before:bg-switch-knob before:translate-x-[26px];
+}
+
+.switch span {
+    @apply bg-[#ccc] duration-300 rounded-full absolute cursor-pointer top-0 left-0 right-0 bottom-0;
+    @apply before:absolute before:content-[''] before:rounded-full before:h-[26px] before:w-[26px] before:left-[4px] before:bottom-[4px] before:bg-switch-background before:duration-300;
+}
+
+.button-section {
+    @apply w-[500px] bg-background-color rounded-[60px] p-4 flex flex-row gap-6;
+}
+
+.button-section button {
+    @apply bg-switch-knob rounded-[60px] font-inika grow p-1 text-[25px];
+}
+
+.button-section button.active {
+    border: 3px black solid;
 }

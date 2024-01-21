@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars';
 export default defineConfig({
+    root: "src",
+    publicDir: '../public',
     plugins: [handlebars({partialDirectory: './partials',})],
+    build: {
+        outDir: "../dist"
+    },
     // config options
     server: {
         proxy: {

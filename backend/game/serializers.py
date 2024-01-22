@@ -29,9 +29,20 @@ class GameModelSerializerPlayerMixin:
                 else:
                     return "join game"
         else:
-            return 'next turn'
+            return 'your turn'
 
-        return 'started'
+        if instance.game_2.guesses.count() == instance.game_1.guesses.count():
+            return 'your turn'
+        elif instance.game_2.guesses.count() > instance.game_1.guesses.count():
+            if player == 2:
+                return 'not your turn'
+            else:
+                return 'your turn'
+        else:
+            if player == 1:
+                return 'not your turn'
+            else:
+                return 'your turn'
 
     def get_player(self, instance):
         if self.context['request'].user.is_authenticated:

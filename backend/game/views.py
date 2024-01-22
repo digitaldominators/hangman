@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.exceptions import NotFound, NotAuthenticated
+from rest_framework.exceptions import NotFound
 
 from .models import GameMap, Game
 from game.serializers import NewGameSerializer
@@ -24,6 +24,8 @@ class GameViewSet(viewsets.GenericViewSet):
         elif self.action == 'join_game':
             return JoinGameSerializer
         elif self.action == 'update':
+            return UpdateGameSerializer
+        elif self.action == 'partial_update':
             return UpdateGameSerializer
         elif self.action == 'choose_word':
             return GameWordSerializer
@@ -82,18 +84,18 @@ class GameViewSet(viewsets.GenericViewSet):
                 game_map = GameMap.objects.create(is_multiplayer=True)
                 request.session[f'game__{game_map.game_slug}'] = 1
 
-            second_player_game = Game.objects.create(word=serializer.validated_data.get('word'))
+            second_player_game = Game.objects.create(word=serializer.validated_data.get('word').lower())
             game_map.game_2 = second_player_game
             game_map.save()
         else:  # single player game
-            game = Game.objects.create(word=generate_random_word())
+            game = Game.objects.create(word=generate_random_word().lower())
             if request.user.is_authenticated:
                 game_map = GameMap.objects.create(player_1=request.user, game_1=game, is_multiplayer=False, full=True)
             else:
                 game_map = GameMap.objects.create(game_1=game, is_multiplayer=False, full=True)
                 request.session[f'game__{game_map.game_slug}'] = 1
 
-        game_serializer = GameSerializer(game_map,context=self.get_serializer_context())
+        game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
         # add if user is logged in or not
         data = game_serializer.data
         data['is_logged_in'] = request.user.is_authenticated
@@ -141,7 +143,7 @@ class GameViewSet(viewsets.GenericViewSet):
                 return Response({"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED)
 
         # create game for player 1 with word set to players word
-        game = Game.objects.create(word=serializer.validated_data['word'])
+        game = Game.objects.create(word=serializer.validated_data['word'].lower())
         game_map.game_1 = game
         game_map.full = True
         game_map.save()
@@ -166,22 +168,22 @@ class GameViewSet(viewsets.GenericViewSet):
 
             # get game objects from database
             games = GameMap.objects.filter(game_slug__in=games)
-            serializer = GameSerializer(games, many=True,context=self.get_serializer_context())
+            serializer = GameSerializer(games, many=True, context=self.get_serializer_context())
             return Response(serializer.data)
 
     def retrieve(self, request, game_slug):
         game_map = self.get_game_map(request, game_slug)
-        return Response(GameSerializer(game_map,context=self.get_serializer_context()).data)
+        return Response(GameSerializer(game_map, context=self.get_serializer_context()).data)
 
     def update(self, request, game_slug):
         """
         update the game map
         """
         game_map = self.get_game_map(request, game_slug)
-        serializer = self.get_serializer_class()(game_map, data=request.data,context=self.get_serializer_context())
+        serializer = self.get_serializer_class()(game_map, data=request.data, context=self.get_serializer_context())
         if serializer.is_valid():
             serializer.save()
-            data = GameSerializer(game_map,context=self.get_serializer_context()).data
+            data = GameSerializer(game_map, context=self.get_serializer_context()).data
             return Response(data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

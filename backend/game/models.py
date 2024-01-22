@@ -14,11 +14,11 @@ class Game(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     @property
-    def correct_guess(self):
+    def correct_guesses(self):
         return self.guesses.filter(correct=True)
 
     @property
-    def incorrect_guess(self):
+    def incorrect_guesses(self):
         return self.guesses.filter(correct=False)
 
     def __str__(self):
@@ -68,6 +68,9 @@ class GameMap(models.Model):
     # since the player can be set with a session token instead so we have to use full to check
     # if all users are set not player_1, player_2
     full = models.BooleanField(default=False)
+
+    # null of no one won - 1 if player 1 won, 2 if player 2 won (computer in single player)
+    winner = models.SmallIntegerField(null=True, blank=True)
 
     # game settings
     # difficulty level number 1-3

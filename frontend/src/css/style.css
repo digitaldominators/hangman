@@ -36,6 +36,9 @@ footer {
     @apply w-2/4 relative p-0.5 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[18px] text-center;
     @apply hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
 }
+.home-game-button.big{
+    @apply p-4 text-3xl w-3/4;
+}
 
 .settings-label {
     @apply font-VT323 text-[48px];

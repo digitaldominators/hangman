@@ -1,46 +1,52 @@
-import readCookie from "./readCookie.js";
+import axios from "axios";
+import barba from "@barba/core";
+import {setCookie} from './readCookie.js'
 let new_game_form;
 let new_game_word_box;
+let word_error_message;
 function new_game_form_changed(e){
     e.preventDefault();
     const formData = new FormData(new_game_form);
-    if (formData.get("single_player")){
-        new_game_word_box.style.display = 'none'
+    if (formData.get("multiplayer")){
+        new_game_word_box.style.opacity = 1;
+        new_game_word_box.style.pointerEvents = 'auto'
     }else{
-        new_game_word_box.style.display = 'inline'
+        new_game_word_box.style.opacity = 0;
+        new_game_word_box.style.pointerEvents = 'none'
     }
 }
 
 function start_new_game(e){
     e.preventDefault();
+    word_error_message.innerText = "";
     const formData = new FormData(new_game_form);
     let data= {
-        multiplayer:!formData.get('single_player'),
+        // !! forces the value to be true or false and not null
+        multiplayer:!!formData.get('multiplayer'),
     }
     if (data.multiplayer){
         data['word'] = formData.get("word")
     }
-    fetch("/api/game/",{
-        method:"POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "X-CSRFToken": readCookie("csrftoken")
-        },
-        body:JSON.stringify(data)})
-        .then(response=>response.json())
-        .then((response)=>{
-            alert(`the game slug is: ${response.game_slug}`)
-        })
-        .catch((error)=>{
-            alert("something went wrong")
-        })
+    axios.post("/api/game/",data).then(response=>{
+        setCookie("current_game",response.data.game_slug,100);
+        if(response.data.is_multiplayer){
+            barba.go('/waiting');
+        }else{
+            barba.go('/game');
+        }
+
+    }).catch(error=>{
+        if(error.response.data.word){
+            word_error_message.innerText = error.response.data.word
+        }
+    });
 }
 
 
 export default function loadNewPage(){
     new_game_form = document.getElementById("new_game_form");
     new_game_word_box = document.getElementById("new_game_word");
+    word_error_message = document.getElementById("word_error_message");
 
     new_game_form.onchange = new_game_form_changed;
     new_game_form.onsubmit = start_new_game;

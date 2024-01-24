@@ -4,9 +4,19 @@ import barbaPrefetch from '@barba/prefetch';
 import {gsap} from "gsap";
 import loadJoinPage from './join.js';
 import loadNewPage from './new.js';
+import axios from 'axios';
+import readCookie from "./readCookie.js";
+import loadWaitingPage from "./waiting.js";
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
+
+
+// set axios defaults
+// axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.headers.post['Accept'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['X-CSRFToken'] = readCookie("csrftoken");
 
 barba.init({
     transitions: [{
@@ -27,12 +37,17 @@ barba.init({
         {
             namespace: 'new',
             afterEnter({next}) {
-                loadNewPage()
+                loadNewPage();
             }
         },{
             namespace: 'join',
             afterEnter({next}) {
-                loadJoinPage()
+                loadJoinPage();
+            }
+        },{
+            namespace: 'waiting',
+            afterEnter({next}) {
+                loadWaitingPage();
             }
         }
 

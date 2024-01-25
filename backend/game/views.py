@@ -54,11 +54,11 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
             return Response({"level": game_settings.level, 'timer': game_settings.timer}, status.HTTP_200_OK)
         else:
             if serializer.validated_data.get("level"):
-                self.request.session.set('level', serializer.validated_data.get("level"))
+                self.request.session['level'] = serializer.validated_data.get("level")
             if serializer.validated_data.get("timer"):
-                self.request.session.set('timer', serializer.validated_data.get("timer"))
-            return {"level": self.request.session.get('level', 1),
-                    "timer": self.request.session.get('timer', 0)}
+                self.request.session['timer'] = serializer.validated_data.get("timer")
+            return Response({"level": self.request.session.get('level', 1),
+                             "timer": self.request.session.get('timer', 0)}, status.HTTP_200_OK)
 
     def list(self, request):
         """display the users settings"""

@@ -69,9 +69,10 @@ footer {
 
 .button-section.disabled{
     @apply cursor-not-allowed;
-    button{
-        @apply pointer-events-none;
-    }
+}
+
+.button-section.disabled button{
+    @apply pointer-events-none;
 }
 
 .button-section button {

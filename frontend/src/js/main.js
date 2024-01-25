@@ -7,6 +7,7 @@ import loadNewPage from './new.js';
 import axios from 'axios';
 import readCookie from "./readCookie.js";
 import loadWaitingPage from "./waiting.js";
+import loadSettingsPage from "./settings.js";
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
@@ -48,6 +49,11 @@ barba.init({
             namespace: 'waiting',
             afterEnter({next}) {
                 loadWaitingPage();
+            }
+        },{
+            namespace: 'settings',
+            afterEnter({next}) {
+                loadSettingsPage();
             }
         }
 

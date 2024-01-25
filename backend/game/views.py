@@ -4,16 +4,67 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 
-from .models import GameMap, Game
+from .models import GameMap, Game, DefaultGameSettings
 from game.serializers import NewGameSerializer
 from rest_framework.response import Response
 
 from generate_random_word import generate_random_word
 
-from .serializers import JoinGameSerializer, GameSerializer, UpdateGameSerializer, GameWordSerializer
+from .serializers import JoinGameSerializer, GameSerializer, UpdateGameSerializer, GameWordSerializer, \
+    DefaultGameSettingsSerializer
+
+
+def set_default_game_setting(request, setting, value):
+    if request.user.is_authenticated:
+        game_settings, created = DefaultGameSettings.objects.get_or_create(user=request.user)
+        if setting == 'level':
+            game_settings.level = value
+        elif setting == 'timer':
+            game_settings.timer = value
+        game_settings.save()
+    else:
+        request.session[setting] = value
+
+
+def get_user_default_settings(request):
+    if request.user.is_authenticated:
+        game_settings, created = DefaultGameSettings.objects.get_or_create(user=request.user)
+        return {"level": game_settings.level, 'timer': game_settings.timer}
+    else:
+        return {"level": request.session.get(f'level', 1),
+                "timer": request.session.get('timer', 0)}
 
 
 # Create your views here.
+class DefaultSettingsViewSet(viewsets.GenericViewSet):
+    serializer_class = DefaultGameSettingsSerializer
+
+    def create(self, request):
+        """update the users default settings"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        if self.request.user.is_authenticated:
+            game_settings, created = DefaultGameSettings.objects.get_or_create(user=self.request.user)
+            if serializer.validated_data.get("level"):
+                game_settings.level = serializer.validated_data.get("level")
+            if serializer.validated_data.get("timer"):
+                game_settings.timer = serializer.validated_data.get("timer")
+            game_settings.save()
+            return Response({"level": game_settings.level, 'timer': game_settings.timer}, status.HTTP_200_OK)
+        else:
+            if serializer.validated_data.get("level"):
+                self.request.session.set('level', serializer.validated_data.get("level"))
+            if serializer.validated_data.get("timer"):
+                self.request.session.set('timer', serializer.validated_data.get("timer"))
+            return {"level": self.request.session.get('level', 1),
+                    "timer": self.request.session.get('timer', 0)}
+
+    def list(self, request):
+        """display the users settings"""
+        return Response(get_user_default_settings(self.request))
+
+
 class GameViewSet(viewsets.GenericViewSet):
     lookup_field = 'game_slug'
     queryset = GameMap.objects.all()
@@ -73,15 +124,30 @@ class GameViewSet(viewsets.GenericViewSet):
         raise NotFound(detail=f'Game not found')
 
     def create(self, request):
-        serializer = self.get_serializer_class()(data=request.data, context=self.get_serializer_context())
+        default_settings = get_user_default_settings(request)
+        data = request.data
+        if data.get('level'):
+            set_default_game_setting(request, 'level', data['level'])
+        else:
+            data['level'] = default_settings['level']
+        if data.get('timer'):
+            set_default_game_setting(request, 'timer', data['timer'])
+        else:
+            data['timer'] = default_settings['timer']
+        serializer = self.get_serializer_class()(data=data, context=self.get_serializer_context())
         serializer.is_valid(raise_exception=True)
 
         # if multiplayer game
         if serializer.validated_data.get('multiplayer'):
             if request.user.is_authenticated:
-                game_map = GameMap.objects.create(player_1=request.user, is_multiplayer=True)
+                game_map = GameMap.objects.create(player_1=request.user,
+                                                  is_multiplayer=True,
+                                                  level=serializer.validated_data.get('level'),
+                                                  timer=serializer.validated_data.get('timer'))
             else:
-                game_map = GameMap.objects.create(is_multiplayer=True)
+                game_map = GameMap.objects.create(is_multiplayer=True,
+                                                  level=serializer.validated_data.get('level'),
+                                                  timer=serializer.validated_data.get('timer'))
                 request.session[f'game__{game_map.game_slug}'] = 1
 
             second_player_game = Game.objects.create(word=serializer.validated_data.get('word').lower())
@@ -90,9 +156,18 @@ class GameViewSet(viewsets.GenericViewSet):
         else:  # single player game
             game = Game.objects.create(word=generate_random_word().lower())
             if request.user.is_authenticated:
-                game_map = GameMap.objects.create(player_1=request.user, game_1=game, is_multiplayer=False, full=True)
+                game_map = GameMap.objects.create(player_1=request.user,
+                                                  game_1=game,
+                                                  is_multiplayer=False,
+                                                  full=True,
+                                                  level=serializer.validated_data.get('level'),
+                                                  timer=serializer.validated_data.get('timer'))
             else:
-                game_map = GameMap.objects.create(game_1=game, is_multiplayer=False, full=True)
+                game_map = GameMap.objects.create(game_1=game,
+                                                  is_multiplayer=False,
+                                                  full=True,
+                                                  level=serializer.validated_data.get('level'),
+                                                  timer=serializer.validated_data.get('timer'))
                 request.session[f'game__{game_map.game_slug}'] = 1
 
         game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
@@ -183,6 +258,8 @@ class GameViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer_class()(game_map, data=request.data, context=self.get_serializer_context())
         if serializer.is_valid():
             serializer.save()
+            if request.data.get('timer'):
+                set_default_game_setting(request, 'timer', request.data.get('timer'))
             data = GameSerializer(game_map, context=self.get_serializer_context()).data
             return Response(data, status=status.HTTP_200_OK)
         else:

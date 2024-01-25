@@ -83,7 +83,7 @@ class NewGameSerializer(serializers.Serializer):
     multiplayer = serializers.BooleanField()
     word = serializers.CharField(required=False)
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
-    level = serializers.IntegerField(default=0, required=False, min_value=0, max_value=3)
+    level = serializers.IntegerField(default=1, required=False, min_value=0, max_value=3)
 
     def validate(self, data):
         if data['multiplayer']:
@@ -166,3 +166,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                 else:
                     game.add_incorrect_guess(guess)
         return instance
+
+class DefaultGameSettingsSerializer(serializers.Serializer):
+    timer = serializers.IntegerField(default=0, required=False, min_value=0)
+    level = serializers.IntegerField(default=0, required=False, min_value=0, max_value=3)

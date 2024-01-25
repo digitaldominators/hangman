@@ -67,9 +67,18 @@ footer {
     @apply w-[500px] bg-background-color rounded-[60px] p-4 flex flex-row gap-6;
 }
 
+.button-section.disabled{
+    @apply cursor-not-allowed;
+    button{
+        @apply pointer-events-none;
+    }
+}
+
 .button-section button {
     @apply bg-switch-knob rounded-[60px] font-inika grow p-1 text-[25px];
 }
+
+
 
 .button-section button.active {
     border: 3px black solid;

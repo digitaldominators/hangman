@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Guess, Game, GameMap
+from .models import Guess, Game, GameMap, DefaultGameSettings
 
 
 class GuessInline(admin.TabularInline):
@@ -45,3 +45,4 @@ class GameMapAdmin(admin.ModelAdmin):
 admin.site.register(Guess, GuessAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(GameMap, GameMapAdmin)
+admin.site.register(DefaultGameSettings)

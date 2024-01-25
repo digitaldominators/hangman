@@ -18,10 +18,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from rest_framework.authtoken.views import obtain_auth_token
 
 from game.views import GameViewSet
-from accounts import views
+#from accounts.views import AccountViewSet
 
 router = routers.DefaultRouter()
 router.register(r'game', GameViewSet, basename='game')
@@ -30,9 +29,8 @@ router.register(r'game', GameViewSet, basename='game')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('register/', views.user_registration_view, name='register'),
-    path('login/', obtain_auth_token, name='login'),
-    path('logout/', views.logout, name='logout'),
+    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

@@ -2,6 +2,9 @@ import readCookie from "./readCookie.js";
 let join_game_form;
 function join_game(e){
     e.preventDefault();
+
+    // get the forms data
+    // data = game_slug, word?
     const formData = new FormData(join_game_form);
 
     const data = {
@@ -9,6 +12,7 @@ function join_game(e){
         word: formData.get("word")
     }
 
+    // todo switch this to use axios.
     fetch("/api/game/join_game/",{
         method:"POST",
         headers: {

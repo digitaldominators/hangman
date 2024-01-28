@@ -81,8 +81,6 @@ footer {
     @apply bg-switch-knob rounded-[60px] font-inika grow p-1 text-[25px];
 }
 
-
-
 .button-section button.active {
     border: 3px black solid;
 }

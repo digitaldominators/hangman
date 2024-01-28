@@ -52,24 +52,26 @@ function SaveSettingChange(setting,value){
     }
 }
 function SetSettingsValues(){
-    if (gameID){
+    // get the backend saved settings. If the user is playing a game set the setting for the game,
+    // If the user is not playing a game currently then just set the default users settings
+    if (gameID){ // user is playing a game
         axios.get(`/api/game/${gameID}/`).then((response)=>{
             timerAmount = response.data.timer;
             levelAmount = response.data.level;
+            // update the displayed settings amount
             showTimerAmount();
             showLevelAmount();
         })
-    }else{
+    }else{ // user is not playing a game
         axios.get("/api/settings/").then((response)=>{
             timerAmount = response.data.timer;
             levelAmount = response.data.level;
+            // update the displayed settings amount
             showTimerAmount();
             showLevelAmount();
         })
     }
 
-    showTimerAmount();
-    showLevelAmount();
 }
 
 export default function loadSettingsPage(){

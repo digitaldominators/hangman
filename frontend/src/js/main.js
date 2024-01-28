@@ -25,6 +25,7 @@ axios.defaults.headers.put['X-CSRFToken'] = readCookie("csrftoken");
 
 
 barba.init({
+    // list of page transitions here
     transitions: [{
         name: 'opacity-transition',
         leave(data) {
@@ -39,6 +40,7 @@ barba.init({
             });
         }
     }],
+    // run the load code for each page.
     views: [
         {
             namespace: 'new',

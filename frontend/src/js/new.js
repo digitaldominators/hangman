@@ -5,6 +5,7 @@ let new_game_form;
 let new_game_word_box;
 let word_error_message;
 function new_game_form_changed(e){
+    // hide or show the word box when the multiplayer switch changes
     e.preventDefault();
     const formData = new FormData(new_game_form);
     if (formData.get("multiplayer")){
@@ -29,6 +30,7 @@ function start_new_game(e){
     }
     axios.post("/api/game/",data).then(response=>{
         setCookie("current_game",response.data.game_slug,100);
+        // redirect to the correct page.
         if(response.data.is_multiplayer){
             barba.go('/waiting');
         }else{

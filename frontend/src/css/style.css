@@ -8,34 +8,36 @@
 @tailwind utilities;
 
 body {
-    @apply bg-background-color mx-auto;
-    height: 100vh;
-    display: grid;
-    grid-template:
-        "navbar" 60px
-        "body" 1fr
-        "footer" 50px;
+    @apply bg-background-color;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 nav {
     grid-area: navbar;
+    width: 100%;
 }
 
 #main-container {
-    overflow: auto;
-    grid-area: body;
-    @apply mx-32 my-5 p-10 relative;
+    @apply p-10 relative;
+    max-width: 900px;
+    max-height: calc(100vh - [HeaderHeight] - [FooterHeight]); /* Adjust as necessary */
+    overflow-y: auto;
+    margin: 20px auto;
     background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
     border-radius: 22px;
+    flex-grow: 1;
 }
 
 footer {
     grid-area: footer;
+    width: 100%;
 }
 
 .home-game-button {
-    @apply w-2/4 relative p-0.5 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[18px] text-center;
-    @apply hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
+    @apply w-2/6 relative p-0.5 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[18px] text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
+    margin: 15px 35px 15px;/* Add margin to the buttons */
 }
 .home-game-button.big{
     @apply p-4 text-3xl w-3/4;
@@ -84,3 +86,4 @@ footer {
 .button-section button.active {
     border: 3px black solid;
 }
+

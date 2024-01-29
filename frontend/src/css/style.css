@@ -30,6 +30,8 @@ body {
     box-sizing: border-box;
 }
 
+
+
 nav, footer {
     width: 100%;
     height: var(--header-height);
@@ -88,6 +90,7 @@ nav, footer {
 
 #main-container {
     padding: var(--padding);
+    padding-top: 40px;
     max-width: 900px;
     margin: 20px auto;
     background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);

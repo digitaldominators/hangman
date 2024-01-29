@@ -40,6 +40,21 @@
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const menuButton = document.querySelector('.menu-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            menuButton.addEventListener('click', () => {
+                if (dropdownContent.style.display === 'none' || !dropdownContent.style.display) {
+                    dropdownContent.style.display = 'block';
+                } else {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
     {{> footer }}
 </body>
 </html>

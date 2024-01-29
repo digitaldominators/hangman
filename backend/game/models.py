@@ -6,15 +6,6 @@ from django.utils.crypto import get_random_string
 from django.db.models.lookups import GreaterThan
 
 
-class DefaultGameSettings(models.Model):
-    user = models.OneToOneField(User, on_delete=models.Model)
-
-    # game settings
-    # difficulty level number 1-3
-    level = models.PositiveSmallIntegerField(default=1)
-    # number of seconds before tern is skipped.
-    timer = models.PositiveSmallIntegerField(default=0)
-
 
 # Create your models here.
 class Game(models.Model):

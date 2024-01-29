@@ -4,7 +4,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 
-from .models import GameMap, Game, DefaultGameSettings
+from .models import GameMap, Game
+from accounts.models import UserProfile
 from game.serializers import NewGameSerializer
 from rest_framework.response import Response
 
@@ -21,7 +22,7 @@ def set_default_game_setting(request, setting, value):
     If the user is not logged in, then is sets the users session.
     """
     if request.user.is_authenticated:
-        game_settings, created = DefaultGameSettings.objects.get_or_create(user=request.user)
+        game_settings, created = UserProfile.objects.get_or_create(user=request.user)
         if setting == 'level':
             game_settings.level = value
         elif setting == 'timer':
@@ -34,7 +35,7 @@ def set_default_game_setting(request, setting, value):
 
 def get_user_default_settings(request):
     if request.user.is_authenticated:
-        game_settings, created = DefaultGameSettings.objects.get_or_create(user=request.user)
+        game_settings, created = UserProfile.objects.get_or_create(user=request.user)
         return {"level": game_settings.level, 'timer': game_settings.timer}
     else:
         return {"level": request.session.get(f'level', 1),

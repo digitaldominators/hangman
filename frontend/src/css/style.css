@@ -7,39 +7,120 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --header-height: 60px;  /* Default header height */
+    --footer-height: 40px;  /* Default footer height */
+    --padding: 10px; /* Default padding */
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 50px;  /* Smaller header for tablets */
+        --footer-height: 30px;  /* Smaller footer for tablets */
+        --padding: 5px; /* Smaller padding for tablets */
+    }
+}
+
 body {
     @apply bg-background-color;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0; /* Resets default margin */
+    box-sizing: border-box;
 }
 
-nav {
-    grid-area: navbar;
+nav, footer {
     width: 100%;
+    height: var(--header-height);
+    box-sizing: border-box;
 }
 
 #main-container {
-    @apply p-10 relative;
+    padding: var(--padding);
     max-width: 900px;
-    max-height: calc(100vh - [HeaderHeight] - [FooterHeight]); /* Adjust as necessary */
-    overflow-y: auto;
     margin: 20px auto;
     background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
     border-radius: 22px;
     flex-grow: 1;
+    box-sizing: border-box;
+    overflow-y: auto; /* Adjust if necessary */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
 }
 
-footer {
-    grid-area: footer;
+/* Image container with aspect ratio */
+.image-container {
+    width: 80%; /* Adjust the width of the image container */
+    max-width: 600px; /* Set a maximum width */
+    margin: 0 auto; /* Center the image container */
+    position: relative; /* Needed for absolute positioning of the image */
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adjust as needed */
 }
 
-.home-game-button {
-    @apply w-2/6 relative p-0.5 font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-[18px] text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
-    margin: 15px 35px 15px;/* Add margin to the buttons */
+/* Responsive adjustments for image container */
+@media (max-width: 1024px) {
+    .image-container {
+        width: 90%; /* Increase the width on smaller screens */
+    }
 }
-.home-game-button.big{
+
+/* Button styles */
+.home-game-button {
+    @apply relative font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
+    font-size: 18px; /* Default font size */
+    padding: 12px 24px; /* Default padding */
+    margin: 15px; /* Default margin */
+    width: auto; /* Auto width for flexible sizing */
+    max-width: 200px; /* Maximum width to prevent too large buttons */
+    transition: font-size 0.3s, padding 0.3s; /* Smooth transition for resizing */
+}
+
+/* Smaller screens (Mobile devices) */
+@media (max-width: 768px) {
+    .home-game-button {
+        font-size: 14px; /* Smaller font size for mobile */
+        padding: 8px 16px; /* Adjust padding for mobile */
+    }
+}
+
+/* Intermediate screen sizes (around 50-70% screen size) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .home-game-button {
+        font-size: 16px; /* Adjust font size for intermediate screens */
+        padding: 10px 20px; /* Adjust padding for intermediate screens */
+    }
+}
+
+/* Slightly larger intermediate screens (above 70%) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .home-game-button {
+        font-size: 17px; /* Slightly larger font size for larger intermediate screens */
+        padding: 11px 22px; /* Slightly larger padding for larger intermediate screens */
+    }
+}
+
+/* Larger screens */
+@media (min-width: 1441px) {
+    .home-game-button {
+        font-size: calc(1vw + 1px); /* Relative font size for larger screens */
+        padding: calc(0.5vw + 1px) calc(1vw + 1px); /* Relative padding for larger screens */
+        max-width: 250px; /* Increased maximum width for larger screens */
+    }
+}
+
+/* Other existing styles */
+.home-game-button.big {
     @apply p-4 text-3xl w-3/4;
 }
 
@@ -69,11 +150,11 @@ footer {
     @apply w-[500px] bg-background-color rounded-[60px] p-4 flex flex-row gap-6;
 }
 
-.button-section.disabled{
+.button-section.disabled {
     @apply cursor-not-allowed;
 }
 
-.button-section.disabled button{
+.button-section.disabled button {
     @apply pointer-events-none;
 }
 
@@ -84,4 +165,3 @@ footer {
 .button-section button.active {
     border: 3px black solid;
 }
-

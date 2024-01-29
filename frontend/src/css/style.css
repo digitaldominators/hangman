@@ -36,6 +36,39 @@ nav, footer {
     box-sizing: border-box;
 }
 
+/* Hover effect for text and icons in the navbar */
+.nav-item-hover {
+    transition: color 0.3s; /* Transition for color */
+}
+
+.nav-item-hover:hover, .nav-item-hover:hover .icon-hover {
+    color: black; /* Change color to black on hover */
+    -webkit-text-stroke: 1px rgb(74, 168, 168); /* Change stroke color on hover */
+}
+
+.icon-hover {
+    transition: stroke 0.3s; /* Transition for SVG stroke */
+}
+
+.icon-hover:hover {
+    stroke: rgb(74, 168, 168); /* Change SVG stroke color on hover */
+    stroke-width: .01px;
+}
+
+
+/* CSS for the hover effect on the Hangman title */
+.title-hover {
+    -webkit-text-stroke: 2px black;
+    font-size: 40px; 
+    transition: color 0.3s, -webkit-text-stroke 0.3s;
+}
+
+.title-hover:hover {
+    color: black;
+    font-size: 40px; 
+    -webkit-text-stroke: 2.0px rgb(74, 168, 168); /* Slightly thinner outline on hover */
+}
+
 #main-container {
     padding: var(--padding);
     max-width: 900px;

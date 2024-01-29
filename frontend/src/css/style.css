@@ -46,6 +46,13 @@ nav, footer {
     -webkit-text-stroke: 1px rgb(74, 168, 168); /* Change stroke color on hover */
 }
 
+.footer-logo {
+    height: 50px; 
+    width: auto;
+    margin-right: 10px; /* Space between logo and text */
+}
+
+
 .icon-hover {
     transition: stroke 0.3s; /* Transition for SVG stroke */
 }
@@ -68,6 +75,16 @@ nav, footer {
     font-size: 40px; 
     -webkit-text-stroke: 2.0px rgb(74, 168, 168); /* Slightly thinner outline on hover */
 }
+
+.bg-footer-background {
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for desired translucency */
+}
+
+.footer-logo {
+    width: 100px; /* Adjust the size of your logo as needed */
+    height: auto; /* This ensures the aspect ratio is maintained */
+}
+
 
 #main-container {
     padding: var(--padding);

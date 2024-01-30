@@ -2,10 +2,11 @@ import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars';
 export default defineConfig({
     root: "src",
-    publicDir: '../public',
+    publicDir: false,
     plugins: [handlebars({partialDirectory: './partials',})],
     build: {
-        outDir: "../dist"
+        outDir: "../dist",
+        manifest: true,
     },
     // config options
     server: {

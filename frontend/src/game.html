@@ -1,20 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/js/main.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Hangman</title>
-</head>
-<body data-barba="wrapper">
-{{> navbar }}
-<div id="main-container" class="mx-auto flex flex-col items-center"> <!-- Center the main container -->
-    <main data-barba="container" data-barba-namespace="index" class="w-full md:w-3/4 xl:w-3/5">
-        <h1>Main Game</h1>
-    </main>
-</div>
-{{> footer }}
-</body>
-</html>
+{{#> base namespace='game'}}
+{{#*inline "content"}}
+
+<h1>Main Game</h1>
+
+{{/inline}}
+{{/base }}
+
+

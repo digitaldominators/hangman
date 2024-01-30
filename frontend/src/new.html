@@ -1,45 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icon.png" /><link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/js/main.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Hangman - new game</title>
-</head>
-<body data-barba="wrapper">
-{{> navbar }}
-<div id="main-container">
-    <main data-barba="container" data-barba-namespace="new">
-        <form id="new_game_form">
-            <table class="table-fixed mx-auto w-2/3 border-separate">
-                <tbody>
-                <tr>
-                    <td class="settings-label">Multiplayer</td>
-                    <td>&nbsp;&nbsp;
-                        <label class="switch">
-                            <input type="checkbox" name="multiplayer">
-                            <span></span>
-                        </label>
-                    </td>
-                </tr>
-                <tr id="new_game_word" class="duration-300" style="opacity: 0; pointer-events: none">
-                    <td class="settings-label">Word</td>
-                    <td>
-                        <input type="text" name="word" class="w-full p-1 text-[35px]">
-                        <span class="mt-2 text-red-500" id="word_error_message"></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <br>
-            <button type="submit" class="home-game-button big block m-auto">
-                Start Game
-            </button>
-        </form>
-</main>
-</div>
-{{> footer }}
-</body>
-</html>
+{{#> base title='New Game' namespace='new'}}
+{{#*inline "content"}}
+
+<form id="new_game_form">
+    <table class="table-fixed mx-auto w-2/3 border-separate">
+        <tbody>
+        <tr>
+            <td class="settings-label">Multiplayer</td>
+            <td>&nbsp;&nbsp;
+                <label class="switch">
+                    <input type="checkbox" name="multiplayer">
+                    <span></span>
+                </label>
+            </td>
+        </tr>
+        <tr id="new_game_word" class="duration-300" style="opacity: 0; pointer-events: none">
+            <td class="settings-label">Word</td>
+            <td>
+                <input type="text" name="word" class="w-full p-1 text-[35px]">
+                <span class="mt-2 text-red-500" id="word_error_message"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <button type="submit" class="home-game-button big block m-auto">
+        Start Game
+    </button>
+</form>
+
+
+{{/inline}}
+{{/base }}

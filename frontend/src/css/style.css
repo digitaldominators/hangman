@@ -102,6 +102,10 @@ nav, footer {
     flex-direction: column;
     justify-content: center; /* Center the content vertically */
     align-items: center; /* Center the content horizontally */
+    @apply mx-auto flex justify-center items-center;
+}
+main{
+    @apply w-full md:w-3/4 xl:w-3/5;
 }
 
 /* Image container with aspect ratio */

@@ -1,34 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/js/main.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Hangman - join game</title>
-</head>
-<body data-barba="wrapper">
-{{> navbar }}
-<div id="main-container">
-    <main data-barba="container" data-barba-namespace="join">
-    <h1>Join Game</h1>
-    <dialog id="join_game_modal" open>
-        <p>Join Game</p>
-        <form id="join_game_form">
-            <label>
-                join code
-                <input type="text" name="join_code">
-            </label>
-            <label>
-                Other players guess word
-                <input type="text" name="word">
-            </label>
-            <input type="submit">
-        </form>
-    </dialog>
-</main>
-</div>
-{{> footer }}
-</body>
-</html>
+{{#> base title='Join Game' namespace='join'}}
+{{#*inline "content"}}
+
+<h1>Join Game</h1>
+<dialog id="join_game_modal" open>
+    <p>Join Game</p>
+    <form id="join_game_form">
+        <label>
+            join code
+            <input type="text" name="join_code">
+        </label>
+        <label>
+            Other players guess word
+            <input type="text" name="word">
+        </label>
+        <input type="submit">
+    </form>
+</dialog>
+
+{{/inline}}
+{{/base }}

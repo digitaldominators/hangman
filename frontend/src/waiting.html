@@ -1,23 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/js/main.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Hangman</title>
-</head>
-<body data-barba="wrapper">
-{{> navbar }}
-<div id="main-container" class="mx-auto flex flex-col items-center"> <!-- Center the main container -->
-    <main data-barba="container" data-barba-namespace="waiting" class="w-full md:w-3/4 xl:w-3/5">
-        <h1 class="text-8xl text-center" id="title">Invite Your Friend</h1>
-        <br>
-        <h1 class="text-8xl text-center" id="join_section">Join Code - <span id="join_code" class="select-all"></span></h1>
-        <div class="animate-ping bg-purple-800 w-[100px] h-[100px] rounded-full mx-auto my-40"></div>
-    </main>
-</div>
-{{> footer }}
-</body>
-</html>
+{{#> base title='Waiting' namespace='waiting'}}
+{{#*inline "content"}}
+
+<h1 class="text-8xl text-center" id="title">Invite Your Friend</h1>
+<br>
+<h1 class="text-8xl text-center" id="join_section">Join Code - <span id="join_code" class="select-all"></span></h1>
+<div class="animate-ping bg-purple-800 w-[100px] h-[100px] rounded-full mx-auto my-40"></div>
+
+{{/inline}}
+{{/base }}

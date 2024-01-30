@@ -7,6 +7,18 @@ export default defineConfig({
     build: {
         outDir: "../dist",
         manifest: true,
+        emptyOutDir:true,
+        rollupOptions: {
+            // overwrite default .html entry
+            input: [
+                "./src/game.html",
+                "./src/index.html",
+                "./src/join.html",
+                "./src/new.html",
+                "./src/settings.html",
+                "./src/waiting.html",
+            ],
+        }
     },
     // config options
     server: {

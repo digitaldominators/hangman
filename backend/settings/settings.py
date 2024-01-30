@@ -59,10 +59,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'settings.urls'
 
+FRONT_END_DIR = Path(BASE_DIR).resolve().parent / 'frontend'
+print(FRONT_END_DIR)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates', FRONT_END_DIR / 'dist']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,9 +125,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    FRONT_END_DIR /'dist' / 'assets',
+    ]
+STATIC_URL = 'assets/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

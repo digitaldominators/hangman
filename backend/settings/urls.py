@@ -17,25 +17,37 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
 from rest_framework import routers
 
 from game.views import GameViewSet
 from game.views import DefaultSettingsViewSet
 from scoreboard.views import ScoreboardViewSet
 
-#from accounts.views import AccountViewSet
+# from accounts.views import AccountViewSet
 
 router = routers.DefaultRouter()
 router.register(r'game', GameViewSet, basename='game')
 router.register(r'settings', DefaultSettingsViewSet, basename='settings')
 router.register(r'scoreboard', ScoreboardViewSet, basename='scoreboard')
-#router.register(r'accounts', AccountViewSet, basename='account')
+
+
+# router.register(r'accounts', AccountViewSet, basename='account')
+
+def game_view(request, slug=None):
+    template_name = 'index.html'
+    if slug:
+        template_name = slug + ".html"
+    return render(request, template_name)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('', game_view),
+    path("<slug:slug>/", game_view),
 ]
 
 if settings.DEBUG:

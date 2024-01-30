@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import F, Max
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
@@ -12,8 +13,22 @@ class UserProfile(models.Model):
     # game settings
     # difficulty level number 1-3
     level = models.PositiveSmallIntegerField(default=1)
-    # number of seconds before tern is skipped.
+    # number of seconds before turn is skipped.
     timer = models.PositiveSmallIntegerField(default=0)
+
+    # total score
+    score = models.PositiveIntegerField(default=0)
+    # number of games played
+    games_played = models.PositiveIntegerField(default=0)
+    # average score
+    avg_score = models.GeneratedField(expression=F('score') / F("games_played"),
+                                      output_field=models.PositiveIntegerField(), db_persist=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['score']),
+            models.Index(fields=['avg_score'])
+        ]
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

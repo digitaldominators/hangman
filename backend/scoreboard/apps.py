@@ -1,9 +1,8 @@
 from django.apps import AppConfig
 
 
-class GameConfig(AppConfig):
+class ScoreboardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'game'
-
+    name = 'scoreboard'
     def ready(self):
         from . import signals

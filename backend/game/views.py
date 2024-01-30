@@ -90,6 +90,8 @@ class GameViewSet(viewsets.GenericViewSet):
     * correct_guesses - list of letters/words - correct guesses
     * incorrect_guesses - list of letters/words - incorrect guesses
     * word - string - outline of the word each letter except spaces replaces with `_` unless user guesses the letter. If the word is `heads up` and the user guessed `e` `s` and `u` it would return `_e__s u_`.
+    * game_score - int - current score in game
+    * other_player_game_score - int - current score of the other players game
     """
     lookup_field = 'game_slug'
     queryset = GameMap.objects.all()
@@ -297,6 +299,7 @@ class GameViewSet(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         game_map = self.get_game_map(request, game_slug)
 
+        # if game 1 already exists then the word was already set by player 2
         if game_map.game_1:
             return Response({"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -326,7 +329,7 @@ class GameViewSet(viewsets.GenericViewSet):
         get a list of all the games the current user is playing
         """
         if request.user.is_authenticated:
-            games = GameMap.objects.filter(Q(player_1=request.user) | Q(player_2=request.user))
+            games = GameMap.objects.filter(Q(player_1=request.user) | Q(player_2=request.user))[:50]
             serializer = GameSerializer(games, many=True, context=self.get_serializer_context())
             return Response(serializer.data)
         else:
@@ -338,7 +341,7 @@ class GameViewSet(viewsets.GenericViewSet):
             games = [game[6:] for game in games]
 
             # get game objects from database
-            games = GameMap.objects.filter(game_slug__in=games)
+            games = GameMap.objects.filter(game_slug__in=games)[:50]
             serializer = GameSerializer(games, many=True, context=self.get_serializer_context())
             return Response(serializer.data)
 

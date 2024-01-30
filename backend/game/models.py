@@ -4,7 +4,7 @@ from django.db.models.functions import Length
 from django.db import models
 from django.utils.crypto import get_random_string
 from django.db.models.lookups import GreaterThan
-
+from .signals import incorrect_guess, correct_guess
 
 
 # Create your models here.
@@ -13,6 +13,8 @@ class Game(models.Model):
     word = models.CharField(max_length=50)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    score = models.IntegerField(default=0)
 
     @property
     def correct_guesses(self):
@@ -26,10 +28,14 @@ class Game(models.Model):
         return f'{self.word} - {self.created}'
 
     def add_correct_guess(self, guess):
-        return Guess.objects.create(guess=guess, game=self, correct=True)
+        guess_object = Guess.objects.create(guess=guess, game=self, correct=True)
+        correct_guess.send(sender=self.__class__, game=self, guess=guess_object)
+        return guess_object
 
     def add_incorrect_guess(self, guess):
-        return Guess.objects.create(guess=guess, game=self, correct=False)
+        guess_object = Guess.objects.create(guess=guess, game=self, correct=False)
+        incorrect_guess.send(sender=self.__class__, game=self, guess=guess_object)
+        return guess_object
 
     class Meta:
         ordering = ["created"]

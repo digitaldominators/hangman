@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'game',
     'rest_framework',
     'accounts',
+    'scoreboard',
     'rest_framework.authtoken',
 ]
 

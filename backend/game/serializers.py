@@ -3,9 +3,16 @@ from rest_framework.exceptions import NotFound
 
 from .models import GameMap
 import re
-
+from . import signals
 
 class GameModelSerializerPlayerMixin:
+    """
+    A bunch of convenience methods for the GameMap object
+    -> get_status(instance)
+    -> get_player(instance)
+    -> get_game(instance)
+    -> get_word_mask(instance)
+    """
     def get_status(self, instance):
         player = self.get_player(instance)
 
@@ -42,7 +49,7 @@ class GameModelSerializerPlayerMixin:
             if player == 1:
                 return 'not your turn'
             else:
-                return 'your turn'
+                return
 
     def get_player(self, instance):
         if self.context['request'].user.is_authenticated:
@@ -106,11 +113,33 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
     correct_guesses = serializers.SerializerMethodField()
     incorrect_guesses = serializers.SerializerMethodField()
     word = serializers.SerializerMethodField()
+    game_score = serializers.SerializerMethodField()
+    other_player_game_score = serializers.SerializerMethodField()
 
     class Meta:
         model = GameMap
         fields = ['game_slug', 'is_multiplayer', 'full', 'timer', 'level', 'status', 'player', 'correct_guesses',
-                  'incorrect_guesses', 'word']
+                  'incorrect_guesses', 'word', 'game_score', 'other_player_game_score']
+
+    def get_game_score(self,instance):
+        player = self.get_player(instance)
+        if player == 1:
+            if instance.game_1:
+                return instance.game_1.score
+        else:
+            if instance.game_2:
+                return instance.game_2.score
+        return None
+
+    def get_other_player_game_score(self,instance):
+        player = self.get_player(instance)
+        if player == 1:
+            if instance.game_2:
+                return instance.game_2.score
+        else:
+            if instance.game_1:
+                return instance.game_1.score
+        return None
 
     def get_correct_guesses(self, instance):
         if self.get_game(instance):
@@ -134,6 +163,12 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
         model = GameMap
         fields = ['timer', 'guess']
 
+    def validate(self, data):
+        status = self.get_status(self.instance)
+        if status != 'your turn':
+            raise serializers.ValidationError("Not your turn")
+        return data
+
     def update(self, instance, validated_data):
         if validated_data.get('timer'):
             instance.timer = validated_data.get('timer')
@@ -154,6 +189,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                     game.add_correct_guess(guess)
                     instance.winner = player
                     instance.save()
+                    signals.game_over.send(sender=self.__class__,game_map=instance)
                 else:  # incorrect guess
                     game.add_incorrect_guess(guess)
             else:  # guess is a letter
@@ -163,6 +199,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                     if "_" not in self.get_word_mask(instance):
                         instance.winner = player
                         instance.save()
+                        signals.game_over.send(sender=self.__class__,game_map=instance)
                 else:
                     game.add_incorrect_guess(guess)
         return instance

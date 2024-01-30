@@ -25,6 +25,8 @@ The basic game object shows:
 * correct_guesses - list of letters/words - correct guesses
 * incorrect_guesses - list of letters/words - incorrect guesses
 * word - string - outline of the word each letter except spaces replaces with `_` unless user guesses the letter. If the word is `heads up` and the user guessed `e` `s` and `u` it would return `_e__s u_`.
+* game_score - int - current score in game
+* other_player_game_score - int - current score of the other players game
 
 ### new game
 To create a new game post data to /api/game/. 
@@ -64,4 +66,34 @@ To change the timer amount make a post request to /api/game/<game_slug>/
 
     {
         "timer":0 // number of seconds before turn is over
+    }
+
+## Scoreboard
+make a get request to /api/scoreboard/
+Returns the top 50 total scores and average scores. 
+Will return something like:
+
+    {
+        "total_scores": [
+            {
+                "user": "user1",
+                "score": 8750
+            },
+            {
+                "user": "user2",
+                "score": 6800
+            }
+            ...
+        ],
+        "average_scores": [
+            {
+                "user": "user2",
+                "score": 900
+            },
+            {
+                "user": "user1",
+                "score": 730
+            }
+            ...
+        ]
     }

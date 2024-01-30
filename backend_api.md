@@ -97,3 +97,26 @@ Will return something like:
             ...
         ]
     }
+
+## Accounts
+### Registration
+To create a new account, post data to /accounts/register/
+
+    {
+        "username": "bob", // required unique username
+        "email": "bob@youruncle.com, // required unique email address
+        "password": "password", // required password
+        "password2": "password" // required matching password
+    }
+
+### Login
+To login with an existing user, post data to /accounts/login_user/
+
+    {
+        "username": "bob", // required username
+        "password": "password" // required password
+    }
+
+### Logout
+To logout of an existing session, post data to /accounts/logout_user/
+Requires active session as an authenticated user.

@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from os import getenv
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,16 +22,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-59#l+qo=dn#7d&b4%+_ysw@xmerbd(k4jt9r(!#j79#rsi5xqe'
-
+SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if getenv("DEBUG").lower() == 'true':
+    DEBUG = True
+elif getenv("DEBUG").lower() == 'false':
+    DEBUG = False
+else:
+    raise ValueError("Invalid value for DEBUG environment variable")
 
-ALLOWED_HOSTS = ['localhost']
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://localhost:5173'
-]
+ALLOWED_HOSTS = [getenv("HOST")]
+
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:8000',
+        'http://localhost:5173'
+    ]
 
 # Application definition
 
@@ -60,7 +68,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'settings.urls'
 
 FRONT_END_DIR = Path(BASE_DIR).resolve().parent / 'frontend'
-print(FRONT_END_DIR)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

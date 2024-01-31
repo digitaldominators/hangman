@@ -9,7 +9,7 @@ export default defineConfig({
         manifest: true,
         emptyOutDir:true,
         rollupOptions: {
-            // overwrite default .html entry
+            // overwrite default index.html entry
             input: [
                 "./src/game.html",
                 "./src/index.html",

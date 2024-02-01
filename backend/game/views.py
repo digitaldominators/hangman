@@ -273,7 +273,7 @@ class GameViewSet(viewsets.GenericViewSet):
             game_map.player_2 = request.user
         else:
             # don't let the user be both player 1 and 2
-            if request.session[f'game__{game_map.game_slug}'] == request.user:
+            if request.session.get(f'game__{game_map.game_slug}'):
                 return Response({"message": "You are already playing this game."}, status=status.HTTP_400_BAD_REQUEST)
             # set player 2 to be current user
             request.session[f'game__{game_map.game_slug}'] = 2

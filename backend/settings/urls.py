@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.http import Http404
+from django.template.exceptions import TemplateDoesNotExist
 from django.urls import path, include
 from django.shortcuts import render
 from rest_framework import routers
@@ -38,8 +40,10 @@ def game_view(request, slug=None):
     template_name = 'index.html'
     if slug:
         template_name = slug + ".html"
-    return render(request, template_name)
-
+    try:
+        return render(request, template_name)
+    except TemplateDoesNotExist:
+        raise Http404()
 
 urlpatterns = [
     path('admin/', admin.site.urls),

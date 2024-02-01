@@ -8,15 +8,15 @@
 @tailwind utilities;
 
 :root {
-    --header-height: 60px;  /* Default header height */
-    --footer-height: 40px;  /* Default footer height */
+    --header-height: 60px; /* Default header height */
+    --footer-height: 40px; /* Default footer height */
     --padding: 10px; /* Default padding */
 }
 
 @media (max-width: 768px) {
     :root {
-        --header-height: 50px;  /* Smaller header for tablets */
-        --footer-height: 30px;  /* Smaller footer for tablets */
+        --header-height: 50px; /* Smaller header for tablets */
+        --footer-height: 30px; /* Smaller footer for tablets */
         --padding: 5px; /* Smaller padding for tablets */
     }
 }
@@ -30,7 +30,49 @@ body {
     box-sizing: border-box;
 }
 
+.menu-container {
+    position: relative; /* Ensures dropdown is positioned in relation to the menu image */
+    display: inline-block; /* Keeps the container fitting to its content */
+}
 
+.menu-button {
+    cursor: pointer;
+    width: 220px; /* Starting width, adjust if necessary */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%; /* Ensures it appears right below the menu button */
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px; /* Gives a minimum width to the dropdown */
+    /* Additional styles to ensure dropdown visibility and layout */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block; /* Ensures links take up the full width of the dropdown */
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd; /* Visual feedback on hover */
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .menu-button {
+        width: 80px; /* Adjust for smaller screens if needed */
+        height: 80px; /* Maintain aspect ratio */
+    }
+}
 
 nav, footer {
     width: 100%;
@@ -50,8 +92,11 @@ nav, footer {
 
 .footer-logo {
     height: 50px; 
-    width: auto;
+    width: 4vw;
     margin-right: 10px; /* Space between logo and text */
+    width: 4vw; /* Adjust the logo size based on the viewport width */
+    height: auto; /* Maintain aspect ratio */
+    min-width: 40px; /* Minimum size to ensure the logo remains visible */
 }
 
 
@@ -82,11 +127,167 @@ nav, footer {
     background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for desired translucency */
 }
 
-.footer-logo {
-    width: 100px; /* Adjust the size of your logo as needed */
-    height: auto; /* This ensures the aspect ratio is maintained */
+.font-shortStack {
+    font-size: clamp(10px, 1.5vw, 14px); /* Smaller text sizes */
 }
 
+
+
+
+
+/* For very small devices */
+@media (max-width: 480px) {
+    .footer-logo {
+        width: 8vw; /* Adjust logo size */
+        min-width: 30px; /* Smaller minimum size */
+    }
+
+    .font-shortStack {
+        font-size: clamp(8px, 2.5vw, 10px); /* Keep dynamic font sizing */
+    }
+
+    .home-game-button {
+        font-size: 10px; /* Smaller font size for mobile */
+        padding: 8px 12px; /* Slightly smaller padding */
+    }
+
+    /* Adjust navbar elements to fit within the frame */
+    nav {
+        padding: 5px 10px; /* Reduce padding to save space */
+    }
+
+    .menu-button {
+        width: 200px; /* Reduce width to fit small screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Ensure the title fits and is readable */
+    nav a.flex-grow {
+        font-size: 16px; /* Adjust title font size for small screens */
+        padding: 0 10px; /* Add padding to ensure it doesn't touch the edges */
+        white-space: nowrap; /* Prevent title from wrapping */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis if title is too long */
+    }
+
+    /* Adjust flex container to ensure elements are aligned and spaced optimally */
+    nav .flex.justify-between.items-center {
+        justify-content: space-around; /* Adjust spacing around items */
+    }
+    .nav a.flex-grow {
+        margin-left: auto;
+        margin-right: auto;
+        width: max-content; /* Allows the title to shrink/grow as needed */
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 6vw; /* Slightly larger on smaller screens */
+        min-width: 35px; /* Adjust as needed */
+    }
+
+    .font-shortStack {
+        font-size: clamp(9px, 2vw, 12px); /* Even smaller text on smaller screens */
+    }
+    
+    .font-shojumaru {
+        font-size: calc(16px + 1vw); /* Adjust font size dynamically */
+    }
+    .footer-container {
+        flex-direction: row; /* Keep in row to maintain side-by-side layout */
+        flex-wrap: wrap; /* Allows items to wrap if not enough space */
+        justify-content: center; /* Center items when wrapped */
+    }
+    .links-container {
+        justify-content: center; /* Center links when wrapped */
+    }
+    .menu-button {
+        cursor: pointer;
+        width: 220px; /* Starting width, adjust if necessary */
+        height: 220px;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: contain;
+    }
+    .footer-container {
+        flex-direction: row; /* Keep in row to maintain side-by-side layout */
+        flex-wrap: wrap; /* Allows items to wrap if not enough space */
+        justify-content: center; /* Center items when wrapped */
+    }
+    .links-container {
+        justify-content: center; /* Center links when wrapped */
+    }
+    .home-game-button {
+        font-size: 14px; /* Smaller font size for mobile */
+        padding: 8px 16px; /* Adjust padding for mobile */
+    }
+    .font-shojumaru {
+        font-size: calc(16px + 1vw); /* Adjust font size dynamically */
+    }
+}
+
+
+/* Responsive adjustments for image container */
+@media (max-width: 1024px) {
+    .image-container {
+        width: 90%; /* Increase the width on smaller screens */
+    }
+}
+
+
+/* Intermediate screen sizes (around 50-70% screen size) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .home-game-button {
+        font-size: 16px; /* Adjust font size for intermediate screens */
+        padding: 10px 20px; /* Adjust padding for intermediate screens */
+    }
+}
+
+
+/* Slightly larger intermediate screens (above 70%) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .home-game-button {
+        font-size: 17px; /* Slightly larger font size for larger intermediate screens */
+        padding: 11px 22px; /* Slightly larger padding for larger intermediate screens */
+    }
+}
+
+
+/* Larger screens */
+@media (min-width: 1441px) {
+    .home-game-button {
+        font-size: calc(1vw + 1px); /* Relative font size for larger screens */
+        padding: calc(0.5vw + 1px) calc(1vw + 1px); /* Relative padding for larger screens */
+        max-width: 250px; /* Increased maximum width for larger screens */
+    }
+    .menu-button {
+        width: 220px; /* Slightly smaller on mobile devices */
+        height: auto; /* Adjust height accordingly if not set to auto */
+    }
+}
+
+
+/* Footer container adjustments */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px; /* Adjust padding as needed */
+}
+
+/* Links container to keep them side by side */
+.links-container {
+    display: flex; /* Use flexbox to layout links */
+    gap: 20px; /* Adjust gap as needed */
+    align-items: center;
+}
+
+/* Styling for footer text to ensure readability across devices */
+.font-shortStack {
+    font-size: clamp(10px, 1.5vw, 14px); /* Dynamically adjust font size */
+}
 
 #main-container {
     padding: var(--padding);
@@ -110,26 +311,29 @@ main{
 
 /* Image container with aspect ratio */
 .image-container {
-    width: 80%; /* Adjust the width of the image container */
-    max-width: 600px; /* Set a maximum width */
-    margin: 0 auto; /* Center the image container */
-    position: relative; /* Needed for absolute positioning of the image */
+    position: relative;
+    width: 100%; /* Full width of its parent */
+    padding-top: 56.25%; /* Aspect ratio: 16:9 */
+    background-image: url('/images/HangmanStage.png'); /* Path to the image */
+    background-size: contain; /* Shows the whole image scaled down */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-position: center; /* Center the image in the container */
+}
+
+.stick-man {
+    position: absolute;
+    top: 42%; /* Adjust this value to position the neck of the stick man at the gallows */
+    left: 51%; /* Center the stick man horizontally, adjust as needed */
+    transform: translate(-50%, -50%); /* Adjust the position accurately */
+    z-index: 10; /* Ensure the stick man appears above the hangman stage */
+    max-height: 50%; /* Limit the size of the stick man image to the container */
+    max-width: 100%; /* Limit the width to maintain aspect ratio */
 }
 
 .image-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Adjust as needed */
-}
-
-/* Responsive adjustments for image container */
-@media (max-width: 1024px) {
-    .image-container {
-        width: 90%; /* Increase the width on smaller screens */
-    }
+    width: 100%; /* Image will scale with the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Will ensure the image fits within the container */
 }
 
 /* Button styles */
@@ -137,48 +341,24 @@ main{
     @apply relative font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
     font-size: 18px; /* Default font size */
     padding: 12px 24px; /* Default padding */
-    margin: 15px; /* Default margin */
+    margin: 20px; /* Default margin */
     width: auto; /* Auto width for flexible sizing */
     max-width: 200px; /* Maximum width to prevent too large buttons */
     transition: font-size 0.3s, padding 0.3s; /* Smooth transition for resizing */
 }
 
-/* Smaller screens (Mobile devices) */
-@media (max-width: 768px) {
-    .home-game-button {
-        font-size: 14px; /* Smaller font size for mobile */
-        padding: 8px 16px; /* Adjust padding for mobile */
-    }
-}
-
-/* Intermediate screen sizes (around 50-70% screen size) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .home-game-button {
-        font-size: 16px; /* Adjust font size for intermediate screens */
-        padding: 10px 20px; /* Adjust padding for intermediate screens */
-    }
-}
-
-/* Slightly larger intermediate screens (above 70%) */
-@media (min-width: 1025px) and (max-width: 1440px) {
-    .home-game-button {
-        font-size: 17px; /* Slightly larger font size for larger intermediate screens */
-        padding: 11px 22px; /* Slightly larger padding for larger intermediate screens */
-    }
-}
-
-/* Larger screens */
-@media (min-width: 1441px) {
-    .home-game-button {
-        font-size: calc(1vw + 1px); /* Relative font size for larger screens */
-        padding: calc(0.5vw + 1px) calc(1vw + 1px); /* Relative padding for larger screens */
-        max-width: 250px; /* Increased maximum width for larger screens */
-    }
-}
-
 /* Other existing styles */
 .home-game-button.big {
     @apply p-4 text-3xl w-3/4;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    flex-direction: row; /* Place buttons side by side */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px; /* Adds space above the buttons, below the image container */
 }
 
 .settings-label {

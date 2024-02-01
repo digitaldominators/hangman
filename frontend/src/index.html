@@ -1,44 +1,43 @@
 {{#> base namespace='index'}}
 {{#*inline "content"}}
 
-<!-- Hangman image and buttons -->
-<div class="relative aspect-[4.5/4.5] w-full border-landing-image-border border-[14px] bg-cover bg-center rounded-2xl bg-[url('/images/hangman.png')]">
-    <div class="flex justify-center gap-5 absolute bottom-5 left-0 right-0">
-        <a href="/new" id="new_game_button" class="home-game-button">
-            Start Game
-        </a>
-        <a href="/join" id="join_game_button" class="home-game-button">
-            Join Game
-        </a>
-    </div>
+<!-- Image Container -->
+<div class="image-container">
+    <img src="/images/StickMan.png" alt="Stick Man" class="stick-man">
+    <!-- No need for an img tag for the background, as it's set via CSS -->
+</div>
+
+<!-- Game Buttons -->
+<div class="button-container text-center">
+    <a href="/new" id="new_game_button" class="home-game-button">
+        Start Game
+    </a>
+    <a href="/join" id="join_game_button" class="home-game-button">
+        Join Game
+    </a>
 </div>
 
 <!-- How To Play Text -->
-<div class="mt-6 text-center"> <!-- Center the text -->
+<div class="mt-6 text-center">
     <h3 class="font-shortStack text-[20px] tracking-wider">How To Play Hangman</h3>
-    <p class="font-shortStack mt-2 text-[13px] ">
-        <!-- Paragraph content -->
+    <p class="font-shortStack mt-2 text-[13px]">
         Press start game or join game to join another player to solve the puzzle.
         You will be presented with a number of blank spaces representing the missing word.
         Use the keyboard to guess a letter (I recommend starting with vowels).
         If your chosen letter exists in the answer, then all places in the answer where that letter appear will be revealed.
         After you've revealed several letters, you may be able to guess what the answer is and fill in the remaining letters.
-        The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece.
-        Solve the puzzle before the hangman dies.
+        The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece. Solve the puzzle before the hangman dies.
     </p>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
+    document.addEventListener('DOMContentLoaded', () => {
         const menuButton = document.querySelector('.menu-button');
         const dropdownContent = document.querySelector('.dropdown-content');
 
         menuButton.addEventListener('click', () => {
-            if (dropdownContent.style.display === 'none' || !dropdownContent.style.display) {
-                dropdownContent.style.display = 'block';
-            } else {
-                dropdownContent.style.display = 'none';
-            }
+            // This toggles the dropdown display
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
         });
     });
 </script>

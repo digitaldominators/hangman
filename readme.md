@@ -21,6 +21,11 @@ linux/mac
 
     source venv/bin/activate
 
+add `.env` file
+
+* the .env file should look something like the .env.example file
+* for development set DEBUG=TRUE in the `.env` file
+
 install all python packages
 
     pip install -r requirements.txt

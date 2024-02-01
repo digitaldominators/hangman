@@ -184,7 +184,8 @@ class GameViewSet(viewsets.GenericViewSet):
         # get the current users default settings
         default_settings = get_user_default_settings(request)
         # save request data to data
-        data = request.data
+        # must create copy since data is immutable
+        data = request.data.copy()
         # if the user sent data of the level, update the default game level.
         if data.get('level'):
             set_default_game_setting(request, 'level', data['level'])

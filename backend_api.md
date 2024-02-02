@@ -46,7 +46,7 @@ To join a multiplayer game post data to /api/game/join_game/
 
 after joining the game the user must set the word for the other player
 ### set first player word
-To set the first players word player must have already joined the game. Post data to /api/game/<game_slug>/
+To set the first players word player must have already joined the game. Post data to /api/game/<game_slug>/choose_word/
 
     {
         "word": "heads up" // set the word for the first player

@@ -32,7 +32,8 @@ export default {
         'VT323': ['VT323'],
         'inika': ['Inika'],
         'wallpoet': ['Wallpoet'],
-        'unlock': ['Unlock']
+        'unlock': ['Unlock'],
+        'underdog': ['Underdog']
       },
       spacing: {
         '0.5': '0.125rem',

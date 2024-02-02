@@ -1,38 +1,38 @@
-import readCookie from "./readCookie.js";
-let join_game_form;
+import axios from "axios";
+import barba from "@barba/core";
+import {setCookie} from "./readCookie.js";
+let form;
+let code_box;
+let error_message;
 function join_game(e){
     e.preventDefault();
 
     // get the forms data
-    // data = game_slug, word?
+    // data = game_slug
     const formData = new FormData(join_game_form);
 
-    const data = {
-        game_slug: formData.get('join_code'),
-        word: formData.get("word")
-    }
-
-    // todo switch this to use axios.
-    fetch("/api/game/join_game/",{
-        method:"POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "X-CSRFToken": readCookie("csrftoken")
-        },
-        body:JSON.stringify(data)})
-        .then(response=>response.json())
-        .then((response)=>{
-            alert(`Joined game`)
-        })
-        .catch((error)=>{
-            alert("something went wrong")
-        })
+    axios.post('/api/game/join_game/',{game_slug:formData.get("join_code")}).then(response=>{
+        error_message.innerText = "";
+        setCookie("current_game",formData.get("join_code"),100);
+        barba.go('/choose_word');
+    }).catch(error=>{
+        code_box.select()
+        code_box.focus()
+        if (error.response.status===404){
+            error_message.innerText = "Invalid join code"
+            return
+        }
+        if(error.response.data.message){
+            error_message.innerText = error.response.data.message
+        }
+    })
 }
 
 
 export default function loadJoinPage(){
-    join_game_form = document.getElementById("join_game_form");
-
-    join_game_form.onsubmit = join_game;
+    form = document.getElementById("join_game_form");
+    code_box = document.getElementById("code_box")
+    error_message = document.getElementById("error_message")
+    code_box.focus()
+    form.onsubmit = join_game;
 }

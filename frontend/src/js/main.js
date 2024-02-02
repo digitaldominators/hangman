@@ -8,6 +8,7 @@ import axios from 'axios';
 import readCookie from "./readCookie.js";
 import loadWaitingPage from "./waiting.js";
 import loadSettingsPage from "./settings.js";
+import loadChooseWordPage from "./choose_word.js";
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
@@ -61,6 +62,12 @@ barba.init({
             namespace: 'settings',
             afterEnter({next}) {
                 loadSettingsPage();
+            }
+        },
+        {
+            namespace: 'choose_word',
+            afterEnter({next}) {
+                loadChooseWordPage();
             }
         }
 

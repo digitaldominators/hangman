@@ -17,6 +17,7 @@ export default defineConfig({
                 "./src/new.html",
                 "./src/settings.html",
                 "./src/waiting.html",
+                "./src/choose_word.html"
             ],
         }
     },

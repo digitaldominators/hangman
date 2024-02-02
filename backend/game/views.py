@@ -286,7 +286,6 @@ class GameViewSet(viewsets.GenericViewSet):
         game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
         # add if user is logged in or not
         data = game_serializer.data
-        data['is_logged_in'] = request.user.is_authenticated
         return Response(data, status=status.HTTP_201_CREATED)
 
     @action(detail=True, methods=['post'])
@@ -322,7 +321,6 @@ class GameViewSet(viewsets.GenericViewSet):
         game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
         # add if user is logged in or not
         data = game_serializer.data
-        data['is_logged_in'] = request.user.is_authenticated
         return Response(data, status=status.HTTP_201_CREATED)
 
     def list(self, request):

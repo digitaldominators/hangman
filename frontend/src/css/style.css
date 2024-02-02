@@ -14,32 +14,24 @@
     --padding: 10px; /* Default padding */
 }
 
-@media (max-width: 768px) {
-    :root {
-        --header-height: 50px; /* Smaller header for tablets */
-        --footer-height: 30px; /* Smaller footer for tablets */
-        --padding: 5px; /* Smaller padding for tablets */
-    }
-}
-
 body {
     @apply bg-background-color;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0; /* Resets default margin */
+    margin: 0;
     box-sizing: border-box;
 }
 
 .menu-container {
-    position: relative; /* Ensures dropdown is positioned in relation to the menu image */
-    display: inline-block; /* Keeps the container fitting to its content */
+    position: relative;
+    display: inline-block;
 }
 
 .menu-button {
     cursor: pointer;
-    width: 220px; /* Starting width, adjust if necessary */
-    height: auto; /* Maintain aspect ratio */
+    width: 220px;
+    height: auto;
     object-fit: contain;
 }
 
@@ -47,32 +39,22 @@ body {
     display: none;
     position: absolute;
     left: 0;
-    top: 100%; /* Ensures it appears right below the menu button */
+    top: 100%;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    min-width: 160px; /* Gives a minimum width to the dropdown */
-    /* Additional styles to ensure dropdown visibility and layout */
+    min-width: 160px;
 }
 
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    display: block; /* Ensures links take up the full width of the dropdown */
+    display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd; /* Visual feedback on hover */
-}
-
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .menu-button {
-        width: 80px; /* Adjust for smaller screens if needed */
-        height: 80px; /* Maintain aspect ratio */
-    }
+    background-color: #ddd;
 }
 
 nav, footer {
@@ -81,37 +63,24 @@ nav, footer {
     box-sizing: border-box;
 }
 
-/* Hover effect for text and icons in the navbar */
 .nav-item-hover {
-    transition: color 0.3s; /* Transition for color */
+    transition: color 0.3s;
 }
 
 .nav-item-hover:hover, .nav-item-hover:hover .icon-hover {
-    color: black; /* Change color to black on hover */
-    -webkit-text-stroke: 1px rgb(74, 168, 168); /* Change stroke color on hover */
+    color: black;
+    -webkit-text-stroke: 1px rgb(74, 168, 168);
 }
-
-.footer-logo {
-    height: 50px; 
-    width: 4vw;
-    margin-right: 10px; /* Space between logo and text */
-    width: 4vw; /* Adjust the logo size based on the viewport width */
-    height: auto; /* Maintain aspect ratio */
-    min-width: 40px; /* Minimum size to ensure the logo remains visible */
-}
-
 
 .icon-hover {
-    transition: stroke 0.3s; /* Transition for SVG stroke */
+    transition: stroke 0.3s;
 }
 
 .icon-hover:hover {
-    stroke: rgb(74, 168, 168); /* Change SVG stroke color on hover */
+    stroke: rgb(74, 168, 168);
     stroke-width: .01px;
 }
 
-
-/* CSS for the hover effect on the Hangman title */
 .title-hover {
     -webkit-text-stroke: 2px black;
     font-size: 40px; 
@@ -120,154 +89,117 @@ nav, footer {
 
 .title-hover:hover {
     color: black;
-    font-size: 40px; 
-    -webkit-text-stroke: 2.0px rgb(74, 168, 168); /* Slightly thinner outline on hover */
+    -webkit-text-stroke: 2.0px rgb(74, 168, 168);
 }
 
 .bg-footer-background {
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for desired translucency */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .font-shortStack {
-    font-size: clamp(10px, 1.5vw, 14px); /* Smaller text sizes */
+    font-size: clamp(10px, 1.5vw, 14px);
 }
 
-
-
-
-
-/* For very small devices */
-@media (max-width: 480px) {
-    .footer-logo {
-        width: 8vw; /* Adjust logo size */
-        min-width: 30px; /* Smaller minimum size */
-    }
-
-    .font-shortStack {
-        font-size: clamp(8px, 2.5vw, 10px); /* Keep dynamic font sizing */
-    }
-
-    .home-game-button {
-        font-size: 10px; /* Smaller font size for mobile */
-        padding: 8px 12px; /* Slightly smaller padding */
-    }
-
-    /* Adjust navbar elements to fit within the frame */
-    nav {
-        padding: 5px 10px; /* Reduce padding to save space */
-    }
-
-    .menu-button {
-        width: 200px; /* Reduce width to fit small screens */
-        height: auto; /* Maintain aspect ratio */
-    }
-
-    /* Ensure the title fits and is readable */
-    nav a.flex-grow {
-        font-size: 16px; /* Adjust title font size for small screens */
-        padding: 0 10px; /* Add padding to ensure it doesn't touch the edges */
-        white-space: nowrap; /* Prevent title from wrapping */
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Add ellipsis if title is too long */
-    }
-
-    /* Adjust flex container to ensure elements are aligned and spaced optimally */
-    nav .flex.justify-between.items-center {
-        justify-content: space-around; /* Adjust spacing around items */
-    }
-    .nav a.flex-grow {
-        margin-left: auto;
-        margin-right: auto;
-        width: max-content; /* Allows the title to shrink/grow as needed */
-    }
+.footer-logo {
+    height: 50px; 
+    width: 4vw;
+    margin-right: 10px;
+    min-width: 40px; 
+    height: auto;
 }
 
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* This spreads out the navbar items */
+    align-items: center; /* This vertically centers navbar items */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
 
+/* Centering the Hangman title specifically */
+.title-container { 
+    flex-grow: 1; /* Allows the title container to take up any available space */
+    text-align: center; /* Centers the title text within its container */
+}
 
+/* Consolidated media queries */
 @media (max-width: 768px) {
-    .footer-logo {
-        width: 6vw; /* Slightly larger on smaller screens */
-        min-width: 35px; /* Adjust as needed */
+    .navbar-item, .menu-button, .navbar-logo {
+        /* Adjustments to ensure these elements don't push the title out of center */
+        flex-basis: auto; /* Adjust based on your layout's needs */
+        flex-grow: 0; /* Prevents these elements from taking up unnecessary space */
     }
-
-    .font-shortStack {
-        font-size: clamp(9px, 2vw, 12px); /* Even smaller text on smaller screens */
+    .title-container {
+        order: 2; /* Ensures the title is positioned in the middle if needed */
+        width: 100%; /* Gives the title full width to center it in its own space */
     }
-    
-    .font-shojumaru {
-        font-size: calc(16px + 1vw); /* Adjust font size dynamically */
-    }
-    .footer-container {
-        flex-direction: row; /* Keep in row to maintain side-by-side layout */
-        flex-wrap: wrap; /* Allows items to wrap if not enough space */
-        justify-content: center; /* Center items when wrapped */
-    }
-    .links-container {
-        justify-content: center; /* Center links when wrapped */
+    .menu-button, .navbar-logo {
+        order: 1; /* Menu */
+        order: 3; /* Logo, adjust accordingly if you have two images */
     }
     .menu-button {
-        cursor: pointer;
-        width: 220px; /* Starting width, adjust if necessary */
-        height: 220px;
-        height: auto; /* Maintain aspect ratio */
-        object-fit: contain;
+        width: 80px; /* Adjust size for smaller screens */
+        height: 80px; /* Keep aspect ratio */
     }
-    .footer-container {
-        flex-direction: row; /* Keep in row to maintain side-by-side layout */
-        flex-wrap: wrap; /* Allows items to wrap if not enough space */
-        justify-content: center; /* Center items when wrapped */
+}
+
+@media (max-width: 480px) {
+    .menu-button {
+        width: 60px; /* Further reduce size to fit smaller screens */
+        height: 60px; /* Maintain aspect ratio */
     }
-    .links-container {
-        justify-content: center; /* Center links when wrapped */
+
+    /* Adjust title and logo for very small devices */
+    .title-hover, .navbar-logo {
+        font-size: 20px; /* Smaller title for very small screens */
+        width: 60px; /* Smaller logo */
     }
+
+    .dropdown-content {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        display: none; /* Keep it hidden by default */
+    }
+
+    .dropdown-content.show {
+        display: block; /* Show on tap/click */
+    }
+}
+
+/* Ensure image container does not overflow the viewport */
+.image-container {
+    max-width: 100%; /* Limit width to prevent overflow */
+    height: auto; /* Adjust height based on the width to maintain aspect ratio */
+    overflow: hidden; /* Hide any overflow */
+}
+
+
+
+
+/* Adjustments for intermediate screen sizes */
+@media (min-width: 769px) and (max-width: 1024px), (min-width: 1025px) and (max-width: 1440px), (min-width: 1441px) {
     .home-game-button {
-        font-size: 14px; /* Smaller font size for mobile */
-        padding: 8px 16px; /* Adjust padding for mobile */
-    }
-    .font-shojumaru {
-        font-size: calc(16px + 1vw); /* Adjust font size dynamically */
+        /* Adjustments for button sizes across different screen widths */
+        font-size: clamp(16px, 2vw, 18px); /* Use clamp for smooth scaling */
+        padding: 10px 20px; /* Adjust padding based on button size */
     }
 }
 
-
-/* Responsive adjustments for image container */
-@media (max-width: 1024px) {
-    .image-container {
-        width: 90%; /* Increase the width on smaller screens */
-    }
-}
-
-
-/* Intermediate screen sizes (around 50-70% screen size) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .home-game-button {
-        font-size: 16px; /* Adjust font size for intermediate screens */
-        padding: 10px 20px; /* Adjust padding for intermediate screens */
-    }
-}
-
-
-/* Slightly larger intermediate screens (above 70%) */
 @media (min-width: 1025px) and (max-width: 1440px) {
     .home-game-button {
-        font-size: 17px; /* Slightly larger font size for larger intermediate screens */
-        padding: 11px 22px; /* Slightly larger padding for larger intermediate screens */
+        font-size: 17px;
+        padding: 11px 22px;
     }
 }
 
-
-/* Larger screens */
 @media (min-width: 1441px) {
     .home-game-button {
-        font-size: calc(1vw + 1px); /* Relative font size for larger screens */
-        padding: calc(0.5vw + 1px) calc(1vw + 1px); /* Relative padding for larger screens */
-        max-width: 250px; /* Increased maximum width for larger screens */
-    }
-    .menu-button {
-        width: 220px; /* Slightly smaller on mobile devices */
-        height: auto; /* Adjust height accordingly if not set to auto */
+        font-size: calc(1vw + 1px);
+        padding: calc(0.5vw + 1px) calc(1vw + 1px);
+        max-width: 250px;
     }
 }
+
 
 
 /* Footer container adjustments */
@@ -306,9 +238,7 @@ nav, footer {
     align-items: center; /* Center the content horizontally */
     @apply mx-auto flex justify-center items-center;
 }
-main{
-    @apply w-full md:w-3/4 xl:w-3/5;
-}
+
 
 /* Image container with aspect ratio */
 .image-container {

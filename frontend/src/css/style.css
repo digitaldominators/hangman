@@ -322,7 +322,7 @@ nav, footer {
     @apply cursor-not-allowed;
 }
 
-.button-section.disabled button {
+.button-section.disabled button { 
     @apply pointer-events-none;
 }
 

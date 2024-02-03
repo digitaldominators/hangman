@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inika&family=Unlock&family=VT323&family=Wallpoet&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Underdog&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&family=Titan+One&family=Inika&family=Unlock&family=VT323&family=Wallpoet&family=Itim&family=Underdog&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -22,45 +18,28 @@ body {
     margin: 0;
     box-sizing: border-box;
 }
-
-.menu-container {
-    position: relative;
-    display: inline-block;
+/* Body of the page */
+body {
+    @apply bg-background-color;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.menu-button {
-    cursor: pointer;
-    width: 220px;
-    height: auto;
-    object-fit: contain;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    min-width: 160px;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
+/* Navbar and its classes */
 nav, footer {
     width: 100%;
     height: var(--header-height);
     box-sizing: border-box;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .nav-item-hover {
@@ -92,8 +71,98 @@ nav, footer {
     -webkit-text-stroke: 2.0px rgb(74, 168, 168);
 }
 
+.title-container { 
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Main container which holds the image of Hangman */
+#main-container {
+    padding: var(--padding);
+    padding-top: 40px;
+    max-width: 900px;
+    margin: 20px auto;
+    background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
+    border-radius: 22px;
+    flex-grow: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @apply mx-auto flex justify-center items-center;
+}
+
+/* Image of Hangman and Hangman's stick */
+.image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background-image: url('/images/HangmanStage.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.stick-man {
+    position: absolute;
+    top: 42%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    max-height: 50%;
+    max-width: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Start/Join game buttons */
+.home-game-button, .home-game-button.big {
+    @apply relative font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
+}
+
+.home-game-button {
+    font-size: 18px;
+    padding: 12px 24px;
+    margin: 20px;
+    width: auto;
+    max-width: 200px;
+    transition: font-size 0.3s, padding 0.3s;
+}
+
+.home-game-button.big {
+    @apply p-4 text-3xl w-3/4;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Footer stuff */
 .bg-footer-background {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.links-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .font-shortStack {
@@ -108,189 +177,76 @@ nav, footer {
     height: auto;
 }
 
-.navbar-container {
-    display: flex;
-    justify-content: space-between; /* This spreads out the navbar items */
-    align-items: center; /* This vertically centers navbar items */
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-}
-
-/* Centering the Hangman title specifically */
-.title-container { 
-    flex-grow: 1; /* Allows the title container to take up any available space */
-    text-align: center; /* Centers the title text within its container */
-}
-
-/* Consolidated media queries */
-@media (max-width: 768px) {
-    .navbar-item, .menu-button, .navbar-logo {
-        /* Adjustments to ensure these elements don't push the title out of center */
-        flex-basis: auto; /* Adjust based on your layout's needs */
-        flex-grow: 0; /* Prevents these elements from taking up unnecessary space */
-    }
-    .title-container {
-        order: 2; /* Ensures the title is positioned in the middle if needed */
-        width: 100%; /* Gives the title full width to center it in its own space */
-    }
-    .menu-button, .navbar-logo {
-        order: 1; /* Menu */
-        order: 3; /* Logo, adjust accordingly if you have two images */
-    }
-    .menu-button {
-        width: 80px; /* Adjust size for smaller screens */
-        height: 80px; /* Keep aspect ratio */
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-button {
-        width: 60px; /* Further reduce size to fit smaller screens */
-        height: 60px; /* Maintain aspect ratio */
-    }
-
-    /* Adjust title and logo for very small devices */
-    .title-hover, .navbar-logo {
-        font-size: 20px; /* Smaller title for very small screens */
-        width: 60px; /* Smaller logo */
-    }
-
-    .dropdown-content {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        display: none; /* Keep it hidden by default */
-    }
-
-    .dropdown-content.show {
-        display: block; /* Show on tap/click */
-    }
-}
-
 /* Ensure image container does not overflow the viewport */
 .image-container {
-    max-width: 100%; /* Limit width to prevent overflow */
-    height: auto; /* Adjust height based on the width to maintain aspect ratio */
-    overflow: hidden; /* Hide any overflow */
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
 }
 
-
-
-
-/* Adjustments for intermediate screen sizes */
-@media (min-width: 769px) and (max-width: 1024px), (min-width: 1025px) and (max-width: 1440px), (min-width: 1441px) {
-    .home-game-button {
-        /* Adjustments for button sizes across different screen widths */
-        font-size: clamp(16px, 2vw, 18px); /* Use clamp for smooth scaling */
-        padding: 10px 20px; /* Adjust padding based on button size */
-    }
-}
-
-@media (min-width: 1025px) and (max-width: 1440px) {
-    .home-game-button {
-        font-size: 17px;
-        padding: 11px 22px;
-    }
-}
-
-@media (min-width: 1441px) {
-    .home-game-button {
-        font-size: calc(1vw + 1px);
-        padding: calc(0.5vw + 1px) calc(1vw + 1px);
-        max-width: 250px;
-    }
-}
-
-
-
-/* Footer container adjustments */
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px; /* Adjust padding as needed */
-}
-
-/* Links container to keep them side by side */
-.links-container {
-    display: flex; /* Use flexbox to layout links */
-    gap: 20px; /* Adjust gap as needed */
-    align-items: center;
-}
-
-/* Styling for footer text to ensure readability across devices */
-.font-shortStack {
-    font-size: clamp(10px, 1.5vw, 14px); /* Dynamically adjust font size */
-}
-
-#main-container {
-    padding: var(--padding);
-    padding-top: 40px;
-    max-width: 900px;
-    margin: 20px auto;
-    background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
-    border-radius: 22px;
-    flex-grow: 1;
-    box-sizing: border-box;
-    overflow-y: auto; /* Adjust if necessary */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center the content vertically */
-    align-items: center; /* Center the content horizontally */
-    @apply mx-auto flex justify-center items-center;
-}
-
-
-/* Image container with aspect ratio */
-.image-container {
+/* Dropdown menus for the navbar */
+.menu-container {
     position: relative;
-    width: 100%; /* Full width of its parent */
-    padding-top: 56.25%; /* Aspect ratio: 16:9 */
-    background-image: url('/images/HangmanStage.png'); /* Path to the image */
-    background-size: contain; /* Shows the whole image scaled down */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-position: center; /* Center the image in the container */
+    display: inline-block;
 }
 
-.stick-man {
+.menu-button {
+    cursor: pointer;
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
     position: absolute;
-    top: 42%; /* Adjust this value to position the neck of the stick man at the gallows */
-    left: 51%; /* Center the stick man horizontally, adjust as needed */
-    transform: translate(-50%, -50%); /* Adjust the position accurately */
-    z-index: 10; /* Ensure the stick man appears above the hangman stage */
-    max-height: 50%; /* Limit the size of the stick man image to the container */
-    max-width: 100%; /* Limit the width to maintain aspect ratio */
+    left: 0px;
+    top: 105%;
+    width: 350x;
+    min-height: 190px;
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    gap: 25px;
+    color: #FFFFFF;
+    opacity: 0.6;
 }
 
-.image-container img {
-    width: 100%; /* Image will scale with the container */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Will ensure the image fits within the container */
+.dropdown-content a::before {
+    content: '';
+    display: inline-block;
+    margin-right: 10px;
+    height: 3px;
+    width: 20px;
+    background-color: rgb(74, 168, 168);
+    position: relative;
+    top: -10px;
+    box-shadow: 
+        0 6px 0 0 rgb(74, 168, 168),
+        0 12px 0 0 rgb(74, 168, 168);
 }
 
-/* Button styles */
-.home-game-button {
-    @apply relative font-shojumaru text-button-outline border-4 border-button-outline bg-background-color rounded-2xl text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300;
-    font-size: 18px; /* Default font size */
-    padding: 12px 24px; /* Default padding */
-    margin: 20px; /* Default margin */
-    width: auto; /* Auto width for flexible sizing */
-    max-width: 200px; /* Maximum width to prevent too large buttons */
-    transition: font-size 0.3s, padding 0.3s; /* Smooth transition for resizing */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Shojumaru', cursive;
+    font-size: 18px;
 }
 
-/* Other existing styles */
-.home-game-button.big {
-    @apply p-4 text-3xl w-3/4;
+.dropdown-content a:hover {
+    background-color: #ddd;
+    color: rgb(74, 168, 168);
 }
 
-/* Button container */
-.button-container {
-    display: flex;
-    flex-direction: row; /* Place buttons side by side */
-    justify-content: center; /* Center buttons horizontally */
-    gap: 20px; /* Space between buttons */
-    margin-top: 20px; /* Adds space above the buttons, below the image container */
-}
 
 .settings-label {
     @apply font-VT323 text-[48px];

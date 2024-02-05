@@ -82,7 +82,7 @@ class GameMap(models.Model):
     # game settings
     # difficulty level number 1-3
     level = models.PositiveSmallIntegerField(default=1)
-    # number of seconds before tern is skipped.
+    # number of seconds before turn is skipped.
     timer = models.PositiveSmallIntegerField(default=0)
 
     def save(self, *args, **kwargs):

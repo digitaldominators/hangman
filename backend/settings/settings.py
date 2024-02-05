@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'accounts',
     'scoreboard',
     'rest_framework.authtoken',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

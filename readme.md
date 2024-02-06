@@ -29,7 +29,7 @@ add `.env` file
 install all python packages
 
     pip install -r requirements.txt
-    python manage.py migrate
+    python manage.py migratepython manage.py migrate
 
 ## frontend
 install dependencies

@@ -17,7 +17,16 @@ export default defineConfig({
                 "./src/new.html",
                 "./src/settings.html",
                 "./src/waiting.html",
-                "./src/choose_word.html"
+                "./src/choose_word.html",
+                "./src/about.html",
+                "./src/login.html",
+                "./src/privacy.html",
+                "./src/scoreboard.html",
+                "./src/signup.html",
+                "./src/theme.html",
+                "./src/wait.html",
+                "./src/youlost.html",
+                "./src/youwon.html"
             ],
         }
     },

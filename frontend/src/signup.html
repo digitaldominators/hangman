@@ -1,21 +1,27 @@
-{{#> base title='Sign up' namespace='signup'}}
+{{#> base title='signup' namespace='signup'}}
 {{#*inline "content"}}
 
-<div class="container flex justify-center items-center h-screen bg-gray-100 mt-10">
-    <form  class="absolute top-[100px] left-0 right-0 text-center px-8 pt-6 pb-8 mb-4 mt-4" id="join_game_form">
-        <div class="mb-4 mt-10">
-        <p class="signup_text p-4">Username</p>
-        <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder="Username" id="code_box"
-            class="inline-block font-underdog text-[40px] w-1/2 border-black border-4 rounded text-center" autofocus>
-        <p id="error_message" class="text-center text-red-700 relative top-[-25px] pointer-events-none"></p>
+<div class="flex justify-center items-start h-screen" style="padding-top: 40px;">
+    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="sign_up_form" style="width: auto; max-width: 800px;">
+
+        <p class="signup_text p-4" style="font-size: 50px; margin-bottom: 48px;">Enter a Username</p>
+        <div class="mb-6"> 
+            <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder="Username" id="code_box"
+                   class="inline-block text-[48px] w-full border-black border-4 rounded text-center" autofocus style="margin-bottom: 32px;"> 
+            <p id="error_message" class="text-center text-red-700 mt-2"></p>
         </div>
+
+        <!-- Add the text "Enter Password" here -->
+        <p class="signup_text p-4" style="font-size: 50px; margin-bottom: 48px;">Enter Password</p>
+
         <div class="mb-6">
-        <p class="signup_text p-4">Password</p>
-        <input type="password" id="password" name="password" placeholder="Enter password" class="inline-block font-underdog text-[40px] w-1/2 border-black border-4 rounded text-center">
+            <input type="password" name="password" placeholder="Enter password"
+                   class="inline-block text-[48px] w-full border-black border-4 rounded text-center mb-4">
         </div>
-        <button type="submit" class="inline-block text-[50px] font-bold rounded-3xl relative font-itim text-button-outline border-4 border-button-outline bg-background-color text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 m-[40px] px-[25px] py-[36px];">
-            SIGN UP
-        </button>
+        <button type="submit"
+        class="inline-block text-[60px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];">
+    Sign up
+</button>
     </form>
 </div>
 

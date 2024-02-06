@@ -1,33 +1,83 @@
 {{#> base title='Theme' namespace='theme'}}
 {{#*inline "content"}}
-<div class="container mx-auto ">
-    <h2 class="picktheme">Pick a Theme</h2>
-    <div class="grid gap-4 grid-cols-2 grid-rows-2">
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Food & Drinks </p>
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    min-width: 800px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+  }
+  .theme_rectangle {
+    width: 332px; /* Adjusted width for consistency */
+    height: 69px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid rgba(0, 0, 0, 1);
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    background-color: #FFF;
+    text-align: center;
+    margin-bottom: 10px; /* Gap between elements */
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px; /* Adjusted to approximate top position */
+  }
+  button {
+    width: 317px; /* Hug width */
+    height: 97px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center; /* Ensures the text inside the button is centered */
+    background-color: #007bff; /* Example background color */
+    color: #fff; /* Text color */
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); /* Drop shadow */
+  }
+</style>
+<div class="container">
+    <h2 class="picktheme" style="text-align: center;">Pick a Theme</h2>
+    <div class="grid">
+        <!-- Theme boxes -->
+        <div class="theme_rectangle">
+            <p>Food & Drinks</p>
         </div>
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Songs </p>
+        <div class="theme_rectangle">
+            <p>Songs</p>
         </div>
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Animals </p>
+        <div class="theme_rectangle">
+            <p>Animals</p>
         </div>
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Sports </p>
+        <div class="theme_rectangle">
+            <p>Sports</p>
         </div>
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Movies </p>
+        <div class="theme_rectangle">
+            <p>Movies</p>
         </div>
-        <div class="theme_rectangle box-border md:box-content">
-            <p class="w-16 md:w-32 lg:w-48 box-content p-4 border-4 text-lg text-black font-semibold bg-white rounded-xl"> Holiday </p>
+        <div class="theme_rectangle">
+            <p>Holiday</p>
         </div>
     </div>
-    <div class="mt-6 items-center ml-10"> 
-        <button type="submit" class="flex items-center justify-center rounded-3xl border-4 bg-background-color text-button-outline border-button-outline hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 m-10 px-6 text-[50px] font-bold font-itim">
-            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="83" viewBox="0 0 90 83" fill="none" class="mr-3">
-                <path d="M45 5.1875C37.2124 5.1875 29.5996 7.31719 23.1244 11.3073C16.6493 15.2973 11.6025 20.9686 8.62226 27.6038C5.64206 34.239 4.8623 41.5403 6.3816 48.5842C7.90089 55.6282 11.651 62.0984 17.1577 67.1768C22.6644 72.2552 29.6803 75.7136 37.3183 77.1148C44.9563 78.5159 52.8733 77.7968 60.0682 75.0484C67.263 72.3 73.4126 67.6457 77.7391 61.6741C82.0657 55.7026 84.375 48.6819 84.375 41.5C84.375 31.8693 80.2266 22.6331 72.8423 15.8232C65.4581 9.01327 55.4429 5.1875 45 5.1875ZM65.9447 43.8214L32.1947 59.3839C31.7658 59.5816 31.2892 59.6748 30.8103 59.6548C30.3313 59.6348 29.8658 59.5022 29.4581 59.2696C29.0503 59.037 28.7138 58.7121 28.4805 58.3258C28.2472 57.9396 28.1248 57.5047 28.125 57.0625V25.9375C28.1253 25.4955 28.248 25.061 28.4815 24.675C28.715 24.2891 29.0516 23.9646 29.4593 23.7323C29.8669 23.5 30.3322 23.3676 30.811 23.3478C31.2897 23.3279 31.766 23.4211 32.1947 23.6187L65.9447 39.1812C66.4112 39.3968 66.8035 39.7279 67.0777 40.1374C67.3518 40.547 67.497 41.0187 67.497 41.5C67.497 41.9813 67.3518 42.453 67.0777 42.8626C66.8035 43.2721 66.4112 43.6032 65.9447 43.8188" fill="#003939"/>
-            </svg>
-            <span class="text-justify">PLAY</span>
+    <div class="button-container"> 
+        <button type="submit">
+            PLAY
         </button>    
     </div>
 </div>

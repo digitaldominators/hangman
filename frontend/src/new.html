@@ -1,6 +1,5 @@
 {{#> base title='New Game' namespace='new'}}
 {{#*inline "content"}}
-
 <form id="new_game_form">
     <table class="table-fixed mx-auto w-2/3 border-separate">
         <tbody>
@@ -23,11 +22,22 @@
         </tbody>
     </table>
     <br>
-    <button type="submit" class="home-game-button big block m-auto">
+    <button type="button" id="start_game_button" class="home-game-button big block m-auto">
         Start Game
     </button>
 </form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const startGameButton = document.getElementById('start_game_button');
 
+        startGameButton.addEventListener('click', function () {
+            const isMultiplayer = document.querySelector('input[name="multiplayer"]').checked;
+            const word = document.querySelector('input[name="word"]').value;
 
+            // Redirect to "theme.html"
+            window.location.href = 'theme.html';
+        });
+    });
+</script>
 {{/inline}}
 {{/base }}

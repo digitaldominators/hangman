@@ -52,9 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game',
-    'rest_framework',
     'accounts',
     'scoreboard',
+    'category',
+    'rest_framework',
     'rest_framework.authtoken',
     'django_extensions',
 ]

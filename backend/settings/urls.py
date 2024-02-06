@@ -25,6 +25,7 @@ from rest_framework import routers
 from game.views import GameViewSet
 from game.views import DefaultSettingsViewSet
 from scoreboard.views import ScoreboardViewSet
+from category.views import CategoryViewSet
 
 # from accounts.views import AccountViewSet
 
@@ -32,7 +33,7 @@ router = routers.DefaultRouter()
 router.register(r'game', GameViewSet, basename='game')
 router.register(r'settings', DefaultSettingsViewSet, basename='settings')
 router.register(r'scoreboard', ScoreboardViewSet, basename='scoreboard')
-
+router.register(r'categories', CategoryViewSet, basename='categories')
 
 # router.register(r'accounts', AccountViewSet, basename='account')
 

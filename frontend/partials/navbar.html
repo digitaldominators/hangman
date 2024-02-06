@@ -4,7 +4,7 @@
         <div class="menu-container flex-none">
             <img src="/images/MenuDropDown.png" alt="Menu" class="menu-button nav-item-hover" style="cursor: pointer;">
             <!-- Dropdown Content -->
-            <div class="dropdown-content" style="display: none;">
+            <div class="dropdown-content" id="dropdownContent"> <!-- Added id here -->
                 <a href="/settings">Settings</a>
                 <a href="/leaderboard">Leaderboard</a>
                 <a href="/login">Login</a>
@@ -23,9 +23,11 @@
             <!-- You can place invisible content here or just use it as a spacer -->
         </div>
 
-        <!-- Image on the right -->
+        <!-- Image on the right linked to login.html -->
         <div class="flex-none">
-            <img src="/images/PersonSquare.png" alt="Person" class="person-square-img" style="width: 40px; height: auto;">
+            <a href="/login.html"> <!-- Add the href attribute with the path to login.html -->
+                <img src="/images/PersonSquare.png" alt="Person" class="person-square-img" style="width: 40px; height: auto;">
+            </a>
         </div>
     </div>
 </nav>

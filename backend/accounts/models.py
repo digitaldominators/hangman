@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import F, Max
+from django.db.models.functions import NullIf
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
@@ -21,7 +22,7 @@ class UserProfile(models.Model):
     # number of games played
     games_played = models.PositiveIntegerField(default=0)
     # average score
-    avg_score = models.GeneratedField(expression=F('score') / F("games_played"),
+    avg_score = models.GeneratedField(expression=F('score') / NullIf(F("games_played"),0),
                                       output_field=models.PositiveIntegerField(), db_persist=True)
 
     class Meta:

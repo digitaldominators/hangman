@@ -68,6 +68,8 @@ class GameMap(models.Model):
 
     game_slug = models.SlugField(unique=True, blank=True, null=True)
 
+    category = models.CharField(max_length=50)
+
     created = models.DateTimeField(auto_now_add=True)
     is_multiplayer = models.BooleanField(default=False)
 

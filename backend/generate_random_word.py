@@ -1,17 +1,17 @@
 import random
-import urllib.request
+from django.core.paginator import Paginator
+from category.models import Phrase
 
 
-def generate_random_word():
-    # https://stackoverflow.com/a/49524775/14665310
-    word_list_url = "http://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain"
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'}
-    req = urllib.request.Request(word_list_url, headers=headers)
-    response = urllib.request.urlopen(req)
-    long_txt = response.read().decode()
-    words = long_txt.splitlines()
-    return random.choice(words).lower()
+def get_word_and_category(category=None):
+    """returns the category, phrase"""
+    # https://stackoverflow.com/a/76893630/14665310
+    if category is None or category == '':
+        paginator = Paginator(Phrase.objects.filter(active=True, category__active=True).order_by('pk'), 25)
+    else:
+        # if choose a category specifically then even if it is not active choose a word from it.
+        paginator = Paginator(Phrase.objects.filter(category_id=category, active=True).order_by('pk'), 25)
+    random_page = paginator.get_page(random.choice(paginator.page_range))
+    random_sample = random.choice(random_page.object_list)
 
-
-if __name__ == "__main__":
-    print(generate_random_word())
+    return random_sample.category.name, random_sample.phrase.lower()

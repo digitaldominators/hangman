@@ -12,6 +12,15 @@
                 </label>
             </td>
         </tr>
+        <tr>
+            <td class="settings-label">Category</td>
+            <td>
+               <input type="text" id="category_text" autocomplete="off" name="category_text" class="w-full p-1 text-[35px] hidden">
+                <select name="category" id="category" class="w-full p-1 text-[35px]">
+                    <option value="">----------</option>
+                </select>
+            </td>
+        </tr>
         <tr id="new_game_word" class="duration-300" style="opacity: 0; pointer-events: none">
             <td class="settings-label">Word</td>
             <td>
@@ -22,22 +31,9 @@
         </tbody>
     </table>
     <br>
-    <button type="button" id="start_game_button" class="home-game-button big block m-auto">
+    <button type="submit" id="start_game_button" class="home-game-button big block m-auto">
         Start Game
     </button>
 </form>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const startGameButton = document.getElementById('start_game_button');
-
-        startGameButton.addEventListener('click', function () {
-            const isMultiplayer = document.querySelector('input[name="multiplayer"]').checked;
-            const word = document.querySelector('input[name="word"]').value;
-
-            // Redirect to "theme.html"
-            window.location.href = 'theme.html';
-        });
-    });
-</script>
 {{/inline}}
 {{/base }}

@@ -9,7 +9,7 @@ from accounts.models import UserProfile
 from game.serializers import NewGameSerializer
 from rest_framework.response import Response
 
-from generate_random_word import generate_random_word
+from generate_random_word import get_word_and_category
 
 from .serializers import JoinGameSerializer, GameSerializer, UpdateGameSerializer, GameWordSerializer, \
     DefaultGameSettingsSerializer
@@ -208,11 +208,13 @@ class GameViewSet(viewsets.GenericViewSet):
                 game_map = GameMap.objects.create(player_1=request.user,
                                                   is_multiplayer=True,
                                                   level=serializer.validated_data.get('level'),
-                                                  timer=serializer.validated_data.get('timer'))
+                                                  timer=serializer.validated_data.get('timer'),
+                                                  category=serializer.validated_data.get('category_text'))
             else:
                 game_map = GameMap.objects.create(is_multiplayer=True,
                                                   level=serializer.validated_data.get('level'),
-                                                  timer=serializer.validated_data.get('timer'))
+                                                  timer=serializer.validated_data.get('timer'),
+                                                  category=serializer.validated_data.get('category_text'))
                 request.session[f'game__{game_map.game_slug}'] = 1
 
             # create the game for the second player with the word that the first player chose.
@@ -221,7 +223,8 @@ class GameViewSet(viewsets.GenericViewSet):
             game_map.save()
         else:  # single player game
             # create the game with a randomly generated word.
-            game = Game.objects.create(word=generate_random_word().lower())
+            category,phrase = get_word_and_category(category=serializer.validated_data.get('category'))
+            game = Game.objects.create(word=phrase)
 
             # if the user is logged in then set player_1 to be logged in user otherwise add the user to the session.
             if request.user.is_authenticated:
@@ -230,13 +233,15 @@ class GameViewSet(viewsets.GenericViewSet):
                                                   is_multiplayer=False,
                                                   full=True,
                                                   level=serializer.validated_data.get('level'),
-                                                  timer=serializer.validated_data.get('timer'))
+                                                  timer=serializer.validated_data.get('timer'),
+                                                  category=category)
             else:
                 game_map = GameMap.objects.create(game_1=game,
                                                   is_multiplayer=False,
                                                   full=True,
                                                   level=serializer.validated_data.get('level'),
-                                                  timer=serializer.validated_data.get('timer'))
+                                                  timer=serializer.validated_data.get('timer'),
+                                                  category=category)
                 request.session[f'game__{game_map.game_slug}'] = 1
 
         # create a serializer for the game.

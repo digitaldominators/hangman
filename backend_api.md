@@ -11,8 +11,6 @@ The headers should look like:
     "X-CSRFToken": readCookie("csrftoken")
     }
 
-
-
 ## Game
 The basic game object shows:
 * game_slug - code used to join the game and is used as the game id to run any action on the game.
@@ -24,6 +22,7 @@ The basic game object shows:
 * player - int 1 if this player is the first player 2 if second player (1st player created the game)
 * correct_guesses - list of letters/words - correct guesses
 * incorrect_guesses - list of letters/words - incorrect guesses
+* category - string - theme of the game
 * word - string - outline of the word each letter except spaces replaces with `_` unless user guesses the letter. If the word is `heads up` and the user guessed `e` `s` and `u` it would return `_e__s u_`.
 * game_score - int - current score in game
 * other_player_game_score - int - current score of the other players game
@@ -35,7 +34,9 @@ To create a new game post data to /api/game/.
         "multiplayer": false, // required (true/false)
         "word": "heads up", // required if multiplayer - set other players word. - If multi player is false this doesn't do anything.
         "timer": null, // optional - set time between modes
-        "level": null // optional - set difficulty level - default 1
+        "level": null, // optional - set difficulty level - default 1
+        "category": string, // only for single player game - the name of the category - set to empty string "" and it will be randomized
+        "category_text": string, //only for multiplayer - string of category
     }
 ### join game
 To join a multiplayer game post data to /api/game/join_game/
@@ -69,7 +70,7 @@ To change the timer amount make a post request to /api/game/<game_slug>/
     }
 
 ## Scoreboard
-make a get request to /api/scoreboard/
+Make a get request to /api/scoreboard/
 Returns the top 50 total scores and average scores. 
 Will return something like:
 
@@ -97,7 +98,25 @@ Will return something like:
             ...
         ]
     }
+## categories
+Make a get request to /api/categories/ 
+will return something like
 
+    [
+        {
+            "id": 1,
+            "name": "Songs"
+        },
+        {
+            "id": 3,
+            "name": "Food & Drinks"
+        },
+        {
+            "id": 4,
+            "name": "Sports"
+        },
+        ...
+    ]
 ## Accounts
 ### Registration
 To create a new account, post data to /accounts/register/

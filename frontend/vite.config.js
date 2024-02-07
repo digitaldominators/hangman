@@ -24,6 +24,7 @@ export default defineConfig({
                 "./src/scoreboard.html",
                 "./src/signup.html",
                 "./src/theme.html",
+                "./src/invite.html",
                 "./src/wait.html",
                 "./src/youlost.html",
                 "./src/youwon.html"

@@ -15,18 +15,24 @@ class PhraseInline(admin.TabularInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'active', 'created']
-    readonly_fields = ['created']
+    list_display = ['name', 'active', 'created', 'phrases']
+    readonly_fields = ['created', 'phrases']
     search_fields = ['name']
     list_filter = ['active', 'created']
-    inlines = [PhraseInline]
+
+    # takes too long to load
+    # inlines = [PhraseInline]
+
+    @admin.display(description='phrases')
+    def phrases(self, obj):
+        return Phrase.objects.filter(category=obj, active=True).count()
 
 
 class PhraseAdmin(admin.ModelAdmin):
     list_display = ['phrase', 'category', 'active', 'created']
     readonly_fields = ['created']
     search_fields = ['phrase']
-    list_filter = ['active', 'created']
+    list_filter = ['active', 'created', 'category']
 
 
 admin.site.register(Phrase, PhraseAdmin)

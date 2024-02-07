@@ -1,3 +1,4 @@
+from string import ascii_letters
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound
 
@@ -78,7 +79,7 @@ class GameModelSerializerPlayerMixin:
         correct_guesses = self.get_game(instance).guesses.filter(is_word=False, correct=True).values_list('guess',
                                                                                                           flat=True)
         word = self.get_game(instance).word
-        word_mask = [" " if letter == " " else "_" for letter in word]
+        word_mask = ["_" if letter in ascii_letters else letter for letter in word]
         for letter in correct_guesses:
             positions = [x.start() for x in re.finditer(letter, word)]
 
@@ -203,7 +204,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                 if guess in game.word:
                     game.add_correct_guess(guess)
 
-                    if "_" not in self.get_word_mask(instance):
+                    if self.get_word_mask(instance) == game.word:
                         instance.winner = player
                         instance.save()
                         signals.game_over.send(sender=self.__class__, game_map=instance)

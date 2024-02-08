@@ -12,18 +12,11 @@ class IntegerDefaultField(fields.IntegerField):
         return attibute
 
 
-class AverageScoreboardSerializer(serializers.ModelSerializer):
+class ScoreboardSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.username')
-    score = IntegerDefaultField(default=0, source='avg_score')
+    avg_score = IntegerDefaultField(default=0)
+    total_score = IntegerDefaultField(default=0, source='score')
 
     class Meta:
         model = UserProfile
-        fields = ['user', 'score']
-
-
-class TotalScoreboardSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source='user.username')
-
-    class Meta:
-        model = UserProfile
-        fields = ['user', 'score']
+        fields = ['user', 'avg_score', 'total_score']

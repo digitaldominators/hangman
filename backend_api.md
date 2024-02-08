@@ -71,29 +71,33 @@ To change the timer amount make a post request to /api/game/<game_slug>/
 
 ## Scoreboard
 Make a get request to /api/scoreboard/
-Returns the top 50 total scores and average scores. 
+Returns the top 50 sorted by total scores and average scores. 
 Will return something like:
 
     {
         "total_scores": [
             {
                 "user": "user1",
-                "score": 8750
+                "avg_score": 730,
+                "total_score": 8750
             },
             {
                 "user": "user2",
-                "score": 6800
+                "avg_score": 900,
+                "total_score": 6800
             }
             ...
         ],
         "average_scores": [
             {
                 "user": "user2",
-                "score": 900
+                "avg_score": 900,
+                "total_score": 6800
             },
             {
                 "user": "user1",
-                "score": 730
+                "avg_score": 730
+                "total_score": 8750
             }
             ...
         ]

@@ -13,6 +13,7 @@ export default defineConfig({
             // overwrite default index.html entry
             input: [
                 "./src/game.html",
+                "./src/multigame.html",
                 "./src/index.html",
                 "./src/join.html",
                 "./src/new.html",

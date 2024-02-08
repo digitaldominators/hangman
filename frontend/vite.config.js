@@ -5,6 +5,7 @@ export default defineConfig({
     publicDir: false,
     plugins: [handlebars({partialDirectory: './partials',})],
     build: {
+        assetsInlineLimit: 30720, // if asset is 30 KiB or smaller inline it
         outDir: "../dist",
         manifest: true,
         emptyOutDir:true,

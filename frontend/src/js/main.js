@@ -11,6 +11,8 @@ import loadChooseWordPage from "./choose_word.js";
 import loadScoreBoardPage from "./scoreboard.js";
 import loadInvitePage from "./invite.js";
 import loadWaitPage from "./wait.js";
+import './preload_images';
+
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
 

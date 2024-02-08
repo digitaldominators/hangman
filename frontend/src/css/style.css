@@ -313,27 +313,33 @@ nav, footer {
 
 /* Hangman Game CSS */
 
+/* Hangman Game CSS */
+
 .game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     width: 80vw;
-    max-width: 1000px; /* Reduced for better control on large screens */
+    max-width: 1000px;
     margin: auto;
     box-sizing: border-box;
+    position: relative;
 }
 
 .stage-container {
     display: flex;
     justify-content: center;
-    width: 40%; /* Adjusted for better proportion */
-    padding: 20px 0;
+    margin-top: -170px; /* Adjusts the container higher up */
+    padding: 10px 0;
 }
 
 .img-stage {
-    max-width: 100%; /* Adjusted for better fit */
-    height: auto;
+    min-height: 200px; /* Sets a minimum height to make the image taller */
+    min-width: 200px;
+    max-height: 400px; /* Sets a minimum height to make the image taller */
+    max-width: 400px;
+    object-fit: contain; /* Ensures the entire image is visible and maintains its aspect ratio */
 }
 
 .category-name, .player-info-container, .letter-buttons, .guess-button {
@@ -347,9 +353,9 @@ nav, footer {
 
 .guess-button {
     display: flex;
-    justify-content: center; /* Center the guess button horizontally */
-    width: 120px; /* Adjust the width as needed */
-    height: 50px; /* Adjust the height as needed */
+    justify-content: center;
+    width: 120px;
+    height: 50px;
     margin-top: 20px;
 }
 
@@ -367,61 +373,88 @@ nav, footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
-    width: 100%; /* Ensures full utilization of its container's width */
+    gap: 2px; /* Reduced gap for closer letter buttons */
+    width: 100%;
 }
 
 .letter-button {
     font-family: 'Titan One', cursive;
     font-size: 24px;
-    color: rgba(0, 0, 0, 1);
+    color: #333; /* Darkened text without boldness */
     background-color: #FFFFFF;
-    border: 2px solid black;
+    border: 3px solid black; /* Bolder border for emphasis */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
-    margin: 5px;
-    padding: 0; /* Adjust padding to control size */
-    width: 40px; /* Adjust width to content */
-    height: 40px; /* Adjust height to content */
-    flex: 0 1 auto; /* Allows button to adjust based on content size */
-}
-
-/* Ensuring buttons are aligned horizontally */
-.letter-buttons {
-    justify-content: center; /* Centers buttons horizontally */
+    margin: 2px;
+    padding: 0;
+    width: 40px;
+    height: 40px;
 }
 
 .letter-button:hover {
-    background-color: #dedede; /* Light grey for hover */
+    background-color: #dedede;
     color: #000;
 }
 
-.player-info, .score-box {
-    background-color: #f2f2f2;
-    padding: 8px; /* Reduced padding for a tighter look */
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Player info and score box adjustments */
+.player-name, .score-box {
+    font-family: 'Short Stack', sans-serif; /* Updated font family for name and score */
+    background-color: transparent; 
+    padding: 5px;
+    border-radius: 13px;
+    border: 2px solid black;
+    background-color: #fff;
+    margin: 6px 0;
+    width: fit-content; /* Adjust width to content */
+    max-width: 100%;
+    min-width: 100%;
     text-align: center;
-    margin: 5px; /* Keep or adjust margin as needed for spacing */
-    font-size: 16px; /* Smaller font size for content */
-    width: auto; /* Auto width based on content, or specify a max-width */
-    min-width: 100px; /* Minimum width to ensure readability */
-    max-width: 200px; /* Maximum width to keep containers compact */
+    display: block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.player-name {
+    font-size: 10px; /* Increased font size for the score */
 }
 
-.player-info-container {
-    position: fixed;
-    top: 20%;
-    right: 20px; /* Adjusted to position closer to the edge for smaller screens */
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center align the child content */
-    gap: 5px; /* Space between player info and score box */
-    z-index: 10;
+.score-box {
+    font-size: 25px; /* Increased font size for the score */
+
 }
 
 .guess-button:hover {
-    opacity: 0.8; /* Slight transparency on hover for feedback */
+    opacity: 0.8;
+}
+
+.category-box {
+    font-family: 'Titan One', cursive;
+    font-size: 28px; /* Increase font size */
+    padding: 10px 60px; /* Increase vertical padding */
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 13px;
+    width: auto; /* Adjust based on content */
+    max-width: 90%; /* Reduced from full width to make it shorter */
+    text-align: center; /* Ensure text is centered */
+    margin: 0 auto; /* Center the box */
+}
+
+/* Container for the word display */
+.word-display {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 90%; /* Limits the maximum width */
+    margin: 20px auto; /* Centers the container and adds vertical space */
+    font-size: 2vw; /* Scales the font size based on the viewport width */
+}
+
+/* Individual dashes */
+.word-display .letter {
+    padding: 0 1vw; /* Adds horizontal padding that scales with the viewport */
+    margin: 0 0.5vw; /* Adds margin between letters that scales */
+    border-bottom: 2px solid #000; /* Represents the dash */
+    min-width: 2vw; /* Minimum width for each dash */
+    text-align: center; /* Centers the letter inside the dash */
+    height: 1em; /* Height based on the font size */
 }

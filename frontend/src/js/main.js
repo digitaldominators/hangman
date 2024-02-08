@@ -6,11 +6,11 @@ import loadJoinPage from './join.js';
 import loadNewPage from './new.js';
 import axios from 'axios';
 import readCookie from "./readCookie.js";
-import loadWaitingPage from "./waiting.js";
 import loadSettingsPage from "./settings.js";
 import loadChooseWordPage from "./choose_word.js";
 import loadScoreBoardPage from "./scoreboard.js";
-
+import loadInvitePage from "./invite.js";
+import loadWaitPage from "./wait.js";
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
 
@@ -55,11 +55,6 @@ barba.init({
                 loadJoinPage();
             }
         },{
-            namespace: 'waiting',
-            afterEnter({next}) {
-                loadWaitingPage();
-            }
-        },{
             namespace: 'settings',
             afterEnter({next}) {
                 loadSettingsPage();
@@ -75,6 +70,18 @@ barba.init({
             namespace: 'scoreboard',
             afterEnter({next}) {
                 loadScoreBoardPage();
+            }
+        },
+        {
+            namespace: 'invite',
+            afterEnter({next}) {
+                loadInvitePage();
+            }
+        },
+        {
+            namespace: 'wait',
+            afterEnter({next}) {
+                loadWaitPage();
             }
         }
 

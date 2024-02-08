@@ -16,7 +16,6 @@ export default defineConfig({
                 "./src/join.html",
                 "./src/new.html",
                 "./src/settings.html",
-                "./src/waiting.html",
                 "./src/choose_word.html",
                 "./src/about.html",
                 "./src/login.html",

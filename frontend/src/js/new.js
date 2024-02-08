@@ -42,7 +42,7 @@ function start_new_game(e){
         setCookie("current_game",response.data.game_slug,100);
         // redirect to the correct page.
         if(response.data.is_multiplayer){
-            barba.go('/waiting');
+            barba.go('/invite');
         }else{
             barba.go('/game');
         }

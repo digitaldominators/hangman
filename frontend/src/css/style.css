@@ -303,3 +303,114 @@ nav, footer {
 .button-section button.active {
     border: 3px black solid;
 }
+
+
+
+
+
+
+
+
+.game-container {
+    width: 80vw; /* Adjusted for more relative sizing */
+    max-width: 2000px;
+    min-height: 40vh; /* Use min-height to ensure it can grow if needed */
+    margin: 5vh auto; /* Use viewport height for margin to keep it responsive */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* This will distribute space more evenly */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.img-stage {
+    width: 100%; /* Adjust the image width as a percentage of the container's width */
+    max-width: 500px; /* Sets a maximum width to prevent the image from becoming overly large */
+    min-width: 250px; /* Minimum width to keep the image visible on smaller screens */
+    height: auto; /* Maintains the aspect ratio of the image */
+    margin: 2vh 0; /* Responsive margin based on the viewport height */
+}
+
+.word-display {
+    display: flex;
+    justify-content: center;
+    padding: 2vh 0; /* Use viewport height for padding to keep it responsive */
+}
+
+.guessed, .letter {
+    font-size: calc(1vw + 1vh + 0.5vmin); /* Dynamic font size based on viewport */
+    font-weight: bold;
+    margin: 0 1vw; /* Use viewport width for horizontal margin */
+    min-width: 2vw; /* Use viewport width to set a minimum width */
+    text-align: center;
+}
+
+.letter-button {
+    padding: 0.8vw 0.8vw; /* Scales padding with the viewport width, making it dynamic */
+    margin: 1vh; /* Keeps margin responsive with viewport height */
+    font-size: calc(1vw + 1vh); /* Dynamic font size based on viewport */
+    min-width: 40px; /* Sets a minimum width to ensure buttons don't become too small */
+    max-width: 40px; /* Limits the maximum width to prevent overly large buttons */
+    min-height: 40px; /* Minimum height to maintain a usable button size */
+    max-height: 60px; /* Maximum height limit */
+    border-radius: 4px;
+    border: 2px solid black;
+    color: black;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    outline: none;
+}
+
+.letter-button:active, .letter-button:focus {
+    background-color: #A8E0E3;
+    color: white;
+}
+
+.letter-button:hover {
+    background-color: #B8F0F3;
+}
+
+.letter-buttons-row {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+    justify-content: center;
+    max-width: 100%; /* Ensures the button row does not exceed the container width */
+}
+
+.game-container {
+    width: 80vw; /* Starts at 80% of the viewport width */
+    max-width: 5000px; /* Increases max-width to accommodate larger screens */
+    min-width: 300px; /* Ensures a minimum width for very small screens */
+    min-height: 80vh; /* Allows the container to grow with its content */
+    margin: 5vh auto; /* Responsive vertical margin */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Evenly distributes space */
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2vh 0; /* Responsive padding */
+}
+
+.guess-button:hover {
+    background-color: #333;
+}
+
+.category-name, .sound-button, .pause-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.category-box {
+    text-align: center;
+    flex-grow: 2;
+}
+
+/* Keeping the size adjustments for sound and pause buttons */
+.sound-button, .pause-button {
+    width: 40px; /* Consider making these dynamic if needed */
+    height: 40px;
+    object-fit: contain;
+}

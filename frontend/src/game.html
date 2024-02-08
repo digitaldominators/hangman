@@ -1,85 +1,80 @@
 {{#> base namespace='game'}}
 {{#*inline "content"}}
 
-<html>
-  <body>
-    <div class="div">
-      <div class="div-8">
-        <div class="div-9">
-          <div class="div-10">Holidays</div>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/732e27bf53a09715ddcf712646d728d5fcb7723f07ddd8995e2a7444f4b4dea9?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&"
-            class="img-3"
-          />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="category-name">
+            <!-- Updated paths to use the root images directory -->
+            <img src="/images/PauseButton.png" alt="Pause" class="pause-button">
+            <div class="category-box">Holidays</div>
+            <img src="/images/SoundButton.png" alt="Sound" class="sound-button">
         </div>
 
-        <div class="div-11">
-          <div class="div-12">
-            <div class="column">
-              <div class="div-13">
-                <div class="div-player1">PLAYER_NAME</div>
-                <div class="div-score1">12</div>
-              </div>
-            </div>
-            <div class="column-stage">
-              <img
-                loading="lazy"
-                srcset="https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8847071055e55abe1623fe25fb0470f65ffa4bd92c24f4249f35c343fb1638b?apiKey=53bea02ba9f242bcb8ec1c12a0244f5b&"
-                class="img-stage"
-              />
-            </div>
+        <div class="stage-container">
+            <!-- Updated path for the Hangman Stage image -->
+            <img loading="lazy" src="/images/Stage_Retro.PNG" alt="Hangman Stage" class="img-stage">
+        </div>
+
+        <!-- Updated guessed letters display to reflect dynamic content in future -->
+        <ul class="word-display">
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+            <li class="letter guessed">_</li>
+        </ul>
+
+        <div class="letter-buttons">
+            <!-- Consolidated into one container for simplicity -->
+            <div class="letter-buttons-row">
+              <!-- First row of letter buttons -->
+              <button class="letter-button">A</button>
+              <button class="letter-button">B</button>
+              <button class="letter-button">C</button>
+              <button class="letter-button">D</button>
+              <button class="letter-button">E</button>
+              <button class="letter-button">F</button>
+              <button class="letter-button">G</button>
+              <button class="letter-button">H</button>
+              <button class="letter-button">I</button>
+              <button class="letter-button">J</button>
+              <button class="letter-button">K</button>
+              <button class="letter-button">L</button>
+              <button class="letter-button">M</button>
           </div>
+          <div class="letter-buttons-row">
+            <!-- Second row of letter buttons -->
+            <button class="letter-button">N</button>
+            <button class="letter-button">O</button>
+            <button class="letter-button">P</button>
+            <button class="letter-button">Q</button>
+            <button class="letter-button">R</button>
+            <button class="letter-button">S</button>
+            <button class="letter-button">T</button>
+            <button class="letter-button">U</button>
+            <button class="letter-button">V</button>
+            <button class="letter-button">W</button>
+            <button class="letter-button">X</button>
+            <button class="letter-button">Y</button>
+            <button class="letter-button">Z</button>
         </div>
-
-        <div class="guess-box">
-          <ul class="word-display">
-            <li class="letter"></li>
-            <li class="letter"></li>
-            <li class="letter guessed">L</li>
-            <li class="letter guessed">L</li>
-            <li class="letter"></li>
-            <li class="letter"></li>
-            <li class="letter"></li>
-            <li class="letter"></li>
-            <li class="letter guessed">N</li>
-          </ul>
         </div>
-
-        <div class="div-17">
-          <div class="div-a"><button>A</button></div>
-          <div class="div-b"><button>B</button></div>
-          <div class="div-c"><button>C</button></div>
-          <div class="div-d"><button>D</button></div>
-          <div class="div-e"><button>E</button></div>
-          <div class="div-f"><button>F</button></div>
-          <div class="div-g"><button>G</button></div>
-          <div class="div-h"><button>H</button></div>
-          <div class="div-i"><button>I</button></div>
-          <div class="div-j"><button>J</button></div>
-          <div class="div-k"><button>K</button></div>
-          <div class="div-l"><button>L</button></div>
-          <div class="div-m"><button>M</button></div>
-        </div>
-        <div class="div-31">
-          <div class="div-32"><button>N</button></div>
-          <div class="div-33"><button>O</button></div>
-          <div class="div-34"><button>P</button></div>
-          <div class="div-35"><button>Q</button></div>
-          <div class="div-36"><button>R</button></div>
-          <div class="div-37"><button>S</button></div>
-          <div class="div-38"><button>T</button></div>
-          <div class="div-39"><button>U</button></div>
-          <div class="div-40"><button>V</button></div>
-          <div class="div-41"><button>W</button></div>
-          <div class="div-42"><button>X</button></div>
-          <div class="div-43"><button>Y</button></div>
-          <div class="div-44"><button>Z</button></div>
-        </div>
-      </div>
+        <button class="guess-button">Guess</button>
     </div>
-  </body>
+</body>
 </html>
 
 {{/inline}}
-{{/base }}
+{{/base}}

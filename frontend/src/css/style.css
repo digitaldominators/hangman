@@ -382,7 +382,7 @@ nav, footer {
     font-size: 24px;
     color: #333; /* Darkened text without boldness */
     background-color: #FFFFFF;
-    border: 3px solid black; /* Bolder border for emphasis */
+    border: 4px solid black; /* Bolder border for emphasis */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
@@ -422,6 +422,15 @@ nav, footer {
 
 }
 
+
+/* Revised positioning for Player 2 Info on the Right */
+.player-info-right {
+    position: absolute;
+    top: 11%; /* Align vertically with Player 1 info */
+    right: -300px; /* Distance from the right edge of the game container */
+}
+
+
 .guess-button:hover {
     opacity: 0.8;
 }
@@ -446,7 +455,7 @@ nav, footer {
     flex-wrap: wrap;
     max-width: 90%; /* Limits the maximum width */
     margin: 20px auto; /* Centers the container and adds vertical space */
-    font-size: 2vw; /* Scales the font size based on the viewport width */
+    font-size: 3vw; /* Scales the font size based on the viewport width */
 }
 
 /* Individual dashes */

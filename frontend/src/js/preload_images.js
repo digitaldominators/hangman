@@ -1,21 +1,35 @@
+import joinGameStage from '../images/join_game_stage.png'
+import dd_logo from '../images/dd_logo.png'
+import HangmanStage from '../images/HangmanStage.png'
+import youwon from '../images/youwon.png'
+import youlost from '../images/youlost.png'
+import YouLose from '../images/YouLose.png'
+import StickMan from '../images/StickMan.png'
+import Stage_Retro from '../images/Stage_Retro.png'
+import Stage_Creepy from '../images/Stage_Creepy.png'
+import RobotBlack from '../images/RobotBlack.png'
+import Noose from '../images/Noose.png'
+import hangman from '../images/hangman.png'
+import Dominator_Robot from '../images/Dominator_Robot.png'
+import DD_LogoName from '../images/DD_LogoName.png'
+import MainMenuFrame from '../images/MenuDropDown/MainMenuFrame.png'
+
 var image_urls = [
-    "/images/join_game_stage.png",
-    "/images/dd_logo.png",
-    "/images/HangmanStage.png",
-    "/images/youwon.png",
-    "/images/youlost.png",
-    "/images/YouLose.PNG",
-    "/images/StickMan.png",
-    "/images/Stage_Retro.PNG",
-    "/images/Stage_Creepy.PNG",
-    "/images/RobotBlack.PNG",
-    "/images/Noose.PNG",
-    "/images/hangman.png",
-    "/images/Dominator_Robot.png",
-    "/images/DD_LogoName.png",
-    "/images/dd_logo.png",
-    "/images/dd_logo.jpg",
-    "/images/MenuDropDown/MainMenuFrame.png"
+    joinGameStage,
+    dd_logo,
+    HangmanStage,
+    youwon,
+    youlost,
+    YouLose,
+    StickMan,
+    Stage_Retro,
+    Stage_Creepy,
+    RobotBlack,
+    Noose,
+    hangman,
+    Dominator_Robot,
+    DD_LogoName,
+    MainMenuFrame,
 ];
 var images = [];
 function preload(images) {

@@ -1,108 +1,95 @@
-
-
-{{#> base namespace='game'}}
+{{#> base namespace='multigame'}}
 {{#*inline "content"}}
-<link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <div class="game-container">
-        <div class="category-name">
-            <img src="/images/PauseButton.png" alt="Pause" class="pause-button">
-            <div class="category-box">Holidays</div>
-            <img src="/images/SoundButton.png" alt="Sound" class="sound-button">
-        </div>
-
-        <div class="player-info-container">
-            <div class="player-info">
-                <div class="player-name">Player_Name</div>
-                <div class="score-box">100</div>
-            </div>
-        </div>
-        
-        <div class="player-info-container player-info-right">
-            <div class="player-info">
-                <div class="player-name">Player_Name</div>
-                <div class="score-box">100</div>
-            </div>
-        </div>        
-
-        <div class="stage-container">
-            <img loading="lazy" src="/images/Stage_Retro.png" alt="Hangman Stage" class="img-stage">
-        </div>
-
-        <ul class="word-display">
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-            <li class="letter guessed">_</li>
-        </ul>
-
-        <div class="letter-buttons">
-            <div class="letter-buttons-row">
-                <button class="letter-button">A</button>
-                <button class="letter-button">B</button>
-                <button class="letter-button">C</button>
-                <button class="letter-button">D</button>
-                <button class="letter-button">E</button>
-                <button class="letter-button">F</button>
-                <button class="letter-button">G</button>
-                <button class="letter-button">H</button>
-                <button class="letter-button">I</button>
-            </div>
-            <div class="letter-buttons-row">
-                <button class="letter-button">J</button>
-                <button class="letter-button">K</button>
-                <button class="letter-button">L</button>
-                <button class="letter-button">M</button>
-                <button class="letter-button">N</button>
-                <button class="letter-button">O</button>
-                <button class="letter-button">P</button>
-                <button class="letter-button">Q</button>
-                <button class="letter-button">R</button>
-            </div>
-            <div class="letter-buttons-row">
-                <button class="letter-button">S</button>
-                <button class="letter-button">T</button>
-                <button class="letter-button">U</button>
-                <button class="letter-button">V</button>
-                <button class="letter-button">W</button>
-                <button class="letter-button">X</button>
-                <button class="letter-button">Y</button>
-                <button class="letter-button">Z</button>
-            </div>
-        </div>
-
-        <a class="guess-button" href="javascript:void(0);" onclick="guessFunction()">
-            <img src="/images/GuessButton.png" alt="Guess">
-        </a>
+<div class="game-container">
+    <div class="category-name">
+        <img src="/images/PauseButton.png" alt="Pause" class="pause-button">
+        <div class="category-box">Holidays</div>
+        <img src="/images/SoundButton.png" alt="Sound" class="sound-button">
     </div>
-    <script>
-        const pauseButton = document.querySelector('.pause-button');
-        const soundButton = document.querySelector('.sound-button');
 
-        pauseButton.addEventListener('click', function() {
-            // Implement pause functionality
-        });
+    <div class="player-info-container">
+        <div class="player-info">
+            <div class="player-name">Player_Name</div>
+            <div class="score-box">100</div>
+        </div>
+    </div>
 
-        soundButton.addEventListener('click', function() {
-            // Implement sound toggle functionality
-        });
-    </script>
-</body>
-</html>
+    <div class="player-info-container player-info-right">
+        <div class="player-info">
+            <div class="player-name">Player_Name</div>
+            <div class="score-box">100</div>
+        </div>
+    </div>
+
+    <div class="stage-container">
+        <img loading="lazy" src="/images/Stage_Retro.png" alt="Hangman Stage" class="img-stage">
+    </div>
+
+    <ul class="word-display">
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+        <li class="letter guessed">_</li>
+    </ul>
+
+    <div class="letter-buttons">
+        <div class="letter-buttons-row">
+            <button class="letter-button">A</button>
+            <button class="letter-button">B</button>
+            <button class="letter-button">C</button>
+            <button class="letter-button">D</button>
+            <button class="letter-button">E</button>
+            <button class="letter-button">F</button>
+            <button class="letter-button">G</button>
+            <button class="letter-button">H</button>
+            <button class="letter-button">I</button>
+        </div>
+        <div class="letter-buttons-row">
+            <button class="letter-button">J</button>
+            <button class="letter-button">K</button>
+            <button class="letter-button">L</button>
+            <button class="letter-button">M</button>
+            <button class="letter-button">N</button>
+            <button class="letter-button">O</button>
+            <button class="letter-button">P</button>
+            <button class="letter-button">Q</button>
+            <button class="letter-button">R</button>
+        </div>
+        <div class="letter-buttons-row">
+            <button class="letter-button">S</button>
+            <button class="letter-button">T</button>
+            <button class="letter-button">U</button>
+            <button class="letter-button">V</button>
+            <button class="letter-button">W</button>
+            <button class="letter-button">X</button>
+            <button class="letter-button">Y</button>
+            <button class="letter-button">Z</button>
+        </div>
+    </div>
+
+    <a class="guess-button" href="javascript:void(0);" onclick="guessFunction()">
+        <img src="/images/GuessButton.png" alt="Guess">
+    </a>
+</div>
+<script>
+    const pauseButton = document.querySelector('.pause-button');
+    const soundButton = document.querySelector('.sound-button');
+
+    pauseButton.addEventListener('click', function() {
+        // Implement pause functionality
+    });
+
+    soundButton.addEventListener('click', function() {
+        // Implement sound toggle functionality
+    });
+</script>
+
 {{/inline}}
 {{/base}}
 

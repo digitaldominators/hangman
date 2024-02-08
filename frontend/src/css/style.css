@@ -311,106 +311,117 @@ nav, footer {
 
 
 
+/* Hangman Game CSS */
+
 .game-container {
-    width: 80vw; /* Adjusted for more relative sizing */
-    max-width: 2000px;
-    min-height: 40vh; /* Use min-height to ensure it can grow if needed */
-    margin: 5vh auto; /* Use viewport height for margin to keep it responsive */
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* This will distribute space more evenly */
     align-items: center;
+    justify-content: flex-start;
+    width: 80vw;
+    max-width: 1000px; /* Reduced for better control on large screens */
+    margin: auto;
     box-sizing: border-box;
+}
+
+.stage-container {
+    display: flex;
+    justify-content: center;
+    width: 40%; /* Adjusted for better proportion */
+    padding: 20px 0;
 }
 
 .img-stage {
-    width: 100%; /* Adjust the image width as a percentage of the container's width */
-    max-width: 500px; /* Sets a maximum width to prevent the image from becoming overly large */
-    min-width: 250px; /* Minimum width to keep the image visible on smaller screens */
-    height: auto; /* Maintains the aspect ratio of the image */
-    margin: 2vh 0; /* Responsive margin based on the viewport height */
+    max-width: 100%; /* Adjusted for better fit */
+    height: auto;
 }
 
-.word-display {
-    display: flex;
-    justify-content: center;
-    padding: 2vh 0; /* Use viewport height for padding to keep it responsive */
-}
-
-.guessed, .letter {
-    font-size: calc(1vw + 1vh + 0.5vmin); /* Dynamic font size based on viewport */
-    font-weight: bold;
-    margin: 0 1vw; /* Use viewport width for horizontal margin */
-    min-width: 2vw; /* Use viewport width to set a minimum width */
-    text-align: center;
-}
-
-.letter-button {
-    padding: 0.8vw 0.8vw; /* Scales padding with the viewport width, making it dynamic */
-    margin: 1vh; /* Keeps margin responsive with viewport height */
-    font-size: calc(1vw + 1vh); /* Dynamic font size based on viewport */
-    min-width: 40px; /* Sets a minimum width to ensure buttons don't become too small */
-    max-width: 40px; /* Limits the maximum width to prevent overly large buttons */
-    min-height: 40px; /* Minimum height to maintain a usable button size */
-    max-height: 60px; /* Maximum height limit */
-    border-radius: 4px;
-    border: 2px solid black;
-    color: black;
-    background-color: #FFFFFF;
-    transition: background-color 0.3s, color 0.3s;
-    cursor: pointer;
-    outline: none;
-}
-
-.letter-button:active, .letter-button:focus {
-    background-color: #A8E0E3;
-    color: white;
-}
-
-.letter-button:hover {
-    background-color: #B8F0F3;
-}
-
-.letter-buttons-row {
-    display: flex;
-    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
-    justify-content: center;
-    max-width: 100%; /* Ensures the button row does not exceed the container width */
-}
-
-.game-container {
-    width: 80vw; /* Starts at 80% of the viewport width */
-    max-width: 5000px; /* Increases max-width to accommodate larger screens */
-    min-width: 300px; /* Ensures a minimum width for very small screens */
-    min-height: 80vh; /* Allows the container to grow with its content */
-    margin: 5vh auto; /* Responsive vertical margin */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* Evenly distributes space */
-    align-items: center;
-    box-sizing: border-box;
-    padding: 2vh 0; /* Responsive padding */
-}
-
-.guess-button:hover {
-    background-color: #333;
-}
-
-.category-name, .sound-button, .pause-button {
+.category-name, .player-info-container, .letter-buttons, .guess-button {
+    width: 90%;
+    max-width: 600px;
+    margin: 10px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
-.category-box {
+.guess-button {
+    display: flex;
+    justify-content: center; /* Center the guess button horizontally */
+    width: 120px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    margin-top: 20px;
+}
+
+.category-name img, .guess-button img {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.category-name img:hover, .guess-button img:hover {
+    transform: scale(1.1);
+}
+
+/* Adjustments for letter buttons */
+.letter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    width: 100%; /* Ensures full utilization of its container's width */
+}
+
+.letter-button {
+    font-family: 'Titan One', cursive;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 1);
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin: 5px;
+    padding: 0; /* Adjust padding to control size */
+    width: 40px; /* Adjust width to content */
+    height: 40px; /* Adjust height to content */
+    flex: 0 1 auto; /* Allows button to adjust based on content size */
+}
+
+/* Ensuring buttons are aligned horizontally */
+.letter-buttons {
+    justify-content: center; /* Centers buttons horizontally */
+}
+
+.letter-button:hover {
+    background-color: #dedede; /* Light grey for hover */
+    color: #000;
+}
+
+.player-info, .score-box {
+    background-color: #f2f2f2;
+    padding: 8px; /* Reduced padding for a tighter look */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
-    flex-grow: 2;
+    margin: 5px; /* Keep or adjust margin as needed for spacing */
+    font-size: 16px; /* Smaller font size for content */
+    width: auto; /* Auto width based on content, or specify a max-width */
+    min-width: 100px; /* Minimum width to ensure readability */
+    max-width: 200px; /* Maximum width to keep containers compact */
 }
 
-/* Keeping the size adjustments for sound and pause buttons */
-.sound-button, .pause-button {
-    width: 40px; /* Consider making these dynamic if needed */
-    height: 40px;
-    object-fit: contain;
+.player-info-container {
+    position: fixed;
+    top: 20%;
+    right: 20px; /* Adjusted to position closer to the edge for smaller screens */
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the child content */
+    gap: 5px; /* Space between player info and score box */
+    z-index: 10;
+}
+
+.guess-button:hover {
+    opacity: 0.8; /* Slight transparency on hover for feedback */
 }

@@ -9,6 +9,7 @@ import readCookie from "./readCookie.js";
 import loadWaitingPage from "./waiting.js";
 import loadSettingsPage from "./settings.js";
 import loadChooseWordPage from "./choose_word.js";
+import loadScoreBoardPage from "./scoreboard.js";
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
@@ -68,6 +69,12 @@ barba.init({
             namespace: 'choose_word',
             afterEnter({next}) {
                 loadChooseWordPage();
+            }
+        },
+        {
+            namespace: 'scoreboard',
+            afterEnter({next}) {
+                loadScoreBoardPage();
             }
         }
 

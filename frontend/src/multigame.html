@@ -4,21 +4,22 @@
 <div class="game-container">
     <div class="category-name">
         <img src="/images/PauseButton.png" alt="Pause" class="pause-button">
-        <div class="category-box">Holidays</div>
+        <div id="category" class="category-box"></div>
         <img src="/images/SoundButton.png" alt="Sound" class="sound-button">
     </div>
 
     <div class="player-info-container">
         <div class="player-info">
-            <div class="player-name">Player_Name</div>
-            <div class="score-box">100</div>
+            <div class="player-name" id="active_player_name">Player_Name</div>
+            <div class="score-box" id="active_player_score">100</div>
         </div>
     </div>
 
+    <div id="turn"></div>
     <div class="player-info-container player-info-right">
         <div class="player-info">
             <div class="player-name">Player_Name</div>
-            <div class="score-box">100</div>
+            <div class="score-box" id="second_player_score">100</div>
         </div>
     </div>
 
@@ -26,17 +27,7 @@
         <img loading="lazy" src="/images/Stage_Retro.png" alt="Hangman Stage" class="img-stage">
     </div>
 
-    <ul class="word-display">
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-        <li class="letter guessed">_</li>
-    </ul>
+    <ul id="phrase" class="word-display"></ul>
 
     <div class="letter-buttons">
         <div class="letter-buttons-row">

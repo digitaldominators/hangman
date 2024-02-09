@@ -11,6 +11,7 @@ import loadChooseWordPage from "./choose_word.js";
 import loadScoreBoardPage from "./scoreboard.js";
 import loadInvitePage from "./invite.js";
 import loadWaitPage from "./wait.js";
+import loadGamePage from "./game.js";
 import './preload_images';
 
 gsap.globalTimeline.timeScale(2);
@@ -85,7 +86,18 @@ barba.init({
             afterEnter({next}) {
                 loadWaitPage();
             }
+        },
+        {
+            namespace: 'game',
+            afterEnter(next) {
+                loadGamePage();
+            }
+        },
+        {
+            namespace: 'multigame',
+            afterEnter(next) {
+                loadGamePage();
+            }
         }
-
     ]
 });

@@ -53,7 +53,7 @@ class GameModelSerializerPlayerMixin:
             if player == 1:
                 return 'not your turn'
             else:
-                return
+                return 'your turn'
 
     def get_player(self, instance):
         if self.context['request'].user.is_authenticated:

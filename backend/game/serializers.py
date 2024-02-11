@@ -95,7 +95,7 @@ class NewGameSerializer(serializers.Serializer):
     word = serializers.CharField(required=False)
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
     level = serializers.IntegerField(default=1, required=False, min_value=0, max_value=3)
-    category = serializers.ChoiceField(allow_blank=True, choices=Category.objects.filter(active=True), required=False)
+    category = serializers.ChoiceField(allow_blank=True,choices=[], required=False)
     category_text = serializers.CharField(required=False)
 
     def validate(self, data):
@@ -105,6 +105,10 @@ class NewGameSerializer(serializers.Serializer):
             if not data.get('word'):
                 raise serializers.ValidationError({"word": "This field is required."})
         return data
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'] = serializers.ChoiceField(allow_blank=True, choices=Category.objects.filter(active=True))
 
 
 class JoinGameSerializer(serializers.Serializer):

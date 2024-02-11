@@ -1,7 +1,7 @@
 import random
 from django.core.paginator import Paginator
 from category.models import Phrase
-
+from rest_framework.exceptions import NotFound
 
 def get_word_and_category(category=None):
     """returns the category, phrase"""
@@ -12,6 +12,8 @@ def get_word_and_category(category=None):
         # if choose a category specifically then even if it is not active choose a word from it.
         paginator = Paginator(Phrase.objects.filter(category_id=category, active=True).order_by('pk'), 25)
     random_page = paginator.get_page(random.choice(paginator.page_range))
-    random_sample = random.choice(random_page.object_list)
-
+    try:
+        random_sample = random.choice(random_page.object_list)
+    except IndexError:
+        raise NotFound("No terms found.")
     return random_sample.category.name, random_sample.phrase.lower()

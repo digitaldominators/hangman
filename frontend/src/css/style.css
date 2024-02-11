@@ -9,6 +9,8 @@
     --footer-height: 40px; /* Default footer height */
     --padding: 10px; /* Default padding */
 }
+
+
 /* CSS is divided into different sections for readability 
 
     - navbar (Line 20)
@@ -215,8 +217,8 @@ body, html {
 #main-container {
     padding: var(--padding);
     padding-top: 40px;
-    max-width: 850px;
-    margin: 20px auto;
+    max-width: 900px;
+    margin: 10px auto;
     background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
     border-radius: 22px;
     flex-grow: 1;
@@ -232,7 +234,7 @@ body, html {
 .image-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    padding-top: 56%;
     background-image: url('/images/HangmanStage.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -265,6 +267,7 @@ body, html {
     margin: 20px;
     width: auto;
     max-width: 200px;
+    max-height: 100px;
     transition: font-size 0.3s, padding 0.3s;
 }
 
@@ -279,6 +282,7 @@ body, html {
     gap: 20px;
     margin-top: 20px;
 }
+  
 /* 
 
 
@@ -291,11 +295,11 @@ game.html PAGE
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 80vw;
-    max-width: 1000px;
-    margin: auto;
-    box-sizing: border-box;
+    width: 100%; /* Adjust width to be responsive */
+    margin: 0 auto; /* Center the container */
+    box-sizing: border-box; /* Include padding and border */
     position: relative;
+    overflow: hidden; /* Hide overflow to prevent scroll bars */
 }
 
 .stage-container {

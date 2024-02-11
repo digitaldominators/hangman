@@ -186,4 +186,11 @@ animation: spin 4s linear infinite;
     border: 2px solid var(--MainMenuColors-font, #000);
     mix-blend-mode: luminosity;
 }
+
+.error_page {
+    width: 650px;
+    border-radius: 0.6875rem;
+    mix-blend-mode: luminosity;
+}
+  
   

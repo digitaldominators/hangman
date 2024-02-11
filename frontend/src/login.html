@@ -2,20 +2,20 @@
 {{#*inline "content"}}
 
 <div class="flex justify-center items-start h-screen" style="padding-top: 50px;">
-    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="join_game_form" style="width: auto; max-width: 800px;">
+    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="login_form" style="width: auto; max-width: 800px;">
 
-        <p class="signup_text p-4" style="font-size: 40px; margin-bottom: 48px;">Login to your account</p>
+        <p class="signup_text p-4" style="font-size: 50px; margin-bottom: 48px;">Login to your account</p>
         <div class="mb-6"> 
-            <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder=" Username " id="code_box"
-                   class="inline-block text-[30px] w-full border-black border-4 rounded text-center" autofocus style="margin-bottom: 32px;"> 
+            <input autocomplete="off" required type="text" name="username" placeholder="Username" id="username_box"
+                   class="inline-block text-[48px] w-full border-black border-4 rounded text-center" autofocus style="margin-bottom: 32px;"> 
             <p id="error_message" class="text-center text-red-700 mt-2"></p>
         </div>
         <div class="mb-6">
-            <input type="password" name="password" placeholder=" Enter password  "               
-                   class="inline-block text-[30px] w-full border-black border-4 rounded text-center">
+            <input type="password" name="password" placeholder="Password" id="password_box"
+                   class="inline-block text-[48px] w-full border-black border-4 rounded text-center">
         </div>
         <button type="submit"
-                class="inline-block text-[45px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];">
+                class="inline-block text-[60px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];">
             LOG IN
         </button>
     </form>

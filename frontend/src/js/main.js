@@ -12,6 +12,8 @@ import loadScoreBoardPage from "./scoreboard.js";
 import loadInvitePage from "./invite.js";
 import loadWaitPage from "./wait.js";
 import loadGamePage from "./game.js";
+import loadSignupPage from "./signup.js";
+import loadLoginPage from "./login.js";
 import './preload_images';
 
 gsap.globalTimeline.timeScale(2);
@@ -97,6 +99,18 @@ barba.init({
             namespace: 'multigame',
             afterEnter(next) {
                 loadGamePage();
+            }
+        },
+        {
+            namespace: 'signup',
+            afterEnter({next}) {
+                loadSignupPage();
+            }
+        },
+        {
+            namespace: 'login',
+            afterEnter({next}) {
+                loadLoginPage();
             }
         }
     ]

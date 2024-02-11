@@ -13,7 +13,7 @@ function sign_up_user(e){
     // get the form's data
     const formData = new FormData(sign_up_form);
 
-    axios.post('http://localhost:8000/accounts/register/',{
+    axios.post('/accounts/register/',{
         username:formData.get("username"),
         email:formData.get("email"),
         password:formData.get("password"),

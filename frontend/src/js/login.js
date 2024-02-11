@@ -11,7 +11,7 @@ function login_user(e){
     // get the form's data
     const formData = new FormData(login_form);
 
-    axios.post('http://localhost:8000/accounts/login/',{
+    axios.post('/accounts/login/',{
         username:formData.get("username"),
         password:formData.get("password")
     }).then(response=>{

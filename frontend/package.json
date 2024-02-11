@@ -18,7 +18,7 @@
   "dependencies": {
     "@barba/core": "^2.9.7",
     "@barba/prefetch": "^2.1.10",
-    "axios": "^1.6.5",
+    "axios": "^1.6.7",
     "gsap": "^3.12.5",
     "vite-plugin-handlebars": "^2.0.0"
   }

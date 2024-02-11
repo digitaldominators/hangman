@@ -1,10 +1,10 @@
 <nav class="p-5 pt-1 border-b-4 border-divider-color">
     <div class="flex justify-between items-center w-full">
         <!-- Image on the left for the dropdown menu -->
-        <div class="menu-container flex-none">
+        <div class="menu-container flex">
             <img src="/images/MenuDropDown.png" alt="Menu" class="menu-button nav-item-hover" style="cursor: pointer;">
             <!-- Dropdown Content -->
-            <div class="dropdown-content" id="dropdownContent">
+            <div class="dropdown-content flex" id="dropdownContent">
                 <a href="/settings">Settings</a>
                 <a href="/scoreboard">Scoreboard</a>
                 <a href="/login">Login</a>
@@ -19,12 +19,12 @@
         </div>
 
         <!-- Placeholder div to balance the flex space -->
-        <div class="flex-none" style="width: 200px;"> <!-- Match the width of the .menu-button -->
+        <div class="flex" style="width: 150px;"> <!-- Match the width of the .menu-button -->
             <!-- You can place invisible content here or just use it as a spacer -->
         </div>
 
         <!-- Image on the right linked to login.html -->
-        <div class="flex-none">
+        <div class="flex">
             <a href="/login"> <!-- Add the href attribute with the path to login.html -->
                 <img src="/images/PersonSquare.png" alt="Person" class="person-square-img nav-item-hover" style="width: 40px; height: auto; cursor: pointer;">
             </a>

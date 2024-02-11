@@ -1,21 +1,64 @@
-{{#> base title='Join Game' namespace='join'}}
+{{#> base namespace='join'}}
 {{#*inline "content"}}
 
-<h1 class="font-underdog text-[40px] font-extrabold text-center">Enter code to join game</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Join Game</title>
+<style>
+body { 
+  text-align: center; 
+  margin: 0;
+  padding-top: 10px; /* Reduced padding-top to move content higher */
+}
+.relative {
+  position: relative;
+  text-align: center;
+  margin-top: 0; /* Reduced or removed top margin to move content higher */
+}
+#join_game_form {
+  margin: 20px auto; /* Adjust as needed */
+  max-width: 400px; /* Set maximum width for the form */
+}
+#code_box, .join-btn {
+  font-size: 20px; /* Adjust font size as needed */
+  width: 100%; /* Set width to 100% */
+  max-width: 300px; /* Set maximum width for the input and button */
+  padding: 10px; /* Adjust padding to control height, ensuring both elements are the same size */
+  margin: 5px auto; /* Ensure consistent spacing and center alignment */
+  display: block; /* Make the input and button display as block elements */
+  border: 4px solid black; /* Consistent border for visibility */
+  border-radius: 5px; /* Rounded corners */
+}
+.join-btn {
+  cursor: pointer;
+  background-color: #f0f0f0; /* Light background for visibility */
+  border-color: #000000; /* Slightly darker border for the button */
+}
+.joingamestage-img {
+  width: 40%; /* Make the StickMan image smaller */
+  height: auto; /* Maintain aspect ratio */
+  margin-top: 20px; /* Space after the form */
+  display: block; /* Center the image horizontally */
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+
 <div class="relative">
-    <form  class="absolute top-[100px] left-0 right-0 text-center" id="join_game_form">
-        <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder="Code" id="code_box"
-               class="inline-block font-underdog text-[40px] w-1/2 border-black border-4 rounded text-center" autofocus>
-        <p id="error_message" class="text-center text-red-700 relative top-[-25px] pointer-events-none"></p>
-        <button type="submit" class="inline-block text-[50px] font-bold rounded-3xl relative font-itim text-button-outline border-4 border-button-outline bg-background-color text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 m-[40px] px-[25px] py-[36px];">
-            <svg class="inline" xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 95 95" fill="none">
-                <path d="M45 5.1875C37.2124 5.1875 29.5996 7.31719 23.1244 11.3073C16.6493 15.2973 11.6025 20.9686 8.62226 27.6038C5.64206 34.239 4.8623 41.5403 6.3816 48.5842C7.90089 55.6282 11.651 62.0984 17.1577 67.1768C22.6644 72.2552 29.6803 75.7136 37.3183 77.1148C44.9563 78.5159 52.8733 77.7968 60.0682 75.0484C67.263 72.3 73.4126 67.6457 77.7391 61.6741C82.0657 55.7026 84.375 48.6819 84.375 41.5C84.375 31.8693 80.2266 22.6331 72.8423 15.8232C65.4581 9.01327 55.4429 5.1875 45 5.1875ZM65.9447 43.8214L32.1947 59.3839C31.7658 59.5816 31.2892 59.6748 30.8103 59.6548C30.3313 59.6348 29.8658 59.5022 29.4581 59.2696C29.0503 59.037 28.7138 58.7121 28.4805 58.3258C28.2472 57.9396 28.1248 57.5047 28.125 57.0625V25.9375C28.1253 25.4955 28.248 25.061 28.4815 24.675C28.715 24.2891 29.0516 23.9646 29.4593 23.7323C29.8669 23.5 30.3322 23.3676 30.811 23.3478C31.2897 23.3279 31.766 23.4211 32.1947 23.6187L65.9447 39.1812C66.4112 39.3968 66.8035 39.7279 67.0777 40.1374C67.3518 40.547 67.497 41.0187 67.497 41.5C67.497 41.9813 67.3518 42.453 67.0777 42.8626C66.8035 43.2721 66.4112 43.6032 65.9447 43.8188" fill="currentColor"/>
-            </svg>
-            JOIN
-        </button>
-    </form>
-    <img src="images/join_game_stage.png"/>
+  <h1 class="font-underdog text-[40px] font-extrabold">Enter code to join game</h1>
+  <form id="join_game_form">
+    <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder="Code" id="code_box" autofocus>
+    <button type="submit" class="join-btn">JOIN</button>
+  </form>
+  <img src="images/join_game_stage.png" class="joingamestage-img" alt="game stage"/>
 </div>
 
+</body>
+</html>
+
 {{/inline}}
-{{/base }}
+{{/base}}

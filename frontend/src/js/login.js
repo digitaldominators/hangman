@@ -11,7 +11,7 @@ function login_user(e){
     // get the form's data
     const formData = new FormData(login_form);
 
-    axios.post('/accounts/login/',{
+    axios.post('/accounts/login_user/',{
         username:formData.get("username"),
         password:formData.get("password")
     }).then(response=>{

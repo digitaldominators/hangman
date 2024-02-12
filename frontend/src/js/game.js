@@ -127,7 +127,6 @@ function guessLetter(e){
 
 export default function loadGamePage(){
     category = document.getElementById("category");
-    console.log(category)
     loadGameData();
 
     phrase = document.getElementById("phrase");

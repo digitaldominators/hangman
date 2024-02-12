@@ -2,6 +2,7 @@ import axios from "axios";
 import readCookie from "./readCookie.js";
 import barba from "@barba/core";
 import {gsap} from "gsap";
+import confetti from './confetti.js'
 let category;
 let phrase;
 let active_player_name;
@@ -103,6 +104,7 @@ function displayGameData(data){
     }
 
     if(data.status==='you won'){
+        confetti()
         setTimeout(()=>{
             barba.go('/youwon')
         },1000)

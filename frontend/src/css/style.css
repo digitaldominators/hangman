@@ -28,7 +28,6 @@
 Navbar and its classes 
 
 
-
 */
 nav, footer {
     width: 100%;
@@ -214,6 +213,9 @@ body, html {
     overflow-y: hidden;
 }
 
+html{
+    overflow-x: hidden;
+}
 #main-container {
     padding: var(--padding);
     padding-top: 40px;
@@ -460,7 +462,13 @@ game.html PAGE
     text-align: center; 
     height: 1em; 
 }
-
+.confetti-dot{
+    width:7px;
+    height:12px;
+    position:absolute;
+    background-color:#00FF00;
+    z-index:2;
+}
 @media (max-width: 570px) {
     .game-container {
         margin-top: 0; 

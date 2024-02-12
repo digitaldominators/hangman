@@ -461,6 +461,52 @@ game.html PAGE
     height: 1em; 
 }
 
+@media (max-width: 570px) {
+    .game-container {
+        margin-top: 0; 
+        padding-top: 0; 
+    }
+
+    .stage-container {
+        margin-top: -20px;
+        padding: 5px 0;
+    }
+
+    .img-stage {
+        max-height: 250px;
+        max-width: 250px;
+    }
+
+    .letter-buttons {
+        justify-content: center;
+        gap: 3px;
+        margin-top: 5px;
+    }
+
+    .letter-button {
+        font-size: 16px;
+        width: 30px;
+        height: 30px;
+        padding: 2px;
+    }
+    
+    .category-name {
+        margin-top: 0; 
+        margin-bottom: 5px;
+    }
+
+    .player-name, .score-box {
+        font-size: 8px;
+        padding: 3px;
+        margin-top: 1px;
+    }
+
+    .category-name img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 /* 
 
 

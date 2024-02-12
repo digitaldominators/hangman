@@ -345,6 +345,7 @@ game.html PAGE
 
 .player-info{
     position: absolute;
+    width: 100px;
 }
 .player-info.left{
     left:40px;

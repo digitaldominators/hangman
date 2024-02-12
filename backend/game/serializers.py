@@ -95,7 +95,7 @@ class NewGameSerializer(serializers.Serializer):
     word = serializers.CharField(required=False)
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
     level = serializers.IntegerField(default=1, required=False, min_value=0, max_value=3)
-    category = serializers.ChoiceField(allow_blank=True,choices=[], required=False)
+    category = serializers.ChoiceField(allow_blank=True, choices=[], required=False)
     category_text = serializers.CharField(required=False)
 
     def validate(self, data):
@@ -106,9 +106,10 @@ class NewGameSerializer(serializers.Serializer):
                 raise serializers.ValidationError({"word": "This field is required."})
         return data
 
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['category'] = serializers.ChoiceField(allow_blank=True, choices=Category.objects.filter(active=True))
+        self.fields['category'] = serializers.ChoiceField(allow_blank=True,
+                                                          choices=Category.objects.filter(active=True))
 
 
 class JoinGameSerializer(serializers.Serializer):
@@ -122,16 +123,18 @@ class GameWordSerializer(serializers.Serializer):
 class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer):
     status = serializers.SerializerMethodField()
     player = serializers.SerializerMethodField()
+    player_name = serializers.SerializerMethodField()
     correct_guesses = serializers.SerializerMethodField()
     incorrect_guesses = serializers.SerializerMethodField()
     word = serializers.SerializerMethodField()
     game_score = serializers.SerializerMethodField()
     other_player_game_score = serializers.SerializerMethodField()
+    other_player_name = serializers.SerializerMethodField()
 
     class Meta:
         model = GameMap
         fields = ['game_slug', 'is_multiplayer', 'full', 'timer', 'level', 'status', 'player', 'correct_guesses',
-                  'incorrect_guesses', 'word', 'category', 'game_score', 'other_player_game_score']
+                  'incorrect_guesses', 'word', 'category', 'game_score', 'other_player_game_score', 'player_name','other_player_name']
 
     def get_game_score(self, instance):
         player = self.get_player(instance)
@@ -143,6 +146,21 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
                 return instance.game_2.score
         return None
 
+    def get_player_name(self, instance):
+        if self.context['request'].user.is_authenticated:
+            return self.context['request'].user.username
+        else:
+            return None
+
+    def get_other_player_name(self, instance):
+        player = self.get_player(instance)
+        if player == 1:
+            if instance.player_2:
+                return instance.player_2.username
+        elif player == 2:
+            if instance.player_1:
+                return instance.player_1.username
+        return None
     def get_other_player_game_score(self, instance):
         player = self.get_player(instance)
         if player == 1:

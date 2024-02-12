@@ -6,16 +6,27 @@ let phrase;
 let active_player_name;
 let active_player_score;
 let second_player_score;
+let second_player_name;
 async function loadGameData(){
     let response = await axios.get(`/api/game/${readCookie('current_game')}/`);
     // initial game setup
+    // set the category name
     category.innerText = response.data.category;
+    // set the scores
     active_player_score.innerText = response.data.game_score;
-    if (second_player_score){
+    if (second_player_score && response.data.other_player_game_score){
         second_player_score.innerText = response.data.other_player_game_score;
     }
 
-    // todo show the current players name
+    // set the players names
+    if(response.data.player_name){
+        active_player_name.innerText = response.data.player_name;
+    }
+    if (response.data.other_player_name && second_player_name){
+        second_player_name.innerText = response.data.other_player_name;
+    }
+
+    // add the letters
     let letters = "";
     for (let letter of response.data.word){
         letters += `<li class="letter guessed">${letter}</li>`
@@ -98,7 +109,7 @@ export default function loadGamePage(){
     active_player_name = document.getElementById("active_player_name");
     active_player_score = document.getElementById("active_player_score");
     second_player_score = document.getElementById("second_player_score");
-
+    second_player_name = document.getElementById("second_player_name");
 
     for (let item of document.getElementsByClassName('letter-button')){
         item.onclick = guessLetter;

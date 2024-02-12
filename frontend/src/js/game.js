@@ -69,8 +69,10 @@ function displayGameData(data){
 
     if (document.getElementById('turn')){
         if (data.status==='not your turn'){
+            document.getElementsByClassName('letter-buttons')[0].classList.add('cursor-not-allowed')
             document.getElementById('turn').innerText="WAITING FOR OTHER PLAYER"
         }else{
+            document.getElementsByClassName('letter-buttons')[0].classList.remove('cursor-not-allowed')
             document.getElementById('turn').innerText="";
         }
     }
@@ -118,10 +120,11 @@ function displayGameData(data){
 }
 
 function guessLetter(e){
+    document.getElementsByClassName('letter-buttons')[0].classList.add('cursor-wait');
     e.target.classList.add('active');
     let value = e.target.innerText;
-    // console.log(e.target.innerText)
     axios.put(`/api/game/${readCookie('current_game')}/`,{guess:value}).then(response=>{
+        document.getElementsByClassName('letter-buttons')[0].classList.remove('cursor-wait');
         displayGameData(response.data);
     })
 }

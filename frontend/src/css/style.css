@@ -327,6 +327,9 @@ game.html PAGE
     justify-content: space-between;
     align-items: center;
 }
+.letter-buttons.cursor-not-allowed .letter-button, .letter-buttons.cursor-wait .letter-button{
+    @apply pointer-events-none;
+}
 
 .guess-button {
     display: flex;

@@ -13,7 +13,7 @@ function choose_word_game(e){
 
     axios.post(`/api/game/${readCookie("current_game")}/choose_word/`,{word:formData.get("word")}).then(response=>{
         error_message.innerText = "";
-        barba.go('/game');
+        barba.go('/multigame');
     }).catch(error=>{
         word_box.select()
         word_box.focus()

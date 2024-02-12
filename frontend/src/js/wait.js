@@ -9,7 +9,7 @@ function updateStatus(){
                 updateStatus()
             },500)
         }else{
-            barba.go('/game');
+            barba.go('/multigame');
         }
     })
 }

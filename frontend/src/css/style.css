@@ -305,19 +305,19 @@ game.html PAGE
 .stage-container {
     display: flex;
     justify-content: center;
-    margin-top: -170px; 
+    margin-top: -60px;
     padding: 10px 0;
 }
 
 .img-stage {
     min-height: 200px; 
     min-width: 200px;
-    max-height: 400px; 
-    max-width: 400px;
+    max-height: 500px;
+    max-width: 500px;
     object-fit: contain; 
 }
 
-.category-name, .player-info-container, .letter-buttons, .guess-button {
+.category-name, .letter-buttons, .guess-button {
     width: 90%;
     max-width: 600px;
     margin: 10px auto;
@@ -342,6 +342,19 @@ game.html PAGE
 .category-name img:hover, .guess-button img:hover {
     transform: scale(1.1);
 }
+
+.player-info{
+    position: absolute;
+}
+.player-info.left{
+    left:40px;
+    top:150px;
+}
+.player-info.right{
+    right:40px;
+    top:150px;
+}
+
 
 .letter-buttons {
     display: flex;
@@ -393,12 +406,6 @@ game.html PAGE
 .score-box {
     font-size: 25px; 
 
-}
-
-.player-info-right {
-    position: absolute;
-    top: 11%; 
-    right: -300px; 
 }
 
 .guess-button:hover {

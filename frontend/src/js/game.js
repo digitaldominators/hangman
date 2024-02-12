@@ -57,7 +57,14 @@ function getSecondPlayerData(){
     })
 }
 function displayGameData(data){
-    active_player_score.innerText = data.game_score;
+    if(active_player_score.innerText!== data.game_score){
+        let Cont={val:active_player_score.innerText} , NewVal = data.game_score;
+
+        gsap.to(Cont,2,{val:NewVal,roundProps:"val",onUpdate:function(){
+                active_player_score.innerHTML=Cont.val
+        }});
+    }
+
 
     if (document.getElementById('turn')){
         if (data.status==='not your turn'){
@@ -67,7 +74,13 @@ function displayGameData(data){
         }
     }
     if (second_player_score){
-        second_player_score.innerText = data.other_player_game_score;
+        if(second_player_score.innerText!== data.other_player_game_score){
+            let Cont={val:second_player_score.innerText} , NewVal = data.other_player_game_score;
+
+            gsap.to(Cont,2,{val:NewVal,roundProps:"val",onUpdate:function(){
+                    second_player_score.innerHTML=Cont.val
+                }});
+        }
     }
     // show data that constantly updates
     for (let i in data.word){

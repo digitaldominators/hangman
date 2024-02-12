@@ -109,7 +109,8 @@ class NewGameSerializer(serializers.Serializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['category'] = serializers.ChoiceField(allow_blank=True,
-                                                          choices=Category.objects.filter(active=True))
+                                                          choices=Category.objects.filter(active=True),
+                                                          required=False)
 
 
 class JoinGameSerializer(serializers.Serializer):

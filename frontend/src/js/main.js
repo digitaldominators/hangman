@@ -2,6 +2,7 @@
 import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
 import {gsap} from "gsap";
+import {TextPlugin} from 'gsap/TextPlugin'
 import loadJoinPage from './join.js';
 import loadNewPage from './new.js';
 import axios from 'axios';
@@ -15,7 +16,7 @@ import loadGamePage from "./game.js";
 import loadSignupPage from "./signup.js";
 import loadLoginPage from "./login.js";
 // import './preload_images';
-
+gsap.registerPlugin(TextPlugin);
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
 

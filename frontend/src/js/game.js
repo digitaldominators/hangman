@@ -1,6 +1,7 @@
 import axios from "axios";
 import readCookie from "./readCookie.js";
 import barba from "@barba/core";
+import {gsap} from "gsap";
 let category;
 let phrase;
 let active_player_name;
@@ -72,11 +73,10 @@ function displayGameData(data){
     for (let i in data.word){
         // if the letter is different animate in the new correct letter
         if(phrase.children[i].innerText.toUpperCase()!==data.word[i].toUpperCase()){
-            phrase.children[i].classList.add('adding');
-            phrase.children[i].innerText = data.word[i];
-            setTimeout(()=>{
-                phrase.children[i].classList.remove('adding');
-            },500)
+            let tl = gsap.timeline();
+            tl.to(phrase.children[i],{y:10,opacity:0, duration: 0.5});
+            tl.set(phrase.children[i],{text:data.word[i],y:-10})
+            tl.to(phrase.children[i],{y:0,duration:0.7,opacity:1})
         }
     }
     for(let el of document.getElementsByClassName("letter-button active")){

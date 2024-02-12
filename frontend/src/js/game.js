@@ -79,6 +79,15 @@ function displayGameData(data){
             },500)
         }
     }
+    for(let el of document.getElementsByClassName("letter-button active")){
+        if(data.correct_guesses.includes(el.innerText.toLowerCase())){
+            el.classList.remove('active');
+            el.classList.add("correct");
+        }else if(data.incorrect_guesses.includes(el.innerText.toLowerCase())){
+            el.classList.remove('active');
+            el.classList.add("incorrect");
+        }
+    }
 
     if(data.status==='you won'){
         setTimeout(()=>{
@@ -94,6 +103,7 @@ function displayGameData(data){
 }
 
 function guessLetter(e){
+    e.target.classList.add('active');
     let value = e.target.innerText;
     // console.log(e.target.innerText)
     axios.put(`/api/game/${readCookie('current_game')}/`,{guess:value}).then(response=>{

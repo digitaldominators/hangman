@@ -380,9 +380,26 @@ game.html PAGE
     height: 40px;
 }
 
-.letter-button:hover {
+
+.letter-button:hover{
     background-color: #dedede;
     color: #000;
+}
+
+.letter-button.active{
+    background-color: #989898;
+    color: #000;
+    pointer-events: none;
+}
+
+.letter-button.correct{
+    color: #00ff00;
+    pointer-events: none;
+}
+
+.letter-button.incorrect{
+    color: #ff0000;
+    pointer-events: none;
 }
 
 .player-name, .score-box {

@@ -14,7 +14,7 @@ import loadWaitPage from "./wait.js";
 import loadGamePage from "./game.js";
 import loadSignupPage from "./signup.js";
 import loadLoginPage from "./login.js";
-import './preload_images';
+// import './preload_images';
 
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);

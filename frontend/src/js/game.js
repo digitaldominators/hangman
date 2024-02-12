@@ -126,8 +126,10 @@ function guessLetter(e){
 
 
 export default function loadGamePage(){
-    loadGameData();
     category = document.getElementById("category");
+    console.log(category)
+    loadGameData();
+
     phrase = document.getElementById("phrase");
     active_player_name = document.getElementById("active_player_name");
     active_player_score = document.getElementById("active_player_score");

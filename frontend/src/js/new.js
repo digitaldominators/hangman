@@ -68,7 +68,7 @@ export default function loadNewPage(){
     new_game_form = document.getElementById("new_game_form");
     new_game_word_box = document.getElementById("new_game_word");
     word_error_message = document.getElementById("word_error_message");
-    category = document.getElementById('category');
+    category = document.getElementById('category_dropdown');
     category_text = document.getElementById("category_text");
 
     new_game_form.onchange = new_game_form_changed;

@@ -187,14 +187,15 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
         model = GameMap
         fields = ['timer', 'guess']
 
-    def validate(self, data):
+    def validate_guess(self, data):
         status = self.get_status(self.instance)
         if status != 'your turn':
             raise serializers.ValidationError("Not your turn")
         return data
 
     def update(self, instance, validated_data):
-        if validated_data.get('timer'):
+        if validated_data.get('timer') is not None:
+            print(validated_data.get('timer'))
             instance.timer = validated_data.get('timer')
             instance.save()
         if validated_data.get('guess'):

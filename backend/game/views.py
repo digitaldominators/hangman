@@ -66,7 +66,7 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
 
         if serializer.validated_data.get('level'):
             set_default_game_setting(request, 'level', serializer.validated_data.get('level'))
-        if serializer.validated_data.get('timer'):
+        if serializer.validated_data.get('timer') is not None:
             set_default_game_setting(request, 'timer', serializer.validated_data.get('timer'))
 
         # display the settings

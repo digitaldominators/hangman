@@ -51,6 +51,12 @@ barba.init({
     // run the load code for each page.
     views: [
         {
+            namespace: 'index',
+            afterEnter({next}) {
+                document.getElementById('main-container').classList.remove('wide-container');
+            }
+        },
+        {
             namespace: 'new',
             afterEnter({next}) {
                 loadNewPage();

@@ -79,10 +79,14 @@ function displayGameData(data){
     if (document.getElementById('turn')){
         if (data.status==='not your turn'){
             document.getElementsByClassName('letter-buttons')[0].classList.add('cursor-not-allowed')
-            document.getElementById('turn').innerText="WAITING FOR OTHER PLAYER"
+            if(data.other_player_name){
+                document.getElementById('turn').innerText=`${data.other_player_name}'s Turn`
+            }else{
+                document.getElementById('turn').innerText="Other Player's Turn"
+            }
         }else{
             document.getElementsByClassName('letter-buttons')[0].classList.remove('cursor-not-allowed')
-            document.getElementById('turn').innerText="";
+            document.getElementById('turn').innerText="Your Turn";
         }
     }
     if (second_player_score){

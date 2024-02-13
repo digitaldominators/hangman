@@ -33,6 +33,15 @@ async function loadGameData(){
     for (let letter of response.data.word){
         letters += `<li class="letter guessed">${letter}</li>`
     }
+
+    //set state of letters that were pressed before reload (if correct or incorrect letters
+    for (const letter of document.getElementsByClassName('letter-button')){
+        if (response.data.correct_guesses.includes(letter.innerText.toLowerCase())){
+            letter.classList.add('correct')
+        }else if(response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())){
+            letter.classList.add("incorrect")
+        }
+    }
     phrase.innerHTML = letters;
 
     if(response.data.is_multiplayer){

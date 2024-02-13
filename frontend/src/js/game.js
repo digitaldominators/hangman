@@ -17,6 +17,7 @@ let next_turn_time = null;
 
 function set_turn_time(){
     if (next_turn_time){
+        timer.classList.remove('opacity-0');
         const next_time = moment(next_turn_time)
         const duration = moment.duration(next_time.diff(moment()))
         if(duration>0){
@@ -29,7 +30,7 @@ function set_turn_time(){
             timer.innerText="0:00";
         }
     }else{
-        timer.innerText="";
+        timer.classList.add('opacity-0');
     }
 }
 setInterval(set_turn_time,500)
@@ -54,9 +55,7 @@ async function loadGameData(){
     }
 
     // set the timer
-    if (response.data.next_turn_time){
-        next_turn_time = response.data.next_turn_time;
-    }
+    next_turn_time = response.data.next_turn_time;
 
     // add the letters
     let letters = "";
@@ -106,9 +105,7 @@ function displayGameData(data){
     }
 
     // set the timer
-    if (data.next_turn_time){
-        next_turn_time = data.next_turn_time;
-    }
+    next_turn_time = data.next_turn_time;
 
     if (document.getElementById('turn')){
         if (data.status==='not your turn'){

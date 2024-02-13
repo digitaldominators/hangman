@@ -362,10 +362,18 @@ class GameViewSet(viewsets.GenericViewSet):
         Return one game object
         """
         game_map = self.get_game_map(request, game_slug)
-        if game_map.next_turn_time:
-            if game_map.next_turn_time < timezone.now():
+        if game_map.timer:
+            if game_map.next_turn_time is None:
                 game_map.next_turn_time = game_map.get_future_next_turn_time()
                 game_map.turns = [1, 2]
+                game_map.save()
+            elif game_map.next_turn_time < timezone.now():
+                game_map.next_turn_time = game_map.get_future_next_turn_time()
+                game_map.turns = [1, 2]
+                game_map.save()
+        else:
+            if game_map.next_turn_time is not None:
+                game_map.next_turn_time = None
                 game_map.save()
         return Response(GameSerializer(game_map, context=self.get_serializer_context()).data)
 

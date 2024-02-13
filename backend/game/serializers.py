@@ -195,7 +195,6 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
 
     def update(self, instance, validated_data):
         if validated_data.get('timer') is not None:
-            print(validated_data.get('timer'))
             instance.timer = validated_data.get('timer')
             instance.save()
         if validated_data.get('guess'):

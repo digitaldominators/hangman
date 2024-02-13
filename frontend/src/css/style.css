@@ -378,7 +378,7 @@ game.html PAGE
     border: 4px solid black; 
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s, scale 0.1s;
     margin: 2px;
     padding: 0;
     width: 40px;
@@ -389,6 +389,7 @@ game.html PAGE
 .letter-button:hover{
     background-color: #dedede;
     color: #000;
+    scale: 130%;
 }
 
 .letter-button.active{

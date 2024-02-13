@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&family=Titan+One&family=Inika&family=Unlock&family=VT323&family=Wallpoet&family=Itim&family=Underdog&display=swap');
+@import 'join.css';
 
 @tailwind base;
 @tailwind components;
@@ -384,7 +385,6 @@ game.html PAGE
     width: 40px;
     height: 40px;
 }
-
 
 .letter-button:hover{
     background-color: #dedede;

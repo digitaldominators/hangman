@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
@@ -194,7 +195,7 @@ class GameViewSet(viewsets.GenericViewSet):
         # if the user sent data of the timer, update the default game timer.
         if data.get('timer'):
             set_default_game_setting(request, 'timer', data['timer'])
-        else:   # if user did not sent timer, set the timer to use the game default
+        else:  # if user did not sent timer, set the timer to use the game default
             data['timer'] = default_settings['timer']
         # initialize serializer object
         serializer = self.get_serializer_class()(data=data, context=self.get_serializer_context())
@@ -209,12 +210,14 @@ class GameViewSet(viewsets.GenericViewSet):
                                                   is_multiplayer=True,
                                                   level=serializer.validated_data.get('level'),
                                                   timer=serializer.validated_data.get('timer'),
-                                                  category=serializer.validated_data.get('category_text'))
+                                                  category=serializer.validated_data.get('category_text'),
+                                                  turns=[1, 2])
             else:
                 game_map = GameMap.objects.create(is_multiplayer=True,
                                                   level=serializer.validated_data.get('level'),
                                                   timer=serializer.validated_data.get('timer'),
-                                                  category=serializer.validated_data.get('category_text'))
+                                                  category=serializer.validated_data.get('category_text'),
+                                                  turns=[1, 2])
                 request.session[f'game__{game_map.game_slug}'] = 1
 
             # create the game for the second player with the word that the first player chose.
@@ -223,7 +226,7 @@ class GameViewSet(viewsets.GenericViewSet):
             game_map.save()
         else:  # single player game
             # create the game with a randomly generated word.
-            category,phrase = get_word_and_category(category=serializer.validated_data.get('category'))
+            category, phrase = get_word_and_category(category=serializer.validated_data.get('category'))
             game = Game.objects.create(word=phrase)
 
             # if the user is logged in then set player_1 to be logged in user otherwise add the user to the session.
@@ -234,16 +237,20 @@ class GameViewSet(viewsets.GenericViewSet):
                                                   full=True,
                                                   level=serializer.validated_data.get('level'),
                                                   timer=serializer.validated_data.get('timer'),
-                                                  category=category)
+                                                  category=category,
+                                                  turns=[1])
             else:
                 game_map = GameMap.objects.create(game_1=game,
                                                   is_multiplayer=False,
                                                   full=True,
                                                   level=serializer.validated_data.get('level'),
                                                   timer=serializer.validated_data.get('timer'),
-                                                  category=category)
+                                                  category=category,
+                                                  turns=[1])
                 request.session[f'game__{game_map.game_slug}'] = 1
-
+        # set the next turn time
+        game_map.next_turn_time = game_map.get_future_next_turn_time()
+        game_map.save()
         # create a serializer for the game.
         game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
         # add if user is logged in or not
@@ -320,7 +327,8 @@ class GameViewSet(viewsets.GenericViewSet):
         # create game for player 1 with word set to players word
         game = Game.objects.create(word=serializer.validated_data['word'].lower())
         game_map.game_1 = game
-        game_map.full = True
+        # set the next turn time
+        game_map.next_turn_time = game_map.get_future_next_turn_time()
         game_map.save()
 
         game_serializer = GameSerializer(game_map, context=self.get_serializer_context())
@@ -354,6 +362,11 @@ class GameViewSet(viewsets.GenericViewSet):
         Return one game object
         """
         game_map = self.get_game_map(request, game_slug)
+        if game_map.next_turn_time:
+            if game_map.next_turn_time < timezone.now():
+                game_map.next_turn_time = game_map.get_future_next_turn_time()
+                game_map.turns = [1, 2]
+                game_map.save()
         return Response(GameSerializer(game_map, context=self.get_serializer_context()).data)
 
     def update(self, request, game_slug):

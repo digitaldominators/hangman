@@ -26,6 +26,7 @@ The basic game object shows:
 * word - string - outline of the word each letter except spaces replaces with `_` unless user guesses the letter. If the word is `heads up` and the user guessed `e` `s` and `u` it would return `_e__s u_`.
 * game_score - int - current score in game
 * other_player_game_score - int - current score of the other players game
+* next_turn_time - timestamp - when the current turn ends, is null if timer is not set.
 
 ### new game
 To create a new game post data to /api/game/. 

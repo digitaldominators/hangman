@@ -1,7 +1,9 @@
+import datetime
 import string
 from django.contrib.auth.models import User
 from django.db.models.functions import Length
 from django.db import models
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.db.models.lookups import GreaterThan
 from .signals import incorrect_guess, correct_guess
@@ -13,7 +15,6 @@ class Game(models.Model):
     word = models.CharField(max_length=50)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-
     score = models.IntegerField(default=0)
 
     @property
@@ -58,7 +59,6 @@ class Guess(models.Model):
         ordering = ["game", "created"]
         verbose_name_plural = "guesses"
 
-
 class GameMap(models.Model):
     player_1 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
     player_2 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
@@ -66,6 +66,8 @@ class GameMap(models.Model):
     game_1 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
     game_2 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
 
+    next_turn_time = models.DateTimeField(null=True, blank=True)
+    turns = models.JSONField(default=list)
     game_slug = models.SlugField(unique=True, blank=True, null=True)
 
     category = models.CharField(max_length=50)
@@ -87,6 +89,16 @@ class GameMap(models.Model):
     # number of seconds before turn is skipped.
     timer = models.PositiveSmallIntegerField(default=0)
 
+    def get_future_next_turn_time(self):
+        """
+        returns what the text turn time should be when both players went. This does NOT set the next turn time
+        """
+        if self.timer > 0:
+            current_datetime = timezone.now()
+            future_time = current_datetime + datetime.timedelta(seconds=self.timer)
+            return future_time
+        else:
+            return None
     def save(self, *args, **kwargs):
         if not self.game_slug:
             self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)

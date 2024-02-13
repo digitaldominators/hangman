@@ -1,3 +1,4 @@
+import datetime
 from string import ascii_letters
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound
@@ -39,21 +40,11 @@ class GameModelSerializerPlayerMixin:
                     return "Waiting for player to join"
                 else:
                     return "join game"
-        else:
-            return 'your turn'
 
-        if instance.game_2.guesses.count() == instance.game_1.guesses.count():
+        if player in instance.turns:
             return 'your turn'
-        elif instance.game_2.guesses.count() > instance.game_1.guesses.count():
-            if player == 2:
-                return 'not your turn'
-            else:
-                return 'your turn'
         else:
-            if player == 1:
-                return 'not your turn'
-            else:
-                return 'your turn'
+            return 'not your turn'
 
     def get_player(self, instance):
         if self.context['request'].user.is_authenticated:
@@ -135,7 +126,8 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
     class Meta:
         model = GameMap
         fields = ['game_slug', 'is_multiplayer', 'full', 'timer', 'level', 'status', 'player', 'correct_guesses',
-                  'incorrect_guesses', 'word', 'category', 'game_score', 'other_player_game_score', 'player_name','other_player_name']
+                  'incorrect_guesses', 'word', 'category', 'game_score', 'other_player_game_score', 'player_name',
+                  'other_player_name', 'next_turn_time']
 
     def get_game_score(self, instance):
         player = self.get_player(instance)
@@ -162,6 +154,7 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
             if instance.player_1:
                 return instance.player_1.username
         return None
+
     def get_other_player_game_score(self, instance):
         player = self.get_player(instance)
         if player == 1:
@@ -233,6 +226,13 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                         signals.game_over.send(sender=self.__class__, game_map=instance)
                 else:
                     game.add_incorrect_guess(guess)
+
+            if instance.is_multiplayer:
+                instance.turns = [turn for turn in instance.turns if player != turn]
+                if len(instance.turns) == 0:
+                    instance.next_turn_time = instance.get_future_next_turn_time()
+                    instance.turns = [1, 2]
+                instance.save()
         return instance
 
 

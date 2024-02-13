@@ -1,14 +1,39 @@
+import moment from "moment";
 import axios from "axios";
 import readCookie from "./readCookie.js";
 import barba from "@barba/core";
 import {gsap} from "gsap";
 import confetti from './confetti.js'
+
 let category;
 let phrase;
 let active_player_name;
 let active_player_score;
 let second_player_score;
 let second_player_name;
+let timer;
+let next_turn_time = null;
+
+
+function set_turn_time(){
+    if (next_turn_time){
+        const next_time = moment(next_turn_time)
+        const duration = moment.duration(next_time.diff(moment()))
+        if(duration>0){
+            if(duration.seconds()>10){
+                timer.innerText=duration.minutes()+":"+duration.seconds()
+            }else{
+                timer.innerText=duration.minutes()+":0"+duration.seconds()
+            }
+        }else{
+            timer.innerText="0:00";
+        }
+    }else{
+        timer.innerText="";
+    }
+}
+setInterval(set_turn_time,500)
+
 async function loadGameData(){
     let response = await axios.get(`/api/game/${readCookie('current_game')}/`);
     // initial game setup
@@ -26,6 +51,11 @@ async function loadGameData(){
     }
     if (response.data.other_player_name && second_player_name){
         second_player_name.innerText = response.data.other_player_name;
+    }
+
+    // set the timer
+    if (response.data.next_turn_time){
+        next_turn_time = response.data.next_turn_time;
     }
 
     // add the letters
@@ -75,6 +105,10 @@ function displayGameData(data){
         }});
     }
 
+    // set the timer
+    if (data.next_turn_time){
+        next_turn_time = data.next_turn_time;
+    }
 
     if (document.getElementById('turn')){
         if (data.status==='not your turn'){
@@ -145,6 +179,8 @@ function guessLetter(e){
 
 export default function loadGamePage(){
     category = document.getElementById("category");
+    timer = document.getElementById('timer');
+
     loadGameData();
 
     phrase = document.getElementById("phrase");

@@ -1,3 +1,16 @@
+@media (min-width: 570px) {
+    #main-container.wide-container{
+        width: 80vw;
+        max-width: 80vw;
+        padding: 0;
+    }
+
+    #main-container.wide-container main{
+        width: 80vw;
+    }
+}
+
+
 .game-container {
     display: flex;
     flex-direction: column;

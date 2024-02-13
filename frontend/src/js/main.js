@@ -54,64 +54,75 @@ barba.init({
             namespace: 'new',
             afterEnter({next}) {
                 loadNewPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },{
             namespace: 'join',
             afterEnter({next}) {
                 loadJoinPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },{
             namespace: 'settings',
             afterEnter({next}) {
                 loadSettingsPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'choose_word',
             afterEnter({next}) {
                 loadChooseWordPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'scoreboard',
             afterEnter({next}) {
                 loadScoreBoardPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'invite',
             afterEnter({next}) {
                 loadInvitePage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'wait',
             afterEnter({next}) {
                 loadWaitPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'game',
             afterEnter(next) {
                 loadGamePage();
+                document.getElementById('main-container').classList.add('wide-container');
             }
         },
         {
             namespace: 'multigame',
             afterEnter(next) {
                 loadGamePage();
+                document.getElementById('main-container').classList.add('wide-container');
             }
         },
         {
             namespace: 'signup',
             afterEnter({next}) {
                 loadSignupPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         },
         {
             namespace: 'login',
             afterEnter({next}) {
                 loadLoginPage();
+                document.getElementById('main-container').classList.remove('wide-container');
             }
         }
     ]

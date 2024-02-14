@@ -13,10 +13,10 @@ class IntegerDefaultField(fields.IntegerField):
 
 
 class ScoreboardSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source='user.username')
+    user = serializers.CharField(source="user.username")
     avg_score = IntegerDefaultField(default=0)
-    total_score = IntegerDefaultField(default=0, source='score')
+    total_score = IntegerDefaultField(default=0, source="score")
 
     class Meta:
         model = UserProfile
-        fields = ['user', 'avg_score', 'total_score']
+        fields = ["user", "avg_score", "total_score"]

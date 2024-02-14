@@ -22,14 +22,14 @@ class UserProfile(models.Model):
     # number of games played
     games_played = models.PositiveIntegerField(default=0)
     # average score
-    avg_score = models.GeneratedField(expression=F('score') / NullIf(F("games_played"),0),
-                                      output_field=models.PositiveIntegerField(), db_persist=True)
+    avg_score = models.GeneratedField(
+        expression=F("score") / NullIf(F("games_played"), 0),
+        output_field=models.PositiveIntegerField(),
+        db_persist=True,
+    )
 
     class Meta:
-        indexes = [
-            models.Index(fields=['score']),
-            models.Index(fields=['avg_score'])
-        ]
+        indexes = [models.Index(fields=["score"]), models.Index(fields=["avg_score"])]
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

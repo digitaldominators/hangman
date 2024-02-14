@@ -26,7 +26,7 @@ class Game(models.Model):
         return self.guesses.filter(correct=False)
 
     def __str__(self):
-        return f'{self.word} - {self.created}'
+        return f"{self.word} - {self.created}"
 
     def add_correct_guess(self, guess):
         guess_object = Guess.objects.create(guess=guess, game=self, correct=True)
@@ -47,8 +47,11 @@ class Guess(models.Model):
     guess = models.CharField(max_length=50)
     correct = models.BooleanField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="guesses")
-    is_word = models.GeneratedField(expression=GreaterThan(Length('guess'), 1), output_field=models.BooleanField(),
-                                    db_persist=True)
+    is_word = models.GeneratedField(
+        expression=GreaterThan(Length("guess"), 1),
+        output_field=models.BooleanField(),
+        db_persist=True,
+    )
 
     created = models.DateTimeField(auto_now_add=True)
 
@@ -59,12 +62,21 @@ class Guess(models.Model):
         ordering = ["game", "created"]
         verbose_name_plural = "guesses"
 
-class GameMap(models.Model):
-    player_1 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
-    player_2 = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
 
-    game_1 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
-    game_2 = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
+class GameMap(models.Model):
+    player_1 = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True, related_name="+"
+    )
+    player_2 = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True, related_name="+"
+    )
+
+    game_1 = models.ForeignKey(
+        Game, on_delete=models.CASCADE, null=True, blank=True, related_name="+"
+    )
+    game_2 = models.ForeignKey(
+        Game, on_delete=models.CASCADE, null=True, blank=True, related_name="+"
+    )
 
     next_turn_time = models.DateTimeField(null=True, blank=True)
     turns = models.JSONField(default=list)
@@ -99,13 +111,16 @@ class GameMap(models.Model):
             return future_time
         else:
             return None
+
     def save(self, *args, **kwargs):
         if not self.game_slug:
-            self.game_slug = get_random_string(8, allowed_chars=string.ascii_uppercase + string.digits)
+            self.game_slug = get_random_string(
+                8, allowed_chars=string.ascii_uppercase + string.digits
+            )
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.game_slug
 
     class Meta:
-        ordering = ['created']
+        ordering = ["created"]

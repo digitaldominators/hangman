@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from .models import GameMap
 from category.models import Category, Phrase
 
-
+print('test')
+print("test")
 # Create your tests here.
 class DefaultSettingsTestCase(TestCase):
     @classmethod

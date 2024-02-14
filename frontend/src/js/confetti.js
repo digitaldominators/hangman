@@ -2,6 +2,8 @@ import {gsap,Linear,Sine} from "gsap";
 // https://codepen.io/ProjectDCL/pen/ZEmKyPq
 const tl = gsap.timeline();
 const confetti_duration = 7000; // milliseconds
+
+console.log("edited confetti js")
 export default function confetti() {
     tl.play()
     let confettiContainer = document.getElementsByTagName("html")[0];

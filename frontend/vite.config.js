@@ -28,7 +28,8 @@ export default defineConfig({
                 "./src/invite.html",
                 "./src/wait.html",
                 "./src/youlost.html",
-                "./src/youwon.html"
+                "./src/youwon.html",
+                "./src/404.html"
             ],
         }
     },

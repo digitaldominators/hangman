@@ -42,18 +42,18 @@ class GameModelSerializerPlayerMixin:
                     return "join game"
 
         if player in instance.turns:
-            return 'your turn'
+            return "your turn"
         else:
-            return 'not your turn'
+            return "not your turn"
 
     def get_player(self, instance):
-        if self.context['request'].user.is_authenticated:
-            if instance.player_1 == self.context['request'].user:
+        if self.context["request"].user.is_authenticated:
+            if instance.player_1 == self.context["request"].user:
                 return 1
-            if instance.player_2 == self.context['request'].user:
+            if instance.player_2 == self.context["request"].user:
                 return 2
         else:
-            return self.context['request'].session.get(f'game__{instance.game_slug}')
+            return self.context["request"].session.get(f"game__{instance.game_slug}")
 
         raise NotFound("current player not found")
 
@@ -67,8 +67,11 @@ class GameModelSerializerPlayerMixin:
     def get_word_mask(self, instance):
         if not self.get_game(instance):
             return None
-        correct_guesses = self.get_game(instance).guesses.filter(is_word=False, correct=True).values_list('guess',
-                                                                                                          flat=True)
+        correct_guesses = (
+            self.get_game(instance)
+            .guesses.filter(is_word=False, correct=True)
+            .values_list("guess", flat=True)
+        )
         word = self.get_game(instance).word
         word_mask = ["_" if letter in ascii_letters else letter for letter in word]
         for letter in correct_guesses:
@@ -85,23 +88,29 @@ class NewGameSerializer(serializers.Serializer):
     multiplayer = serializers.BooleanField()
     word = serializers.CharField(required=False)
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
-    level = serializers.IntegerField(default=1, required=False, min_value=0, max_value=3)
+    level = serializers.IntegerField(
+        default=1, required=False, min_value=0, max_value=3
+    )
     category = serializers.ChoiceField(allow_blank=True, choices=[], required=False)
     category_text = serializers.CharField(required=False)
 
     def validate(self, data):
-        if data['multiplayer']:
-            if not data.get('category_text'):
-                raise serializers.ValidationError({"category_text": "This field is required."})
-            if not data.get('word'):
+        if data["multiplayer"]:
+            if not data.get("category_text"):
+                raise serializers.ValidationError(
+                    {"category_text": "This field is required."}
+                )
+            if not data.get("word"):
                 raise serializers.ValidationError({"word": "This field is required."})
         return data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['category'] = serializers.ChoiceField(allow_blank=True,
-                                                          choices=Category.objects.filter(active=True),
-                                                          required=False)
+        self.fields["category"] = serializers.ChoiceField(
+            allow_blank=True,
+            choices=Category.objects.filter(active=True),
+            required=False,
+        )
 
 
 class JoinGameSerializer(serializers.Serializer):
@@ -125,9 +134,24 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
 
     class Meta:
         model = GameMap
-        fields = ['game_slug', 'is_multiplayer', 'full', 'timer', 'level', 'status', 'player', 'correct_guesses',
-                  'incorrect_guesses', 'word', 'category', 'game_score', 'other_player_game_score', 'player_name',
-                  'other_player_name', 'next_turn_time']
+        fields = [
+            "game_slug",
+            "is_multiplayer",
+            "full",
+            "timer",
+            "level",
+            "status",
+            "player",
+            "correct_guesses",
+            "incorrect_guesses",
+            "word",
+            "category",
+            "game_score",
+            "other_player_game_score",
+            "player_name",
+            "other_player_name",
+            "next_turn_time",
+        ]
 
     def get_game_score(self, instance):
         player = self.get_player(instance)
@@ -141,8 +165,8 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
 
     def get_player_name(self, instance):
         print("hi")
-        if self.context['request'].user.is_authenticated:
-            return self.context['request'].user.username
+        if self.context["request"].user.is_authenticated:
+            return self.context["request"].user.username
         else:
             return None
 
@@ -168,12 +192,16 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
 
     def get_correct_guesses(self, instance):
         if self.get_game(instance):
-            return self.get_game(instance).correct_guesses.values_list('guess', flat=True)
+            return self.get_game(instance).correct_guesses.values_list(
+                "guess", flat=True
+            )
         return []
 
     def get_incorrect_guesses(self, instance):
         if self.get_game(instance):
-            return self.get_game(instance).incorrect_guesses.values_list('guess', flat=True)
+            return self.get_game(instance).incorrect_guesses.values_list(
+                "guess", flat=True
+            )
         return []
 
     def get_word(self, instance):
@@ -186,22 +214,22 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
 
     class Meta:
         model = GameMap
-        fields = ['timer', 'guess']
+        fields = ["timer", "guess"]
 
     def validate_guess(self, data):
         status = self.get_status(self.instance)
-        if status != 'your turn':
+        if status != "your turn":
             raise serializers.ValidationError("Not your turn")
         return data
 
     def update(self, instance, validated_data):
-        if validated_data.get('timer') is not None:
-            instance.timer = validated_data.get('timer')
+        if validated_data.get("timer") is not None:
+            instance.timer = validated_data.get("timer")
             instance.save()
-        if validated_data.get('guess'):
+        if validated_data.get("guess"):
             player = self.get_player(instance)
             game = self.get_game(instance)
-            guess = validated_data.get('guess').lower()
+            guess = validated_data.get("guess").lower()
 
             # guess was already made
             if game.guesses.filter(guess=guess).exists():
@@ -239,4 +267,6 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
 
 class DefaultGameSettingsSerializer(serializers.Serializer):
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
-    level = serializers.IntegerField(default=0, required=False, min_value=0, max_value=3)
+    level = serializers.IntegerField(
+        default=0, required=False, min_value=0, max_value=3
+    )

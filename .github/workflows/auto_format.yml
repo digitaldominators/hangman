@@ -18,9 +18,11 @@ jobs:
           files: |
             **/*.py
             **/*.pyi
-      - uses: psf/black@stable
+      - name: Format With Black
+        uses: psf/black@stable
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
+          options: ''
           src: ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check for modified files
         id: git-check

@@ -21,7 +21,7 @@ jobs:
       - uses: psf/black@stable
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
-          options: "--check --diff --line-length=120"
+          options: "."
           src: ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check for modified files
         id: git-check

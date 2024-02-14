@@ -180,6 +180,8 @@ class GameViewSet(viewsets.GenericViewSet):
         -> "word": "heads up", // required if multiplayer - set other players word. - If multi player is false this doesn't do anything.
         -> "timer": null, // optional - set time between modes
         -> "level": null // optional - set difficulty level - default 1
+        -> "category": string choice of one of the categories optional
+        -> "category_text": string, //only for multiplayer - string of category
         """
 
         # get the current users default settings

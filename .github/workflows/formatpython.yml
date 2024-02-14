@@ -13,30 +13,5 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           args: . --fix --exit-zero
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-
-      - name: Get email address
-        id: get-email
-        env:
-          GH_TOKEN: ${{ github.token }}
-          login: ${{ github.event.pull_request.owner.login }}
-        run: |
-          email=$(gh api graphql -f login="$login" -f org=ORGANIZATION -f query='
-            query ($login: String!, $org: String!) {
-              user(login: $login) {
-                organizationVerifiedDomainEmails(login: $org)
-              }
-            }
-          ' --jq '.data.user.organizationVerifiedDomainEmails[0]')
-
-          echo "email=$email" >> "$GITHUB_OUTPUT"
-      - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name '${{ github.event.pull_request.user.login }}'
-          git config --global user.email '${{ steps.get-email.outputs.email }}'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Automated changes"
-          git push
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6

@@ -9,6 +9,8 @@ from category.models import Category, Phrase
 class DefaultSettingsTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
+        print("test")
+        print('test')
         cls.user1 = User.objects.create_user(username='user1', password='password 1')
 
     def test_get_default_settings_for_authenticated_user(self):

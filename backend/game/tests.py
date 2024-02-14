@@ -122,6 +122,8 @@ class GameTestCase(TestCase):
         self.assertTrue(GameMap.objects.filter(game_slug=game_slug, timer=30).exists())
 
     def test_game_creation_multiplayer(self):
+        print("changes")
+        print('change')
         response = self.client.post("/api/game/",
                                     {'multiplayer': True, 'word': 'test word', "category_text": "test cat"})
         self.assertEqual(response.status_code, 201)

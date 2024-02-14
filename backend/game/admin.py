@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Guess, Game, GameMap
 
-
+print("again")
 class GuessInline(admin.TabularInline):
     model = Guess
     readonly_fields = ('guess', "correct", "created", 'is_word')

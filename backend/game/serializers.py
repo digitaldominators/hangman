@@ -140,6 +140,7 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
         return None
 
     def get_player_name(self, instance):
+        print("hi")
         if self.context['request'].user.is_authenticated:
             return self.context['request'].user.username
         else:

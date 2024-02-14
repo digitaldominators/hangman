@@ -8,13 +8,21 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
-      - name: black
-        uses: lgeiger/black-action@v1.0.1
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
         with:
-          args: .
+          files: |
+            **/*.py
+            **/*.pyi
+      - uses: psf/black@stable
+        if: steps.changed-files.outputs.any_changed == 'true'
+        with:
+          options: "--check --diff --line-length=120"
+          src: ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
@@ -24,5 +32,5 @@ jobs:
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Automated changes"
+          git commit -am "Automated formatting with black"
           git push

@@ -13,5 +13,12 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           args: . --fix --exit-zero
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+      - name: Check for modified files
+        id: git-check
+        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
+          - name: Push changes
+            if: steps.git-check.outputs.modified == 'true'
+            run: |
+              git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+              git commit -am "Automated changes"
+              git push

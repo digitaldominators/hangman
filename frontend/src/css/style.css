@@ -212,7 +212,7 @@ body, html {
     min-height: 100vh;
     margin: 0;
     box-sizing: border-box;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 html{

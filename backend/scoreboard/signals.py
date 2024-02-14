@@ -17,7 +17,6 @@ def won_game(sender, game: Game, player: User, game_map: GameMap, **kwargs):
         game.score += 600
     game.save()
 
-
     if player:
         user_profile, created = UserProfile.objects.get_or_create(user=player)
         user_profile.score += game.score

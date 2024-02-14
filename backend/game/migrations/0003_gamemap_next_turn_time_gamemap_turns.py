@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('game', '0002_gamemap_category'),
+        ("game", "0002_gamemap_category"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='gamemap',
-            name='next_turn_time',
+            model_name="gamemap",
+            name="next_turn_time",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='gamemap',
-            name='turns',
+            model_name="gamemap",
+            name="turns",
             field=models.JSONField(default=list),
         ),
     ]

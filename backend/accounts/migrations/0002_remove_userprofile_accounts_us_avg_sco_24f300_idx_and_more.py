@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveIndex(
-            model_name='userprofile',
-            name='accounts_us_avg_sco_24f300_idx',
+            model_name="userprofile",
+            name="accounts_us_avg_sco_24f300_idx",
         ),
         migrations.RemoveField(
-            model_name='userprofile',
-            name='avg_score',
+            model_name="userprofile",
+            name="avg_score",
         ),
     ]

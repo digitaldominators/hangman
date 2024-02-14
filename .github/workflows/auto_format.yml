@@ -22,9 +22,11 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v42
         with:
-          files_ignore: |
-            .github/**/*.yml
-            **.py
+          files: |
+            **.css
+            **.js
+            **.html
+            **.json
       - name: Format With Black
         uses: psf/black@stable
         if: steps.changed-python-files.outputs.any_changed == 'true'

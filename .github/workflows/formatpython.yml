@@ -1,5 +1,8 @@
 name: auto-format
-on: pull_request
+on:
+  schedule:
+    # https://crontab.guru/every-night-at-midnight
+    - cron: "0 7,9,12,14,16,18,20 * * *"
 jobs:
   format:
     # Check if the PR is not from a fork
@@ -11,7 +14,6 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           args: . --fix --exit-zero
-      - name: create pull request
-        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+      - uses: gr2m/create-or-update-pull-request-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

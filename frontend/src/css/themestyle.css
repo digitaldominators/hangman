@@ -181,9 +181,7 @@ animation: spin 4s linear infinite;
 
 
 .won-lost {
-    width: 600px;
     border-radius: 0.6875rem;
-    border: 2px solid var(--MainMenuColors-font, #000);
     mix-blend-mode: luminosity;
 }
 

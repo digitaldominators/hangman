@@ -1,5 +1,7 @@
 name: auto-format
 on: pull_request
+permissions:
+  contents: write
 jobs:
   format:
     # Check if the PR is not from a fork

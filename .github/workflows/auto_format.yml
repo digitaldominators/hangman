@@ -30,7 +30,7 @@ jobs:
         if: steps.changed-python-files.outputs.any_changed == 'true'
         with:
           options: ''
-          src: ${{ steps.changed-files.outputs.all_changed_files }}
+          src: ${{ steps.changed-python-files.outputs.all_changed_files }}
       - name: Format with Prettier
         uses: actionsx/prettier@v2
         with:

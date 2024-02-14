@@ -1,5 +1,5 @@
 # Setup
-requirements python 3.12(anything past 3.9 should be fine), npm, git
+requirements python 3.12(anything past 3.9 should be fine), npm (node 20+), git
 
 git clone https://github.com/smark-1/hangman.git
 

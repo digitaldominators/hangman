@@ -21,7 +21,7 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
           options: ''
-          src: ${{ steps.changed-files.outputs.all_changed_files }} --quiet
+          src: ${{ steps.changed-files.outputs.all_changed_files }} --include='**\*.py'
       - name: Format with prettier
         uses: actionsx/prettier@v2
         with:

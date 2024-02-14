@@ -20,6 +20,7 @@ jobs:
       - name: Get email address
         id: get-email
         env:
+          GH_TOKEN: ${{ github.token }}
           login: ${{ github.event.pull_request.owner.login }}
         run: |
           email=$(gh api graphql -f login="$login" -f org=ORGANIZATION -f query='

@@ -23,7 +23,7 @@ jobs:
       - name: Format with prettier
         uses: actionsx/prettier@v2
         with:
-          args: ${{ steps.changed-files.outputs.all_changed_files }} "!**/*.{py}" --write
+          args: ${{ steps.changed-files.outputs.all_changed_files }} --ignore-unknown --write
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT

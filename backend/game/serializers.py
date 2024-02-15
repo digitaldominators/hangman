@@ -194,7 +194,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
         return data
 
     def update(self, instance, validated_data):
-        if validated_data.get('timer') is not None:
+        if validated_data.get('timer'):
             instance.timer = validated_data.get('timer')
             instance.save()
         if validated_data.get('guess'):
@@ -228,6 +228,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                     game.add_incorrect_guess(guess)
 
             if instance.is_multiplayer:
+                # remove player from turns
                 instance.turns = [turn for turn in instance.turns if player != turn]
                 if len(instance.turns) == 0:
                     instance.next_turn_time = instance.get_future_next_turn_time()

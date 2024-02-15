@@ -251,6 +251,7 @@ class GameTestCase(TestCase):
         response = self.client.get("/api/game/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 2)
+
     def test_list_all_games_anonymous(self):
         """test that all games can be listed"""
         response = self.client.get("/api/game/")
@@ -264,7 +265,6 @@ class GameTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 2)
 
-
     def test_view_game_details(self):
         """test that a game can be viewed,
         game is full, timer is 0, level is 1
@@ -276,39 +276,49 @@ class GameTestCase(TestCase):
         other_player_game_score is 0
         next_turn_time is null
         """
-        self.client.login(username='user1', password='password 1')
-        response = self.client.post("/api/game/", {'multiplayer': False})
-        game_slug = response.json()['game_slug']
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post("/api/game/", {"multiplayer": False})
+        game_slug = response.json()["game_slug"]
 
         response = self.client.get(f"/api/game/{game_slug}/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['game_slug'], game_slug)
-        self.assertEqual(response.json()['is_multiplayer'], False)
-        self.assertEqual(response.json()['timer'], 0)
-        self.assertEqual(response.json()['level'], 1)
-        self.assertEqual(response.json()['status'], 'your turn')
-        self.assertEqual(response.json()['player'], 1)
-        self.assertEqual(response.json()['correct_guesses'], [])
-        self.assertEqual(response.json()['incorrect_guesses'], [])
-        self.assertEqual(response.json()['game_score'], 0)
-        self.assertEqual(response.json()['other_player_game_score'], None)
-        self.assertIsNone(response.json()['next_turn_time'])
+        self.assertEqual(response.json()["game_slug"], game_slug)
+        self.assertEqual(response.json()["is_multiplayer"], False)
+        self.assertEqual(response.json()["timer"], 0)
+        self.assertEqual(response.json()["level"], 1)
+        self.assertEqual(response.json()["status"], "your turn")
+        self.assertEqual(response.json()["player"], 1)
+        self.assertEqual(response.json()["correct_guesses"], [])
+        self.assertEqual(response.json()["incorrect_guesses"], [])
+        self.assertEqual(response.json()["game_score"], 0)
+        self.assertEqual(response.json()["other_player_game_score"], None)
+        self.assertIsNone(response.json()["next_turn_time"])
 
     def test_view_game_details_timer_updates(self):
         """test that if the timer is set on a multiplayer game it updates if the next turn time already happened, and sets the turns to [1, 2]"""
-        self.client.login(username='user1', password='password 1')
-        response = self.client.post("/api/game/", {'multiplayer': True, 'word': 'test word', 'category_text': 'test cat','timer':10})
-        game_slug = response.json()['game_slug']
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post(
+            "/api/game/",
+            {
+                "multiplayer": True,
+                "word": "test word",
+                "category_text": "test cat",
+                "timer": 10,
+            },
+        )
+        game_slug = response.json()["game_slug"]
 
-        self.client.login(username='user2', password='password 2')
-        self.client.post(f"/api/game/join_game/", {'game_slug': game_slug})
+        self.client.login(username="user2", password="password 2")
+        self.client.post(f"/api/game/join_game/", {"game_slug": game_slug})
 
-        self.client.post(f"/api/game/{game_slug}/choose_word/", {'word': 'test word'})
+        self.client.post(f"/api/game/{game_slug}/choose_word/", {"word": "test word"})
 
         game_map = GameMap.objects.get(game_slug=game_slug)
         self.assertEqual(game_map.turns, [1, 2])
 
-        response = self.client.put(f"/api/game/{game_slug}/", {'guess': 'a'}, content_type='application/json')
+        response = self.client.put(
+            f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
+        )
         game_map.refresh_from_db()
 
         self.assertEqual(response.status_code, 200)
@@ -321,7 +331,6 @@ class GameTestCase(TestCase):
         game_map.refresh_from_db()
         # test that if the time past the next turn time, the timer updates and the turns reset
         self.client.get(f"/api/game/{game_slug}/")
-
 
         game_map.refresh_from_db()
         self.assertEqual(game_map.turns, [1, 2])

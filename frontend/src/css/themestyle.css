@@ -1,170 +1,142 @@
-
 .themepage {
-    width: 1024px;
-    height: 1440px; 
-    background: #C6EAF0;
+  width: 1024px;
+  height: 1440px;
+  background: #c6eaf0;
 }
 
-
 .rectangle1 {
-    min-width: auto;
-    height: auto;
-    flex-shrink: 0;
-    border-radius: 22px;
-    background: linear-gradient(180deg, #A8E0E3 0%, rgba(10, 146, 153, 0.00) 100%);
+  min-width: auto;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #a8e0e3 0%, rgba(10, 146, 153, 0) 100%);
 }
 
 .picktheme {
-    display: flex;
-    /*width: 345px;*/
-    height: 115px;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-    color: #003939;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: "Titan One";
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px; /* 66.667% */
-    /*margin-left: 70px;*/
-    /*margin-right: 15.06;*/
-    margin-bottom: 13.31px;
+  display: flex;
+  /*width: 345px;*/
+  height: 115px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #003939;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: "Titan One";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 66.667% */
+  /*margin-left: 70px;*/
+  /*margin-right: 15.06;*/
+  margin-bottom: 13.31px;
 }
 
 .themes {
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-    color: var(--MainMenuColors-font, #000);
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: "Tiro Telugu";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px; /* 80% */
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--MainMenuColors-font, #000);
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: "Tiro Telugu";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 80% */
 }
 
 .theme_rectangle {
-    fill: #F6F6F6;
-    stroke-width: 3px;
-    stroke: var(--MainMenuColors-font, #000);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  fill: #f6f6f6;
+  stroke-width: 3px;
+  stroke: var(--MainMenuColors-font, #000);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .play_text {
-    display: flex;
-    color: #043535;
-    font-family: "Nico Moji";
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 200;
-    line-height: 2rem; /* 45.714% */
-    margin-top: 15px;
-    margin-left: 10px;
-
-
+  display: flex;
+  color: #043535;
+  font-family: "Nico Moji";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 2rem; /* 45.714% */
+  margin-top: 15px;
+  margin-left: 10px;
 }
 
 .wrap {
-    height: 100%;
-    display: flex;
-    margin-top: 42px;
-    margin-bottom: 42px;
-    margin-right: 23px;
-    margin-left: 160px;
-    
-  }
-  
-  .play_adjust {
-    margin-left: 70px;
-    margin-top: 80px;
-    display: inline-block; 
-    transition: box-shadow 0.3s ease; 
+  height: 100%;
+  display: flex;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  margin-right: 23px;
+  margin-left: 160px;
+}
 
-    }
-  
+.play_adjust {
+  margin-left: 70px;
+  margin-top: 80px;
+  display: inline-block;
+  transition: box-shadow 0.3s ease;
+}
+
 .play_adjust:hover {
-    margin-left: 70px;
-    margin-top: 70px;
-    margin-right: 60px;
-    margin-bottom: 60px;
+  margin-left: 70px;
+  margin-top: 70px;
+  margin-right: 60px;
+  margin-bottom: 60px;
 }
 
 .scoreboard_text {
-    color: var(--MainMenuColors-font, #000);
-    font-family: VT323;
-    font-size: 2.1875rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2rem; /* 91.429% */
+  color: var(--MainMenuColors-font, #000);
+  font-family: VT323;
+  font-size: 2.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 91.429% */
 }
-.scoreboard_text.bold{
-    font-weight: 700;
+.scoreboard_text.bold {
+  font-weight: 700;
 }
 
 .scoreboard_table {
-    border: 1px solid;
+  border: 1px solid;
 }
 
 .signup_form {
-    width: 30.625rem;
-    height: 30.3125rem;
-    flex-shrink: 0;
+  width: 30.625rem;
+  height: 30.3125rem;
+  flex-shrink: 0;
 }
 
 .signup_text {
-    color: #003939;
-    font-family: "Titan One";
-    font-size: 3.125rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2rem; /* 64% */
+  color: #003939;
+  font-family: "Titan One";
+  font-size: 3.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 64% */
 }
 
 .about_logo {
-    width: 13.25rem;  /* 468px */
-    height: 6.8125rem; /* 253px */
+  width: 13.25rem; /* 468px */
+  height: 6.8125rem; /* 253px */
 }
 
 .join_font {
-    color: var(--MainMenuColors-font, #000);
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    -webkit-text-stroke-width: 1;
-    -webkit-text-stroke-color: var(--MainMenuColors-font, #000);
-    font-family: Underdog;
-    font-size: 3.125rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2rem; /* 64% */
+  color: var(--MainMenuColors-font, #000);
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: var(--MainMenuColors-font, #000);
+  font-family: Underdog;
+  font-size: 3.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 64% */
 }
-
-@keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-.spinner {
-animation: spin 4s linear infinite;
-}
-
-.arrow-spinner {
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 15px solid black;
-    animation: spin 1s linear infinite;
-  }
 
 @keyframes spin {
   from {
@@ -175,69 +147,89 @@ animation: spin 4s linear infinite;
   }
 }
 
+.spinner {
+  animation: spin 4s linear infinite;
+}
+
+.arrow-spinner {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid black;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .won-lost {
-    width: 600px;
-    border-radius: 0.6875rem;
-    border: 2px solid var(--MainMenuColors-font, #000);
-    mix-blend-mode: luminosity;
+  width: 600px;
+  border-radius: 0.6875rem;
+  border: 2px solid var(--MainMenuColors-font, #000);
+  mix-blend-mode: luminosity;
 }
-  
+
 /* Privacy Page settings*/
-.pp-text {	
-	display: inline-flex;
-    justify-content: flex-start;
-    color: #003939;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: "Titan One";
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 100;
-    line-height: 10px; /* 66.667% */
-	padding-top: 15px;
-	padding-bottom: 30px; 
-	align-items: center;
+.pp-text {
+  display: inline-flex;
+  justify-content: flex-start;
+  color: #003939;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: "Titan One";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 100;
+  line-height: 10px; /* 66.667% */
+  padding-top: 15px;
+  padding-bottom: 30px;
+  align-items: center;
 }
 
 /* Privacy Page Text */
-.ppbar { 
-	text-align: left;
-	font-size: 13px; 
-	font-family: Tiro Telugu; 
-	font-weight: 400; 
-	line-height: 32px; 
-	word-wrap: break-word;
-	padding-left: 10px;
-
+.ppbar {
+  text-align: left;
+  font-size: 13px;
+  font-family: Tiro Telugu;
+  font-weight: 400;
+  line-height: 32px;
+  word-wrap: break-word;
+  padding-left: 10px;
 }
 
 .scrollable-div {
-	justify-content: flex-start;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	height: 500px;
-	width: auto;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+  width: auto;
 }
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-width: 12px;
-height: 12px;
-scrollbar-color: transparent;
+  width: 12px;
+  height: 12px;
+  scrollbar-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
-box-shadow: inset 0 0 10px #003939;
-border-radius: 10px;
+  box-shadow: inset 0 0 10px #003939;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-border-radius: 10px;
-background: lightblue; 
-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  border-radius: 10px;
+  background: lightblue;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-border-radius: 10px;
-background: #C6EAF0; 
-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  border-radius: 10px;
+  background: #c6eaf0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }

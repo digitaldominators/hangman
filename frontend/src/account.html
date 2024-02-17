@@ -1,0 +1,50 @@
+{{#> base title='Account' namespace='account'}}
+{{#*inline "content"}}
+
+<div class="flex justify-center items-start" style="padding-top: 0px;">
+    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="login_form" style="width: auto; max-width: 2000px;">
+
+        <p class="signup_text p-4" style="font-size: 40px; margin-bottom: 4px;">Account</p>
+        <div class="mb-4 flex items-center"> 
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Username:</p>
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Placeholder-Username</p>
+        </div>
+        
+        <div class="mb-4 flex items-center">
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Password:</p>
+            <input type="password" name="password" placeholder="*****" id="password_box"
+                   class="inline-block text-[40px] w-full border-black border-4 rounded text-center">
+        </div>
+        <div class="mb-4 flex items-center">
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Renter Password:</p>
+            <input type="password" name="password" placeholder="*****" id="password_box"
+                   class="inline-block text-[40px] w-full border-black border-4 rounded text-center">
+        </div>
+        
+        <button type="submit"
+                class="inline-block text-[20px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];">
+            Update Password
+        </button>
+
+        <div class="mb-4 flex items-center">
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Highest Score:</p>
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">4000</p>
+        </div>
+        <div class="mb-4 flex items-center">
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Average Score:</p>
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">4000</p>
+        </div>
+        <div class="mb-4 flex items-center">
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">Games Played:</p>
+            <p class="font-underdog p-4 inline-block" style="font-size: 40px; margin-bottom: 4px;">40</p>
+        </div>
+
+        <button type="submit"
+                class="join-btn inline-block text-[28px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];">
+            Logout
+        </button>
+    </form>
+</div>
+
+{{/inline}}
+{{/base }}

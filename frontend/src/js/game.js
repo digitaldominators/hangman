@@ -129,16 +129,26 @@ function displayGameData(data){
                 }});
         }
     }
-    // show data that constantly updates
+    // show letters
     for (let i in data.word){
+        /*
+            [...data.word][i].toUpperCase()
+            this converts a string to a list of characters so that the emoji characters indexed returns the emoji and not its character code
+            i.e. a = '🌕'; a[0] -> '\uD83C';
+            this converts it to a = ['🌕']; a[0] -> '🌕';
+            Which allows emojis to be matched correctly and not be replaced with �
+        */
         // if the letter is different animate in the new correct letter
-        if(phrase.children[i].innerText.toUpperCase()!==data.word[i].toUpperCase()){
+        console.log(phrase.children[i].innerText.toUpperCase())
+        if(phrase.children[i].innerText.toUpperCase()!==[...data.word][i].toUpperCase()){
             let tl = gsap.timeline();
             tl.to(phrase.children[i],{y:10,opacity:0, duration: 0.5});
             tl.set(phrase.children[i],{text:data.word[i],y:-10})
             tl.to(phrase.children[i],{y:0,duration:0.7,opacity:1})
         }
     }
+
+    // make letters red or green if letters were already chosen
     for(let el of document.getElementsByClassName("letter-button active")){
         if(data.correct_guesses.includes(el.innerText.toLowerCase())){
             el.classList.remove('active');

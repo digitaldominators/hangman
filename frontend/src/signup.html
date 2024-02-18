@@ -1,40 +1,74 @@
-{{#> base title='signup' namespace='signup'}}
-{{#*inline "content"}}
+{{#> base title='signup' namespace='signup'}} {{#*inline "content"}}
 
-<div class="flex justify-center items-start h-screen" style="padding-top: 40px;">
-    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="sign_up_form" style="width: auto; max-width: 800px;">
-        <p class="signup_text p-4" style="font-size: 40px; margin-bottom: 4px;">Sign Up</p>
-        <!-- Username Field -->
-        <div class="mb-4">
-            <input autocomplete="off" required type="text" name="username" placeholder="Username" id="username_box"
-                   class="inline-block text-[35px] w-full border-black border-4 rounded text-center" autofocus style="margin-bottom: 16px;">
-            <p id="error_message" class="text-center text-red-700 mt-2"></p>
-        </div>
+<div class="flex justify-center items-start h-screen" style="padding-top: 40px">
+  <form
+    class="text-center px-8 pt-6 pb-8 font-shortStack"
+    id="sign_up_form"
+    style="width: auto; max-width: 800px"
+  >
+    <p class="signup_text p-4" style="font-size: 40px; margin-bottom: 4px">
+      Sign Up
+    </p>
+    <!-- Username Field -->
+    <div class="mb-4">
+      <input
+        autocomplete="off"
+        required
+        type="text"
+        name="username"
+        placeholder="Username"
+        id="username_box"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center"
+        autofocus
+        style="margin-bottom: 16px"
+      />
+      <p id="error_message" class="text-center text-red-700 mt-2"></p>
+    </div>
 
-        <!-- Email Field -->
-        <div class="mb-4">
-            <input autocomplete="off" required type="text" name="email" placeholder="Email" id="email_box"
-                   class="inline-block text-[35px] w-full border-black border-4 rounded text-center" autofocus style="margin-bottom: 16px;">
-            <p id="error_message" class="text-center text-red-700 mt-2"></p>
-        </div>
+    <!-- Email Field -->
+    <div class="mb-4">
+      <input
+        autocomplete="off"
+        required
+        type="text"
+        name="email"
+        placeholder="Email"
+        id="email_box"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center"
+        autofocus
+        style="margin-bottom: 16px"
+      />
+      <p id="error_message" class="text-center text-red-700 mt-2"></p>
+    </div>
 
-        <!-- Password Field -->
-        <div class="mb-4">
-            <input type="password" name="password" placeholder="Password" id="password_box"
-                   class="inline-block text-[35px] w-full border-black border-4 rounded text-center mb-4">
-        </div>
+    <!-- Password Field -->
+    <div class="mb-4">
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        id="password_box"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center mb-4"
+      />
+    </div>
 
-        <!-- Password Confirmation Field -->
-        <div class="mb-4">
-            <input type="password" name="password2" placeholder="Password (again)" id="password2_box"
-                   class="inline-block text-[35px] w-full border-black border-4 rounded text-center mb-4">
-        </div>
-        <button type="submit"
-        class="inline-block text-[60px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];">
-    Sign up
-</button>
-    </form>
+    <!-- Password Confirmation Field -->
+    <div class="mb-4">
+      <input
+        type="password"
+        name="password2"
+        placeholder="Password (again)"
+        id="password2_box"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center mb-4"
+      />
+    </div>
+    <button
+      type="submit"
+      class="inline-block text-[60px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];"
+    >
+      Sign up
+    </button>
+  </form>
 </div>
 
-{{/inline}}
-{{/base }}
+{{/inline}} {{/base }}

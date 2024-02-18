@@ -29,7 +29,8 @@ export default defineConfig({
                 "./src/wait.html",
                 "./src/youlost.html",
                 "./src/youwon.html",
-                "./src/404.html"
+                "./src/404.html",
+                "./src/account.html"
             ],
         }
     },

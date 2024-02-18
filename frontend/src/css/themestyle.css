@@ -25,7 +25,7 @@
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
-  line-height: 32px; /* 66.667% */
+  /*line-height: 32px;*/
   /*margin-left: 70px;*/
   /*margin-right: 15.06;*/
   margin-bottom: 13.31px;
@@ -232,4 +232,9 @@
   border-radius: 10px;
   background: #c6eaf0;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.account_form {
+  font-size: 20px;
+
 }

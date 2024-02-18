@@ -49,8 +49,8 @@ def game_view(request, slug=None):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('api/accounts/', include('accounts.urls')),
+    path('api/accounts/', include('django.contrib.auth.urls')),
     path('', game_view),
     path("<slug:slug>/", game_view),
 ]

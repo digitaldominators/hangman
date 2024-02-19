@@ -71,7 +71,7 @@ def logout_user(request):
 )
 def change_password(request):
     if request.user.is_authenticated:
-        user=request.user
+        user = request.user
         serializer = ChangePasswordSerializer(
             data=request.data, context={"request": request}
         )

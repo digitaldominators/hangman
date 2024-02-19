@@ -7,7 +7,6 @@ let password;
 let password2;
 let error_message;
 
-
 function change_password(e) {
   e.preventDefault();
 

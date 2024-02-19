@@ -1,33 +1,49 @@
 <nav class="p-5 pt-1 border-b-4 border-divider-color">
-    <div class="flex justify-between items-center w-full">
-        <!-- Image on the left for the dropdown menu -->
-        <div class="menu-container flex flex-col items-start">
-            <img src="/images/MenuDropDown.png" alt="Menu" class="menu-button nav-item-hover" style="cursor: pointer;">
-            <!-- Dropdown Content -->
-            <div class="dropdown-content flex" id="dropdownContent">
-                <a href="/settings" class="block text-left">Settings</a>
-                <a href="/scoreboard" class="block text-left">Scoreboard</a>
-                <a href="/login" class="block text-left">Login</a>
-                <a href="/signup" class="block text-left">Signup</a>
-            </div>
-        </div>
-        <!-- Title Container for centering -->
-        <div class="flex-grow flex justify-center">
-            <a class="font-shojumaru text-logo-color text-[35px] title-hover" href="/" style="margin: 0;">
-                Hangman
-            </a>
-        </div>
-
-        <!-- Placeholder div to balance the flex space -->
-        <div class="flex" style="width: 150px;"> <!-- Match the width of the .menu-button -->
-            <!-- You can place invisible content here or just use it as a spacer -->
-        </div>
-
-        <!-- Image on the right linked to account.html -->
-        <div class="flex">
-            <a href="/account"> <!-- Add the href attribute with the path to account.html -->
-                <img src="/images/PersonSquare.png" alt="Person" class="person-square-img nav-item-hover" style="width: 40px; height: auto; cursor: pointer;">
-            </a>
-        </div>
+  <div class="flex justify-between items-center w-full">
+    <!-- Image on the left for the dropdown menu -->
+    <div class="menu-container flex flex-col items-start">
+      <img
+        src="/images/MenuDropDown.png"
+        alt="Menu"
+        class="menu-button nav-item-hover"
+        style="cursor: pointer"
+      />
+      <!-- Dropdown Content -->
+      <div class="dropdown-content flex" id="dropdownContent">
+        <a href="/settings" class="block text-left">Settings</a>
+        <a href="/scoreboard" class="block text-left">Scoreboard</a>
+        <a href="/login" class="block text-left">Login</a>
+        <a href="/signup" class="block text-left">Signup</a>
+      </div>
     </div>
+    <!-- Title Container for centering -->
+    <div class="flex-grow flex justify-center">
+      <a
+        class="font-shojumaru text-logo-color text-[35px] title-hover"
+        href="/"
+        style="margin: 0"
+      >
+        Hangman
+      </a>
+    </div>
+
+    <!-- Placeholder div to balance the flex space -->
+    <div class="flex" style="width: 150px">
+      <!-- Match the width of the .menu-button -->
+      <!-- You can place invisible content here or just use it as a spacer -->
+    </div>
+
+    <!-- Image on the right linked to account.html -->
+    <div class="flex">
+      <a href="/account">
+        <!-- Add the href attribute with the path to account.html -->
+        <img
+          src="/images/PersonSquare.png"
+          alt="Person"
+          class="person-square-img nav-item-hover"
+          style="width: 40px; height: auto; cursor: pointer"
+        />
+      </a>
+    </div>
+  </div>
 </nav>

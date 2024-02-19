@@ -19,7 +19,7 @@ function sign_up_user(e) {
     })
     .then((response) => {
       error_message.innerText = "";
-      barba.go('/index');
+      barba.go("/index");
     })
     .catch((error) => {
       if (error.response.data.error) {

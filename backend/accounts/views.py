@@ -18,10 +18,10 @@ def user_registration_view(request):
 
         if serializer.is_valid():
 
-            data['message'] = 'Account has been created'
+            data["message"] = "Account has been created"
 
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
+            username = serializer.validated_data["username"]
+            password = serializer.validated_data["password"]
 
             user = authenticate(username=username, password=password)
             login(request, user)
@@ -98,9 +98,11 @@ def user_authenticated(request):
 
             data = {}
 
-            data['authenticated'] = True
-            data['username'] = request.user.username
+            data["authenticated"] = True
+            data["username"] = request.user.username
 
             return Response(data, status=status.HTTP_200_OK)
         else:
-            return Response({'authenticated': False}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                {"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED
+            )

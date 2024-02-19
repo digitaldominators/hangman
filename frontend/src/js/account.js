@@ -8,14 +8,12 @@ let password2;
 let error_message;
 
 function user_authenticated() {
-
   axios
-    .post('/api/accounts/user_authenticated/')
-    .then((response) => {
-    })
+    .post("/api/accounts/user_authenticated/")
+    .then((response) => {})
     .catch((error) => {
       if (error.response.status === 401) {
-        barba.go('/login');
+        barba.go("/login");
       }
     });
 }

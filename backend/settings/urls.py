@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.contrib import admin
 from django.http import Http404
@@ -30,15 +31,16 @@ from category.views import CategoryViewSet
 # from accounts.views import AccountViewSet
 
 router = routers.DefaultRouter()
-router.register(r'game', GameViewSet, basename='game')
-router.register(r'settings', DefaultSettingsViewSet, basename='settings')
-router.register(r'scoreboard', ScoreboardViewSet, basename='scoreboard')
-router.register(r'categories', CategoryViewSet, basename='categories')
+router.register(r"game", GameViewSet, basename="game")
+router.register(r"settings", DefaultSettingsViewSet, basename="settings")
+router.register(r"scoreboard", ScoreboardViewSet, basename="scoreboard")
+router.register(r"categories", CategoryViewSet, basename="categories")
 
 # router.register(r'accounts', AccountViewSet, basename='account')
 
+
 def game_view(request, slug=None):
-    template_name = 'index.html'
+    template_name = "index.html"
     if slug:
         template_name = slug + ".html"
     try:
@@ -46,14 +48,17 @@ def game_view(request, slug=None):
     except TemplateDoesNotExist:
         raise Http404()
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('api/accounts/', include('accounts.urls')),
-    path('api/accounts/', include('django.contrib.auth.urls')),
-    path('', game_view),
+    path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path("api/accounts/", include("accounts.urls")),
+    path("api/accounts/", include("django.contrib.auth.urls")),
+    path("", game_view),
     path("<slug:slug>/", game_view),
 ]
 
 if settings.DEBUG:
-    urlpatterns += [path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))]
+    urlpatterns += [
+        path("api-auth/", include("rest_framework.urls", namespace="rest_framework"))
+    ]

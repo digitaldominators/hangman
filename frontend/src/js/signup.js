@@ -1,6 +1,5 @@
 import axios from "axios";
 import barba from "@barba/core";
-import { setCookie } from "./readCookie.js";
 let form;
 let username;
 let password;
@@ -20,7 +19,7 @@ function sign_up_user(e) {
     })
     .then((response) => {
       error_message.innerText = "";
-      setCookie("username", formData.get("username"), 100);
+      barba.go('/index');
     })
     .catch((error) => {
       if (error.response.data.error) {

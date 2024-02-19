@@ -32,10 +32,12 @@ class AccountRegistrationSerializer(serializers.ModelSerializer):
 
 class ChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(
-        style={"input_type": "password"}, max_length=128, write_only=True, required=True
+        max_length=128, write_only=True, required=True
+        # style={"input_type": "password"}, max_length=128, write_only=True, required=True
     )
     password2 = serializers.CharField(
-        style={"input_type": "password"}, max_length=128, write_only=True, required=True
+        max_length=128, write_only=True, required=True
+        # style={"input_type": "password"}, max_length=128, write_only=True, required=True
     )
 
     # def validate_old_password(self, value):

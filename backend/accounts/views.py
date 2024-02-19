@@ -1,10 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
 from .serializers import AccountRegistrationSerializer, ChangePasswordSerializer
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 
 
 @api_view(
@@ -18,14 +16,16 @@ def user_registration_view(request):
 
         data = {}
 
-        if serializer.is_valid(raise_exception=True):
-            account = serializer.save()
+        if serializer.is_valid():
 
-            data["message"] = "Account has been created"
-            data["username"] = account.username
+            data['message'] = 'Account has been created'
 
-            token = Token.objects.get(user=account).key
-            data["token"] = token
+            username = serializer.validated_data['username']
+            password = serializer.validated_data['password']
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
         else:
             data = serializer.errors
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
@@ -49,7 +49,7 @@ def login_user(request):
             )
         else:
             return Response(
-                {"message": "Login attempt failed"}, status=status.HTTP_401_UNAUTHORIZED
+                {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
             )
 
 
@@ -77,14 +77,10 @@ def change_password(request):
 
         data = {}
 
-        if serializer.is_valid(raise_exception=True):
-            user = serializer.save()
-            if hasattr(user, "auth_token"):
-                user.auth_token.delete()
-            token = Token.objects.get(user=user).key
+        if serializer.is_valid():
 
             data["message"] = "Password has been changed"
-            data["token"] = token
+
         else:
             data = serializer.errors
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
@@ -99,4 +95,12 @@ def change_password(request):
 def user_authenticated(request):
     if request.method == "POST":
         if request.user.is_authenticated:
-            return Response({"username": request.user})
+
+            data = {}
+
+            data['authenticated'] = True
+            data['username'] = request.user.username
+
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response({'authenticated': False}, status=status.HTTP_401_UNAUTHORIZED)

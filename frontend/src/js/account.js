@@ -1,10 +1,25 @@
 import axios from "axios";
 import barba from "@barba/core";
+
 let password_form;
 let logout_form;
 let password;
 let password2;
 let error_message;
+
+function user_authenticated() {
+
+  axios
+    .post('/api/accounts/user_authenticated/')
+    .then((response) => {
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        barba.go('/login');
+      }
+    });
+}
+
 function change_password(e) {
   e.preventDefault();
 
@@ -53,7 +68,8 @@ export default function loadAccountPage() {
   password = document.getElementById("password_box");
   password2 = document.getElementById("password2_box");
   // error_message = document.getElementById('error_message');
-  // password.focus();
   password_form.onsubmit = change_password;
   logout_form.onsubmit = logout;
+
+  user_authenticated();
 }

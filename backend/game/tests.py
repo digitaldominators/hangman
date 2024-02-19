@@ -192,6 +192,20 @@ class GameTestCase(TestCase):
         response = self.client.post(f"/api/game/join_game/", {"game_slug": game_slug})
         self.assertEqual(response.status_code, 201)
 
+    def test_join_game_lowercase_slug(self):
+        """test that you can join a game using a lowercase slug"""
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post(
+            "/api/game/",
+            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+        )
+        game_slug = response.json()["game_slug"]
+
+        self.client.login(username="user2", password="password 2")
+        response = self.client.post(f"/api/game/join_game/", {"game_slug": game_slug.lower()})
+        self.assertEqual(response.status_code, 201)
+
+
     def test_multiplayer_game_cannot_be_joined_by_same_player(self):
         """test that the user who created the game cannot join the game as the second user"""
         self.client.login(username="user1", password="password 1")

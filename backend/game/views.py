@@ -268,7 +268,8 @@ class GameViewSet(viewsets.GenericViewSet):
         -> game_slug : join code for the game
         """
         # get join game serializer
-        serializer = self.get_serializer_class()(data=request.data, context=self.get_serializer_context())
+        serializer = self.get_serializer_class()(data={'game_slug': request.data.get('game_slug', "").upper()},
+                                                 context=self.get_serializer_context())
         # validate users input
         serializer.is_valid(raise_exception=True)
         # get game map

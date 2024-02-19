@@ -101,6 +101,4 @@ def user_authenticated(request):
 
         return Response(data, status=status.HTTP_200_OK)
     else:
-        return Response(
-            {"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED
-        )
+        return Response({"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED)

@@ -43,9 +43,7 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response(
-            {"message": "You have logged in"}, status=status.HTTP_200_OK
-        )
+        return Response({"message": "You have logged in"}, status=status.HTTP_200_OK)
     else:
         return Response(
             {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST

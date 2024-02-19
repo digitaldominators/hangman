@@ -12,7 +12,9 @@ class ScoreBoardTestCase(TestCase):
         scores = [200, 700, 800, 6_000]
         for i in range(len(scores)):
             user = User.objects.create_user(username=f"user {i}", password="password")
-            UserProfile.objects.create(user=user, score=scores[i], games_played=(i + 1) * 10)
+            UserProfile.objects.create(
+                user=user, score=scores[i], games_played=(i + 1) * 10
+            )
 
     def test_scoreboard_total_scores(self):
         """test that the total scores are displayed in the correct order"""

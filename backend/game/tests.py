@@ -114,7 +114,6 @@ class GameTestCase(TestCase):
         self.assertEqual(response.json()["incorrect_guesses"], ["z"])
         self.assertEqual(response.json()["game_score"], 0)
 
-
     def test_game_creation_single_player(self):
         """test that a single player game can be created"""
         response = self.client.post("/api/game/", {"multiplayer": False})

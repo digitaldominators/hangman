@@ -17,7 +17,7 @@ def user_registration_view(request):
         data = {}
 
         if serializer.is_valid():
-
+            serializer.save()
             data["message"] = "Account has been created"
 
             username = serializer.validated_data["username"]
@@ -70,21 +70,23 @@ def logout_user(request):
     ]
 )
 def change_password(request):
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        user=request.user
         serializer = ChangePasswordSerializer(
             data=request.data, context={"request": request}
         )
 
         data = {}
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        login(request, user)
+        data["message"] = "Password has been changed"
 
-        if serializer.is_valid():
-
-            data["message"] = "Password has been changed"
-
-        else:
-            data = serializer.errors
-            return Response(data, status=status.HTTP_400_BAD_REQUEST)
         return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response(
+            {"message": "You are not logged in"}, status=status.HTTP_401_UNAUTHORIZED
+        )
 
 
 @api_view(

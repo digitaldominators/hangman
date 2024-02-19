@@ -51,11 +51,13 @@ class ChangePasswordSerializer(serializers.Serializer):
     # return value
 
     def validate(self, data):
-        if data["password"] != data["password2"]:
+        if data.get("password") != data.get("password2"):
             raise serializers.ValidationError({"error": "Passwords do not match"})
         password_validation.validate_password(
-            data["password"], self.context["request"].user
+            data.get("password"), self.context["request"].user
         )
+        if not data.get("password"):
+            raise serializers.ValidationError({"error": "password is required"})
         return data
 
     def save(self, **kwargs):

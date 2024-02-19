@@ -7,16 +7,6 @@ let password;
 let password2;
 let error_message;
 
-function user_authenticated() {
-  axios
-    .post("/api/accounts/user_authenticated/")
-    .then((response) => {})
-    .catch((error) => {
-      if (error.response.status === 401) {
-        barba.go("/login");
-      }
-    });
-}
 
 function change_password(e) {
   e.preventDefault();
@@ -45,9 +35,6 @@ function change_password(e) {
 function logout(e) {
   e.preventDefault();
 
-  // get the form's data
-  const formData = new FormData(logout_form);
-
   axios
     .post("/api/accounts/logout_user/")
     .then((response) => {
@@ -68,6 +55,4 @@ export default function loadAccountPage() {
   // error_message = document.getElementById('error_message');
   password_form.onsubmit = change_password;
   logout_form.onsubmit = logout;
-
-  user_authenticated();
 }

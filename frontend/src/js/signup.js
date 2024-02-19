@@ -19,6 +19,9 @@ function sign_up_user(e) {
     })
     .then((response) => {
       error_message.innerText = "";
+      if (response.data.message) {
+        error_message.innerText = response.data.message;
+      }
       barba.go("/index");
     })
     .catch((error) => {

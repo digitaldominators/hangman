@@ -20,6 +20,9 @@ function change_password(e) {
     })
     .then((response) => {
       error_message.innerText = "";
+      if (response.data.message) {
+        error_message.innerText = response.data.message;
+      }
     })
     .catch((error) => {
       if (error.response.data.error) {
@@ -51,7 +54,7 @@ export default function loadAccountPage() {
   logout_form = document.getElementById("logout_form");
   password = document.getElementById("password_box");
   password2 = document.getElementById("password2_box");
-  // error_message = document.getElementById('error_message');
+  error_message = document.getElementById('error_message');
   password_form.onsubmit = change_password;
   logout_form.onsubmit = logout;
 }

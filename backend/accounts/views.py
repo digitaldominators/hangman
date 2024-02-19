@@ -1,54 +1,104 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from .serializers import AccountRegistrationSerializer
-from django.shortcuts import render, redirect
+from .serializers import AccountRegistrationSerializer, ChangePasswordSerializer
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
 
-@api_view(['POST',])
+
+@api_view(
+    [
+        "POST",
+    ]
+)
 def user_registration_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         serializer = AccountRegistrationSerializer(data=request.data)
 
         data = {}
 
         if serializer.is_valid():
-            account = serializer.save()
+            serializer.save()
+            data["message"] = "Account has been created"
 
-            data['response'] = 'Account has been created'
-            data['username'] = account.username
-            data['email'] = account.email
+            username = serializer.validated_data["username"]
+            password = serializer.validated_data["password"]
 
-            token = Token.objects.get(user=account).key
-            data['token'] = token
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
         else:
             data = serializer.errors
-        return Response(data)
-    
-@api_view(['POST',])
-def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return Response({'Message': 'You have logged in'}, status=status.HTTP_200_OK)
-            # return redirect('home')
-        else:
-            return Response({'Message': 'Login attempt failed'}, status=status.HTTP_401_UNAUTHORIZED)
-            # messages.success(request, ('Login attempt failed'))
-            # return redirect('login')
-    # else:
-        # return render(request, 'authenticate/login.html', {})
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data, status=status.HTTP_200_OK)
 
-@api_view(['POST',])
+
+@api_view(
+    [
+        "POST",
+    ]
+)
+def login_user(request):
+    username = request.data.get("username", None)
+    password = request.data.get("password", None)
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return Response({"message": "You have logged in"}, status=status.HTTP_200_OK)
+    else:
+        return Response(
+            {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+@api_view(
+    [
+        "POST",
+    ]
+)
 def logout_user(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         logout(request)
-        return Response({'Message': 'You have logged out'}, status=status.HTTP_200_OK)
-        # messages.success(request, ('You were logged out'))
-        # return redirect('home')
+        return Response({"message": "You have logged out"}, status=status.HTTP_200_OK)
+
+
+@api_view(
+    [
+        "POST",
+    ]
+)
+def change_password(request):
+    if request.user.is_authenticated:
+        user = request.user
+        serializer = ChangePasswordSerializer(
+            data=request.data, context={"request": request}
+        )
+
+        data = {}
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        login(request, user)
+        data["message"] = "Password has been changed"
+
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response(
+            {"message": "You are not logged in"}, status=status.HTTP_401_UNAUTHORIZED
+        )
+
+
+@api_view(
+    [
+        "POST",
+    ]
+)
+def user_authenticated(request):
+    if request.user.is_authenticated:
+
+        data = {}
+
+        data["authenticated"] = True
+        data["username"] = request.user.username
+
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response({"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED)

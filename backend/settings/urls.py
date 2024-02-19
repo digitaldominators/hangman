@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.http import Http404
 from django.template.exceptions import TemplateDoesNotExist
 from django.urls import path, include
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import routers
 
 from game.views import GameViewSet
@@ -43,6 +43,9 @@ def game_view(request, slug=None):
     template_name = "index.html"
     if slug:
         template_name = slug + ".html"
+        if template_name == "account.html":
+            if not request.user.is_authenticated:
+                return redirect("/login/")
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:

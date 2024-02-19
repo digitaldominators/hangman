@@ -38,19 +38,18 @@ def user_registration_view(request):
     ]
 )
 def login_user(request):
-    if request.method == "POST":
-        username = request.data.get("username", None)
-        password = request.data.get("password", None)
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return Response(
-                {"message": "You have logged in"}, status=status.HTTP_200_OK
-            )
-        else:
-            return Response(
-                {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
-            )
+    username = request.data.get("username", None)
+    password = request.data.get("password", None)
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return Response(
+            {"message": "You have logged in"}, status=status.HTTP_200_OK
+        )
+    else:
+        return Response(
+            {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 @api_view(

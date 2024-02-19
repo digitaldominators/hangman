@@ -28,24 +28,23 @@ class AccountRegistrationSerializer(serializers.ModelSerializer):
         return account
     
 class ChangePasswordSerializer(serializers.Serializer):
-    old_password = serializers.CharField(style={'input_type': 'password'}, max_length=128, write_only=True, required=True)
-    new_password = serializers.CharField(style={'input_type': 'password'}, max_length=128, write_only=True, required=True)
-    new_password2 = serializers.CharField(style={'input_type': 'password'}, max_length=128, write_only=True, required=True)
+    password = serializers.CharField(style={'input_type': 'password'}, max_length=128, write_only=True, required=True)
+    password2 = serializers.CharField(style={'input_type': 'password'}, max_length=128, write_only=True, required=True)
 
-    def validate_old_password(self, value):
-        user = self.context['request'].user
-        if not user.check_password(value):
-            raise serializers.ValidationError({'error': 'Current password is incorrect'})
-        return value
+    #def validate_old_password(self, value):
+        #user = self.context['request'].user
+        #if not user.check_password(value):
+            #raise serializers.ValidationError({'error': 'Current password is incorrect'})
+        #return value
     
     def validate(self, data):
-        if data['new_password'] != data['new_password2']:
+        if data['password'] != data['password2']:
             raise serializers.ValidationError({'error': 'Passwords do not match'})
-        password_validation.validate_password(data['new_password'], self.context['request'].user)
+        password_validation.validate_password(data['password'], self.context['request'].user)
         return data
     
     def save(self, **kwargs):
-        password = self.validated_data['new_password']
+        password = self.validated_data['password']
         user = self.context['request'].user
         user.set_password(password)
         user.save()

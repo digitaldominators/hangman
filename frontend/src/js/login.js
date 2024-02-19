@@ -16,7 +16,6 @@ function login_user(e){
         password:formData.get("password")
     }).then(response=>{
         error_message.innerText = "";
-        setCookie('username',formData.get('username'),100);
         barba.go('/index');
     }).catch(error=>{
         if(error.response.data.message){

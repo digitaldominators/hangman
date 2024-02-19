@@ -15,6 +15,7 @@ import loadWaitPage from "./wait.js";
 import loadGamePage from "./game.js";
 import loadSignupPage from "./signup.js";
 import loadLoginPage from "./login.js";
+import loadAccountPage from "./account.js";
 // import './preload_images';
 gsap.registerPlugin(TextPlugin);
 gsap.globalTimeline.timeScale(2);
@@ -140,6 +141,13 @@ barba.init({
             namespace: 'login',
             afterEnter({next}) {
                 loadLoginPage();
+                document.getElementById('main-container').classList.remove('wide-container');
+            }
+        },
+        {
+            namespace: 'account',
+            afterEnter({next}) {
+                loadAccountPage();
                 document.getElementById('main-container').classList.remove('wide-container');
             }
         }

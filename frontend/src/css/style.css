@@ -338,7 +338,7 @@ Other small pages
 }
 
 .button-section {
-    @apply w-[500px] bg-background-color rounded-[60px] p-4 flex flex-row gap-6;
+    @apply md:w-[500px] bg-background-color rounded md:rounded-[60px] p-4 flex md:flex-row flex-col gap-6;
 }
 
 .button-section.disabled {

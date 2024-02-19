@@ -2,49 +2,45 @@
 {{#*inline "content"}}
 
 <h1 class="font-titanOne text-center m-auto text-4xl md:text-5xl lg:text-6xl">SETTINGS</h1>
-<table class="table-auto mx-auto border-separate border-spacing-x-12 w-full md:w-[80%] lg:w-[60%]">
-    <tbody>
-    <tr>
-        <td class="settings-label">Sounds</td>
-        <td>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span></span>
-            </label>
-        </td>
-    </tr>
-    <tr>
-        <td class="settings-label">Level</td>
-        <td>
-            <div class="button-section disabled flex justify-around">
-                <button data-level="1" class="level-button text-lg md:text-xl lg:text-2xl">Easy</button>
-                <button data-level="2" class="level-button text-lg md:text-xl lg:text-2xl">Medium</button>
-                <button data-level="3" class="level-button text-lg md:text-xl lg:text-2xl">Hard</button>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td class="settings-label">Timer</td>
-        <td>
-            <div class="flex items-center my-4">
-                <button id="timer_up" class="block rounded-full bg-black text-background-color m-2 w-10 h-10 md:w-12 md:h-12 scale-150 hover:bg-white hover:text-black duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6">
-                        <path fill-rule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <div class="px-5 md:px-10 text-xl md:text-2xl lg:text-3xl bg-background-color rounded-full text-timer-select font-wallpoet w-[50%] md:w-[200px]">
-                    <span id="timer_amount">0</span><span class="font-unlock text-base" id="sec_letters">sec</span>
-                </div>
-                <button id="timer_down" class="block rounded-full bg-black text-background-color m-2 w-10 h-10 md:w-12 md:h-12 scale-150 hover:bg-white hover:text-black duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6">
-                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="grid grid-cols-1 md:grid-cols-3 mx-auto w-[100vw] md:w-full px-10">
+
+    <div class="settings-label">Sounds</div>
+    <div class="md:col-span-2 flex justify-center md:justify-start md:place-items-center">
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span></span>
+        </label>
+    </div>
+
+
+
+    <div class="settings-label">Level</div>
+    <div class="md:col-span-2">
+        <div class="button-section disabled justify-around">
+            <button data-level="1" class="level-button text-lg md:text-xl lg:text-2xl">Easy</button>
+            <button data-level="2" class="level-button text-lg md:text-xl lg:text-2xl">Medium</button>
+            <button data-level="3" class="level-button text-lg md:text-xl lg:text-2xl">Hard</button>
+        </div>
+    </div>
+    <div class="settings-label">
+        Timer
+    </div>
+    <div class="md:col-span-2 flex items-center my-4 mx-auto md:mx-0">
+        <button id="timer_up" class="block rounded-full bg-black text-background-color m-2 p-1 w-10 h-10 scale-150 hover:bg-white hover:text-black duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-7 h-7">
+                <path fill-rule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+        <div class="px-5 md:px-10 py-[20px] text-2xl lg:text-3xl bg-background-color rounded-full text-timer-select font-wallpoet w-[200px]">
+            <span id="timer_amount">0</span><span class="font-unlock text-base" id="sec_letters">sec</span>
+        </div>
+        <button id="timer_down" class="block rounded-full bg-black text-background-color m-2 p-1 w-10 h-10 scale-150 hover:bg-white hover:text-black duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-7 h-7">
+                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+</div>
 <br>
 <br>
 <div class="flex justify-center">

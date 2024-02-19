@@ -94,16 +94,15 @@ def change_password(request):
     ]
 )
 def user_authenticated(request):
-    if request.method == "POST":
-        if request.user.is_authenticated:
+    if request.user.is_authenticated:
 
-            data = {}
+        data = {}
 
-            data["authenticated"] = True
-            data["username"] = request.user.username
+        data["authenticated"] = True
+        data["username"] = request.user.username
 
-            return Response(data, status=status.HTTP_200_OK)
-        else:
-            return Response(
-                {"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED
-            )
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response(
+            {"authenticated": False}, status=status.HTTP_401_UNAUTHORIZED
+        )

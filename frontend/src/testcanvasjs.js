@@ -2,10 +2,14 @@ import baseimage from '/images/HangmanStage.png';
 // stick figure images
 import stickHeadImage from '/images/lives/stick/stickHead.svg';
 import stickTorsoImage from '/images/lives/stick/stickTorso.svg';
-import stickLeftArmImage from '/images/lives/stick/stickLArm.svg';
-import stickRightArmImage from '/images/lives/stick/stickRArm.svg';
-import stickLeftLegImage from '/images/lives/stick/stickLLeg.svg';
-import stickRightLegImage from '/images/lives/stick/stickRLeg.svg';
+import stickLeftArmImage from '/images/lives/stick/stickLArm2.PNG';
+import stickLeftHandImage from '/images/lives/stick/stickLHand.PNG';
+import stickRightArmImage from '/images/lives/stick/stickRArm2.PNG';
+import stickRightHandImage from '/images/lives/stick/stickRHand.PNG';
+import stickLeftLegImage from '/images/lives/stick/stickLLeg2.PNG';
+import stickLeftFootImage from '/images/lives/stick/stickLFoot.PNG';
+import stickRightLegImage from '/images/lives/stick/stickRLeg2.PNG';
+import stickRightFootImage from '/images/lives/stick/stickRFoot.PNG';
 // skele images
 import skeleHeadImage from '/images/lives/skele/skeleHead.png';
 import skeleTorsoImage from '/images/lives/skele/skeleTorso.png';

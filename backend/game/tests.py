@@ -74,12 +74,6 @@ class DefaultSettingsTestCase(TestCase):
 
 
 class GameTestCase(TestCase):
-    """
-    Test list one game
-    Test guess a letter
-    Test update timer
-    """
-
     @classmethod
     def setUpTestData(cls):
         """Create a user and a category with phrases for testing"""
@@ -89,6 +83,36 @@ class GameTestCase(TestCase):
         cat1phrases = ["phrase 1", "phrase 2", "phrase 3"]
         for phrase in cat1phrases:
             Phrase.objects.create(phrase=phrase, category=cls.cat1)
+
+    def test_guess_letter_correct(self):
+        """test if a letter can be guessed correctly"""
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post("/api/game/", {"multiplayer": False})
+        game_slug = response.json()["game_slug"]
+
+        # a is in each of the phrases
+        response = self.client.put(
+            f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["correct_guesses"], ["a"])
+        self.assertEqual(response.json()["incorrect_guesses"], [])
+        self.assertEqual(response.json()["game_score"], 100)
+
+    def test_guess_letter_incorrect(self):
+        """test if a letter can be guessed incorrectly"""
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post("/api/game/", {"multiplayer": False})
+        game_slug = response.json()["game_slug"]
+
+        # z is not in any of the phrases
+        response = self.client.put(
+            f"/api/game/{game_slug}/", {"guess": "z"}, content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["correct_guesses"], [])
+        self.assertEqual(response.json()["incorrect_guesses"], ["z"])
+        self.assertEqual(response.json()["game_score"], 0)
 
     def test_game_creation_single_player(self):
         """test that a single player game can be created"""
@@ -190,6 +214,21 @@ class GameTestCase(TestCase):
 
         self.client.login(username="user2", password="password 2")
         response = self.client.post(f"/api/game/join_game/", {"game_slug": game_slug})
+        self.assertEqual(response.status_code, 201)
+
+    def test_join_game_lowercase_slug(self):
+        """test that you can join a game using a lowercase slug"""
+        self.client.login(username="user1", password="password 1")
+        response = self.client.post(
+            "/api/game/",
+            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+        )
+        game_slug = response.json()["game_slug"]
+
+        self.client.login(username="user2", password="password 2")
+        response = self.client.post(
+            f"/api/game/join_game/", {"game_slug": game_slug.lower()}
+        )
         self.assertEqual(response.status_code, 201)
 
     def test_multiplayer_game_cannot_be_joined_by_same_player(self):

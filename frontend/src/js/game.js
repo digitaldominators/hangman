@@ -2,9 +2,9 @@ import moment from "moment";
 import axios from "axios";
 import readCookie from "./readCookie.js";
 import barba from "@barba/core";
-import {gsap} from "gsap";
-import confetti from './confetti.js'
-import {draw_next_body_part, refreshCanvas} from "./stageCanvas.js";
+import { gsap } from "gsap";
+import confetti from "./confetti.js";
+import { draw_next_body_part, refreshCanvas } from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -34,51 +34,55 @@ function set_turn_time() {
   }
 }
 
-async function loadGameData(){
-    let response = await axios.get(`/api/game/${readCookie('current_game')}/`);
-    // initial game setup
-    // set the category name
-    category.innerText = response.data.category;
-    // set the scores
-    active_player_score.innerText = response.data.game_score;
-    if (second_player_score && response.data.other_player_game_score){
-        second_player_score.innerText = response.data.other_player_game_score;
-    }
+async function loadGameData() {
+  let response = await axios.get(`/api/game/${readCookie("current_game")}/`);
+  // initial game setup
+  // set the category name
+  category.innerText = response.data.category;
+  // set the scores
+  active_player_score.innerText = response.data.game_score;
+  if (second_player_score && response.data.other_player_game_score) {
+    second_player_score.innerText = response.data.other_player_game_score;
+  }
 
-    // set the players names
-    if(response.data.player_name){
-        active_player_name.innerText = response.data.player_name;
-    }
-    if (response.data.other_player_name && second_player_name){
-        second_player_name.innerText = response.data.other_player_name;
-    }
+  // set the players names
+  if (response.data.player_name) {
+    active_player_name.innerText = response.data.player_name;
+  }
+  if (response.data.other_player_name && second_player_name) {
+    second_player_name.innerText = response.data.other_player_name;
+  }
 
-    // set the timer
-    next_turn_time = response.data.next_turn_time;
+  // set the timer
+  next_turn_time = response.data.next_turn_time;
 
-    // add the letters
-    let letters = "";
-    for (let letter of response.data.word){
-        letters += `<li class="letter guessed">${letter}</li>`
-    }
+  // add the letters
+  let letters = "";
+  for (let letter of response.data.word) {
+    letters += `<li class="letter guessed">${letter}</li>`;
+  }
 
-    //set state of letters that were pressed before reload (if correct or incorrect letters
-    for (const letter of document.getElementsByClassName('letter-button')){
-        if (response.data.correct_guesses.includes(letter.innerText.toLowerCase())){
-            letter.classList.add('correct');
-        }else if(response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())){
-            letter.classList.add("incorrect");
-            draw_next_body_part();
-        }
-    }
-    phrase.innerHTML = letters;
-
-    if(response.data.is_multiplayer){
-        setTimeout(()=>{
-            getSecondPlayerData();
-        },1000)
+  //set state of letters that were pressed before reload (if correct or incorrect letters
+  for (const letter of document.getElementsByClassName("letter-button")) {
+    if (
+      response.data.correct_guesses.includes(letter.innerText.toLowerCase())
+    ) {
+      letter.classList.add("correct");
+    } else if (
+      response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())
+    ) {
+      letter.classList.add("incorrect");
+      draw_next_body_part();
     }
   }
+  phrase.innerHTML = letters;
+
+  if (response.data.is_multiplayer) {
+    setTimeout(() => {
+      getSecondPlayerData();
+    }, 1000);
+  }
+}
 
 function getSecondPlayerData() {
   axios
@@ -119,23 +123,23 @@ function displayGameData(data) {
   next_turn_time = data.next_turn_time;
 
   if (document.getElementById("turn")) {
-      if (data.status === "not your turn") {
-          document
-              .getElementsByClassName("letter-buttons")[0]
-              .classList.add("cursor-not-allowed");
-          if (data.other_player_name) {
-              document.getElementById(
-                  "turn"
-              ).innerText = `${data.other_player_name}'s Turn`;
-          } else {
-              document.getElementById("turn").innerText = "Other Player's Turn";
-          }
+    if (data.status === "not your turn") {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.add("cursor-not-allowed");
+      if (data.other_player_name) {
+        document.getElementById(
+          "turn"
+        ).innerText = `${data.other_player_name}'s Turn`;
       } else {
-          document
-              .getElementsByClassName("letter-buttons")[0]
-              .classList.remove("cursor-not-allowed");
-          document.getElementById("turn").innerText = "Your Turn";
+        document.getElementById("turn").innerText = "Other Player's Turn";
       }
+    } else {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.remove("cursor-not-allowed");
+      document.getElementById("turn").innerText = "Your Turn";
+    }
   }
 
   if (second_player_score) {
@@ -150,7 +154,6 @@ function displayGameData(data) {
           second_player_score.innerHTML = Cont.val;
         },
       });
-
     }
   }
   // show letters
@@ -183,7 +186,7 @@ function displayGameData(data) {
     } else if (data.incorrect_guesses.includes(el.innerText.toLowerCase())) {
       el.classList.remove("active");
       el.classList.add("incorrect");
-        draw_next_body_part();
+      draw_next_body_part();
     }
   }
 
@@ -200,7 +203,6 @@ function displayGameData(data) {
     }, 1000);
   }
 }
-
 
 function guessLetter(e) {
   document
@@ -236,10 +238,9 @@ export default function loadGamePage() {
   second_player_score = document.getElementById("second_player_score");
   second_player_name = document.getElementById("second_player_name");
 
-  for (let item of document.getElementsByClassName('letter-button')){
-      item.onclick = guessLetter;
+  for (let item of document.getElementsByClassName("letter-button")) {
+    item.onclick = guessLetter;
   }
   refreshCanvas(0);
-  setInterval(set_turn_time,500);
-
+  setInterval(set_turn_time, 500);
 }

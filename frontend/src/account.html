@@ -1,50 +1,85 @@
-{{#> base title='Account' namespace='account'}}
-{{#*inline "content"}}
+{{#> base title='Account' namespace='account'}} {{#*inline "content"}}
 
-<div class="flex justify-center items-start" style="padding-top: 0px;">
-    <form class="text-center px-8 pt-6 pb-8 font-shortStack" id="login_form" style="width: auto; max-width: 2000px;">
+<div class="flex justify-center items-start" style="padding-top: 0px">
+  <form
+    class="text-center px-8 pt-6 pb-8 font-shortStack"
+    id="password_form"
+    style="width: auto; max-width: 2000px"
+  >
+    <p
+      id="error_message"
+      class="text-center text-red-700 relative top-[-25px] pointer-events-none"
+      style="font-size: 30px"
+    ></p>
 
-        <p class="signup_text p-4 account_form" >Account</p>
-        <div class="mb-4 flex items-center"> 
-            <p class="font-underdog p-4 inline-block account_form" >Username:</p>
-            <p class="font-underdog p-4 inline-block account_form" >Placeholder-Username</p>
-        </div>
+    <p class="signup_text p-4 account_form">Account</p>
+    <div class="mb-4 flex items-center">
+      <p class="font-underdog p-4 inline-block account_form">Username:</p>
+      <p class="font-underdog p-4 inline-block account_form">
+        Placeholder-Username
+      </p>
+    </div>
 
-        <p class="font-underdog p-4 inline-block account_form" >Enter New Password:</p>
-        <div class="mb-4 flex items-center">
-            <input type="password" name="password" placeholder="*****" id="password_box"
-                   class="inline-block text-[40px] w-full border-black border-4 rounded text-center">
-        </div>
-        <p class="font-underdog p-4 inline-block account_form" >Renter New Password:</p>
-        <div class="mb-4 flex items-center">
-            <input type="password" name="password" placeholder="*****" id="password_box"
-                   class="inline-block text-[40px] w-full border-black border-4 rounded text-center">
-        </div>
-        
-        <button type="submit"
-                class="inline-block text-[20px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];">
-            Update Password
-        </button>
+    <p class="font-underdog p-4 inline-block account_form">
+      Enter New Password:
+    </p>
+    <div class="mb-4 flex items-center">
+      <input
+        type="password"
+        name="password"
+        placeholder="*****"
+        id="password_box"
+        class="inline-block text-[40px] w-full border-black border-4 rounded text-center"
+      />
+    </div>
+    <p class="font-underdog p-4 inline-block account_form">
+      Renter New Password:
+    </p>
+    <div class="mb-4 flex items-center">
+      <input
+        type="password"
+        name="password2"
+        placeholder="*****"
+        id="password2_box"
+        class="inline-block text-[40px] w-full border-black border-4 rounded text-center"
+      />
+    </div>
 
-        <div class="mb-4 flex items-center">
-            <p class="font-underdog p-4 inline-block account_form" >Highest Score:</p>
-            <p class="font-underdog p-4 inline-block account_form" >4000</p>
-        </div>
-        <div class="mb-4 flex items-center">
-            <p class="font-underdog p-4 inline-block account_form" >Average Score:</p>
-            <p class="font-underdog p-4 inline-block account_form" >4000</p>
-        </div>
-        <div class="mb-4 flex items-center">
-            <p class="font-underdog p-4 inline-block account_form" >Games Played:</p>
-            <p class="font-underdog p-4 inline-block account_form" >40</p>
-        </div>
-
-        <button type="submit"
-                class="join-btn inline-block text-[28px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];">
-            Logout
-        </button>
-    </form>
+    <button
+      type="submit"
+      class="inline-block text-[20px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];"
+    >
+      Update Password
+    </button>
+  </form>
 </div>
 
-{{/inline}}
-{{/base }}
+<div class="flex justify-center items-start" style="padding-top: 0px">
+  <form
+    class="text-center px-8 pt-6 pb-8 font-shortStack"
+    id="logout_form"
+    style="width: auto; max-width: 2000px"
+  >
+    <div class="mb-4 flex items-center">
+      <p class="font-underdog p-4 inline-block account_form">Highest Score:</p>
+      <p class="font-underdog p-4 inline-block account_form">4000</p>
+    </div>
+    <div class="mb-4 flex items-center">
+      <p class="font-underdog p-4 inline-block account_form">Average Score:</p>
+      <p class="font-underdog p-4 inline-block account_form">4000</p>
+    </div>
+    <div class="mb-4 flex items-center">
+      <p class="font-underdog p-4 inline-block account_form">Games Played:</p>
+      <p class="font-underdog p-4 inline-block account_form">40</p>
+    </div>
+
+    <button
+      type="submit"
+      class="join-btn inline-block text-[28px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];"
+    >
+      Logout
+    </button>
+  </form>
+</div>
+
+{{/inline}} {{/base }}

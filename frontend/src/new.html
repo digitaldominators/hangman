@@ -1,41 +1,58 @@
-{{#> base title='New Game' namespace='new'}}
-{{#*inline "content"}}
+{{#> base title='New Game' namespace='new'}} {{#*inline "content"}}
 <form id="new_game_form">
-    <table class="table-fixed mx-auto w-2/3 border-separate">
-        <tbody>
-        <tr>
-            <td class="settings-label">Multiplayer</td>
-            <td>&nbsp;&nbsp;
-                <label class="switch">
-                    <input type="checkbox" name="multiplayer">
-                    <span></span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td class="settings-label">Category</td>
-            <td>
-               <input type="text" id="category_text" autocomplete="off" name="category_text" class="w-full p-1 text-[35px] hidden">
-                <select name="category" id="category_dropdown" class="w-full p-1 text-[35px]">
-                    <option value="">----------</option>
-                </select>
-            </td>
-        </tr>
-        <tr id="new_game_word" class="duration-300" style="opacity: 0; pointer-events: none">
-            <td class="settings-label">Word</td>
-            <td>
-                <input autocomplete="off" type="text" name="word" class="w-full p-1 text-[35px]">
-                <span class="mt-2 text-red-500" id="word_error_message"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <br>
-    <div class="flex justify-center items-center">
-        <button type="submit" id="start_game_button" class="home-game-button big block m-auto">
-            Start Game
-        </button>
+  <div class="grid grid-cols-2 mx-auto w-full md:w-2/3">
+    <div class="settings-label col-span-2 md:col-span-1">Multiplayer</div>
+    <div
+      class="col-span-2 md:col-span-1 flex justify-center md:justify-start md:place-items-center"
+    >
+      <label class="switch">
+        <input type="checkbox" name="multiplayer" />
+        <span></span>
+      </label>
     </div>
+    <div class="settings-label col-span-2 md:col-span-1">Category</div>
+    <div class="col-span-2 md:col-span-1">
+      <input
+        type="text"
+        id="category_text"
+        autocomplete="off"
+        name="category_text"
+        class="w-full p-1 text-[35px] hidden"
+      />
+      <select
+        name="category"
+        id="category_dropdown"
+        class="w-full p-1 text-[35px]"
+      >
+        <option value="">----------</option>
+      </select>
+    </div>
+    <div
+      id="new_game_word"
+      class="duration-300 grid grid-cols-1 md:grid-cols-2 col-span-2"
+      style="opacity: 0; pointer-events: none"
+    >
+      <div class="settings-label">Word</div>
+      <div>
+        <input
+          autocomplete="off"
+          type="text"
+          name="word"
+          class="w-full p-1 text-[35px]"
+        />
+        <span class="mt-2 text-red-500" id="word_error_message"></span>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="flex justify-center items-center">
+    <button
+      type="submit"
+      id="start_game_button"
+      class="home-game-button big block m-auto"
+    >
+      Start Game
+    </button>
+  </div>
 </form>
-{{/inline}}
-{{/base }}
+{{/inline}} {{/base }}

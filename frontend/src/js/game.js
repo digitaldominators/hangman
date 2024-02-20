@@ -15,24 +15,23 @@ let second_player_name;
 let timer;
 let next_turn_time = null;
 
-
-function set_turn_time(){
-    if (next_turn_time){
-        timer.classList.remove('opacity-0');
-        const next_time = moment(next_turn_time)
-        const duration = moment.duration(next_time.diff(moment()))
-        if(duration>0){
-            if(duration.seconds()>10){
-                timer.innerText=duration.minutes()+":"+duration.seconds()
-            }else{
-                timer.innerText=duration.minutes()+":0"+duration.seconds()
-            }
-        }else{
-            timer.innerText="0:00";
-        }
-    }else{
-        timer.classList.add('opacity-0');
+function set_turn_time() {
+  if (next_turn_time) {
+    timer.classList.remove("opacity-0");
+    const next_time = moment(next_turn_time);
+    const duration = moment.duration(next_time.diff(moment()));
+    if (duration > 0) {
+      if (duration.seconds() > 10) {
+        timer.innerText = duration.minutes() + ":" + duration.seconds();
+      } else {
+        timer.innerText = duration.minutes() + ":0" + duration.seconds();
+      }
+    } else {
+      timer.innerText = "0:00";
     }
+  } else {
+    timer.classList.add("opacity-0");
+  }
 }
 
 async function loadGameData(){
@@ -79,67 +78,73 @@ async function loadGameData(){
             getSecondPlayerData();
         },1000)
     }
+  }
+  phrase.innerHTML = letters;
+
+  if (response.data.is_multiplayer) {
+    setTimeout(() => {
+      getSecondPlayerData();
+    }, 1000);
+  }
 }
 
-function getSecondPlayerData(){
-    axios.get(`/api/game/${readCookie('current_game')}/`).then(response=>{
-        displayGameData(response.data);
-        if(response.data.status==='you won' || response.data.status=== 'you lost'){
-            return
-        }
-        setTimeout(()=>{
-            getSecondPlayerData();
-        },1000)
-    }).catch(()=>{
-        setTimeout(()=>{
-            getSecondPlayerData();
-        },1000)
+function getSecondPlayerData() {
+  axios
+    .get(`/api/game/${readCookie("current_game")}/`)
+    .then((response) => {
+      displayGameData(response.data);
+      if (
+        response.data.status === "you won" ||
+        response.data.status === "you lost"
+      ) {
+        return;
+      }
+      setTimeout(() => {
+        getSecondPlayerData();
+      }, 1000);
     })
+    .catch(() => {
+      setTimeout(() => {
+        getSecondPlayerData();
+      }, 1000);
+    });
 }
-function displayGameData(data){
-    if(active_player_score.innerText!== data.game_score){
-        let Cont={val:active_player_score.innerText} , NewVal = data.game_score;
+function displayGameData(data) {
+  if (active_player_score.innerText !== data.game_score) {
+    let Cont = { val: active_player_score.innerText },
+      NewVal = data.game_score;
 
-        gsap.to(Cont,2,{val:NewVal,roundProps:"val",onUpdate:function(){
-                active_player_score.innerHTML=Cont.val
-        }});
+    gsap.to(Cont, 2, {
+      val: NewVal,
+      roundProps: "val",
+      onUpdate: function () {
+        active_player_score.innerHTML = Cont.val;
+      },
+    });
+  }
+
+  // set the timer
+  next_turn_time = data.next_turn_time;
+
+  if (document.getElementById("turn")) {
+    if (data.status === "not your turn") {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.add("cursor-not-allowed");
+      if (data.other_player_name) {
+        document.getElementById(
+          "turn"
+        ).innerText = `${data.other_player_name}'s Turn`;
+      } else {
+        document.getElementById("turn").innerText = "Other Player's Turn";
+      }
+    } else {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.remove("cursor-not-allowed");
+      document.getElementById("turn").innerText = "Your Turn";
     }
 
-    // set the timer
-    next_turn_time = data.next_turn_time;
-
-    if (document.getElementById('turn')){
-        if (data.status==='not your turn'){
-            document.getElementsByClassName('letter-buttons')[0].classList.add('cursor-not-allowed')
-            if(data.other_player_name){
-                document.getElementById('turn').innerText=`${data.other_player_name}'s Turn`
-            }else{
-                document.getElementById('turn').innerText="Other Player's Turn"
-            }
-        }else{
-            document.getElementsByClassName('letter-buttons')[0].classList.remove('cursor-not-allowed')
-            document.getElementById('turn').innerText="Your Turn";
-        }
-    }
-    if (second_player_score){
-        if(second_player_score.innerText!== data.other_player_game_score){
-            let Cont={val:second_player_score.innerText} , NewVal = data.other_player_game_score;
-
-            gsap.to(Cont,2,{val:NewVal,roundProps:"val",onUpdate:function(){
-                    second_player_score.innerHTML=Cont.val
-                }});
-        }
-    }
-    // show data that constantly updates
-    for (let i in data.word){
-        // if the letter is different animate in the new correct letter
-        if(phrase.children[i].innerText.toUpperCase()!==data.word[i].toUpperCase()){
-            let tl = gsap.timeline();
-            tl.to(phrase.children[i],{y:10,opacity:0, duration: 0.5});
-            tl.set(phrase.children[i],{text:data.word[i],y:-10})
-            tl.to(phrase.children[i],{y:0,duration:0.7,opacity:1})
-        }
-    }
     for(let el of document.getElementsByClassName("letter-button active")){
         if(data.correct_guesses.includes(el.innerText.toLowerCase())){
             el.classList.remove('active');
@@ -149,48 +154,108 @@ function displayGameData(data){
             el.classList.add("incorrect");
             draw_next_body_part();
         }
-    }
 
-    if(data.status==='you won'){
-        confetti()
-        setTimeout(()=>{
-            barba.go('/youwon')
-        },1000)
-    }
+  }
+  if (second_player_score) {
+    if (second_player_score.innerText !== data.other_player_game_score) {
+      let Cont = { val: second_player_score.innerText },
+        NewVal = data.other_player_game_score;
 
-    if(data.status==='you lost'){
-        setTimeout(()=>{
-            barba.go('/youlost')
-        },1000)
+      gsap.to(Cont, 2, {
+        val: NewVal,
+        roundProps: "val",
+        onUpdate: function () {
+          second_player_score.innerHTML = Cont.val;
+        },
+      });
+
     }
+  }
+  // show letters
+  for (let i in data.word) {
+    /*
+            [...data.word][i].toUpperCase()
+            this converts a string to a list of characters so that the emoji characters indexed returns the emoji and not its character code
+            i.e. a = '🌕'; a[0] -> '\uD83C';
+            this converts it to a = ['🌕']; a[0] -> '🌕';
+            Which allows emojis to be matched correctly and not be replaced with �
+        */
+    // if the letter is different animate in the new correct letter
+    console.log(phrase.children[i].innerText.toUpperCase());
+    if (
+      phrase.children[i].innerText.toUpperCase() !==
+      [...data.word][i].toUpperCase()
+    ) {
+      let tl = gsap.timeline();
+      tl.to(phrase.children[i], { y: 10, opacity: 0, duration: 0.5 });
+      tl.set(phrase.children[i], { text: data.word[i], y: -10 });
+      tl.to(phrase.children[i], { y: 0, duration: 0.7, opacity: 1 });
+    }
+  }
+
+  // make letters red or green if letters were already chosen
+  for (let el of document.getElementsByClassName("letter-button active")) {
+    if (data.correct_guesses.includes(el.innerText.toLowerCase())) {
+      el.classList.remove("active");
+      el.classList.add("correct");
+    } else if (data.incorrect_guesses.includes(el.innerText.toLowerCase())) {
+      el.classList.remove("active");
+      el.classList.add("incorrect");
+    }
+  }
+
+  if (data.status === "you won") {
+    confetti();
+    setTimeout(() => {
+      barba.go("/youwon");
+    }, 1000);
+  }
+
+  if (data.status === "you lost") {
+    setTimeout(() => {
+      barba.go("/youlost");
+    }, 1000);
+  }
 }
 
-function guessLetter(e){
-    document.getElementsByClassName('letter-buttons')[0].classList.add('cursor-wait');
-    e.target.classList.add('active');
-    let value = e.target.innerText;
-    axios.put(`/api/game/${readCookie('current_game')}/`,{guess:value}).then(response=>{
-        document.getElementsByClassName('letter-buttons')[0].classList.remove('cursor-wait');
-        displayGameData(response.data);
-    })
+function guessLetter(e) {
+  document
+    .getElementsByClassName("letter-buttons")[0]
+    .classList.add("cursor-wait");
+  e.target.classList.add("active");
+  let value = e.target.innerText;
+  axios
+    .put(`/api/game/${readCookie("current_game")}/`, { guess: value })
+    .then((response) => {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.remove("cursor-wait");
+      displayGameData(response.data);
+    });
 }
 
+export default function loadGamePage() {
+  category = document.getElementById("category");
+  timer = document.getElementById("timer");
 
-export default function loadGamePage(){
-    category = document.getElementById("category");
-    timer = document.getElementById('timer');
+  loadGameData();
 
-    loadGameData();
+  phrase = document.getElementById("phrase");
+  active_player_name = document.getElementById("active_player_name");
+  active_player_score = document.getElementById("active_player_score");
+  second_player_score = document.getElementById("second_player_score");
+  second_player_name = document.getElementById("second_player_name");
 
-    phrase = document.getElementById("phrase");
-    active_player_name = document.getElementById("active_player_name");
-    active_player_score = document.getElementById("active_player_score");
-    second_player_score = document.getElementById("second_player_score");
-    second_player_name = document.getElementById("second_player_name");
+  phrase = document.getElementById("phrase");
+  active_player_name = document.getElementById("active_player_name");
+  active_player_score = document.getElementById("active_player_score");
+  second_player_score = document.getElementById("second_player_score");
+  second_player_name = document.getElementById("second_player_name");
 
-    for (let item of document.getElementsByClassName('letter-button')){
-        item.onclick = guessLetter;
-    }
-    refreshCanvas(0);
-    setInterval(set_turn_time,500);
+  for (let item of document.getElementsByClassName('letter-button')){
+      item.onclick = guessLetter;
+  }
+  refreshCanvas(0);
+  setInterval(set_turn_time,500);
+
 }

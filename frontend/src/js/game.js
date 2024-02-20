@@ -79,14 +79,6 @@ async function loadGameData(){
         },1000)
     }
   }
-  phrase.innerHTML = letters;
-
-  if (response.data.is_multiplayer) {
-    setTimeout(() => {
-      getSecondPlayerData();
-    }, 1000);
-  }
-}
 
 function getSecondPlayerData() {
   axios
@@ -127,35 +119,25 @@ function displayGameData(data) {
   next_turn_time = data.next_turn_time;
 
   if (document.getElementById("turn")) {
-    if (data.status === "not your turn") {
-      document
-        .getElementsByClassName("letter-buttons")[0]
-        .classList.add("cursor-not-allowed");
-      if (data.other_player_name) {
-        document.getElementById(
-          "turn"
-        ).innerText = `${data.other_player_name}'s Turn`;
+      if (data.status === "not your turn") {
+          document
+              .getElementsByClassName("letter-buttons")[0]
+              .classList.add("cursor-not-allowed");
+          if (data.other_player_name) {
+              document.getElementById(
+                  "turn"
+              ).innerText = `${data.other_player_name}'s Turn`;
+          } else {
+              document.getElementById("turn").innerText = "Other Player's Turn";
+          }
       } else {
-        document.getElementById("turn").innerText = "Other Player's Turn";
+          document
+              .getElementsByClassName("letter-buttons")[0]
+              .classList.remove("cursor-not-allowed");
+          document.getElementById("turn").innerText = "Your Turn";
       }
-    } else {
-      document
-        .getElementsByClassName("letter-buttons")[0]
-        .classList.remove("cursor-not-allowed");
-      document.getElementById("turn").innerText = "Your Turn";
-    }
-
-    for(let el of document.getElementsByClassName("letter-button active")){
-        if(data.correct_guesses.includes(el.innerText.toLowerCase())){
-            el.classList.remove('active');
-            el.classList.add("correct");
-        }else if(data.incorrect_guesses.includes(el.innerText.toLowerCase())){
-            el.classList.remove('active');
-            el.classList.add("incorrect");
-            draw_next_body_part();
-        }
-
   }
+
   if (second_player_score) {
     if (second_player_score.innerText !== data.other_player_game_score) {
       let Cont = { val: second_player_score.innerText },
@@ -201,6 +183,7 @@ function displayGameData(data) {
     } else if (data.incorrect_guesses.includes(el.innerText.toLowerCase())) {
       el.classList.remove("active");
       el.classList.add("incorrect");
+        draw_next_body_part();
     }
   }
 
@@ -217,6 +200,7 @@ function displayGameData(data) {
     }, 1000);
   }
 }
+
 
 function guessLetter(e) {
   document

@@ -29,13 +29,17 @@ const bodyParts = {
         {name: 'head', x: 325, y: 150, width: 70, height: 70, url: stickHeadImage},
         {name: 'torso', x: 355, y: 210, width: 13, height: 100, url: stickTorsoImage},
         {name: 'left_arm', x: 290, y: 218, width: 76, height: 105, url: stickLeftArmImage},
-		{name: 'left_hand', x: 290, y: 218, width: 76, height: 105, url: stickLeftHandImage},
+	{name: 'left_hand', x: 290, y: 218, width: 76, height: 105, url: stickLeftHandImage},
         {name: 'right_arm', x: 350, y: 212, width: 69, height: 105, url: stickRightArmImage},
-		{name: 'right_hand', x: 350, y: 212, width: 69, height: 105, url: stickRightHandImage},
+	{name: 'right_hand', x: 350, y: 212, width: 69, height: 105, url: stickRightHandImage},
         {name: 'left_leg', x: 290, y: 300, width: 97, height: 142, url: stickLeftLegImage},
-		{name: 'left_foot', x: 290, y: 300, width: 97, height: 142, url: stickLeftFootImage},
+	{name: 'left_foot', x: 290, y: 300, width: 97, height: 142, url: stickLeftFootImage},
         {name: 'right_leg', x: 345, y: 290, width: 87, height: 146, url: stickRightLegImage},
-		{name: 'right_foot', x: 345, y: 290, width: 87, height: 146, url: stickRightFootImage}
+	{name: 'right_foot', x: 345, y: 290, width: 87, height: 146, url: stickRightFootImage},
+	{name: 'hat', x: 345, y: 290, width: 87, height: 146, url: HatImage},
+	{name: 'glasses', x: 345, y: 290, width: 87, height: 146, url: GlassesImage},
+	{name: 'left_shoe', x: 345, y: 290, width: 87, height: 146, url: LeftShoeImage},
+	{name: 'right_shoe', x: 345, y: 290, width: 87, height: 146, url: RightShoeImage}    
     ],
     skele: [
         {name: 'head', x: 310, y: 140, width: 100, height: 100, url: skeleHeadImage},
@@ -43,14 +47,12 @@ const bodyParts = {
         {name: 'left_arm', x: 270, y: 223, width: 76, height: 105, url: skeleLeftArmImage},
         {name: 'right_arm', x: 380, y: 223, width: 76, height: 105, url: skeleRightArmImage},
         {name: 'left_leg', x: 270, y: 310, width: 97, height: 142, url: skeleLeftLegImage},
-        {name: 'right_leg', x: 335, y: 302, width: 105, height: 160, url: skeleRightLegImage}
-    ],
-    items: [
-		{name: 'hat', x: 345, y: 290, width: 87, height: 146, url: HatImage},
-		{name: 'glasses', x: 345, y: 290, width: 87, height: 146, url: GlassesImage},
-		{name: 'left_shoe', x: 345, y: 290, width: 87, height: 146, url: LeftShoeImage},
-		{name: 'right_shoe', x: 345, y: 290, width: 87, height: 146, url: RightShoeImage}
-	]
+        {name: 'right_leg', x: 335, y: 302, width: 105, height: 160, url: skeleRightLegImage},
+	{name: 'hat', x: 345, y: 290, width: 87, height: 146, url: HatImage},
+	{name: 'glasses', x: 345, y: 290, width: 87, height: 146, url: GlassesImage},
+	{name: 'left_shoe', x: 345, y: 290, width: 87, height: 146, url: LeftShoeImage},
+	{name: 'right_shoe', x: 345, y: 290, width: 87, height: 146, url: RightShoeImage}
+    ]
 };
 
 let bodyType = 'skele';

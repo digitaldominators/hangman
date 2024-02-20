@@ -2,14 +2,14 @@ import baseimage from "/images/HangmanStage.png";
 // stick figure images
 import stickHeadImage from "/images/lives/stick/stickHead.svg";
 import stickTorsoImage from "/images/lives/stick/stickTorso.svg";
-import stickLeftArmImage from "/images/lives/stick/stickLArm2.PNG";
-import stickLeftHandImage from "/images/lives/stick/stickLHand.PNG";
-import stickRightArmImage from "/images/lives/stick/stickRArm2.PNG";
-import stickRightHandImage from "/images/lives/stick/stickRHand.PNG";
-import stickLeftLegImage from "/images/lives/stick/stickLLeg2.PNG";
-import stickLeftFootImage from "/images/lives/stick/stickLFoot.PNG";
-import stickRightLegImage from "/images/lives/stick/stickRLeg2.PNG";
-import stickRightFootImage from "/images/lives/stick/stickRFoot.PNG";
+import stickLeftArmImage from "/images/lives/stick/stickLArm2.svg";
+import stickLeftHandImage from "/images/lives/stick/stickLHand.svg";
+import stickRightArmImage from "/images/lives/stick/stickRArm2.svg";
+import stickRightHandImage from "/images/lives/stick/stickRHand.svg";
+import stickLeftLegImage from "/images/lives/stick/stickLLeg2.svg";
+import stickLeftFootImage from "/images/lives/stick/stickLFoot.svg";
+import stickRightLegImage from "/images/lives/stick/stickRLeg2.svg";
+import stickRightFootImage from "/images/lives/stick/stickRFoot.svg";
 // skele images
 import skeleHeadImage from "/images/lives/skele/skeleHead.png";
 import skeleTorsoImage from "/images/lives/skele/skeleTorso.png";
@@ -18,10 +18,10 @@ import skeleRightArmImage from "/images/lives/skele/skele_RArm.png";
 import skeleLeftLegImage from "/images/lives/skele/skele_LLeg.png";
 import skeleRightLegImage from "/images/lives/skele/skele_RLeg.png";
 // items
-import GlassesImage from "/images/lives/items/glasses.PNG";
-import HatImage from "/images/lives/items/hat.PNG";
-import LeftShoeImage from "/images/lives/items/LShoe.PNG";
-import RightShoeImage from "/images/lives/items/RShoe.PNG";
+import GlassesImage from "/images/lives/items/glasses.svg";
+import HatImage from "/images/lives/items/hat.svg";
+import LeftShoeImage from "/images/lives/items/LShoe.svg";
+import RightShoeImage from "/images/lives/items/RShoe.svg";
 
 // constants
 const canvas = document.getElementById("myCanvas");

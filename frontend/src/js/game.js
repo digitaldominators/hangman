@@ -33,7 +33,6 @@ function set_turn_time(){
         timer.classList.add('opacity-0');
     }
 }
-setInterval(set_turn_time,500)
 
 async function loadGameData(){
     let response = await axios.get(`/api/game/${readCookie('current_game')}/`);
@@ -189,4 +188,6 @@ export default function loadGamePage(){
     for (let item of document.getElementsByClassName('letter-button')){
         item.onclick = guessLetter;
     }
+
+    setInterval(set_turn_time,500);
 }

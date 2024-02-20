@@ -1,23 +1,19 @@
 import baseimage from '/images/HangmanStage.png';
-// stick figure images
-import stickHeadImage from '/images/lives/stick/stickHead.svg';
-import stickTorsoImage from '/images/lives/stick/stickTorso.svg';
-import stickLeftArmImage from '/images/lives/stick/stickLArm.svg';
-import stickRightArmImage from '/images/lives/stick/stickRArm.svg';
-import stickLeftLegImage from '/images/lives/stick/stickLLeg.svg';
-import stickRightLegImage from '/images/lives/stick/stickRLeg.svg';
-// skele images
-import skeleHeadImage from '/images/lives/skele/skeleHead.png';
-import skeleTorsoImage from '/images/lives/skele/skeleTorso.png';
-import skeleLeftArmImage from '/images/lives/skele/skele_LArm.png';
-import skeleRightArmImage from '/images/lives/skele/skele_RArm.png';
-import skeleLeftLegImage from '/images/lives/skele/skele_LLeg.png';
-import skeleRightLegImage from '/images/lives/skele/skele_RLeg.png';
+import stickHeadImage from "../images/lives/stick/stickHead.svg";
+import stickTorsoImage from "../images/lives/stick/stickTorso.svg";
+import stickLeftArmImage from "../images/lives/stick/stickLArm.svg";
+import stickRightArmImage from "../images/lives/stick/stickRArm.svg";
+import stickLeftLegImage from "../images/lives/stick/stickLLeg.svg";
+import stickRightLegImage from "../images/lives/stick/stickRLeg.svg";
+import skeleHeadImage from "../images/lives/skele/skeleHead.png";
+import skeleTorsoImage from "../images/lives/skele/skeleTorso.png";
+import skeleLeftArmImage from "../images/lives/skele/skele_LArm.png";
+import skeleRightArmImage from "../images/lives/skele/skele_RArm.png";
+import skeleLeftLegImage from "../images/lives/skele/skele_LLeg.png";
+import skeleRightLegImage from "../images/lives/skele/skele_RLeg.png";
 
-// constants
-const canvas = document.getElementById('myCanvas');
-const slider = document.getElementById('slider');
-const context = canvas.getContext('2d');
+let canvas = document.getElementById('gameStage');
+let context = canvas.getContext('2d');
 
 const bodyParts = {
     stick: [
@@ -38,11 +34,25 @@ const bodyParts = {
     ]
 };
 
-let bodyType = 'skele';
-
+const bodyType = 'skele';
+let ratio = Math.min(canvas.width / 700, canvas.height / 700);
 let body_part_index = 0
 
-const ratio = Math.min(canvas.width / 700, canvas.height / 700);
+export function refreshCanvas(currentpercent){
+    canvas = document.getElementById('gameStage');
+    context = canvas.getContext('2d');
+    canvas.style.width ='100%';
+    canvas.style.height='100%';
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    ratio = Math.min(canvas.width / 700, canvas.height / 700);
+    body_part_index = 0;
+    make_base();
+    if (currentpercent) {
+        draw_percent_of_body(currentpercent);
+    }
+    draw_percent_of_body(0);
+}
 function draw_image(url, x, y, width, height){
     let image = new Image();
     image.src = url;
@@ -51,46 +61,24 @@ function draw_image(url, x, y, width, height){
     }
 }
 
-function make_base()
-{
+function make_base() {
     body_part_index = 0;
     context.clearRect(0, 0, canvas.width, canvas.height);
     draw_image(baseimage, 0, 0, 700, 700);
 }
-function draw_next_body_part(){
+export function draw_next_body_part(){
     const part = bodyParts[bodyType][body_part_index]
     draw_image(part.url, part.x, part.y, part.width, part.height)
     body_part_index += 1
 }
 
-function draw_percent_of_body(percent){
+export function draw_percent_of_body(percent){
     const number_of_parts = bodyParts[bodyType].length;
     const parts_to_draw = Math.min(Math.round((percent/100) * number_of_parts),100);
-    if (parts_to_draw <= body_part_index){
+    if (parts_to_draw < body_part_index){
         make_base();
     }
     for (let i = body_part_index; i < parts_to_draw; i++){
         draw_next_body_part();
     }
-}
-
-function switchBodyType(bType){
-    bodyType = bType;
-    make_base();
-    draw_percent_of_body(slider.value)
-}
-make_base();
-draw_percent_of_body(100);
-document.getElementById('next_part').addEventListener('click', draw_next_body_part)
-slider.addEventListener('change', function(){
-    draw_percent_of_body(this.value)
-})
-
-for(let key in bodyParts){
-    let button = document.createElement("button")
-    button.innerText = key
-    button.addEventListener('click', function(){
-        switchBodyType(key)
-    })
-    document.body.appendChild(button)
 }

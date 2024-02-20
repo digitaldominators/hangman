@@ -4,6 +4,7 @@ import readCookie from "./readCookie.js";
 import barba from "@barba/core";
 import {gsap} from "gsap";
 import confetti from './confetti.js'
+import {draw_next_body_part, refreshCanvas} from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -65,9 +66,10 @@ async function loadGameData(){
     //set state of letters that were pressed before reload (if correct or incorrect letters
     for (const letter of document.getElementsByClassName('letter-button')){
         if (response.data.correct_guesses.includes(letter.innerText.toLowerCase())){
-            letter.classList.add('correct')
+            letter.classList.add('correct');
         }else if(response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())){
-            letter.classList.add("incorrect")
+            letter.classList.add("incorrect");
+            draw_next_body_part();
         }
     }
     phrase.innerHTML = letters;
@@ -145,6 +147,7 @@ function displayGameData(data){
         }else if(data.incorrect_guesses.includes(el.innerText.toLowerCase())){
             el.classList.remove('active');
             el.classList.add("incorrect");
+            draw_next_body_part();
         }
     }
 
@@ -188,6 +191,6 @@ export default function loadGamePage(){
     for (let item of document.getElementsByClassName('letter-button')){
         item.onclick = guessLetter;
     }
-
+    refreshCanvas(0);
     setInterval(set_turn_time,500);
 }

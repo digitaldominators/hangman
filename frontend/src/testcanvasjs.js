@@ -28,7 +28,7 @@ const canvas = document.getElementById("myCanvas");
 const slider = document.getElementById("slider");
 const context = canvas.getContext("2d");
 
-// prettier-ignore-start
+// prettier-ignore
 const bodyParts = {
   stick: [
     {name: "head", x: 325, y: 150, width: 70, height: 70, url: stickHeadImage},
@@ -59,7 +59,6 @@ const bodyParts = {
     {name: "right_shoe", x: 345, y: 290, width: 87, height: 146, url: RightShoeImage},
   ],
 };
-// prettier-ignore-end
 
 let bodyType = "skele";
 

@@ -2,7 +2,8 @@ from django.apps import AppConfig
 
 
 class ScoreboardConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'scoreboard'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "scoreboard"
+
     def ready(self):
         from . import signals  # fmt: skip

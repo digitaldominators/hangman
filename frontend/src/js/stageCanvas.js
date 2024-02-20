@@ -12,8 +12,9 @@ import skeleRightArmImage from "../images/lives/skele/skele_RArm.png";
 import skeleLeftLegImage from "../images/lives/skele/skele_LLeg.png";
 import skeleRightLegImage from "../images/lives/skele/skele_RLeg.png";
 
-let canvas = document.getElementById('gameStage');
-let context = canvas.getContext('2d');
+let canvas;
+let context;
+let ratio;
 
 const bodyParts = {
     stick: [
@@ -35,8 +36,7 @@ const bodyParts = {
 };
 
 const bodyType = 'skele';
-let ratio = Math.min(canvas.width / 700, canvas.height / 700);
-let body_part_index = 0
+let body_part_index = 0;
 
 export function refreshCanvas(currentpercent){
     canvas = document.getElementById('gameStage');

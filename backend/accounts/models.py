@@ -25,12 +25,17 @@ class UserProfile(models.Model):
     avg_score = models.GeneratedField(expression=F('score') / NullIf(F("games_played"),0),
                                       output_field=models.PositiveIntegerField(), db_persist=True)
 
+    # set to true if user wants to remove scores from leaderboard
+    private = models.BooleanField(default=False)
+
     class Meta:
         indexes = [
             models.Index(fields=['score']),
             models.Index(fields=['avg_score'])
         ]
 
+    def __str__(self):
+        return self.user.username
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

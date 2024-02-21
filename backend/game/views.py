@@ -43,7 +43,7 @@ def set_default_game_setting(request, setting, value):
 def get_user_default_settings(request):
     if request.user.is_authenticated:
         game_settings, created = UserProfile.objects.get_or_create(user=request.user)
-        return {"level": game_settings.level, "timer": game_settings.timer}
+        return {"level": game_settings.level, "timer": game_settings.timer,'private':game_settings.private}
     else:
         return {
             "level": request.session.get(f"level", 1),
@@ -81,7 +81,18 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
             set_default_game_setting(
                 request, "timer", serializer.validated_data.get("timer")
             )
-
+        if serializer.validated_data.get("private") is not None:
+            if request.user.is_authenticated:
+                game_settings, created = UserProfile.objects.get_or_create(
+                    user=request.user
+                )
+                game_settings.private = serializer.validated_data.get("private")
+                game_settings.save()
+            else:
+                return Response(
+                    {"message": "You must be logged in to change scoreboard privacy"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
         # display the settings
         return self.list(request)
 

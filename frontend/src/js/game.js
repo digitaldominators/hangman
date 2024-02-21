@@ -1,6 +1,6 @@
 import moment from "moment";
 import axios from "axios";
-import readCookie from "./readCookie.js";
+import readCookie, { setCookie } from "./readCookie.js";
 import barba from "@barba/core";
 import { gsap } from "gsap";
 import confetti from "./confetti.js";
@@ -193,12 +193,16 @@ function displayGameData(data) {
   if (data.status === "you won") {
     confetti();
     setTimeout(() => {
+      // delete cookie
+      setCookie("current_game", "", -1);
       barba.go("/youwon");
     }, 1000);
   }
 
   if (data.status === "you lost") {
     setTimeout(() => {
+      // delete cookie
+      setCookie("current_game", "", -1);
       barba.go("/youlost");
     }, 1000);
   }

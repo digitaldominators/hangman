@@ -141,6 +141,17 @@ barba.init({
     {
       namespace: "game",
       afterEnter(next) {
+        if (readCookie("current_game") === null) {
+          barba.go("/");
+        } else {
+          axios
+            .get(`/api/game/${readCookie("current_game")}/`)
+            .then((response) => {
+              if (response.data.is_multiplayer) {
+                barba.go("/multigame");
+              }
+            });
+        }
         loadGamePage();
         document
           .getElementById("main-container")
@@ -150,6 +161,17 @@ barba.init({
     {
       namespace: "multigame",
       afterEnter(next) {
+        if (readCookie("current_game") === null) {
+          barba.go("/");
+        } else {
+          axios
+            .get(`/api/game/${readCookie("current_game")}/`)
+            .then((response) => {
+              if (!response.data.is_multiplayer) {
+                barba.go("/game");
+              }
+            });
+        }
         loadGamePage();
         document
           .getElementById("main-container")

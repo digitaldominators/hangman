@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework import viewsets, status
@@ -201,6 +202,19 @@ class GameViewSet(viewsets.GenericViewSet):
         -> "category_text": string, //only for multiplayer - string of category
         """
 
+        # show human-readable error messages for creating a multiplayer game
+        if request.data.get("multiplayer") == True:
+            if request.data.get("category_text", "") == "":
+                return Response(
+                    {"message": "Category cannot be blank"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            elif request.data.get("word", "") == "":
+                return Response(
+                    {"message": "Word cannot be blank"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
         # get the current users default settings
         default_settings = get_user_default_settings(request)
         # save request data to data
@@ -307,10 +321,16 @@ class GameViewSet(viewsets.GenericViewSet):
         )
         # validate users input
         serializer.is_valid(raise_exception=True)
-        # get game map
-        game_map = get_object_or_404(
-            GameMap, game_slug=serializer.validated_data["game_slug"]
-        )
+
+        try:
+            # get game map
+            game_map = get_object_or_404(
+                GameMap, game_slug=serializer.validated_data["game_slug"]
+            )
+        except Http404:
+            return Response(
+                {"message": "Invalid join code"}, status=status.HTTP_404_NOT_FOUND
+            )
 
         # don't let user join if game is already full
         if game_map.full:

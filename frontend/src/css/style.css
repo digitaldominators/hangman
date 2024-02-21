@@ -2,6 +2,7 @@
 @import "join.css";
 @import "game.css";
 @import "themestyle.css";
+@import "toastify-js/src/toastify.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

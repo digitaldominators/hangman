@@ -1,6 +1,5 @@
 import axios from "axios";
 import barba from "@barba/core";
-
 let password_form;
 let logout_form;
 let password;
@@ -13,40 +12,18 @@ function change_password(e) {
   // get the form's data
   const formData = new FormData(password_form);
 
-  axios
-    .post("/api/accounts/change_password/", {
-      password: formData.get("password"),
-      password2: formData.get("password2"),
-    })
-    .then((response) => {
-      error_message.innerText = "";
-      if (response.data.message) {
-        error_message.innerText = response.data.message;
-      }
-    })
-    .catch((error) => {
-      if (error.response.data.error) {
-        error_message.innerText = error.response.data.error;
-      }
-      if (error.response.data.message) {
-        error_message.innerText = error.response.data.message;
-      }
-    });
+  axios.post("/api/accounts/change_password/", {
+    password: formData.get("password"),
+    password2: formData.get("password2"),
+  });
 }
 
 function logout(e) {
   e.preventDefault();
 
-  axios
-    .post("/api/accounts/logout_user/")
-    .then((response) => {
-      barba.go("/index");
-    })
-    .catch((error) => {
-      if (error.response.data.message) {
-        error_message.innerText = error.response.data.message;
-      }
-    });
+  axios.post("/api/accounts/logout_user/").then((response) => {
+    barba.go("/");
+  });
 }
 
 export default function loadAccountPage() {

@@ -30,7 +30,7 @@ function set_turn_time() {
       timer.innerText = "0:00";
     }
   } else {
-    timer.classList.add("opacity-0");
+    timer?.classList.add("opacity-0");
   }
 }
 
@@ -166,7 +166,6 @@ function displayGameData(data) {
             Which allows emojis to be matched correctly and not be replaced with �
         */
     // if the letter is different animate in the new correct letter
-    console.log(phrase.children[i].innerText.toUpperCase());
     if (
       phrase.children[i].innerText.toUpperCase() !==
       [...data.word][i].toUpperCase()

@@ -75,11 +75,11 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
 
         if serializer.validated_data.get("level"):
             set_default_game_setting(
-                    request, "level", serializer.validated_data.get("level")
+                request, "level", serializer.validated_data.get("level")
             )
         if serializer.validated_data.get("timer") is not None:
             set_default_game_setting(
-                    request, "timer", serializer.validated_data.get("timer")
+                request, "timer", serializer.validated_data.get("timer")
             )
 
         # display the settings
@@ -159,9 +159,9 @@ class GameViewSet(viewsets.GenericViewSet):
         """
         if request.user.is_authenticated:
             return get_object_or_404(
-                    GameMap,
-                    Q(player_1=request.user) | Q(player_2=request.user),
-                    game_slug=slug,
+                GameMap,
+                Q(player_1=request.user) | Q(player_2=request.user),
+                game_slug=slug,
             )
         else:
             game_number = request.session.get(f"game__{slug}")
@@ -206,13 +206,13 @@ class GameViewSet(viewsets.GenericViewSet):
         if request.data.get("multiplayer") == True:
             if request.data.get("category_text", "") == "":
                 return Response(
-                        {"message": "Category cannot be blank"},
-                        status=status.HTTP_400_BAD_REQUEST,
+                    {"message": "Category cannot be blank"},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
             elif request.data.get("word", "") == "":
                 return Response(
-                        {"message": "Word cannot be blank"},
-                        status=status.HTTP_400_BAD_REQUEST,
+                    {"message": "Word cannot be blank"},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
 
         # get the current users default settings
@@ -232,7 +232,7 @@ class GameViewSet(viewsets.GenericViewSet):
             data["timer"] = default_settings["timer"]
         # initialize serializer object
         serializer = self.get_serializer_class()(
-                data=data, context=self.get_serializer_context()
+            data=data, context=self.get_serializer_context()
         )
         # check if the data is valid, if not raise a 400 error
         serializer.is_valid(raise_exception=True)
@@ -242,57 +242,57 @@ class GameViewSet(viewsets.GenericViewSet):
             # if the user is logged in then set player_1 to be logged in user otherwise add the user to the session.
             if request.user.is_authenticated:
                 game_map = GameMap.objects.create(
-                        player_1=request.user,
-                        is_multiplayer=True,
-                        level=serializer.validated_data.get("level"),
-                        timer=serializer.validated_data.get("timer"),
-                        category=serializer.validated_data.get("category_text"),
-                        turns=[1, 2],
+                    player_1=request.user,
+                    is_multiplayer=True,
+                    level=serializer.validated_data.get("level"),
+                    timer=serializer.validated_data.get("timer"),
+                    category=serializer.validated_data.get("category_text"),
+                    turns=[1, 2],
                 )
             else:
                 game_map = GameMap.objects.create(
-                        is_multiplayer=True,
-                        level=serializer.validated_data.get("level"),
-                        timer=serializer.validated_data.get("timer"),
-                        category=serializer.validated_data.get("category_text"),
-                        turns=[1, 2],
+                    is_multiplayer=True,
+                    level=serializer.validated_data.get("level"),
+                    timer=serializer.validated_data.get("timer"),
+                    category=serializer.validated_data.get("category_text"),
+                    turns=[1, 2],
                 )
                 request.session[f"game__{game_map.game_slug}"] = 1
 
             # create the game for the second player with the word that the first player chose.
             second_player_game = Game.objects.create(
-                    word=serializer.validated_data.get("word").lower()
+                word=serializer.validated_data.get("word").lower()
             )
             game_map.game_2 = second_player_game
             game_map.save()
         else:  # single player game
             # create the game with a randomly generated word.
             category, phrase = get_word_and_category(
-                    category=serializer.validated_data.get("category")
+                category=serializer.validated_data.get("category")
             )
             game = Game.objects.create(word=phrase)
 
             # if the user is logged in then set player_1 to be logged in user otherwise add the user to the session.
             if request.user.is_authenticated:
                 game_map = GameMap.objects.create(
-                        player_1=request.user,
-                        game_1=game,
-                        is_multiplayer=False,
-                        full=True,
-                        level=serializer.validated_data.get("level"),
-                        timer=serializer.validated_data.get("timer"),
-                        category=category,
-                        turns=[1],
+                    player_1=request.user,
+                    game_1=game,
+                    is_multiplayer=False,
+                    full=True,
+                    level=serializer.validated_data.get("level"),
+                    timer=serializer.validated_data.get("timer"),
+                    category=category,
+                    turns=[1],
                 )
             else:
                 game_map = GameMap.objects.create(
-                        game_1=game,
-                        is_multiplayer=False,
-                        full=True,
-                        level=serializer.validated_data.get("level"),
-                        timer=serializer.validated_data.get("timer"),
-                        category=category,
-                        turns=[1],
+                    game_1=game,
+                    is_multiplayer=False,
+                    full=True,
+                    level=serializer.validated_data.get("level"),
+                    timer=serializer.validated_data.get("timer"),
+                    category=category,
+                    turns=[1],
                 )
                 request.session[f"game__{game_map.game_slug}"] = 1
         # set the next turn time
@@ -300,7 +300,7 @@ class GameViewSet(viewsets.GenericViewSet):
         game_map.save()
         # create a serializer for the game.
         game_serializer = GameSerializer(
-                game_map, context=self.get_serializer_context()
+            game_map, context=self.get_serializer_context()
         )
         # add if user is logged in or not
         data = game_serializer.data
@@ -316,8 +316,8 @@ class GameViewSet(viewsets.GenericViewSet):
         """
         # get join game serializer
         serializer = self.get_serializer_class()(
-                data={"game_slug": request.data.get("game_slug", "").upper()},
-                context=self.get_serializer_context(),
+            data={"game_slug": request.data.get("game_slug", "").upper()},
+            context=self.get_serializer_context(),
         )
         # validate users input
         serializer.is_valid(raise_exception=True)
@@ -325,17 +325,17 @@ class GameViewSet(viewsets.GenericViewSet):
         try:
             # get game map
             game_map = get_object_or_404(
-                    GameMap, game_slug=serializer.validated_data["game_slug"]
+                GameMap, game_slug=serializer.validated_data["game_slug"]
             )
         except Http404:
             return Response(
-                    {"message": "Invalid join code"}, status=status.HTTP_404_NOT_FOUND
+                {"message": "Invalid join code"}, status=status.HTTP_404_NOT_FOUND
             )
 
         # don't let user join if game is already full
         if game_map.full:
             return Response(
-                    {"message": "Game full"}, status=status.HTTP_401_UNAUTHORIZED
+                {"message": "Game full"}, status=status.HTTP_401_UNAUTHORIZED
             )
 
         # set player to the current user. If user is not logged in set it with a session object
@@ -343,8 +343,8 @@ class GameViewSet(viewsets.GenericViewSet):
             # don't let the user be both player 1 and 2
             if game_map.player_1 == request.user:
                 return Response(
-                        {"message": "You are already playing this game."},
-                        status=status.HTTP_400_BAD_REQUEST,
+                    {"message": "You are already playing this game."},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
             # set player 2 to be current user
             game_map.player_2 = request.user
@@ -352,8 +352,8 @@ class GameViewSet(viewsets.GenericViewSet):
             # don't let the user be both player 1 and 2
             if request.session.get(f"game__{game_map.game_slug}"):
                 return Response(
-                        {"message": "You are already playing this game."},
-                        status=status.HTTP_400_BAD_REQUEST,
+                    {"message": "You are already playing this game."},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
             # set player 2 to be current user
             request.session[f"game__{game_map.game_slug}"] = 2
@@ -364,7 +364,7 @@ class GameViewSet(viewsets.GenericViewSet):
 
         # return the game object data
         game_serializer = GameSerializer(
-                game_map, context=self.get_serializer_context()
+            game_map, context=self.get_serializer_context()
         )
         # add if user is logged in or not
         data = game_serializer.data
@@ -378,7 +378,7 @@ class GameViewSet(viewsets.GenericViewSet):
         -> word: string, the word/ phrase to for player 1 to guess
         """
         serializer = self.get_serializer_class()(
-                data=request.data, context=self.get_serializer_context()
+            data=request.data, context=self.get_serializer_context()
         )
         serializer.is_valid(raise_exception=True)
         game_map = self.get_game_map(request, game_slug)
@@ -386,7 +386,7 @@ class GameViewSet(viewsets.GenericViewSet):
         # if game 1 already exists then the word was already set by player 2
         if game_map.game_1:
             return Response(
-                    {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
+                {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
             )
 
         # at this point only player 1 or 2 can reach this point. If the user is not player 2 or the game is not 2
@@ -394,12 +394,12 @@ class GameViewSet(viewsets.GenericViewSet):
         if request.user.is_authenticated:
             if game_map.player_2 != request.user:
                 return Response(
-                        {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
+                    {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
                 )
         else:
             if request.session[f"game__{game_map.game_slug}"] != 2:
                 return Response(
-                        {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
+                    {"message": "Word already set"}, status=status.HTTP_401_UNAUTHORIZED
                 )
 
         # create game for player 1 with word set to players word
@@ -410,7 +410,7 @@ class GameViewSet(viewsets.GenericViewSet):
         game_map.save()
 
         game_serializer = GameSerializer(
-                game_map, context=self.get_serializer_context()
+            game_map, context=self.get_serializer_context()
         )
         # add if user is logged in or not
         data = game_serializer.data
@@ -422,10 +422,10 @@ class GameViewSet(viewsets.GenericViewSet):
         """
         if request.user.is_authenticated:
             games = GameMap.objects.filter(
-                    Q(player_1=request.user) | Q(player_2=request.user)
+                Q(player_1=request.user) | Q(player_2=request.user)
             )[:50]
             serializer = GameSerializer(
-                    games, many=True, context=self.get_serializer_context()
+                games, many=True, context=self.get_serializer_context()
             )
             return Response(serializer.data)
         else:
@@ -439,7 +439,7 @@ class GameViewSet(viewsets.GenericViewSet):
             # get game objects from database
             games = GameMap.objects.filter(game_slug__in=games)[:50]
             serializer = GameSerializer(
-                    games, many=True, context=self.get_serializer_context()
+                games, many=True, context=self.get_serializer_context()
             )
             return Response(serializer.data)
 
@@ -462,7 +462,7 @@ class GameViewSet(viewsets.GenericViewSet):
                 game_map.next_turn_time = None
                 game_map.save()
         return Response(
-                GameSerializer(game_map, context=self.get_serializer_context()).data
+            GameSerializer(game_map, context=self.get_serializer_context()).data
         )
 
     def update(self, request, game_slug):
@@ -471,7 +471,7 @@ class GameViewSet(viewsets.GenericViewSet):
         """
         game_map = self.get_game_map(request, game_slug)
         serializer = self.get_serializer_class()(
-                game_map, data=request.data, context=self.get_serializer_context()
+            game_map, data=request.data, context=self.get_serializer_context()
         )
         if serializer.is_valid():
             serializer.save()

@@ -12,21 +12,18 @@ function change_password(e) {
   // get the form's data
   const formData = new FormData(password_form);
 
-  axios
-    .post("/api/accounts/change_password/", {
-      password: formData.get("password"),
-      password2: formData.get("password2"),
-    })
+  axios.post("/api/accounts/change_password/", {
+    password: formData.get("password"),
+    password2: formData.get("password2"),
+  });
 }
 
 function logout(e) {
   e.preventDefault();
 
-  axios
-    .post("/api/accounts/logout_user/")
-    .then((response) => {
-      barba.go("/");
-    })
+  axios.post("/api/accounts/logout_user/").then((response) => {
+    barba.go("/");
+  });
 }
 
 export default function loadAccountPage() {

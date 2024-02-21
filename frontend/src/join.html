@@ -1,14 +1,27 @@
-{{#> base title="Join Game" namespace='join'}}
-{{#*inline "content"}}
+{{#> base title="Join Game" namespace='join'}} {{#*inline "content"}}
 
 <div class="relative">
-  <h1 class="font-underdog text-[40px] font-extrabold">Enter code to join game</h1>
+  <h1 class="font-underdog text-[40px] font-extrabold">
+    Enter code to join game
+  </h1>
   <form id="join_game_form">
-      <input autocomplete="off" required type="text" name="join_code" maxlength="8" placeholder="Code" id="code_box" autofocus>
-      <button type="submit" class="join-btn">JOIN</button>
+    <input
+      autocomplete="off"
+      required
+      type="text"
+      name="join_code"
+      maxlength="8"
+      placeholder="Code"
+      id="code_box"
+      autofocus
+    />
+    <button type="submit" class="join-btn">JOIN</button>
   </form>
-  <img src="images/join_game_stage.png" class="joingamestage-img" alt="game stage"/>
+  <img
+    src="images/join_game_stage.png"
+    class="joingamestage-img"
+    alt="game stage"
+  />
 </div>
 
-{{/inline}}
-{{/base}}
+{{/inline}} {{/base}}

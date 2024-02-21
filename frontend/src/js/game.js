@@ -4,6 +4,7 @@ import readCookie from "./readCookie.js";
 import barba from "@barba/core";
 import { gsap } from "gsap";
 import confetti from "./confetti.js";
+import { draw_next_body_part, refreshCanvas } from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -32,7 +33,6 @@ function set_turn_time() {
     timer.classList.add("opacity-0");
   }
 }
-setInterval(set_turn_time, 500);
 
 async function loadGameData() {
   let response = await axios.get(`/api/game/${readCookie("current_game")}/`);
@@ -72,6 +72,7 @@ async function loadGameData() {
       response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())
     ) {
       letter.classList.add("incorrect");
+      draw_next_body_part();
     }
   }
   phrase.innerHTML = letters;
@@ -140,6 +141,7 @@ function displayGameData(data) {
       document.getElementById("turn").innerText = "Your Turn";
     }
   }
+
   if (second_player_score) {
     if (second_player_score.innerText !== data.other_player_game_score) {
       let Cont = { val: second_player_score.innerText },
@@ -184,6 +186,7 @@ function displayGameData(data) {
     } else if (data.incorrect_guesses.includes(el.innerText.toLowerCase())) {
       el.classList.remove("active");
       el.classList.add("incorrect");
+      draw_next_body_part();
     }
   }
 
@@ -229,7 +232,15 @@ export default function loadGamePage() {
   second_player_score = document.getElementById("second_player_score");
   second_player_name = document.getElementById("second_player_name");
 
+  phrase = document.getElementById("phrase");
+  active_player_name = document.getElementById("active_player_name");
+  active_player_score = document.getElementById("active_player_score");
+  second_player_score = document.getElementById("second_player_score");
+  second_player_name = document.getElementById("second_player_name");
+
   for (let item of document.getElementsByClassName("letter-button")) {
     item.onclick = guessLetter;
   }
+  refreshCanvas(0);
+  setInterval(set_turn_time, 500);
 }

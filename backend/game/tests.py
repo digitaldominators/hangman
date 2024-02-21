@@ -17,7 +17,7 @@ class DefaultSettingsTestCase(TestCase):
         response = self.client.get("/api/settings/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(response.content, {"level": 1, 'private': False, "timer": 0})
 
     def test_set_default_settings_for_authenticated_user(self):
         self.client.login(username="user1", password="password 1")
@@ -27,7 +27,7 @@ class DefaultSettingsTestCase(TestCase):
 
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 2, "timer": 20})
+        self.assertJSONEqual(response.content, {"level": 2, 'private': False, "timer": 20})
 
     def test_default_settings_invalid_for_authenticated_user(self):
         self.client.login(username="user1", password="password 1")
@@ -42,7 +42,7 @@ class DefaultSettingsTestCase(TestCase):
         # assert settings stay the same
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(response.content, {"level": 1, 'private': False, "timer": 0})
 
     def test_get_default_settings_for_anonymous_user(self):
         response = self.client.get("/api/settings/")
@@ -92,7 +92,7 @@ class GameTestCase(TestCase):
 
         # a is in each of the phrases
         response = self.client.put(
-            f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
+                f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["correct_guesses"], ["a"])
@@ -107,7 +107,7 @@ class GameTestCase(TestCase):
 
         # z is not in any of the phrases
         response = self.client.put(
-            f"/api/game/{game_slug}/", {"guess": "z"}, content_type="application/json"
+                f"/api/game/{game_slug}/", {"guess": "z"}, content_type="application/json"
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["correct_guesses"], [])
@@ -124,7 +124,7 @@ class GameTestCase(TestCase):
         game_slug = response.json()["game_slug"]
         self.assertTrue(GameMap.objects.filter(game_slug=game_slug).exists())
         self.assertTrue(
-            GameMap.objects.filter(game_slug=game_slug, level=1, timer=0).exists()
+                GameMap.objects.filter(game_slug=game_slug, level=1, timer=0).exists()
         )
         self.assertIsNotNone(GameMap.objects.get(game_slug=game_slug).game_1)
         self.assertIsNone(GameMap.objects.get(game_slug=game_slug).game_2)
@@ -152,8 +152,8 @@ class GameTestCase(TestCase):
     def test_game_creation_multiplayer(self):
         """test that a multiplayer game can be created with a word and category"""
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["is_multiplayer"], True)
@@ -163,7 +163,7 @@ class GameTestCase(TestCase):
     def test_game_creation_multiplayer_word_blank(self):
         """test that a multiplayer game can't be created with a blank word"""
         response = self.client.post(
-            "/api/game/", {"multiplayer": True, "word": "", "category_text": "test cat"}
+                "/api/game/", {"multiplayer": True, "word": "", "category_text": "test cat"}
         )
 
         self.assertEqual(response.status_code, 400)
@@ -171,7 +171,7 @@ class GameTestCase(TestCase):
     def test_game_creation_multiplayer_word_required(self):
         """test that a multiplayer game can't be created without a word"""
         response = self.client.post(
-            "/api/game/", {"multiplayer": True, "category_text": "test cat"}
+                "/api/game/", {"multiplayer": True, "category_text": "test cat"}
         )
 
         self.assertEqual(response.status_code, 400)
@@ -179,7 +179,7 @@ class GameTestCase(TestCase):
     def test_game_creation_multiplayer_category_required(self):
         """test that a multiplayer game can't be created without a category"""
         response = self.client.post(
-            "/api/game/", {"multiplayer": True, "word": "test word"}
+                "/api/game/", {"multiplayer": True, "word": "test word"}
         )
 
         self.assertEqual(response.status_code, 400)
@@ -187,8 +187,8 @@ class GameTestCase(TestCase):
     def test_game_creation_multiplayer_category_blank(self):
         """test that a multiplayer game can't be created with a blank category"""
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": ""},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": ""},
         )
 
         self.assertEqual(response.status_code, 400)
@@ -207,8 +207,8 @@ class GameTestCase(TestCase):
         """test that a multiplayer game can be joined"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         game_slug = response.json()["game_slug"]
 
@@ -220,14 +220,14 @@ class GameTestCase(TestCase):
         """test that you can join a game using a lowercase slug"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         game_slug = response.json()["game_slug"]
 
         self.client.login(username="user2", password="password 2")
         response = self.client.post(
-            f"/api/game/join_game/", {"game_slug": game_slug.lower()}
+                f"/api/game/join_game/", {"game_slug": game_slug.lower()}
         )
         self.assertEqual(response.status_code, 201)
 
@@ -235,8 +235,8 @@ class GameTestCase(TestCase):
         """test that the user who created the game cannot join the game as the second user"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         game_slug = response.json()["game_slug"]
 
@@ -248,14 +248,14 @@ class GameTestCase(TestCase):
         """test when playing a multiplayer game, the user must join the game before being able to choose the word"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         game_slug = response.json()["game_slug"]
 
         self.client.login(username="user2", password="password 2")
         response = self.client.post(
-            f"/api/game/{game_slug}/choose_word/", {"word": "test word"}
+                f"/api/game/{game_slug}/choose_word/", {"word": "test word"}
         )
         self.assertEqual(response.status_code, 404)
 
@@ -263,8 +263,8 @@ class GameTestCase(TestCase):
         """test that the user who joined the game can choose a word"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {"multiplayer": True, "word": "test word", "category_text": "test cat"},
+                "/api/game/",
+                {"multiplayer": True, "word": "test word", "category_text": "test cat"},
         )
         game_slug = response.json()["game_slug"]
 
@@ -273,7 +273,7 @@ class GameTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
         response = self.client.post(
-            f"/api/game/{game_slug}/choose_word/", {"word": "test word"}
+                f"/api/game/{game_slug}/choose_word/", {"word": "test word"}
         )
         self.assertEqual(response.status_code, 201)
 
@@ -337,13 +337,13 @@ class GameTestCase(TestCase):
         """test that if the timer is set on a multiplayer game it updates if the next turn time already happened, and sets the turns to [1, 2]"""
         self.client.login(username="user1", password="password 1")
         response = self.client.post(
-            "/api/game/",
-            {
-                "multiplayer": True,
-                "word": "test word",
-                "category_text": "test cat",
-                "timer": 10,
-            },
+                "/api/game/",
+                {
+                    "multiplayer"  : True,
+                    "word"         : "test word",
+                    "category_text": "test cat",
+                    "timer"        : 10,
+                },
         )
         game_slug = response.json()["game_slug"]
 
@@ -356,7 +356,7 @@ class GameTestCase(TestCase):
         self.assertEqual(game_map.turns, [1, 2])
 
         response = self.client.put(
-            f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
+                f"/api/game/{game_slug}/", {"guess": "a"}, content_type="application/json"
         )
         game_map.refresh_from_db()
 

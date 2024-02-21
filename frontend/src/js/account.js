@@ -33,18 +33,22 @@ function updateShowOnLeaderboard() {
 }
 
 function loadAccountInfo() {
-    axios.get("/api/accounts/user_authenticated/").then((response) => {
-      if (response.data.authenticated === false) {
-        barba.go("/login");
-      }else{
-        // set username
-        document.getElementById("username_box").innerHTML = response.data.username;
-        document.getElementById("total_score_box").innerHTML = response.data.total_score;
-        document.getElementById("average_score_box").innerHTML = response.data.average_score;
-        document.getElementById("games_played_box").innerHTML = response.data.total_games;
-        showOnLeaderboardSwitch.checked = response.data.show_leaderboard;
-      }
-    });
+  axios.get("/api/accounts/user_authenticated/").then((response) => {
+    if (response.data.authenticated === false) {
+      barba.go("/login");
+    } else {
+      // set username
+      document.getElementById("username_box").innerHTML =
+        response.data.username;
+      document.getElementById("total_score_box").innerHTML =
+        response.data.total_score;
+      document.getElementById("average_score_box").innerHTML =
+        response.data.average_score;
+      document.getElementById("games_played_box").innerHTML =
+        response.data.total_games;
+      showOnLeaderboardSwitch.checked = response.data.show_leaderboard;
+    }
+  });
 }
 export default function loadAccountPage() {
   password_form = document.getElementById("password_form");

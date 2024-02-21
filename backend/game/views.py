@@ -43,7 +43,11 @@ def set_default_game_setting(request, setting, value):
 def get_user_default_settings(request):
     if request.user.is_authenticated:
         game_settings, created = UserProfile.objects.get_or_create(user=request.user)
-        return {"level": game_settings.level, "timer": game_settings.timer,'private':game_settings.private}
+        return {
+            "level": game_settings.level,
+            "timer": game_settings.timer,
+            "private": game_settings.private,
+        }
     else:
         return {
             "level": request.session.get(f"level", 1),

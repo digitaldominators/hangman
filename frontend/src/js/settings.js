@@ -1,5 +1,6 @@
 import axios from "axios";
 import readCookie from "./readCookie.js";
+import Toastify from "toastify-js";
 let timerUpButton;
 let timerDownButton;
 let timerAmountSpan;
@@ -74,6 +75,13 @@ function SetSettingsValues(){
 
 }
 
+function showChangeLevelError(){
+    Toastify({
+        text: "Cannot change level during a game",
+        backgroundColor: "info",
+    }).showToast();
+}
+
 export default function loadSettingsPage(){
     timerDownButton = document.getElementById("timer_down");
     timerUpButton = document.getElementById("timer_up");
@@ -83,6 +91,7 @@ export default function loadSettingsPage(){
     timerDownButton.onclick = timerDown;
     if (readCookie("current_game")){
         gameID = readCookie("current_game");
+        document.querySelector('.button-section').onclick = showChangeLevelError;
     }else{
         // only allow user to update the level if not in middle of a game.
         document.querySelector('.button-section').classList.remove('disabled')

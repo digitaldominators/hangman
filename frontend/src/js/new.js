@@ -3,7 +3,6 @@ import barba from "@barba/core";
 import {setCookie} from './readCookie.js'
 let new_game_form;
 let new_game_word_box;
-let word_error_message;
 let category_text;
 let category;
 let categories = [];
@@ -26,7 +25,6 @@ function new_game_form_changed(e){
 
 function start_new_game(e){
     e.preventDefault();
-    word_error_message.innerText = "";
     const formData = new FormData(new_game_form);
     let data= {
         // !! forces the value to be true or false and not null
@@ -46,11 +44,6 @@ function start_new_game(e){
         }else{
             barba.go('/game');
         }
-
-    }).catch(error=>{
-        if(error.response.data.word){
-            word_error_message.innerText = error.response.data.word
-        }
     });
 }
 async function loadCategories(){
@@ -67,7 +60,6 @@ async function loadCategories(){
 export default function loadNewPage(){
     new_game_form = document.getElementById("new_game_form");
     new_game_word_box = document.getElementById("new_game_word");
-    word_error_message = document.getElementById("word_error_message");
     category = document.getElementById('category_dropdown');
     category_text = document.getElementById("category_text");
 

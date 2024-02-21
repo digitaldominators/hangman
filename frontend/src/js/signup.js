@@ -1,35 +1,41 @@
 import axios from "axios";
 import barba from "@barba/core";
+import Toastify from "toastify-js";
 let form;
 let username;
 let password;
 let password2;
-let error_message;
 function sign_up_user(e) {
   e.preventDefault();
 
   // get the form's data
   const formData = new FormData(sign_up_form);
-
-  axios
+  const uninterceptedAxiosInstance = axios.create();
+  uninterceptedAxiosInstance
     .post("/api/accounts/register/", {
       username: formData.get("username"),
       password: formData.get("password"),
       password2: formData.get("password2"),
     })
     .then((response) => {
-      error_message.innerText = "";
-      if (response.data.message) {
-        error_message.innerText = response.data.message;
-      }
-      barba.go("/index");
+      Toastify({
+        text: "Account Created",
+        backgroundColor: "green",
+      }).showToast();
+      barba.go("/account");
     })
     .catch((error) => {
       if (error.response.data.error) {
-        error_message.innerText = error.response.data.error;
+        Toastify({
+          text: error.response.data.error,
+          backgroundColor: "red",
+        }).showToast();
       }
       if (error.response.data.username) {
-        error_message.innerText = error.response.data.username;
+        Toastify({
+          text: error.response.data.username,
+          backgroundColor: "red",
+        }).showToast();
       }
     });
 }
@@ -39,7 +45,6 @@ export default function loadSignupPage() {
   username = document.getElementById("username_box");
   password = document.getElementById("password_box");
   password2 = document.getElementById("password2_box");
-  error_message = document.getElementById("error_message");
   username.focus();
   form.onsubmit = sign_up_user;
 }

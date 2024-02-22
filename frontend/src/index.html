@@ -1,48 +1,47 @@
-{{#> base namespace='index'}}
-{{#*inline "content"}}
+{{#> base namespace='index'}} {{#*inline "content"}}
 
 <!-- Image Container -->
 <div
-        class="w-full md:w-3/5 lg:w-[500px] xl:w-[450px] mx-auto"
-        style="aspect-ratio: 1 / 1"
+  class="w-full md:w-3/5 lg:w-[500px] xl:w-[450px] mx-auto"
+  style="aspect-ratio: 1 / 1"
 >
-    <canvas id="gameStage"></canvas>
+  <canvas id="gameStage"></canvas>
 </div>
 
 <!-- Game Buttons -->
 <div class="button-container text-center">
-    <a href="/new" id="new_game_button" class="home-game-button">
-        Start Game
-    </a>
-    <a href="/join" id="join_game_button" class="home-game-button">
-        Join Game
-    </a>
+  <a href="/new" id="new_game_button" class="home-game-button"> Start Game </a>
+  <a href="/join" id="join_game_button" class="home-game-button"> Join Game </a>
 </div>
-
 
 <!-- How To Play Text -->
 <div class="mt-6 text-center">
-    <h3 class="font-shortStack text-[20px] tracking-wider">How To Play Hangman</h3>
-    <p class="font-shortStack mt-2 text-[13px]">
-        Press start game or join game to join another player to solve the puzzle.
-        You will be presented with a number of blank spaces representing the missing word.
-        Use the keyboard to guess a letter (I recommend starting with vowels).
-        If your chosen letter exists in the answer, then all places in the answer where that letter appear will be revealed.
-        After you've revealed several letters, you may be able to guess what the answer is and fill in the remaining letters.
-        The catch is  every time you guess a letter wrong you loose a life and the hangman begins to appear, piece by piece. Solve the puzzle before the hangman dies.
-    </p>
+  <h3 class="font-shortStack text-[20px] tracking-wider">
+    How To Play Hangman
+  </h3>
+  <p class="font-shortStack mt-2 text-[13px]">
+    Press start game or join game to join another player to solve the puzzle.
+    You will be presented with a number of blank spaces representing the missing
+    word. Use the keyboard to guess a letter (I recommend starting with vowels).
+    If your chosen letter exists in the answer, then all places in the answer
+    where that letter appear will be revealed. After you've revealed several
+    letters, you may be able to guess what the answer is and fill in the
+    remaining letters. The catch is every time you guess a letter wrong you
+    loose a life and the hangman begins to appear, piece by piece. Solve the
+    puzzle before the hangman dies.
+  </p>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuButton = document.querySelector('.menu-button');
-        const dropdownContent = document.querySelector('.dropdown-content');
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.querySelector(".menu-button");
+    const dropdownContent = document.querySelector(".dropdown-content");
 
-        menuButton.addEventListener('click', () => {
-            // This toggles the dropdown display
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-        });
+    menuButton.addEventListener("click", () => {
+      // This toggles the dropdown display
+      dropdownContent.style.display =
+        dropdownContent.style.display === "block" ? "none" : "block";
     });
+  });
 </script>
-{{/inline}}
-{{/base }}
+{{/inline}} {{/base }}

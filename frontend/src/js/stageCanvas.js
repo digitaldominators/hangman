@@ -1,4 +1,4 @@
-import baseimage from "/images/StageNoN.png";
+import baseimage from "/images/HangmanStage.png";
 // stick figure images
 import stickHeadImage from "/images/lives/stick/stickHead.svg";
 import stickTorsoImage from "/images/lives/stick/stickTorso.png";
@@ -26,7 +26,7 @@ import GlassesImage from "/images/lives/items/glasses.svg";
 import HatImage from "/images/lives/items/hat.svg";
 import LeftShoeImage from "/images/lives/items/LShoe.svg";
 import RightShoeImage from "/images/lives/items/RShoe.svg";
-import NooseImage from "/images/lives/items/noose.svg";
+import NooseImage from "/images/Noose.png";
 
 let canvas;
 let context;

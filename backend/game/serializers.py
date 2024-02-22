@@ -270,3 +270,5 @@ class DefaultGameSettingsSerializer(serializers.Serializer):
     level = serializers.IntegerField(
         default=0, required=False, min_value=0, max_value=3
     )
+
+    private = serializers.BooleanField(required=False)

@@ -17,7 +17,9 @@ class DefaultSettingsTestCase(TestCase):
         response = self.client.get("/api/settings/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(
+            response.content, {"level": 1, "private": False, "timer": 0}
+        )
 
     def test_set_default_settings_for_authenticated_user(self):
         self.client.login(username="user1", password="password 1")
@@ -27,7 +29,9 @@ class DefaultSettingsTestCase(TestCase):
 
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 2, "timer": 20})
+        self.assertJSONEqual(
+            response.content, {"level": 2, "private": False, "timer": 20}
+        )
 
     def test_default_settings_invalid_for_authenticated_user(self):
         self.client.login(username="user1", password="password 1")
@@ -42,7 +46,9 @@ class DefaultSettingsTestCase(TestCase):
         # assert settings stay the same
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(
+            response.content, {"level": 1, "private": False, "timer": 0}
+        )
 
     def test_get_default_settings_for_anonymous_user(self):
         response = self.client.get("/api/settings/")

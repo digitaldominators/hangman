@@ -28,7 +28,6 @@ import LeftShoeImage from "/images/lives/items/LShoe.svg";
 import RightShoeImage from "/images/lives/items/RShoe.svg";
 import NooseImage from "/images/lives/items/noose.svg";
 
-
 let canvas;
 let context;
 let ratio;

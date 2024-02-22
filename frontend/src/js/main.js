@@ -1,8 +1,8 @@
 // this file is on every page
 import barba from "@barba/core";
 import barbaPrefetch from "@barba/prefetch";
-import {gsap} from "gsap";
-import {TextPlugin} from "gsap/TextPlugin";
+import { gsap } from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import loadJoinPage from "./join.js";
 import loadNewPage from "./new.js";
 import axios from "axios";
@@ -30,8 +30,7 @@ axios.defaults.headers.put["Accept"] = "application/json";
 axios.defaults.headers.put["Content-Type"] = "application/json";
 
 axios.interceptors.request.use(function (config) {
-
-  config.headers['X-CSRFToken'] =  readCookie("csrftoken");
+  config.headers["X-CSRFToken"] = readCookie("csrftoken");
   return config;
 });
 

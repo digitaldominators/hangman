@@ -1,7 +1,7 @@
 {{#> base title='Scoreboard' namespace='scoreboard'}}
 {{#*inline "content"}}
-
-<h2 class="picktheme text-center">SCOREBOARD</h2>
+<div class="h-[75vh]">
+    <h1 class="picktheme text-center">SCOREBOARD</h1>
 
     <div class="p-2 mb-1 grid grid-cols-4 gap-4">
         <div>
@@ -16,9 +16,11 @@
             <p class="scoreboard_text cursor-pointer" id="avg_score_sort">Average Score</p>
         </div>
     </div>
-<div id="scoreboard_body">
-    <!-- Loaded with JavaScript -->
+    <div id="scoreboard_body">
+        <!-- Loaded with JavaScript -->
+    </div>
 </div>
+
 
 {{/inline}}
 {{/base }}

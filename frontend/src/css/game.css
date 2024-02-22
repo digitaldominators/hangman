@@ -173,36 +173,38 @@
 }
 
 .word-display {
-  display: flex;
+  display: block;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 90%;
   margin: 20px auto;
   font-size: 3vw;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .word-display .letter {
+  display: inline;
+  white-space:pre-wrap;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
   padding: 0 1vw;
-  margin: 0 0.5vw;
   border-bottom: 2px solid #000;
-  min-width: 2vw;
   text-align: center;
   height: 1em;
-  width: 50px;
   font-size: 3rem;
   color: #003939;
-  font-weight: 400;
-  font-family: Titan One;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-optical-sizing: auto;
   text-transform: uppercase;
-  margin-bottom: 35px;
+  margin: 0 0.5vw 35px;
   border-bottom: 5px solid #000;
   line-height: 48px;
-  word-wrap: break-word;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  -webkit-text-stroke-width: 1;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-text-stroke-color: var(--MainMenuColors-primary, #fff);
   flex-grow: 1;
 }
+
 .word-display .letter.guessed {
   border-color: transparent;
   margin: -40px 0 35px;
@@ -233,13 +235,6 @@
     justify-content: center;
     gap: 3px;
     margin-top: 5px;
-  }
-
-  .letter-button {
-    /*font-size: 16px;*/
-    /*width: 30px;*/
-    /*height: 30px;*/
-    /*padding: 2px;*/
   }
 
   .category-name {

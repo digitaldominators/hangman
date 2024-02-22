@@ -184,7 +184,7 @@
 
 .word-display .letter {
   display: inline;
-  white-space:pre-wrap;
+  white-space: pre-wrap;
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
   padding: 0 1vw;

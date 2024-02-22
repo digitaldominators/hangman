@@ -16,6 +16,7 @@ import loadGamePage from "./game.js";
 import loadSignupPage from "./signup.js";
 import loadLoginPage from "./login.js";
 import loadAccountPage from "./account.js";
+import loadIndexPage from "./index.js";
 import Toastify from "toastify-js";
 // import './preload_images';
 gsap.registerPlugin(TextPlugin);
@@ -132,6 +133,7 @@ barba.init({
     {
       namespace: "index",
       afterEnter({ next }) {
+        loadIndexPage();
         document
           .getElementById("main-container")
           .classList.remove("wide-container");

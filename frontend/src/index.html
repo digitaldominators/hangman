@@ -2,9 +2,11 @@
 {{#*inline "content"}}
 
 <!-- Image Container -->
-<div class="image-container">
-    <img src="/images/StickMan.png" alt="Stick Man" class="stick-man">
-    <!-- No need for an img tag for the background, as it's set via CSS -->
+<div
+        class="w-full md:w-3/5 lg:w-[500px] xl:w-[450px] mx-auto"
+        style="aspect-ratio: 1 / 1"
+>
+    <canvas id="gameStage"></canvas>
 </div>
 
 <!-- Game Buttons -->

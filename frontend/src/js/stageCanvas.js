@@ -69,10 +69,25 @@ const bodyParts = {
   ],
 };
 
-const bodyType = "stick";
+let bodyType = "stick";
 
 let body_part_index = 0;
 
+export function get_current_part_index() {
+  return body_part_index;
+}
+
+export function get_total_parts() {
+  return bodyParts[bodyType].length;
+}
+
+export function set_body_type(type) {
+  bodyType = type;
+}
+
+export function get_body_types() {
+  return Object.keys(bodyParts);
+}
 export function refreshCanvas(currentpercent) {
   canvas = document.getElementById("gameStage");
   context = canvas.getContext("2d");

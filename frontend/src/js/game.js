@@ -3,7 +3,11 @@ import axios from "axios";
 import readCookie, { setCookie } from "./readCookie.js";
 import { gsap } from "gsap";
 import confetti from "./confetti.js";
-import { draw_next_body_part,draw_percent_of_body, refreshCanvas } from "./stageCanvas.js";
+import {
+  draw_next_body_part,
+  draw_percent_of_body,
+  refreshCanvas,
+} from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -47,9 +51,9 @@ async function loadGameData() {
   // set the players names
   if (response.data.player_name) {
     active_player_name.innerText = response.data.player_name;
-  }else{
+  } else {
     let p = document.createElement("p");
-    p.innerHTML= `<a href="/login" style="color: blue">Login</a> to save your scores`
+    p.innerHTML = `<a href="/login" style="color: blue">Login</a> to save your scores`;
     document.getElementById("game_over_message_box").appendChild(p);
   }
   if (response.data.other_player_name && second_player_name) {
@@ -212,24 +216,48 @@ function displayGameData(data) {
 function winGame() {
   confetti();
   const timeline = gsap.timeline();
-  document.getElementsByClassName('game-container')[0].classList.add("over");
+  document.getElementsByClassName("game-container")[0].classList.add("over");
   const dialog = document.querySelector("#game_over_message_box");
   dialog.showModal();
   draw_percent_of_body(0);
-  timeline.to(document.getElementById('gameStageContainer'),{duration:1,y:100,scale:0.9},"anim_start")
-  timeline.to(document.getElementById('game_over_message'),{duration:3,text:"You Won!",ease:"power2.out"});
-  timeline.to(document.getElementById('game_over_message_box'),{duration:4,borderColor:"rgb(2,65,2)"},"anim_start")
+  timeline.to(
+    document.getElementById("gameStageContainer"),
+    { duration: 1, y: 100, scale: 0.9 },
+    "anim_start"
+  );
+  timeline.to(document.getElementById("game_over_message"), {
+    duration: 3,
+    text: "You Won!",
+    ease: "power2.out",
+  });
+  timeline.to(
+    document.getElementById("game_over_message_box"),
+    { duration: 4, borderColor: "rgb(2,65,2)" },
+    "anim_start"
+  );
 }
 
 function loseGame() {
   const timeline = gsap.timeline();
-  document.getElementsByClassName('game-container')[0].classList.add("over");
+  document.getElementsByClassName("game-container")[0].classList.add("over");
   const dialog = document.querySelector("#game_over_message_box");
   dialog.showModal();
   draw_percent_of_body(100);
-  timeline.to(document.getElementById('gameStageContainer'),{duration:1,y:100,scale:1.3},"anim_start")
-  timeline.to(document.getElementById('game_over_message'),{duration:3,text:"You Lost :(",ease:"power2.out"})
-  timeline.to(document.getElementById('game_over_message_box'),{duration:4,borderColor:"rgb(255,0,0)"},"anim_start")
+  timeline.to(
+    document.getElementById("gameStageContainer"),
+    { duration: 1, y: 100, scale: 1.3 },
+    "anim_start"
+  );
+  timeline.to(document.getElementById("game_over_message"), {
+    duration: 3,
+    text: "You Lost :(",
+    ease: "power2.out",
+  });
+  timeline.to(
+    document.getElementById("game_over_message_box"),
+    { duration: 4, borderColor: "rgb(255,0,0)" },
+    "anim_start"
+  );
 }
 
 function guessLetter(e) {

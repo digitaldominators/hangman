@@ -1,10 +1,9 @@
 import moment from "moment";
 import axios from "axios";
 import readCookie, { setCookie } from "./readCookie.js";
-import barba from "@barba/core";
 import { gsap } from "gsap";
 import confetti from "./confetti.js";
-import { draw_next_body_part, refreshCanvas } from "./stageCanvas.js";
+import { draw_next_body_part,draw_percent_of_body, refreshCanvas } from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -48,6 +47,10 @@ async function loadGameData() {
   // set the players names
   if (response.data.player_name) {
     active_player_name.innerText = response.data.player_name;
+  }else{
+    let p = document.createElement("p");
+    p.innerHTML= `<a href="/login" style="color: blue">Login</a> to save your scores`
+    document.getElementById("game_over_message_box").appendChild(p);
   }
   if (response.data.other_player_name && second_player_name) {
     second_player_name.innerText = response.data.other_player_name;
@@ -81,6 +84,14 @@ async function loadGameData() {
     setTimeout(() => {
       getSecondPlayerData();
     }, 1000);
+  }
+
+  if (response.data.status === "you won") {
+    winGame();
+  }
+
+  if (response.data.status === "you lost") {
+    loseGame();
   }
 }
 
@@ -190,21 +201,35 @@ function displayGameData(data) {
   }
 
   if (data.status === "you won") {
-    confetti();
-    setTimeout(() => {
-      // delete cookie
-      setCookie("current_game", "", -1);
-      barba.go("/youwon");
-    }, 1000);
+    winGame();
   }
 
   if (data.status === "you lost") {
-    setTimeout(() => {
-      // delete cookie
-      setCookie("current_game", "", -1);
-      barba.go("/youlost");
-    }, 1000);
+    loseGame();
   }
+}
+
+function winGame() {
+  confetti();
+  const timeline = gsap.timeline();
+  document.getElementsByClassName('game-container')[0].classList.add("over");
+  const dialog = document.querySelector("#game_over_message_box");
+  dialog.showModal();
+  draw_percent_of_body(0);
+  timeline.to(document.getElementById('gameStageContainer'),{duration:1,y:100,scale:0.9},"anim_start")
+  timeline.to(document.getElementById('game_over_message'),{duration:3,text:"You Won!",ease:"power2.out"});
+  timeline.to(document.getElementById('game_over_message_box'),{duration:4,borderColor:"rgb(2,65,2)"},"anim_start")
+}
+
+function loseGame() {
+  const timeline = gsap.timeline();
+  document.getElementsByClassName('game-container')[0].classList.add("over");
+  const dialog = document.querySelector("#game_over_message_box");
+  dialog.showModal();
+  draw_percent_of_body(100);
+  timeline.to(document.getElementById('gameStageContainer'),{duration:1,y:100,scale:1.3},"anim_start")
+  timeline.to(document.getElementById('game_over_message'),{duration:3,text:"You Lost :(",ease:"power2.out"})
+  timeline.to(document.getElementById('game_over_message_box'),{duration:4,borderColor:"rgb(255,0,0)"},"anim_start")
 }
 
 function guessLetter(e) {
@@ -226,7 +251,6 @@ function guessLetter(e) {
 export default function loadGamePage() {
   category = document.getElementById("category");
   timer = document.getElementById("timer");
-
   loadGameData();
 
   phrase = document.getElementById("phrase");

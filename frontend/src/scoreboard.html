@@ -1,26 +1,26 @@
-{{#> base title='Scoreboard' namespace='scoreboard'}}
-{{#*inline "content"}}
+{{#> base title='Scoreboard' namespace='scoreboard'}} {{#*inline "content"}}
 <div class="h-[75vh]">
-    <h1 class="picktheme text-center">SCOREBOARD</h1>
+  <h1 class="picktheme text-center">SCOREBOARD</h1>
 
-    <div class="p-2 mb-1 grid grid-cols-4 gap-4">
-        <div>
-            <p class="mr-2 scoreboard_text">Username</p>
-        </div>
-        <div>
-        </div>
-        <div>
-            <p class="mr-2 scoreboard_text cursor-pointer" id="total_score_sort">Total Score</p>
-        </div>
-        <div>
-            <p class="scoreboard_text cursor-pointer" id="avg_score_sort">Average Score</p>
-        </div>
+  <div class="p-2 mb-1 grid grid-cols-4 gap-4">
+    <div>
+      <p class="mr-2 scoreboard_text">Username</p>
     </div>
-    <div id="scoreboard_body">
-        <!-- Loaded with JavaScript -->
+    <div></div>
+    <div>
+      <p class="mr-2 scoreboard_text cursor-pointer" id="total_score_sort">
+        Total Score
+      </p>
     </div>
+    <div>
+      <p class="scoreboard_text cursor-pointer" id="avg_score_sort">
+        Average Score
+      </p>
+    </div>
+  </div>
+  <div id="scoreboard_body">
+    <!-- Loaded with JavaScript -->
+  </div>
 </div>
 
-
-{{/inline}}
-{{/base }}
+{{/inline}} {{/base }}

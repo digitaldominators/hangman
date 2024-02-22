@@ -1,8 +1,8 @@
 // this file is on every page
 import barba from "@barba/core";
 import barbaPrefetch from "@barba/prefetch";
-import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
+import {gsap} from "gsap";
+import {TextPlugin} from "gsap/TextPlugin";
 import loadJoinPage from "./join.js";
 import loadNewPage from "./new.js";
 import axios from "axios";
@@ -23,14 +23,17 @@ gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
 
 // set axios defaults
-// axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.headers.post["Content-Type"] = "application/json";
-axios.defaults.headers.post["X-CSRFToken"] = readCookie("csrftoken");
 
 axios.defaults.headers.put["Accept"] = "application/json";
 axios.defaults.headers.put["Content-Type"] = "application/json";
-axios.defaults.headers.put["X-CSRFToken"] = readCookie("csrftoken");
+
+axios.interceptors.request.use(function (config) {
+
+  config.headers['X-CSRFToken'] =  readCookie("csrftoken");
+  return config;
+});
 
 axios.interceptors.response.use(
   function (response) {

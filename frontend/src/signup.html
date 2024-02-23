@@ -1,10 +1,11 @@
-{{#> base title='signup' namespace='signup'}} {{#*inline "content"}}
+{{#> base title='signup' namespace='signup'}}
+{{#*inline "content"}}
 
-<div class="flex justify-center items-start h-screen" style="padding-top: 40px">
+<div class="flex flex-col justify-center items-center" style="min-height: 1vh; padding-top: 1px;"> <!-- Reduced top padding and ensured full viewport height -->
   <form
-    class="text-center px-8 pt-6 pb-8 font-shortStack"
+    class="text-center px-8 pt-6 pb-4 font-shortStack" 
     id="sign_up_form"
-    style="width: auto; max-width: 800px"
+    style="max-width: 2000px;"
   >
     <p class="signup_text p-4" style="font-size: 40px; margin-bottom: 4px">
       Sign Up
@@ -48,11 +49,19 @@
     </div>
     <button
       type="submit"
-      class="inline-block text-[60px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[40px];"
+      class="inline-block text-[30px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[30px] py-[20px];" 
     >
       Sign up
     </button>
   </form>
+  <div class="text-center mt-4"> <!-- Adjusted margin to bring closer -->
+    <span class="text-gray-600">Already have an account?</span>
+    <a
+      href="/login"
+      class="inline-block text-[20px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[6px] text-black-600 hover:text-white font-bold border-4"
+    >LOG IN</a>
+  </div>
 </div>
 
-{{/inline}} {{/base }}
+{{/inline}}
+{{/base}}

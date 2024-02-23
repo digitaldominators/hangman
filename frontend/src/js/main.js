@@ -115,22 +115,6 @@ barba.init({
   // run the load code for each page.
   views: [
     {
-      namespace: "youlose",
-      afterEnter({ next }) {
-        document
-          .getElementById("main-container")
-          .classList.remove("wide-container");
-      },
-    },
-    {
-      namespace: "youwon",
-      afterEnter({ next }) {
-        document
-          .getElementById("main-container")
-          .classList.remove("wide-container");
-      },
-    },
-    {
       namespace: "index",
       afterEnter({ next }) {
         loadIndexPage();

@@ -1,7 +1,10 @@
 import baseimage from "/images/StageNoN.png";
 // stick figure images
-import stickHeadImage from "/images/lives/stick/stickHead.svg";
-import stickTorsoImage from "/images/lives/stick/stickTorso.png";
+import stickHeadImage from "/images/lives/stick/stickHead2.png";
+import stickRightEyeImage from "/images/lives/stick/stickREye.png";
+import stickLeftEyeImage from "/images/lives/stick/stickLEye.png";
+import stickMouthImage from "/images/lives/stick/stickMouth.png";
+import stickTorsoImage from "/images/lives/stick/stickTorso2.png";
 import stickLeftArmImage from "/images/lives/stick/stickLArm2.png";
 import stickLeftHandImage from "/images/lives/stick/stickLHand.svg";
 import stickRightArmImage from "/images/lives/stick/stickRArm2.svg";
@@ -37,32 +40,35 @@ const context = canvas.getContext("2d");
 const bodyParts = {
   stick: [
 	{name: 'noose', x: 282, y: -20, width: 160, height: 290, url: NooseImage},
-    {name: 'head', x: 325, y: 150, width: 70, height: 70, url: stickHeadImage},
-    {name: 'torso', x: 333, y: 200, width: 55, height: 115, url: stickTorsoImage},
-    {name: 'left_arm', x: 300, y: 210, width: 75, height: 100, url: stickLeftArmImage},
+    	{name: 'head', x: 295, y: 112, width: 130, height: 165, url: stickHeadImage},
+	{name: 'right_eye', x: 349, y: 158, width: 50, height: 50, url: stickRightEyeImage},
+	{name: 'left_eye', x: 318, y: 158, width: 50, height: 50, url: stickLeftEyeImage},
+	{name: 'mouth', x: 336, y: 181, width: 50, height: 40, url: stickMouthImage},
+    	{name: 'torso', x: 333, y: 205, width: 55, height: 110, url: stickTorsoImage},
+    	{name: 'left_arm', x: 300, y: 212, width: 75, height: 100, url: stickLeftArmImage},
 	{name: 'left_hand', x: 289, y: 275, width: 50, height: 55, url: stickLeftHandImage},
-    {name: 'right_arm', x: 340, y: 195, width: 75, height: 120, url: stickRightArmImage},
-	{name: 'right_hand', x: 372, y: 261, width: 60, height: 75, url: stickRightHandImage},
-    {name: 'left_leg', x: 295, y: 284, width: 97, height: 142, url: stickLeftLegImage},
-	{name: 'left_foot', x: 270, y: 365, width: 97, height: 100, url: stickLeftFootImage},
-    {name: 'right_leg', x: 340, y: 280, width: 87, height: 140, url: stickRightLegImage},
-	{name: 'right_foot', x: 370, y: 340, width: 85, height: 145, url: stickRightFootImage},
-	{name: 'hat', x: 315, y: 125, width: 80, height: 65, url: HatImage},
-	{name: 'glasses', x: 323, y: 173, width: 80, height: 30, url: GlassesImage},
+    	{name: 'right_arm', x: 340, y: 199, width: 75, height: 120, url: stickRightArmImage},
+	{name: 'right_hand', x: 370, y: 261, width: 60, height: 75, url: stickRightHandImage},
+	{name: 'left_leg', x: 295, y: 289, width: 97, height: 130, url: stickLeftLegImage},
+	{name: 'left_foot', x: 272, y: 365, width: 92, height: 95, url: stickLeftFootImage},
+    	{name: 'right_leg', x: 338, y: 280, width: 87, height: 140, url: stickRightLegImage},
+	{name: 'right_foot', x: 367, y: 340, width: 85, height: 138, url: stickRightFootImage},
+	{name: 'hat', x: 308, y: 110, width: 100, height: 80, url: HatImage},
+	{name: 'glasses', x: 321, y: 173, width: 80, height: 30, url: GlassesImage},
 	{name: 'left_shoe', x: 280, y: 390, width: 60, height: 60, url: LeftShoeImage},
-	{name: 'right_shoe', x: 382, y: 390, width: 60, height: 60, url: RightShoeImage}
+	{name: 'right_shoe', x: 384, y: 390, width: 60, height: 60, url: RightShoeImage}
   ],
   skele: [
 	{name: 'noose', x: 282, y: -20, width: 160, height: 290, url: NooseImage},
-    {name: "head", x: 310, y: 140, width: 100, height: 100, url: skeleHeadImage},
-    {name: "torso", x: 310, y: 213, width: 100, height: 108, url: skeleTorsoImage},
-    {name: "left_arm", x: 293, y: 223, width: 45, height: 98, url: skeleLeftArmImage},
+    	{name: "head", x: 310, y: 140, width: 100, height: 100, url: skeleHeadImage},
+    	{name: "torso", x: 310, y: 213, width: 100, height: 108, url: skeleTorsoImage},
+    	{name: "left_arm", x: 293, y: 223, width: 45, height: 98, url: skeleLeftArmImage},
 	{name: 'left_hand', x: 270, y: 282, width: 55, height: 60, url: skeleLeftHandImage},
-    {name: "right_arm", x: 385, y: 216, width: 50, height: 105, url: skeleRightArmImage},
+    	{name: "right_arm", x: 385, y: 216, width: 50, height: 105, url: skeleRightArmImage},
 	{name: 'right_hand', x: 402, y: 273, width: 60, height: 79, url: skeleRightHandImage},
-    {name: "left_leg", x: 299, y: 305, width: 85, height: 135, url: skeleLeftLegImage},
+    	{name: "left_leg", x: 299, y: 305, width: 85, height: 135, url: skeleLeftLegImage},
 	{name: 'left_foot', x: 283, y: 383, width: 82, height: 70, url: skeleLeftFootImage},
-    {name: "right_leg", x: 343, y: 302, width: 70, height: 140, url: skeleRightLegImage},
+    	{name: "right_leg", x: 343, y: 302, width: 70, height: 140, url: skeleRightLegImage},
 	{name: 'right_foot', x: 345, y: 388, width: 80, height: 65, url: skeleRightFootImage},
 	{name: 'hat', x: 315, y: 125, width: 80, height: 65, url: HatImage},
 	{name: 'glasses', x: 322, y: 175, width: 80, height: 30, url: GlassesImage},

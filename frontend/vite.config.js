@@ -27,8 +27,6 @@ export default defineConfig({
                 "./src/theme.html",
                 "./src/invite.html",
                 "./src/wait.html",
-                "./src/youlost.html",
-                "./src/youwon.html",
                 "./src/404.html",
                 "./src/account.html"
             ],

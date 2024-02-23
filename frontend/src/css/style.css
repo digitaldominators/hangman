@@ -15,12 +15,13 @@
 
 /* CSS is divided into different sections for readability 
 
-    - navbar (Line 20)
-    - menu drop-down (Line 91)
-    - footer (Line 150)
-    - index.html (Line 193)
-    - game.html (Line 280)
-    - other small pages (Line 433)
+    - navbar 
+    - menu drop-down 
+    - footer 
+    - index.html
+    - game.html 
+    - other small pages
+    - login/signup.htmls
 
 */
 /* 
@@ -308,7 +309,46 @@ game.html PAGE
   background-color: #00ff00;
   z-index: 2;
 }
+/* 
 
+
+Login and Sign up page Containers 
+
+
+*/
+.form-container {
+  width: auto;
+  max-width: 2000px;
+  padding: 20px 50px; /* Adjust horizontal padding here */
+}
+
+.input-field {
+  width: 100%; /* Ensures input fields take up full width of the form container */
+  font-size: 40px; /* Keeps font size large for readability */
+  border: 4px solid black;
+  border-radius: 0.5rem; /* Adds some rounded corners for aesthetics */
+  text-align: center;
+  padding: 10px 20px; /* Adjust padding to ensure text boxes are not too tall */
+}
+
+/* Responsive styles */
+@media (min-width: 600px) {
+  .form-container {
+    padding: 20px 100px; /* Increase horizontal padding without affecting vertical size */
+  }
+}
+
+@media (min-width: 900px) {
+  .form-container {
+    padding: 20px 150px; /* Further increase for larger screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  .form-container {
+    padding: 20px 200px; /* Adjust as needed for very large screens */
+  }
+}
 /* 
 
 

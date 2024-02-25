@@ -66,6 +66,19 @@
     <img src="/images/GuessButton.png" alt="Guess" />
   </a>
 </div>
+<dialog id="word_guess_box">
+    <div class="dialog-box">
+        <h2 class="text-3xl m-3">Guess Word</h2>
+        <form id="guess_word_form">
+            <input type="text" name="word"
+                   id="word_guess_input"
+                   class="block text-2xl border-4 border-button-outline rounded-3xl p-2 m-3"/>
+            <div class="text-center">
+                <button type="submit" class="text-center"><img src="/images/GuessButton.png" alt="Guess" class="inline rounded-2xl bg-background-color" /></button>
+            </div>
+        </form>
+    </div>
+</dialog>
 <dialog id="game_over_message_box">
   <div class="dialog-box">
     <h2 class="text-3xl m-3">Game Over</h2>

@@ -1,11 +1,22 @@
 {{#> base title='Choose Word' namespace='choose_word'}} {{#*inline "content"}}
 
-<h1 class="font-underdog text-[40px] font-extrabold text-center">
+<div class="text-timer-select">
+
+<h1 class="text-[35px] font-extrabold text-center m-5" style="font-family: Titan One">
   Pick your secret word
 </h1>
+<h2 class="text-[35px] font-extrabold m-3" style="font-family: Titan One">
+    The Category is...
+</h2>
+<h2 id="category_text" class="text-[30px] font-extrabold text-center underline m-5" style="font-family: Titan One">
+    ...... ......
+</h2>
+<h2 class="text-[35px] font-extrabold text-center" style="font-family: Titan One">
+    What's your secret word?
+</h2>
 <div class="relative">
   <form
-    class="absolute top-[100px] left-0 right-0 text-center"
+    class="text-center p-3"
     id="choose_word_form"
   >
     <input
@@ -38,7 +49,6 @@
       PLAY
     </button>
   </form>
-  <img src="images/join_game_stage.png" />
 </div>
-
+</div>
 {{/inline}} {{/base }}

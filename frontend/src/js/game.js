@@ -17,7 +17,7 @@ let second_player_score;
 let second_player_name;
 let timer;
 let next_turn_time = null;
-
+let incorrect_guesses = 0;
 function set_turn_time() {
   if (next_turn_time) {
     timer.classList.remove("opacity-0");
@@ -79,8 +79,11 @@ async function loadGameData() {
       response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())
     ) {
       letter.classList.add("incorrect");
-      draw_next_body_part();
     }
+  }
+  for (let i in response.data.incorrect_guesses) {
+    draw_next_body_part();
+    incorrect_guesses++;
   }
   phrase.innerHTML = letters;
 
@@ -276,6 +279,28 @@ function guessLetter(e) {
     });
 }
 
+function guessWord(e){
+  e.preventDefault();
+  const word_guess_input = document.getElementById("word_guess_input");
+
+  let value = word_guess_input.value;
+
+    axios
+        .put(`/api/game/${readCookie("current_game")}/`, { guess: value })
+        .then((response) => {
+          document
+              .getElementsByClassName("letter-buttons")[0]
+              .classList.remove("cursor-wait");
+          displayGameData(response.data);
+          word_guess_input.value = "";
+          if(incorrect_guesses < response.data.incorrect_guesses.length){
+            draw_next_body_part();
+            incorrect_guesses++;
+          }
+        });
+    document.getElementById("word_guess_box").close();
+}
+
 export default function loadGamePage() {
   category = document.getElementById("category");
   timer = document.getElementById("timer");
@@ -296,6 +321,9 @@ export default function loadGamePage() {
   for (let item of document.getElementsByClassName("letter-button")) {
     item.onclick = guessLetter;
   }
+
+  document.getElementById("guessButton").onclick = (() => {document.getElementById("word_guess_box").showModal();});
+  document.getElementById("guess_word_form").onsubmit = guessWord;
   refreshCanvas(0);
   setInterval(set_turn_time, 500);
 }

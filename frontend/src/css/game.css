@@ -151,7 +151,7 @@
   font-size: 10px;
 }
 
-#game_over_message_box {
+#game_over_message_box, #word_guess_box {
   @apply duration-300 p-5 rounded-2xl;
   border: 2px solid black;
   transition: opacity 0.5s;
@@ -159,12 +159,12 @@
   opacity: 0;
 }
 
-#game_over_message_box[open] {
+#game_over_message_box[open], #word_guess_box[open] {
   opacity: 95%;
   pointer-events: inherit;
 }
 
-#game_over_message_box::backdrop {
+#game_over_message_box::backdrop, #word_guess_box::backdrop {
   @apply duration-300;
   opacity: 0.1;
   background-color: #000;

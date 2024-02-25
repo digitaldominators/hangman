@@ -5,12 +5,11 @@ import Toastify from "toastify-js";
 let form;
 let word_box;
 
-function add_category_text(){
-    const category = document.getElementById("category_text");
-    axios.get(`/api/game/${readCookie("current_game")}/`).then((response) => {
+function add_category_text() {
+  const category = document.getElementById("category_text");
+  axios.get(`/api/game/${readCookie("current_game")}/`).then((response) => {
     category.innerText = response.data.category;
-    });
-
+  });
 }
 function choose_word_game(e) {
   e.preventDefault();
@@ -33,7 +32,7 @@ function choose_word_game(e) {
 }
 
 export default function loadChooseWordPage() {
-    add_category_text();
+  add_category_text();
   form = document.getElementById("choose_word_form");
   word_box = document.getElementById("word_box");
   word_box.focus();

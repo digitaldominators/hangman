@@ -279,26 +279,26 @@ function guessLetter(e) {
     });
 }
 
-function guessWord(e){
+function guessWord(e) {
   e.preventDefault();
   const word_guess_input = document.getElementById("word_guess_input");
 
   let value = word_guess_input.value;
 
-    axios
-        .put(`/api/game/${readCookie("current_game")}/`, { guess: value })
-        .then((response) => {
-          document
-              .getElementsByClassName("letter-buttons")[0]
-              .classList.remove("cursor-wait");
-          displayGameData(response.data);
-          word_guess_input.value = "";
-          if(incorrect_guesses < response.data.incorrect_guesses.length){
-            draw_next_body_part();
-            incorrect_guesses++;
-          }
-        });
-    document.getElementById("word_guess_box").close();
+  axios
+    .put(`/api/game/${readCookie("current_game")}/`, { guess: value })
+    .then((response) => {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.remove("cursor-wait");
+      displayGameData(response.data);
+      word_guess_input.value = "";
+      if (incorrect_guesses < response.data.incorrect_guesses.length) {
+        draw_next_body_part();
+        incorrect_guesses++;
+      }
+    });
+  document.getElementById("word_guess_box").close();
 }
 
 export default function loadGamePage() {
@@ -322,7 +322,9 @@ export default function loadGamePage() {
     item.onclick = guessLetter;
   }
 
-  document.getElementById("guessButton").onclick = (() => {document.getElementById("word_guess_box").showModal();});
+  document.getElementById("guessButton").onclick = () => {
+    document.getElementById("word_guess_box").showModal();
+  };
   document.getElementById("guess_word_form").onsubmit = guessWord;
   refreshCanvas(0);
   setInterval(set_turn_time, 500);

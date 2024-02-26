@@ -9,4 +9,3 @@ game - contains the views and serializers for the main game app. This is where t
 scoreboard - contains the views and serializers for the scoreboard app. This is where the api endpoint for listing the top 50 scores lives.
 
 settings - contains the settings for the django app and is the entry point for the app with the wsgi.py file.
-

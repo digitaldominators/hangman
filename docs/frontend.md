@@ -1,11 +1,11 @@
-The frontend and backend are running as separate applications. The frontend is not really using any framework and 
+The frontend and backend are running as separate applications. The frontend is not really using any framework and
 is just using vanilla javascript with a few libraries to allow is to behave like a single page app.
 
 The frontend is organized into a few folders:
 
 partials - contains the html template pages. These files are statically built into every page. This includes the header, footer, and the navbar.
 
-src/js - contains the javascript files. This is where the main logic of the app is. The main file is main.js. This file is the entry point for the app. 
+src/js - contains the javascript files. This is where the main logic of the app is. The main file is main.js. This file is the entry point for the app.
 It sets up the event listeners and the routing for the app. All the other javascript files are imported here and the initialization for each page is done
 by the page's load<X>Page method using Barba.js. The main.js page is also responsible for setting up gsap.
 

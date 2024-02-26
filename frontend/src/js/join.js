@@ -13,7 +13,7 @@ function join_game(e) {
   axios
     .post("/api/game/join_game/", { game_slug: formData.get("join_code") })
     .then((response) => {
-      setCookie("current_game", formData.get("join_code"), 100);
+      setCookie("current_game", formData.get("join_code").toUpperCase(), 100);
       barba.go("/choose_word");
     })
     .catch((error) => {

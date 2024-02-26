@@ -6,7 +6,7 @@ import confetti from "./confetti.js";
 import {
   draw_next_body_part,
   draw_percent_of_body,
-    set_body_type,
+  set_body_type,
   refreshCanvas,
 } from "./stageCanvas.js";
 
@@ -280,10 +280,10 @@ function guessLetter(e) {
 export default function loadGamePage() {
   category = document.getElementById("category");
   timer = document.getElementById("timer");
-  if(readCookie("character")==="skele"){
-    set_body_type('skele');
-  }else{
-    set_body_type('stick');
+  if (readCookie("character") === "skele") {
+    set_body_type("skele");
+  } else {
+    set_body_type("stick");
   }
 
   loadGameData();

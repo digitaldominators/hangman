@@ -299,12 +299,13 @@ export default function loadGamePage() {
   refreshCanvas(0);
   setInterval(set_turn_time, 500);
 
-  document.getElementById("sound-button").addEventListener("click", function () {
-    if (document.getElementById("game_music").paused) {
-      document.getElementById("game_music").play();
-    }
-    else {
-      document.getElementById("game_music").pause();
-    }
-  });
+  document
+    .getElementById("sound-button")
+    .addEventListener("click", function () {
+      if (document.getElementById("game_music").paused) {
+        document.getElementById("game_music").play();
+      } else {
+        document.getElementById("game_music").pause();
+      }
+    });
 }

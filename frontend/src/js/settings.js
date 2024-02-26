@@ -106,20 +106,19 @@ export default function loadSettingsPage() {
     .forEach((button) => (button.onclick = setLevelAmount));
   SetSettingsValues();
 
-
   if (document.getElementById("game_music").paused) {
     document.getElementById("sound_switch").checked = false;
-  }
-  else {
+  } else {
     document.getElementById("sound_switch").checked = true;
   }
 
-  document.getElementById("sound_switch").addEventListener("change", function () {
-    if (document.getElementById("sound_switch").checked) {
-      document.getElementById("game_music").play();
-    }
-    else {
-      document.getElementById("game_music").pause();
-    }
-  });
+  document
+    .getElementById("sound_switch")
+    .addEventListener("change", function () {
+      if (document.getElementById("sound_switch").checked) {
+        document.getElementById("game_music").play();
+      } else {
+        document.getElementById("game_music").pause();
+      }
+    });
 }

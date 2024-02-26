@@ -1,5 +1,5 @@
 import axios from "axios";
-import readCookie from "./readCookie.js";
+import readCookie, {setCookie} from "./readCookie.js";
 import Toastify from "toastify-js";
 let timerUpButton;
 let timerDownButton;
@@ -22,10 +22,10 @@ function setLevelAmount(e) {
   SaveSettingChange("level", e.target.dataset.level);
 }
 function showLevelAmount() {
-  document
+    document.getElementById("level_section")
     .querySelectorAll(`[data-level]`)
     .forEach((button) => button.classList.remove("active"));
-  document
+  document.getElementById("level_section")
     .querySelector(`[data-level='${levelAmount}']`)
     .classList.add("active");
 }
@@ -57,6 +57,13 @@ function SaveSettingChange(setting, value) {
   }
 }
 function SetSettingsValues() {
+
+  if(readCookie("character")==="skele"){
+    document.getElementById("skele_button").classList.add('active');
+  }else{
+    document.getElementById("stick_button").classList.add('active');
+  }
+
   // get the backend saved settings. If the user is playing a game set the setting for the game,
   // If the user is not playing a game currently then just set the default users settings
   if (gameID) {
@@ -87,6 +94,13 @@ function showChangeLevelError() {
   }).showToast();
 }
 
+function changeCharacter(character) {
+  document.getElementById("skele_button").classList.remove('active');
+  document.getElementById("stick_button").classList.remove('active');
+  document.getElementById(`${character}_button`).classList.add('active');
+  setCookie('character', character, 100);
+}
+
 export default function loadSettingsPage() {
   timerDownButton = document.getElementById("timer_down");
   timerUpButton = document.getElementById("timer_up");
@@ -96,13 +110,15 @@ export default function loadSettingsPage() {
   timerDownButton.onclick = timerDown;
   if (readCookie("current_game")) {
     gameID = readCookie("current_game");
-    document.querySelector(".button-section").onclick = showChangeLevelError;
+    document.querySelector("#level_section").onclick = showChangeLevelError;
   } else {
     // only allow user to update the level if not in middle of a game.
-    document.querySelector(".button-section").classList.remove("disabled");
+    document.querySelector("#level_section").classList.remove("disabled");
   }
-  document
+  document.getElementById("level_section")
     .querySelectorAll(`[data-level]`)
     .forEach((button) => (button.onclick = setLevelAmount));
+    document.getElementById("skele_button").onclick = () => {changeCharacter("skele")}
+    document.getElementById("stick_button").onclick = () => {changeCharacter("stick")}
   SetSettingsValues();
 }

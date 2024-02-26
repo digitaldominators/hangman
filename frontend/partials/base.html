@@ -1,13 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    {{> header}}
-    <body data-barba="wrapper">
-        {{> navbar }}
-        <div id="main-container"> <!-- Center the main container -->
-            <main data-barba="container" data-barba-namespace="{{ namespace }}">
-                {{> content }}
-            </main>
-        </div>
-        {{> footer }}
-    </body>
+  {{> header}}
+  <body data-barba="wrapper">
+    {{> navbar }}
+    <audio
+      src="/sounds/have-you-seen-her-andrey-rossi-main-version-30420-01-44.mp3"
+      id="game_music"
+      loop
+    ></audio>
+    <div id="main-container">
+      <!-- Center the main container -->
+      <main data-barba="container" data-barba-namespace="{{ namespace }}">
+        {{> content }}
+      </main>
+    </div>
+    {{> footer }}
+  </body>
 </html>

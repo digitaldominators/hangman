@@ -114,8 +114,8 @@ menu drop-down
   position: absolute;
   left: 0%;
   top: 100%;
-  width: 30vw;
-  max-width: 300px;
+  width: 15vw;
+  max-width: 220px;
   min-width: 160px;
   padding: 3px 0;
   background-color: #ffffffe0;
@@ -133,7 +133,7 @@ menu drop-down
   display: block;
   font-family: "Shojumaru", cursive;
   color: black;
-  font-size: clamp(12px, 2vw, 24px);
+  font-size: clamp(12px, 1vw, 24px);
 }
 
 .dropdown-content a::before {
@@ -141,7 +141,7 @@ menu drop-down
   display: inline-block;
   margin-right: 10px;
   height: 3px;
-  width: 20px;
+  width: 17px;
   background-color: rgb(74, 168, 168);
   position: relative;
   top: -10px;

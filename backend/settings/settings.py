@@ -146,6 +146,14 @@ STATICFILES_DIRS = [
     ]
 STATIC_URL = '/assets/'
 
+# hangman game settings
+TOTAL_BODY_PARTS = 18
+EASY_LEVEL_NUM_TRIES = TOTAL_BODY_PARTS
+MEDIUM_LEVEL_NUM_TRIES = 10
+HARD_LEVEL_NUM_TRIES = 6
+
+DEFAULT_LEVEL = 2  # medium
+
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory

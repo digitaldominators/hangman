@@ -8,12 +8,16 @@ from rest_framework.authtoken.models import Token
 from django.conf import settings
 
 
+def get_default_level():
+    return settings.DEFAULT_LEVEL
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.Model)
 
     # game settings
     # difficulty level number 1-3
-    level = models.PositiveSmallIntegerField(default=1)
+    level = models.PositiveSmallIntegerField(default=get_default_level)
     # number of seconds before turn is skipped.
     timer = models.PositiveSmallIntegerField(default=0)
 
@@ -23,9 +27,9 @@ class UserProfile(models.Model):
     games_played = models.PositiveIntegerField(default=0)
     # average score
     avg_score = models.GeneratedField(
-        expression=F("score") / NullIf(F("games_played"), 0),
-        output_field=models.PositiveIntegerField(),
-        db_persist=True,
+            expression=F("score") / NullIf(F("games_played"), 0),
+            output_field=models.PositiveIntegerField(),
+            db_persist=True,
     )
 
     # set to true if user wants to remove scores from leaderboard

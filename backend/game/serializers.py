@@ -1,5 +1,7 @@
 import datetime
 from string import ascii_letters
+
+from django.conf import settings
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound
 
@@ -84,12 +86,16 @@ class GameModelSerializerPlayerMixin:
         return word_mask
 
 
+def get_default_level():
+    return settings.DEFAULT_LEVEL
+
+
 class NewGameSerializer(serializers.Serializer):
     multiplayer = serializers.BooleanField()
     word = serializers.CharField(required=False)
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
     level = serializers.IntegerField(
-        default=1, required=False, min_value=0, max_value=3
+            default=get_default_level, required=False, min_value=0, max_value=3
     )
     category = serializers.ChoiceField(allow_blank=True, choices=[], required=False)
     category_text = serializers.CharField(required=False)
@@ -98,7 +104,7 @@ class NewGameSerializer(serializers.Serializer):
         if data["multiplayer"]:
             if not data.get("category_text"):
                 raise serializers.ValidationError(
-                    {"category_text": "This field is required."}
+                        {"category_text": "This field is required."}
                 )
             if not data.get("word"):
                 raise serializers.ValidationError({"word": "This field is required."})
@@ -107,9 +113,9 @@ class NewGameSerializer(serializers.Serializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["category"] = serializers.ChoiceField(
-            allow_blank=True,
-            choices=Category.objects.filter(active=True),
-            required=False,
+                allow_blank=True,
+                choices=Category.objects.filter(active=True),
+                required=False,
         )
 
 
@@ -192,14 +198,14 @@ class GameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSerializer
     def get_correct_guesses(self, instance):
         if self.get_game(instance):
             return self.get_game(instance).correct_guesses.values_list(
-                "guess", flat=True
+                    "guess", flat=True
             )
         return []
 
     def get_incorrect_guesses(self, instance):
         if self.get_game(instance):
             return self.get_game(instance).incorrect_guesses.values_list(
-                "guess", flat=True
+                    "guess", flat=True
             )
         return []
 
@@ -234,6 +240,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
             if game.guesses.filter(guess=guess).exists():
                 return instance
 
+            added_incorrect_guess = False
             # if guess is a word
             if len(guess) > 1:
                 # correct
@@ -244,6 +251,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                     signals.game_over.send(sender=self.__class__, game_map=instance)
                 else:  # incorrect guess
                     game.add_incorrect_guess(guess)
+                    added_incorrect_guess = True
             else:  # guess is a letter
                 if guess in game.word:
                     game.add_correct_guess(guess)
@@ -254,6 +262,15 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                         signals.game_over.send(sender=self.__class__, game_map=instance)
                 else:
                     game.add_incorrect_guess(guess)
+                    added_incorrect_guess = True
+            if added_incorrect_guess:
+                if instance.level == 1 and game.incorrect_guesses.count() >= settings.EASY_LEVEL_NUM_TRIES \
+                        or instance.level == 2 and game.incorrect_guesses.count() >= settings.MEDIUM_LEVEL_NUM_TRIES \
+                        or instance.level == 3 and game.incorrect_guesses.count() >= settings.HARD_LEVEL_NUM_TRIES:
+                    # winner is the other player
+                    instance.winner = 2 if player == 1 else 1
+                    instance.save()
+                    signals.game_over.send(sender=self.__class__, game_map=instance)
 
             if instance.is_multiplayer:
                 # remove player from turns
@@ -268,7 +285,7 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
 class DefaultGameSettingsSerializer(serializers.Serializer):
     timer = serializers.IntegerField(default=0, required=False, min_value=0)
     level = serializers.IntegerField(
-        default=0, required=False, min_value=0, max_value=3
+            default=get_default_level, required=False, min_value=0, max_value=3
     )
 
     private = serializers.BooleanField(required=False)

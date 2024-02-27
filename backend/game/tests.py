@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.conf import settings
 from .models import GameMap
 from category.models import Category, Phrase
 
@@ -18,19 +18,20 @@ class DefaultSettingsTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
-            response.content, {"level": 1, "private": False, "timer": 0}
+            response.content, {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0}
         )
 
     def test_set_default_settings_for_authenticated_user(self):
         self.client.login(username="user1", password="password 1")
+        self.client.post("/api/settings/", {"level": 3})
 
-        self.client.post("/api/settings/", {"level": 2})
         self.client.post("/api/settings/", {"timer": 20})
+
 
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
-            response.content, {"level": 2, "private": False, "timer": 20}
+            response.content, {"level": 3, "private": False, "timer": 20}
         )
 
     def test_default_settings_invalid_for_authenticated_user(self):
@@ -47,22 +48,22 @@ class DefaultSettingsTestCase(TestCase):
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
-            response.content, {"level": 1, "private": False, "timer": 0}
+            response.content, {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0}
         )
 
     def test_get_default_settings_for_anonymous_user(self):
         response = self.client.get("/api/settings/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0})
 
     def test_set_default_settings_for_anonymous_user(self):
-        self.client.post("/api/settings/", {"level": 2})
+        self.client.post("/api/settings/", {"level": 1})
         self.client.post("/api/settings/", {"timer": 20})
 
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 2, "timer": 20})
+        self.assertJSONEqual(response.content, {"level": 1, "timer": 20})
 
     def test_default_settings_invalid_for_anonymous_user(self):
         response = self.client.post("/api/settings/", {"level": 7})
@@ -76,7 +77,7 @@ class DefaultSettingsTestCase(TestCase):
         # assert settings stay the same
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": 1, "timer": 0})
+        self.assertJSONEqual(response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0})
 
 
 class GameTestCase(TestCase):
@@ -130,7 +131,7 @@ class GameTestCase(TestCase):
         game_slug = response.json()["game_slug"]
         self.assertTrue(GameMap.objects.filter(game_slug=game_slug).exists())
         self.assertTrue(
-            GameMap.objects.filter(game_slug=game_slug, level=1, timer=0).exists()
+            GameMap.objects.filter(game_slug=game_slug, level=settings.DEFAULT_LEVEL, timer=0).exists()
         )
         self.assertIsNotNone(GameMap.objects.get(game_slug=game_slug).game_1)
         self.assertIsNone(GameMap.objects.get(game_slug=game_slug).game_2)
@@ -330,7 +331,7 @@ class GameTestCase(TestCase):
         self.assertEqual(response.json()["game_slug"], game_slug)
         self.assertEqual(response.json()["is_multiplayer"], False)
         self.assertEqual(response.json()["timer"], 0)
-        self.assertEqual(response.json()["level"], 1)
+        self.assertEqual(response.json()["level"], settings.DEFAULT_LEVEL)
         self.assertEqual(response.json()["status"], "your turn")
         self.assertEqual(response.json()["player"], 1)
         self.assertEqual(response.json()["correct_guesses"], [])

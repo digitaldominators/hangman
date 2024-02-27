@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -50,7 +51,7 @@ def get_user_default_settings(request):
         }
     else:
         return {
-            "level": request.session.get(f"level", 1),
+            "level": request.session.get(f"level", settings.DEFAULT_LEVEL),
             "timer": request.session.get("timer", 0),
         }
 
@@ -73,19 +74,19 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
         post data:
             level: difficulty level, int 1-3
             timer: positive number of seconds between turns, if 0 game is not timed
+            private: boolean, if the user wants to hide their scores from the leaderboard
         """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        if serializer.validated_data.get("level"):
+        if request.data.get("level"):
             set_default_game_setting(
                 request, "level", serializer.validated_data.get("level")
             )
-        if serializer.validated_data.get("timer") is not None:
+        if request.data.get("timer") is not None:
             set_default_game_setting(
                 request, "timer", serializer.validated_data.get("timer")
             )
-        if serializer.validated_data.get("private") is not None:
+        if request.data.get("timer") is not None:
             if request.user.is_authenticated:
                 game_settings, created = UserProfile.objects.get_or_create(
                     user=request.user

@@ -6,9 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 
 
 @api_view(
-    [
-        "POST",
-    ]
+        [
+            "POST",
+        ]
 )
 def user_registration_view(request):
     if request.method == "POST":
@@ -33,9 +33,9 @@ def user_registration_view(request):
 
 
 @api_view(
-    [
-        "POST",
-    ]
+        [
+            "POST",
+        ]
 )
 def login_user(request):
     username = request.data.get("username", None)
@@ -46,14 +46,14 @@ def login_user(request):
         return Response({"message": "You have logged in"}, status=status.HTTP_200_OK)
     else:
         return Response(
-            {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
+                {"message": "Login attempt failed"}, status=status.HTTP_400_BAD_REQUEST
         )
 
 
 @api_view(
-    [
-        "POST",
-    ]
+        [
+            "POST",
+        ]
 )
 def logout_user(request):
     if request.method == "POST":
@@ -62,15 +62,15 @@ def logout_user(request):
 
 
 @api_view(
-    [
-        "POST",
-    ]
+        [
+            "POST",
+        ]
 )
 def change_password(request):
     if request.user.is_authenticated:
         user = request.user
         serializer = ChangePasswordSerializer(
-            data=request.data, context={"request": request}
+                data=request.data, context={"request": request}
         )
 
         data = {}
@@ -82,14 +82,14 @@ def change_password(request):
         return Response(data, status=status.HTTP_200_OK)
     else:
         return Response(
-            {"message": "You are not logged in"}, status=status.HTTP_401_UNAUTHORIZED
+                {"message": "You are not logged in"}, status=status.HTTP_401_UNAUTHORIZED
         )
 
 
 @api_view(
-    [
-        "GET",
-    ]
+        [
+            "GET",
+        ]
 )
 def user_authenticated(request):
     if request.user.is_authenticated:
@@ -98,13 +98,13 @@ def user_authenticated(request):
 
         data["authenticated"] = True
         data["username"] = request.user.username
-        if request.user.userprofile:
+        if hasattr(request.user, 'userprofile'):
             data["total_score"] = request.user.userprofile.score
             data["average_score"] = request.user.userprofile.avg_score
             data["total_games"] = request.user.userprofile.games_played
             data["show_leaderboard"] = not request.user.userprofile.private
         else:
-            data["highest_score"] = 0
+            data["total_score"] = 0
             data["average_score"] = 0
             data["total_games"] = 0
             data["show_leaderboard"] = True

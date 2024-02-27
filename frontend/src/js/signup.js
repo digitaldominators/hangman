@@ -1,6 +1,7 @@
 import axios from "axios";
 import barba from "@barba/core";
 import Toastify from "toastify-js";
+import readCookie from "./readCookie.js";
 let form;
 let username;
 let password;
@@ -9,14 +10,23 @@ function sign_up_user(e) {
   e.preventDefault();
 
   // get the form's data
-  const formData = new FormData(sign_up_form);
+  const formData = new FormData(form);
   const uninterceptedAxiosInstance = axios.create();
   uninterceptedAxiosInstance
-    .post("/api/accounts/register/", {
-      username: formData.get("username"),
-      password: formData.get("password"),
-      password2: formData.get("password2"),
-    })
+    .post(
+      "/api/accounts/register/",
+      {
+        username: formData.get("username"),
+        password: formData.get("password"),
+        password2: formData.get("password2"),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": readCookie("csrftoken"),
+        },
+      }
+    )
     .then((response) => {
       Toastify({
         text: "Account Created",

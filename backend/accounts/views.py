@@ -98,13 +98,13 @@ def user_authenticated(request):
 
         data["authenticated"] = True
         data["username"] = request.user.username
-        if request.user.userprofile:
+        if hasattr(request.user, "userprofile"):
             data["total_score"] = request.user.userprofile.score
             data["average_score"] = request.user.userprofile.avg_score
             data["total_games"] = request.user.userprofile.games_played
             data["show_leaderboard"] = not request.user.userprofile.private
         else:
-            data["highest_score"] = 0
+            data["total_score"] = 0
             data["average_score"] = 0
             data["total_games"] = 0
             data["show_leaderboard"] = True

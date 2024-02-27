@@ -263,6 +263,8 @@ class UpdateGameSerializer(GameModelSerializerPlayerMixin, serializers.ModelSeri
                 else:
                     game.add_incorrect_guess(guess)
                     added_incorrect_guess = True
+
+            # check if game is over from too many incorrect guesses
             if added_incorrect_guess:
                 if instance.level == 1 and game.incorrect_guesses.count() >= settings.EASY_LEVEL_NUM_TRIES \
                         or instance.level == 2 and game.incorrect_guesses.count() >= settings.MEDIUM_LEVEL_NUM_TRIES \

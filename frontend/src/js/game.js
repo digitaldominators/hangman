@@ -239,6 +239,10 @@ function winGame() {
     { duration: 4, borderColor: "rgb(2,65,2)" },
     "anim_start"
   );
+
+  // set the current game cookie to expire
+  // so that the player has to choose a different game
+  setCookie("current_game", "", -1);
 }
 
 function loseGame() {
@@ -262,6 +266,10 @@ function loseGame() {
     { duration: 4, borderColor: "rgb(255,0,0)" },
     "anim_start"
   );
+
+  // set the current game cookie to expire
+  // so that the player has to choose a different game
+  setCookie("current_game", "", -1);
 }
 
 function guessLetter(e) {

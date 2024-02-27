@@ -18,7 +18,8 @@ class DefaultSettingsTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
-            response.content, {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0}
+            response.content,
+            {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0},
         )
 
     def test_set_default_settings_for_authenticated_user(self):
@@ -26,7 +27,6 @@ class DefaultSettingsTestCase(TestCase):
         self.client.post("/api/settings/", {"level": 3})
 
         self.client.post("/api/settings/", {"timer": 20})
-
 
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
@@ -48,14 +48,17 @@ class DefaultSettingsTestCase(TestCase):
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
-            response.content, {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0}
+            response.content,
+            {"level": settings.DEFAULT_LEVEL, "private": False, "timer": 0},
         )
 
     def test_get_default_settings_for_anonymous_user(self):
         response = self.client.get("/api/settings/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0})
+        self.assertJSONEqual(
+            response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0}
+        )
 
     def test_set_default_settings_for_anonymous_user(self):
         self.client.post("/api/settings/", {"level": 1})
@@ -77,7 +80,9 @@ class DefaultSettingsTestCase(TestCase):
         # assert settings stay the same
         response = self.client.get("/api/settings/")
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0})
+        self.assertJSONEqual(
+            response.content, {"level": settings.DEFAULT_LEVEL, "timer": 0}
+        )
 
 
 class GameTestCase(TestCase):
@@ -131,7 +136,9 @@ class GameTestCase(TestCase):
         game_slug = response.json()["game_slug"]
         self.assertTrue(GameMap.objects.filter(game_slug=game_slug).exists())
         self.assertTrue(
-            GameMap.objects.filter(game_slug=game_slug, level=settings.DEFAULT_LEVEL, timer=0).exists()
+            GameMap.objects.filter(
+                game_slug=game_slug, level=settings.DEFAULT_LEVEL, timer=0
+            ).exists()
         )
         self.assertIsNotNone(GameMap.objects.get(game_slug=game_slug).game_1)
         self.assertIsNone(GameMap.objects.get(game_slug=game_slug).game_2)

@@ -27,9 +27,9 @@ class UserProfile(models.Model):
     games_played = models.PositiveIntegerField(default=0)
     # average score
     avg_score = models.GeneratedField(
-            expression=F("score") / NullIf(F("games_played"), 0),
-            output_field=models.PositiveIntegerField(),
-            db_persist=True,
+        expression=F("score") / NullIf(F("games_played"), 0),
+        output_field=models.PositiveIntegerField(),
+        db_persist=True,
     )
 
     # set to true if user wants to remove scores from leaderboard

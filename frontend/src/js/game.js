@@ -20,17 +20,17 @@ let next_turn_time = null;
 let incorrect_guesses = 0;
 let level;
 let second_player_data_interval_id;
-function draw_next_loss_percent(){
+function draw_next_loss_percent() {
   incorrect_guesses++;
   let percent = 0;
-  if (level===1){
-    percent = 100/18;
-  }else if(level===2){
-    percent = 100/10;
-  }else if(level===3){
-    percent = 100/6;
+  if (level === 1) {
+    percent = 100 / 18;
+  } else if (level === 2) {
+    percent = 100 / 10;
+  } else if (level === 3) {
+    percent = 100 / 6;
   }
-  draw_percent_of_body(percent*incorrect_guesses)
+  draw_percent_of_body(percent * incorrect_guesses);
 }
 
 function set_turn_time() {
@@ -234,10 +234,10 @@ function displayGameData(data) {
   }
 }
 
-function gameEnded(){
+function gameEnded() {
   // stop trying to fetch the other players scores the game is over
-  if (second_player_data_interval_id){
-    clearInterval(second_player_data_interval_id)
+  if (second_player_data_interval_id) {
+    clearInterval(second_player_data_interval_id);
   }
   // set the current game cookie to expire
   // so that the player has to choose a different game

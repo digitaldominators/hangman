@@ -13,11 +13,20 @@ function sign_up_user(e) {
   const formData = new FormData(form);
   const uninterceptedAxiosInstance = axios.create();
   uninterceptedAxiosInstance
-    .post("/api/accounts/register/", {
-      username: formData.get("username"),
-      password: formData.get("password"),
-      password2: formData.get("password2"),
-    },{headers: {"Content-Type": "application/json", "X-CSRFToken": readCookie("csrftoken")}})
+    .post(
+      "/api/accounts/register/",
+      {
+        username: formData.get("username"),
+        password: formData.get("password"),
+        password2: formData.get("password2"),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": readCookie("csrftoken"),
+        },
+      }
+    )
     .then((response) => {
       Toastify({
         text: "Account Created",

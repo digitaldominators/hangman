@@ -195,11 +195,6 @@ Footer styles
   height: auto;
 }
 
-.image-container {
-  max-width: 100%;
-  height: auto;
-  overflow: hidden;
-}
 /* 
 
 
@@ -241,16 +236,6 @@ html {
   @apply mx-auto flex justify-center items-center;
 }
 
-.image-container {
-  position: relative;
-  width: 100%;
-  padding-top: 56%;
-  background-image: url("/images/HangmanStage.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .stick-man {
   position: absolute;
   top: 42%;
@@ -259,12 +244,6 @@ html {
   z-index: 10;
   max-height: 50%;
   max-width: 100%;
-}
-
-.image-container img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .home-game-button,

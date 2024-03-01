@@ -32,7 +32,7 @@ import GlassesImage from "/images/lives/items/glasses.svg";
 import HatImage from "/images/lives/items/hat.svg";
 import LeftShoeImage from "/images/lives/items/LShoe.svg";
 import RightShoeImage from "/images/lives/items/RShoe.svg";
-import NooseImage from "/images/Noose.png";
+import NooseImage from "/images/lives/items/noose.svg";
 
 // constants
 const canvas = document.getElementById("myCanvas");

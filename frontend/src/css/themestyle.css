@@ -198,10 +198,47 @@
   font-size: 13px;
   font-family: Tiro Telugu;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 20px;
   word-wrap: break-word;
   padding-left: 10px;
 }
+
+/* About Page Styles */
+.table-text {
+	justify-content: flex-center;
+	font-family: Underdog;
+	font-size: 16px; 
+	text-align: left; 
+	line-height: 18px; 
+	list-style-position: inside;
+	padding: 5px;
+	margin: 1px;
+	border-spacing: 10px 0;
+}
+
+th, td {
+  padding-left: 20px;
+  text-align: left;
+  line-height: 14px; 
+}
+
+.about-style {
+  text-align: left;
+  font-size: 16px;
+  font-family: Underdog;
+  line-height: 24px;
+  word-wrap: break-word;
+  padding-left: 10px;
+}
+
+.scrollable2-div {
+  justify-content: flex-center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 250px;
+  width: auto;
+}
+/* End of About Page styles */
 
 .scrollable-div {
   justify-content: flex-start;
@@ -210,6 +247,7 @@
   height: 500px;
   width: auto;
 }
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 12px;

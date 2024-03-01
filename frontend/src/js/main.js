@@ -18,7 +18,6 @@ import loadLoginPage from "./login.js";
 import loadAccountPage from "./account.js";
 import loadIndexPage from "./index.js";
 import Toastify from "toastify-js";
-// import './preload_images';
 gsap.registerPlugin(TextPlugin);
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);

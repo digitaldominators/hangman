@@ -51,7 +51,7 @@ footer {
   height: auto;
   cursor: pointer;
   object-fit: contain;
-  max-width: 60%;
+  max-width: 100%;
 }
 
 .person-square-img {

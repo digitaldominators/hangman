@@ -100,6 +100,30 @@
   </div>
 </div>
 
+<!-- Recent Games Popup Button -->
+<div class="flex justify-center items-start" style="padding-top: 0px">
+  <div class="text-center px-8 pt-6 pb-8 font-shortStack" style="width: auto; max-width: 2000px">
+    <button id="recent_games_button" class="inline-block text-[20px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[17px];">
+      Recent Games
+    </button>
+  </div>
+</div>
+
+<!-- Popup Containing Recent Games Data -->
+<dialog id="recent_games_dialog" class="dialog-box" style="padding: 10px">
+  <h2 class="signup_text p-4 account_form">Recent Games</h2>
+  <p
+    id="popup_error_message"
+    class="text-center text-red-700 relative top-[-25px] pointer-events-none"
+    style="font-size: 20px; padding-top: 30px"
+  ></p>
+  <div id="close_button" style="padding-top: 8px">
+    <button class="game-history-close-button inline-block text-[16px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[12px] py-[8px]">
+      Close
+    </button>
+  </div>
+</dialog>
+
 <div class="flex justify-center items-start" style="padding-top: 0px">
   <form
     class="text-center px-8 pt-6 pb-8 font-shortStack"

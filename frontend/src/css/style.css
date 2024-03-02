@@ -387,3 +387,44 @@ Other small pages
 .button-section button.active {
   border: 3px black solid;
 }
+
+/* 
+
+
+Game history popup and table
+
+
+
+*/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.game-history-button {
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 4px;
+  color: black;
+  padding: 4px 6px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.game-history-close-button {
+  background-color: rgb(74, 168, 168);
+  border-color: #000000;
+  color: black;
+  cursor: pointer;
+}

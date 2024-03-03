@@ -7,7 +7,7 @@ export default function confetti() {
     let confettiContainer = document.getElementsByTagName("html")[0];
     let total = 100;
     let w = confettiContainer.getBoundingClientRect().width;
-    let h = confettiContainer.getBoundingClientRect().height;
+    let h = confettiContainer.getBoundingClientRect().height-20;
 
     for (let i=0; i<total; i++){
         let dot = document.createElement('div');

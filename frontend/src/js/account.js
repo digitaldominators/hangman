@@ -67,12 +67,18 @@ function displayRecentGames() {
 }
 
 function createTable(data) {
-  const table = document.createElement('table');
-  table.setAttribute('id', 'game_history_table');
-  const tableHead = document.createElement('thead');
-  const tableBody = document.createElement('tbody');
-  const columnNames = ['Word', 'Status', 'Score', 'Level', 'Multiplayer', ''];
-  const gameFields = ['word', 'status', 'game_score', 'level', 'is_multiplayer'];
+  const table = document.createElement("table");
+  table.setAttribute("id", "game_history_table");
+  const tableHead = document.createElement("thead");
+  const tableBody = document.createElement("tbody");
+  const columnNames = ["Word", "Status", "Score", "Level", "Multiplayer", ""];
+  const gameFields = [
+    "word",
+    "status",
+    "game_score",
+    "level",
+    "is_multiplayer",
+  ];
 
   // Append the table head and body to the table
   table.appendChild(tableHead);
@@ -87,23 +93,23 @@ function createTable(data) {
   });
 
   // Create table body
-  data.forEach(game => {
-    let gameSlug = game['game_slug'];
-    let multiplayer = game['is_multiplayer'];
-    let status = game['status'];
+  data.forEach((game) => {
+    let gameSlug = game["game_slug"];
+    let multiplayer = game["is_multiplayer"];
+    let status = game["status"];
     let row = tableBody.insertRow();
     gameFields.forEach((column) => {
       let cell = row.insertCell();
       cell.textContent = game[column];
     });
-    if (status === 'you won' || status === 'you lost') {
+    if (status === "you won" || status === "you lost") {
       row.insertCell();
     } else {
       let cell = row.insertCell();
-      let gameButton = document.createElement('button');
-      gameButton.innerText = 'Continue';
-      gameButton.setAttribute('class', 'game-history-button');
-      gameButton.addEventListener('click', () => {
+      let gameButton = document.createElement("button");
+      gameButton.innerText = "Continue";
+      gameButton.setAttribute("class", "game-history-button");
+      gameButton.addEventListener("click", () => {
         redirectGame(gameSlug, multiplayer);
       });
       cell.appendChild(gameButton);

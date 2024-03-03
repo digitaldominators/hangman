@@ -1,6 +1,6 @@
 import axios from "axios";
 import barba from "@barba/core";
-import {setCookie} from "./readCookie.js";
+import { setCookie } from "./readCookie.js";
 
 let password_form;
 let logout_form;
@@ -58,7 +58,7 @@ function loadAccountInfo() {
 function displayRecentGames() {
   axios.get("api/game/").then((response) => {
     if (Object.keys(response.data).length) {
-      createTable(response.data)
+      createTable(response.data);
     } else {
       document.getElementById("popup_error_message").innerHTML =
         "You have not played any games yet";
@@ -80,11 +80,11 @@ function createTable(data) {
 
   // Create table head
   let row = tableHead.insertRow();
-  columnNames.forEach(name => {
-    let column = document.createElement('th');
+  columnNames.forEach((name) => {
+    let column = document.createElement("th");
     column.textContent = name;
     row.appendChild(column);
-  })
+  });
 
   // Create table body
   data.forEach(game => {
@@ -92,7 +92,7 @@ function createTable(data) {
     let multiplayer = game['is_multiplayer'];
     let status = game['status'];
     let row = tableBody.insertRow();
-    gameFields.forEach(column => {
+    gameFields.forEach((column) => {
       let cell = row.insertCell();
       cell.textContent = game[column];
     });
@@ -111,16 +111,18 @@ function createTable(data) {
   });
 
   // Append the table to the HTML document
-  const closeButton = document.getElementById('close_button');
-  document.getElementById('recent_games_dialog').insertBefore(table, closeButton);
+  const closeButton = document.getElementById("close_button");
+  document
+    .getElementById("recent_games_dialog")
+    .insertBefore(table, closeButton);
 }
 
 function redirectGame(gameSlug, multiplayer) {
   setCookie("current_game", gameSlug, 100);
   if (multiplayer) {
-    barba.go('/multigame');
+    barba.go("/multigame");
   } else {
-    barba.go('/game');
+    barba.go("/game");
   }
 }
 
@@ -138,15 +140,17 @@ export default function loadAccountPage() {
   popup_error_message = document.getElementById("popup_error_message");
 
   const dialog = document.getElementById("recent_games_dialog");
-  document.getElementById("recent_games_button").addEventListener("click", () => {
-    displayRecentGames();
-    dialog.showModal();
-  });
+  document
+    .getElementById("recent_games_button")
+    .addEventListener("click", () => {
+      displayRecentGames();
+      dialog.showModal();
+    });
 
   const closeButton = document.getElementById("close_button");
   closeButton.addEventListener("click", () => {
     dialog.close();
-    const table = document.getElementById('game_history_table');
+    const table = document.getElementById("game_history_table");
     if (table) {
       table.remove();
     }

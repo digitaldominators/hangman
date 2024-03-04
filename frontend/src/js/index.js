@@ -40,7 +40,7 @@ function showCurrentGameNotification() {
   }
   if (readCookie("current_game")) {
     let notif = document.createElement("div");
-    notif.innerHTML = "You are in middle of a game. &ensp;&ensp;&ensp;";
+    notif.innerHTML = "Game in progress &ensp;&ensp;&ensp;";
     notif.classList.add(
       "toastify",
       "on",

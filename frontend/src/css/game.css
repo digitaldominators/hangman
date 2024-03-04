@@ -305,11 +305,8 @@
   }
 }
 
-
-
 #gameStageContainer {
   max-width: 400px; /* preferred max size */
   max-height: 400px; /* maintains aspect ratio */
   margin: auto; /* centers the stage */
-  
 }

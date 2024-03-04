@@ -395,6 +395,13 @@ Game history popup and table
 
 */
 
+
+
+.tableFixHead thead th {
+  position: sticky; /* make the table heads sticky */
+  top: 0;         /* table head will be placed from the top of the table and sticks to it */
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -405,6 +412,16 @@ td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: rgb(74, 168, 168);
+}
+
+.table-container {
+  max-height: 76vh;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .game-history-button {

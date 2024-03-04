@@ -118,9 +118,7 @@ function createTable(data) {
 
   // Append the table to the HTML document
   const closeButton = document.getElementById("close_button");
-  document
-    .getElementById("table_container")
-    .appendChild(table);
+  document.getElementById("table_container").appendChild(table);
 }
 
 function redirectGame(gameSlug, multiplayer) {

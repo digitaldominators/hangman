@@ -1,13 +1,16 @@
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="images/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Play Hangman online by guessing the randomly generated word in single player mode or compete against a friend who selects the word in multiplayer mode.">
-    <script type="module" src="/js/main.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    {{#if title }}
-    <title>{{ title }} | Hangman</title>
-    {{^}}
-    <title>Hangman</title>
-    {{/if}}
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/images/icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Play Hangman online by guessing the randomly generated word in single player mode or compete against a friend who selects the word in multiplayer mode."
+  />
+  <script type="module" src="/js/main.js"></script>
+  <link rel="stylesheet" href="/css/style.css" />
+  {{#if title }}
+  <title>{{ title }} | Hangman</title>
+  {{^}}
+  <title>Hangman</title>
+  {{/if}}
 </head>

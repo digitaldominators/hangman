@@ -1,8 +1,11 @@
 {{#> base title='Login' namespace='login'}} {{#*inline "content"}}
 
-<div class="flex justify-center items-start" style="padding-top: 0px">
+<div
+  class="flex justify-center items-start"
+  style="padding-top: 0px; margin-top: -140px"
+>
   <form
-    class="text-center px-8 pt-6 pb-8 font-shortStack"
+    class="text-center px-8 pt-6 pb-8 font-shortStack form-container"
     id="login_form"
     style="width: auto; max-width: 2000px"
   >
@@ -17,7 +20,7 @@
         name="username"
         placeholder="Username"
         id="username_box"
-        class="inline-block text-[40px] w-full border-black border-4 rounded text-center"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center"
         autofocus
         style="margin-bottom: 16px"
       />
@@ -28,7 +31,8 @@
         name="password"
         placeholder="Password"
         id="password_box"
-        class="inline-block text-[40px] w-full border-black border-4 rounded text-center"
+        class="inline-block text-[35px] w-full border-black border-4 rounded text-center"
+        style="margin-bottom: 16px"
       />
     </div>
     <button
@@ -43,9 +47,9 @@
   <span class="text-gray-600">Don't have an account yet ?</span>
   <a
     href="/signup"
-    class="inline-block text-[15px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[6px] text-black-600 hover:text-white font-bold border-4"
+    class="inline-block text-[10px] font-bold rounded-3xl text-button-outline border-4 border-button-outline text-center hover:bg-hover-button hover:text-white hover:shadow-inner hover:border-hover-button-border duration-300 px-[10px] py-[6px] text-black-600"
     >SIGN UP</a
   >
 </div>
 
-{{/inline}} {{/base }}
+{{/inline}} {{/base}}

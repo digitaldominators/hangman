@@ -1,27 +1,38 @@
-import baseimage from "/images/HangmanStage.png";
+import baseimage from "../images/StageNoN.png";
 // stick figure images
-import stickHeadImage from "/images/lives/stick/stickHead.svg";
-import stickTorsoImage from "/images/lives/stick/stickTorso.svg";
-import stickLeftArmImage from "/images/lives/stick/stickLArm2.svg";
-import stickLeftHandImage from "/images/lives/stick/stickLHand.svg";
-import stickRightArmImage from "/images/lives/stick/stickRArm2.svg";
-import stickRightHandImage from "/images/lives/stick/stickRHand.svg";
-import stickLeftLegImage from "/images/lives/stick/stickLLeg2.svg";
-import stickLeftFootImage from "/images/lives/stick/stickLFoot.svg";
-import stickRightLegImage from "/images/lives/stick/stickRLeg2.svg";
-import stickRightFootImage from "/images/lives/stick/stickRFoot.svg";
+import stickHeadImage from "../images/lives/stick/stickHead2.png";
+import stickRightEyeImage from "../images/lives/stick/stickREye.png";
+import stickLeftEyeImage from "../images/lives/stick/stickLEye.png";
+import stickMouthImage from "../images/lives/stick/stickMouth.png";
+import stickTorsoImage from "../images/lives/stick/stickTorso2.png";
+import stickLeftArmImage from "../images/lives/stick/stickLArm2.png";
+import stickLeftHandImage from "../images/lives/stick/stickLHand.svg";
+import stickRightArmImage from "../images/lives/stick/stickRArm2.svg";
+import stickRightHandImage from "../images/lives/stick/stickRHand.svg";
+import stickLeftLegImage from "../images/lives/stick/stickLLeg2.svg";
+import stickLeftFootImage from "../images/lives/stick/stickLFoot.svg";
+import stickRightLegImage from "../images/lives/stick/stickRLeg2.svg";
+import stickRightFootImage from "../images/lives/stick/stickRFoot.svg";
 // skele images
-import skeleHeadImage from "/images/lives/skele/skeleHead.png";
-import skeleTorsoImage from "/images/lives/skele/skeleTorso.png";
-import skeleLeftArmImage from "/images/lives/skele/skele_LArm.png";
-import skeleRightArmImage from "/images/lives/skele/skele_RArm.png";
-import skeleLeftLegImage from "/images/lives/skele/skele_LLeg.png";
-import skeleRightLegImage from "/images/lives/skele/skele_RLeg.png";
+import skeleHeadImage from "../images/lives/skele/skeleHead2.png";
+import skeleRightEyeImage from "../images/lives/skele/skeleREye.png";
+import skeleLeftEyeImage from "../images/lives/skele/skeleLEye.png";
+import skeleNoseImage from "../images/lives/skele/skeleNose.png";
+import skeleTorsoImage from "../images/lives/skele/skeleTorso.svg";
+import skeleLeftArmImage from "../images/lives/skele/skeleLArm.svg";
+import skeleLeftHandImage from "../images/lives/skele/skeleLHand.svg";
+import skeleRightArmImage from "../images/lives/skele/skeleRArm.svg";
+import skeleRightHandImage from "../images/lives/skele/skeleRHand.svg";
+import skeleLeftLegImage from "../images/lives/skele/skeleLLeg.svg";
+import skeleLeftFootImage from "../images/lives/skele/skeleLFoot.svg";
+import skeleRightLegImage from "../images/lives/skele/skeleRLeg.svg";
+import skeleRightFootImage from "../images/lives/skele/skeleRFoot.svg";
 // items
-import GlassesImage from "/images/lives/items/glasses.svg";
-import HatImage from "/images/lives/items/hat.svg";
-import LeftShoeImage from "/images/lives/items/LShoe.svg";
-import RightShoeImage from "/images/lives/items/RShoe.svg";
+import GlassesImage from "../images/lives/items/glasses.svg";
+import HatImage from "../images/lives/items/hat.svg";
+import LeftShoeImage from "../images/lives/items/LShoe.svg";
+import RightShoeImage from "../images/lives/items/RShoe.svg";
+import NooseImage from "../images/lives/items/noose.svg";
 
 let canvas;
 let context;
@@ -29,39 +40,66 @@ let ratio;
 // prettier-ignore
 const bodyParts = {
   stick: [
-    {name: 'head', x: 325, y: 150, width: 70, height: 70, url: stickHeadImage},
-    {name: 'torso', x: 355, y: 210, width: 13, height: 100, url: stickTorsoImage},
-    {name: 'left_arm', x: 300, y: 210, width: 75, height: 100, url: stickLeftArmImage},
-    {name: 'left_hand', x: 288, y: 272, width: 50, height: 55, url: stickLeftHandImage},
-    {name: 'right_arm', x: 340, y: 195, width: 75, height: 120, url: stickRightArmImage},
-    {name: 'right_hand', x: 372, y: 261, width: 60, height: 75, url: stickRightHandImage},
-    {name: 'left_leg', x: 295, y: 284, width: 97, height: 142, url: stickLeftLegImage},
-    {name: 'left_foot', x: 270, y: 365, width: 97, height: 100, url: stickLeftFootImage},
-    {name: 'right_leg', x: 340, y: 283, width: 87, height: 140, url: stickRightLegImage},
-    {name: 'right_foot', x: 370, y: 348, width: 87, height: 145, url: stickRightFootImage},
-    {name: 'hat', x: 315, y: 125, width: 80, height: 65, url: HatImage},
-    {name: 'glasses', x: 325, y: 175, width: 80, height: 30, url: GlassesImage},
+    {name: 'noose', x: 282, y: -20, width: 160, height: 290, url: NooseImage},
+    {name: 'head', x: 295, y: 112, width: 130, height: 165, url: stickHeadImage},
+    {name: 'right_eye', x: 349, y: 158, width: 50, height: 50, url: stickRightEyeImage},
+    {name: 'left_eye', x: 318, y: 158, width: 50, height: 50, url: stickLeftEyeImage},
+    {name: 'mouth', x: 336, y: 181, width: 50, height: 40, url: stickMouthImage},
+    {name: 'torso', x: 333, y: 205, width: 55, height: 110, url: stickTorsoImage},
+    {name: 'left_arm', x: 300, y: 212, width: 75, height: 100, url: stickLeftArmImage},
+    {name: 'left_hand', x: 289, y: 275, width: 50, height: 55, url: stickLeftHandImage},
+    {name: 'right_arm', x: 340, y: 199, width: 75, height: 120, url: stickRightArmImage},
+    {name: 'right_hand', x: 370, y: 261, width: 60, height: 75, url: stickRightHandImage},
+    {name: 'left_leg', x: 295, y: 289, width: 97, height: 130, url: stickLeftLegImage},
+    {name: 'left_foot', x: 272, y: 365, width: 92, height: 95, url: stickLeftFootImage},
+    {name: 'right_leg', x: 338, y: 280, width: 87, height: 140, url: stickRightLegImage},
+    {name: 'right_foot', x: 367, y: 340, width: 85, height: 138, url: stickRightFootImage},
+    {name: 'hat', x: 308, y: 110, width: 100, height: 80, url: HatImage},
+    {name: 'glasses', x: 321, y: 173, width: 80, height: 30, url: GlassesImage},
     {name: 'left_shoe', x: 280, y: 390, width: 60, height: 60, url: LeftShoeImage},
-    {name: 'right_shoe', x: 382, y: 390, width: 60, height: 60, url: RightShoeImage}
+    {name: 'right_shoe', x: 384, y: 390, width: 60, height: 60, url: RightShoeImage}
   ],
   skele: [
-    {name: "head", x: 310, y: 140, width: 100, height: 100, url: skeleHeadImage},
-    {name: "torso", x: 310, y: 215, width: 100, height: 100, url: skeleTorsoImage},
-    {name: "left_arm", x: 270, y: 223, width: 76, height: 105, url: skeleLeftArmImage},
-    {name: "right_arm", x: 380, y: 223, width: 76, height: 105, url: skeleRightArmImage},
-    {name: "left_leg", x: 270, y: 310, width: 97, height: 142, url: skeleLeftLegImage},
-    {name: "right_leg", x: 335, y: 302, width: 105, height: 160, url: skeleRightLegImage},
-    { name: "hat", x: 345, y: 290, width: 87, height: 146, url: HatImage},
-    {name: "glasses", x: 345, y: 290, width: 87, height: 146, url: GlassesImage},
-    {name: "left_shoe", x: 345, y: 290, width: 87, height: 146, url: LeftShoeImage},
-    {name: "right_shoe", x: 345, y: 290, width: 87, height: 146, url: RightShoeImage},
+    {name: 'noose', x: 282, y: -20, width: 160, height: 290, url: NooseImage},
+    {name: "head", x: 300, y: 120, width: 120, height: 120, url: skeleHeadImage},
+    {name: 'right_eye', x: 365, y: 165, width: 25, height: 37, url: skeleRightEyeImage},
+    {name: 'left_eye', x: 335, y: 165, width: 25, height: 37, url: skeleLeftEyeImage},
+    {name: 'nose', x: 351, y: 183, width: 22, height: 22, url: skeleNoseImage},
+    {name: "torso", x: 315, y: 213, width: 90, height: 115, url: skeleTorsoImage},
+    {name: "left_arm", x: 293, y: 226, width: 44, height: 98, url: skeleLeftArmImage},
+    {name: 'left_hand', x: 270, y: 282, width: 55, height: 60, url: skeleLeftHandImage},
+    {name: "right_arm", x: 385, y: 220, width: 45, height: 105, url: skeleRightArmImage},
+    {name: 'right_hand', x: 398, y: 275, width: 60, height: 79, url: skeleRightHandImage},
+    {name: "left_leg", x: 301, y: 314, width: 85, height: 135, url: skeleLeftLegImage},
+    {name: 'left_foot', x: 283, y: 393, width: 82, height: 70, url: skeleLeftFootImage},
+    {name: "right_leg", x: 342, y: 312, width: 70, height: 140, url: skeleRightLegImage},
+    {name: 'right_foot', x: 345, y: 397, width: 82, height: 65, url: skeleRightFootImage},
+    {name: 'hat', x: 309, y: 105, width: 100, height: 85, url: HatImage},
+    {name: 'glasses', x: 322, y: 175, width: 80, height: 30, url: GlassesImage},
+    {name: 'left_shoe', x: 296, y: 397, width: 60, height: 60, url: LeftShoeImage},
+    {name: 'right_shoe', x: 363, y: 398, width: 60, height: 60, url: RightShoeImage}
   ],
 };
 
-const bodyType = "stick";
+let bodyType = "stick";
 
 let body_part_index = 0;
 
+export function get_current_part_index() {
+  return body_part_index;
+}
+
+export function get_total_parts() {
+  return bodyParts[bodyType].length;
+}
+
+export function set_body_type(type) {
+  bodyType = type;
+}
+
+export function get_body_types() {
+  return Object.keys(bodyParts);
+}
 export function refreshCanvas(currentpercent) {
   canvas = document.getElementById("gameStage");
   context = canvas.getContext("2d");

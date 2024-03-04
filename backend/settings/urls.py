@@ -51,6 +51,8 @@ def game_view(request, slug=None):
     except TemplateDoesNotExist:
         raise Http404()
 
+def sound_redirect(request, path):
+    return redirect(f"{settings.STATIC_URL}sounds/{path}")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -59,6 +61,7 @@ urlpatterns = [
     path("api/accounts/", include("django.contrib.auth.urls")),
     path("", game_view),
     path("<slug:slug>/", game_view),
+    path("sounds/<path:path>", sound_redirect),
 ]
 
 if settings.DEBUG:

@@ -1,38 +1,32 @@
 {{#> base title='Settings' namespace='settings'}} {{#*inline "content"}}
 
-<h1 class="font-titanOne text-center m-auto text-4xl md:text-5xl lg:text-6xl">
-  SETTINGS
-</h1>
+<p
+  class="signup_text p-4"
+  style="font-size: 40px; margin-bottom: 4px; margin-top: -50px"
+>
+  Settings
+</p>
 <div class="grid grid-cols-1 md:grid-cols-3 mx-auto w-[100vw] md:w-full px-10">
   <div class="settings-label">Sounds</div>
   <div
     class="md:col-span-2 flex justify-center md:justify-start md:place-items-center"
   >
     <label class="switch">
-      <input type="checkbox" checked />
+      <input type="checkbox" checked id="sound_switch" />
       <span></span>
     </label>
   </div>
 
   <div class="settings-label">Level</div>
   <div class="md:col-span-2">
-    <div class="button-section disabled justify-around">
-      <button
-        data-level="1"
-        class="level-button text-lg md:text-xl lg:text-2xl"
-      >
+    <div class="button-section disabled justify-around" id="level_section">
+      <button data-level="1" class="text-lg md:text-xl lg:text-2xl">
         Easy
       </button>
-      <button
-        data-level="2"
-        class="level-button text-lg md:text-xl lg:text-2xl"
-      >
+      <button data-level="2" class="text-lg md:text-xl lg:text-2xl">
         Medium
       </button>
-      <button
-        data-level="3"
-        class="level-button text-lg md:text-xl lg:text-2xl"
-      >
+      <button data-level="3" class="text-lg md:text-xl lg:text-2xl">
         Hard
       </button>
     </div>
@@ -79,6 +73,11 @@
         />
       </svg>
     </button>
+  </div>
+  <div class="settings-label">Character</div>
+  <div class="button-section">
+    <button id="skele_button">Skeleton</button>
+    <button id="stick_button">Stick man</button>
   </div>
 </div>
 <br />

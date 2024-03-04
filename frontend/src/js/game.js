@@ -1,10 +1,13 @@
 import moment from "moment";
 import axios from "axios";
 import readCookie, { setCookie } from "./readCookie.js";
-import barba from "@barba/core";
 import { gsap } from "gsap";
 import confetti from "./confetti.js";
-import { draw_next_body_part, refreshCanvas } from "./stageCanvas.js";
+import {
+  draw_percent_of_body,
+  set_body_type,
+  refreshCanvas,
+} from "./stageCanvas.js";
 
 let category;
 let phrase;
@@ -14,6 +17,21 @@ let second_player_score;
 let second_player_name;
 let timer;
 let next_turn_time = null;
+let incorrect_guesses = 0;
+let level;
+let second_player_data_interval_id;
+function draw_next_loss_percent() {
+  incorrect_guesses++;
+  let percent = 0;
+  if (level === 1) {
+    percent = 100 / 18;
+  } else if (level === 2) {
+    percent = 100 / 10;
+  } else if (level === 3) {
+    percent = 100 / 6;
+  }
+  draw_percent_of_body(percent * incorrect_guesses);
+}
 
 function set_turn_time() {
   if (next_turn_time) {
@@ -39,6 +57,7 @@ async function loadGameData() {
   // initial game setup
   // set the category name
   category.innerText = response.data.category;
+  level = response.data.level;
   // set the scores
   active_player_score.innerText = response.data.game_score;
   if (second_player_score && response.data.other_player_game_score) {
@@ -48,6 +67,10 @@ async function loadGameData() {
   // set the players names
   if (response.data.player_name) {
     active_player_name.innerText = response.data.player_name;
+  } else {
+    let p = document.createElement("p");
+    p.innerHTML = `<a href="/login" style="color: blue">Login</a> to save your scores`;
+    document.getElementById("game_over_message_box").appendChild(p);
   }
   if (response.data.other_player_name && second_player_name) {
     second_player_name.innerText = response.data.other_player_name;
@@ -72,19 +95,32 @@ async function loadGameData() {
       response.data.incorrect_guesses.includes(letter.innerText.toLowerCase())
     ) {
       letter.classList.add("incorrect");
-      draw_next_body_part();
     }
+  }
+  for (let i in response.data.incorrect_guesses) {
+    draw_next_loss_percent();
   }
   phrase.innerHTML = letters;
 
   if (response.data.is_multiplayer) {
-    setTimeout(() => {
+    second_player_data_interval_id = setTimeout(() => {
       getSecondPlayerData();
     }, 1000);
+  }
+
+  if (response.data.status === "you won") {
+    winGame();
+  }
+
+  if (response.data.status === "you lost") {
+    loseGame();
   }
 }
 
 function getSecondPlayerData() {
+  if (readCookie("current_game") === null) {
+    return;
+  }
   axios
     .get(`/api/game/${readCookie("current_game")}/`)
     .then((response) => {
@@ -185,26 +221,78 @@ function displayGameData(data) {
     } else if (data.incorrect_guesses.includes(el.innerText.toLowerCase())) {
       el.classList.remove("active");
       el.classList.add("incorrect");
-      draw_next_body_part();
+      draw_next_loss_percent();
     }
   }
 
   if (data.status === "you won") {
-    confetti();
-    setTimeout(() => {
-      // delete cookie
-      setCookie("current_game", "", -1);
-      barba.go("/youwon");
-    }, 1000);
+    winGame();
   }
 
   if (data.status === "you lost") {
-    setTimeout(() => {
-      // delete cookie
-      setCookie("current_game", "", -1);
-      barba.go("/youlost");
-    }, 1000);
+    loseGame();
   }
+}
+
+function gameEnded() {
+  // stop trying to fetch the other players scores the game is over
+  if (second_player_data_interval_id) {
+    clearInterval(second_player_data_interval_id);
+  }
+  // set the current game cookie to expire
+  // so that the player has to choose a different game
+  setCookie("current_game", "", -1);
+}
+
+function winGame() {
+  confetti();
+  const timeline = gsap.timeline();
+  document.getElementsByClassName("game-container")[0].classList.add("over");
+  const dialog = document.querySelector("#game_over_message_box");
+  dialog.showModal();
+  draw_percent_of_body(0);
+  timeline.to(
+    document.getElementById("gameStageContainer"),
+    { duration: 1, y: 100, scale: 0.9 },
+    "anim_start"
+  );
+  timeline.to(document.getElementById("game_over_message"), {
+    duration: 3,
+    text: "You Won!",
+    ease: "power2.out",
+  });
+  timeline.to(
+    document.getElementById("game_over_message_box"),
+    { duration: 4, borderColor: "rgb(2,65,2)" },
+    "anim_start"
+  );
+
+  gameEnded();
+}
+
+function loseGame() {
+  const timeline = gsap.timeline();
+  document.getElementsByClassName("game-container")[0].classList.add("over");
+  const dialog = document.querySelector("#game_over_message_box");
+  dialog.showModal();
+  draw_percent_of_body(100);
+  timeline.to(
+    document.getElementById("gameStageContainer"),
+    { duration: 1, y: 100, scale: 1.3 },
+    "anim_start"
+  );
+  timeline.to(document.getElementById("game_over_message"), {
+    duration: 3,
+    text: "You Lost :(",
+    ease: "power2.out",
+  });
+  timeline.to(
+    document.getElementById("game_over_message_box"),
+    { duration: 4, borderColor: "rgb(255,0,0)" },
+    "anim_start"
+  );
+
+  gameEnded();
 }
 
 function guessLetter(e) {
@@ -223,9 +311,36 @@ function guessLetter(e) {
     });
 }
 
+function guessWord(e) {
+  e.preventDefault();
+  const word_guess_input = document.getElementById("word_guess_input");
+
+  let value = word_guess_input.value;
+
+  axios
+    .put(`/api/game/${readCookie("current_game")}/`, { guess: value })
+    .then((response) => {
+      document
+        .getElementsByClassName("letter-buttons")[0]
+        .classList.remove("cursor-wait");
+      displayGameData(response.data);
+      word_guess_input.value = "";
+      if (incorrect_guesses < response.data.incorrect_guesses.length) {
+        draw_next_loss_percent();
+      }
+    });
+  document.getElementById("word_guess_box").close();
+}
+
 export default function loadGamePage() {
+  incorrect_guesses = 0;
   category = document.getElementById("category");
   timer = document.getElementById("timer");
+  if (readCookie("character") === "skele") {
+    set_body_type("skele");
+  } else {
+    set_body_type("stick");
+  }
 
   loadGameData();
 
@@ -244,6 +359,21 @@ export default function loadGamePage() {
   for (let item of document.getElementsByClassName("letter-button")) {
     item.onclick = guessLetter;
   }
+
+  document.getElementById("guessButton").onclick = () => {
+    document.getElementById("word_guess_box").showModal();
+  };
+  document.getElementById("guess_word_form").onsubmit = guessWord;
   refreshCanvas(0);
   setInterval(set_turn_time, 500);
+
+  document
+    .getElementById("sound-button")
+    .addEventListener("click", function () {
+      if (document.getElementById("game_music").paused) {
+        document.getElementById("game_music").play();
+      } else {
+        document.getElementById("game_music").pause();
+      }
+    });
 }

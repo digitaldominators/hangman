@@ -151,6 +151,32 @@
   font-size: 10px;
 }
 
+#game_over_message_box,
+#word_guess_box {
+  @apply duration-300 p-5 rounded-2xl;
+  border: 2px solid black;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#game_over_message_box[open],
+#word_guess_box[open] {
+  opacity: 95%;
+  pointer-events: inherit;
+}
+
+#game_over_message_box::backdrop,
+#word_guess_box::backdrop {
+  @apply duration-300;
+  opacity: 0.1;
+  background-color: #000;
+  pointer-events: none;
+}
+
+.player-info {
+  z-index: 2;
+}
 .score-box {
   font-size: 25px;
 }
@@ -172,40 +198,66 @@
   margin: 0 auto;
 }
 
+#timer {
+  @apply px-4 py-1 bg-[#008080] text-white text-3xl rounded-xl border-black border-2 duration-300 opacity-0 pointer-events-none;
+}
+
+.game-container.over #timer {
+  opacity: 0;
+}
+
+.game-container.over .word-display .letter {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.game-container.over .letter-buttons {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.game-container.over .guess-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .word-display {
-  display: flex;
+  display: block;
   justify-content: center;
-  flex-wrap: wrap;
   max-width: 90%;
   margin: 20px auto;
   font-size: 3vw;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .word-display .letter {
+  display: inline;
+  white-space: pre-wrap;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
   padding: 0 1vw;
-  margin: 0 0.5vw;
   border-bottom: 2px solid #000;
-  min-width: 2vw;
   text-align: center;
   height: 1em;
-  width: 50px;
   font-size: 3rem;
   color: #003939;
-  font-weight: 400;
-  font-family: Titan One;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-optical-sizing: auto;
   text-transform: uppercase;
-  margin-bottom: 35px;
+  margin: 0 0.5vw 35px;
   border-bottom: 5px solid #000;
   line-height: 48px;
-  word-wrap: break-word;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  -webkit-text-stroke-width: 1;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-text-stroke-color: var(--MainMenuColors-primary, #fff);
   flex-grow: 1;
 }
+
 .word-display .letter.guessed {
   border-color: transparent;
   margin: -40px 0 35px;
+  @apply duration-300;
 }
 @media (max-width: 991px) {
   .word-display .letter.guessed {
@@ -233,13 +285,6 @@
     justify-content: center;
     gap: 3px;
     margin-top: 5px;
-  }
-
-  .letter-button {
-    /*font-size: 16px;*/
-    /*width: 30px;*/
-    /*height: 30px;*/
-    /*padding: 2px;*/
   }
 
   .category-name {

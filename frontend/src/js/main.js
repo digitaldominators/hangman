@@ -16,21 +16,23 @@ import loadGamePage from "./game.js";
 import loadSignupPage from "./signup.js";
 import loadLoginPage from "./login.js";
 import loadAccountPage from "./account.js";
+import loadIndexPage from "./index.js";
 import Toastify from "toastify-js";
-// import './preload_images';
 gsap.registerPlugin(TextPlugin);
 gsap.globalTimeline.timeScale(2);
 barba.use(barbaPrefetch);
 
 // set axios defaults
-// axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.headers.post["Content-Type"] = "application/json";
-axios.defaults.headers.post["X-CSRFToken"] = readCookie("csrftoken");
 
 axios.defaults.headers.put["Accept"] = "application/json";
 axios.defaults.headers.put["Content-Type"] = "application/json";
-axios.defaults.headers.put["X-CSRFToken"] = readCookie("csrftoken");
+
+axios.interceptors.request.use(function (config) {
+  config.headers["X-CSRFToken"] = readCookie("csrftoken");
+  return config;
+});
 
 axios.interceptors.response.use(
   function (response) {
@@ -112,24 +114,9 @@ barba.init({
   // run the load code for each page.
   views: [
     {
-      namespace: "youlose",
-      afterEnter({ next }) {
-        document
-          .getElementById("main-container")
-          .classList.remove("wide-container");
-      },
-    },
-    {
-      namespace: "youwon",
-      afterEnter({ next }) {
-        document
-          .getElementById("main-container")
-          .classList.remove("wide-container");
-      },
-    },
-    {
       namespace: "index",
       afterEnter({ next }) {
+        loadIndexPage();
         document
           .getElementById("main-container")
           .classList.remove("wide-container");

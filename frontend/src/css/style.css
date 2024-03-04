@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&family=Titan+One&family=Inika&family=Unlock&family=VT323&family=Wallpoet&family=Itim&family=Underdog&family=IBM+Plex+Mono:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Underdog&display=swap');
+
 @import "join.css";
 @import "game.css";
 @import "themestyle.css";
@@ -22,6 +24,9 @@
     - game.html 
     - other small pages
     - login/signup.htmls
+    - about.html
+    - privacy.html 
+    - account.html
 
 */
 /* 
@@ -386,4 +391,137 @@ Other small pages
 
 .button-section button.active {
   border: 3px black solid;
+}
+
+
+/* 
+
+
+About Page
+
+
+
+*/
+.about-container {
+  width: 100%;
+  padding: 5px 100px 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: 'Underdog', sans-serif; /* Default font */
+  color: rgba(0, 57, 57, 1);
+}
+
+/* Override for specific sections */
+.about-heading, .digital-dominators {
+  font-family: 'Titan One', sans-serif; /* Override font for these elements */
+  text-align: center;
+}
+
+.about-heading {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: normal;
+  margin-top: -50px;
+}
+
+.digital-dominators { /* Additional styling for 'DIGITAL DOMINATORS' */
+  font-size: 25px; /* Adjust size as needed */
+  margin-top: 0px; /* Space below the logo */
+}
+
+.about-logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 20px;
+}
+
+.about-logo {
+  width: 100px; /* Half the original size */
+  height: auto;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+.project-lead {
+  text-align: center;
+  font-family: 'Underdog', sans-serif; /* Specified font for this section */
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.team-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.team-column h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.section-divider {
+  margin-top: 20px;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 57, 57, 0.75), rgba(0, 0, 0, 0));
+}
+
+.how-to-play, .multiplayer, .game-stats, .settings-page {
+  margin-top: 20px;
+  text-align: left; /* Ensure content is left-aligned */
+}
+
+.how-to-play h3, .multiplayer h3, .game-stats h3, .settings-page h3 {
+  font-size: 24px;
+  margin-bottom: 10px; /* Add some space between heading and paragraph */
+}
+
+.how-to-play p, .multiplayer p, .game-stats p, .settings-page p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* 
+
+
+Privacy Page
+
+
+
+*/
+.privacy-section, .sub-section {
+  text-align: left;
+}
+
+.privacy-section h3, .sub-section h4, .privacy-section p, .sub-section p, .sub-section ul {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Ensure list items are styled correctly */
+.privacy-section ul, .sub-section ul {
+  list-style-type: disc;
+  margin-left: 20px; /* Adjust as necessary for alignment */
+}
+
+
+
+
+
+
+/* 
+
+
+Account Page 
+
+
+
+*/
+
+.signup_text {
+  font-size: 48px; 
+  font-family: 'Titan One', sans-serif; 
 }

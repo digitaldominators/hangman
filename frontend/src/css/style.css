@@ -474,7 +474,7 @@ About Page
 }
 
 .scrollable-sections {
-  max-height: 400px; /* Adjust this value as needed */
+  max-height: 350px; /* Adjust this value as needed */
   overflow-y: auto; /* This makes the section scrollable */
   margin-top: 20px;
 }

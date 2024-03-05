@@ -34,7 +34,9 @@ install all python packages
     pip install -r requirements.txt
     python manage.py migrate
 
-to be able to play single player games you need to create a category and add 20+ words to it
+add default categories and words to database
+
+    python manage.py loaddata default_category_data.json
 
 note: if there are no words in the database the game will not allow you to create a single player game.
 

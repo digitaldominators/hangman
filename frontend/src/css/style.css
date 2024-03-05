@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Shojumaru&family=Short+Stack&family=Titan+One&family=Inika&family=Unlock&family=VT323&family=Wallpoet&family=Itim&family=Underdog&family=IBM+Plex+Mono:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Underdog&display=swap");
+
 @import "join.css";
 @import "game.css";
 @import "themestyle.css";
@@ -22,6 +24,9 @@
     - game.html 
     - other small pages
     - login/signup.htmls
+    - about.html
+    - privacy.html 
+    - account.html
 
 */
 /* 
@@ -51,7 +56,7 @@ footer {
   height: auto;
   cursor: pointer;
   object-fit: contain;
-  max-width: 70%;
+  max-width: 100%;
 }
 
 .person-square-img {
@@ -388,10 +393,7 @@ Other small pages
 
 /* 
 
-
 Game history popup and table
-
-
 
 */
 
@@ -442,4 +444,172 @@ th {
   border-color: #000000;
   color: black;
   cursor: pointer;
+}
+  */
+  About Page
+
+
+
+*/
+.about-container {
+  width: 100%;
+  padding: 5px 100px 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: "Underdog", sans-serif; /* Default font */
+  color: rgba(0, 57, 57, 1);
+}
+
+/* Override for specific sections */
+.about-heading,
+.digital-dominators {
+  font-family: "Titan One", sans-serif; /* Override font for these elements */
+  text-align: center;
+}
+
+.about-heading {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+.digital-dominators {
+  /* Additional styling for 'DIGITAL DOMINATORS' */
+  font-size: 25px; /* Adjust size as needed */
+  margin-top: -30px; /* Space below the logo */
+}
+
+.about-logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 20px;
+}
+
+.about-logo {
+  width: 250px; /* Half the original size */
+  height: auto;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.project-lead {
+  text-align: center;
+  font-family: "Underdog", sans-serif; /* Specified font for this section */
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.team-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.team-column h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.section-divider {
+  margin-top: 20px;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 57, 57, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.scrollable-sections {
+  max-height: 350px; /* Adjust this value as needed */
+  overflow-y: auto; /* This makes the section scrollable */
+  margin-top: 20px;
+}
+
+.how-to-play,
+.multiplayer,
+.game-stats,
+.settings-page {
+  text-align: left; /* Ensure content is left-aligned */
+}
+
+.how-to-play h3,
+.multiplayer h3,
+.game-stats h3,
+.settings-page h3 {
+  font-size: 23px;
+  margin-bottom: 10px; /* Add some space between heading and paragraph */
+}
+
+.how-to-play p,
+.multiplayer p,
+.game-stats p,
+.settings-page p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* 
+
+
+Privacy Page
+
+
+*/
+
+/* General alignment and font size for privacy and sub-sections */
+.privacy-section,
+.sub-section {
+  text-align: left; /* Ensures text alignment is to the left */
+}
+
+/* Heading, paragraph, and list item styles */
+.privacy-section h3,
+.sub-section h4 {
+  font-size: 20px; /* Uniform font size for headings */
+  margin-top: 20px; /* Adds space above headings */
+  margin-bottom: 10px; /* Adds space below headings for separation */
+}
+
+.privacy-section p,
+.sub-section p {
+  font-size: 13px; /* Uniform font size for paragraphs */
+  margin-top: 10px; /* Adds space above paragraphs */
+}
+
+/* List styles */
+.privacy-section ul,
+.sub-section ul {
+  list-style-type: disc; /* Uses disc for list items */
+  margin-left: 20px; /* Indents lists for clear hierarchy */
+  font-size: 18px; /* Ensures list items match the text font size */
+}
+
+.privacy-section ul li,
+.sub-section ul li {
+  margin-top: 10px; /* Adds space above list items */
+}
+
+/* Scrollable container for the privacy sections */
+.scrollable-privacy-section {
+  max-height: 600px; /* Adjust based on your layout */
+  overflow-y: auto; /* Enables vertical scrolling for overflow content */
+  margin-top: 20px; /* Adds space above the scrollable container */
+}
+
+/* 
+
+
+Account Page 
+
+
+
+*/
+
+.signup_text {
+  font-size: 48px;
+  font-family: "Titan One", sans-serif;
 }

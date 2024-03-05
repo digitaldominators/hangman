@@ -100,8 +100,8 @@ export function set_body_type(type) {
 export function get_body_types() {
   return Object.keys(bodyParts);
 }
-export function refreshCanvas(currentpercent) {
-  canvas = document.getElementById("gameStage");
+export function refreshCanvas(currentpercent, canvasID = "gameStage") {
+  canvas = document.getElementById(canvasID);
   context = canvas.getContext("2d");
   canvas.style.width = "100%";
   canvas.style.height = "100%";

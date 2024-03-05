@@ -128,9 +128,7 @@ menu drop-down
   position: absolute;
   left: 0%;
   top: 100%;
-  width: 15vw;
-  max-width: 220px;
-  min-width: 160px;
+  width: 10vw;
   padding: 3px 0;
   background-color: #ffffffe0;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -395,12 +393,60 @@ Other small pages
 
 /* 
 
-
-About Page
-
-
+Game history popup and table
 
 */
+
+.tableFixHead thead th {
+  position: sticky; /* make the table heads sticky */
+  top: 0; /* table head will be placed from the top of the table and sticks to it */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: rgb(74, 168, 168);
+}
+
+.table-container {
+  /*max-height: 76vh;*/
+  @apply max-h-[80vh] md:max-h-[65vh];
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.game-history-button {
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 4px;
+  color: black;
+  padding: 4px 6px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.game-history-close-button {
+  background-color: rgb(74, 168, 168);
+  border-color: #000000;
+  color: black;
+  cursor: pointer;
+}
+/* About Page */
+
 .about-container {
   width: 100%;
   padding: 5px 100px 20px;

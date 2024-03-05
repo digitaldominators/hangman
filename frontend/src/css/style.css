@@ -445,7 +445,9 @@ th {
   color: black;
   cursor: pointer;
 }
-*/ About Page */ .about-container {
+/* About Page */ 
+
+.about-container {
   width: 100%;
   padding: 5px 100px 20px;
   margin: 0 auto;

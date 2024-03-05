@@ -89,8 +89,8 @@ function createTable(data) {
   columnNames.forEach((name) => {
     let column = document.createElement("th");
     column.textContent = name;
-    if (name==='Level' || name ==='Multiplayer'){
-      column.classList.add('hidden', 'md:table-cell')
+    if (name === "Level" || name === "Multiplayer") {
+      column.classList.add("hidden", "md:table-cell");
     }
 
     row.appendChild(column);
@@ -105,8 +105,8 @@ function createTable(data) {
     gameFields.forEach((column) => {
       let cell = row.insertCell();
       cell.textContent = game[column];
-      if (column==='level' || column ==='is_multiplayer'){
-        cell.classList.add('hidden', 'md:table-cell')
+      if (column === "level" || column === "is_multiplayer") {
+        cell.classList.add("hidden", "md:table-cell");
       }
     });
     if (status === "you won" || status === "you lost") {

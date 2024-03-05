@@ -417,7 +417,8 @@ th {
 }
 
 .table-container {
-  max-height: 76vh;
+  /*max-height: 76vh;*/
+  @apply max-h-[80vh] md:max-h-[65vh];
   overflow-y: auto;
   scrollbar-gutter: stable;
 }

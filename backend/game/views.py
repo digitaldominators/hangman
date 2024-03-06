@@ -86,12 +86,12 @@ class DefaultSettingsViewSet(viewsets.GenericViewSet):
             set_default_game_setting(
                 request, "timer", serializer.validated_data.get("timer")
             )
-        if request.data.get("timer") is not None:
+        if request.data.get("private") is not None:
             if request.user.is_authenticated:
                 game_settings, created = UserProfile.objects.get_or_create(
                     user=request.user
                 )
-                game_settings.private = serializer.validated_data.get("private")
+                game_settings.private = serializer.validated_data.get("private",False)
                 game_settings.save()
             else:
                 return Response(

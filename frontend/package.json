@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@barba/core": "^2.9.7",
-    "@barba/prefetch": "^2.1.10",
+    "@barba/prefetch": "^2.2.0",
     "axios": "^1.7.2",
     "gsap": "^3.12.5",
     "moment": "^2.30.1",

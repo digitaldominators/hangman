@@ -2,7 +2,9 @@
 
 requirements python 3.12, npm (node 20+), git
 
-git clone https://github.com/smark-1/hangman.git
+```bash
+git clone https://github.com/digitaldominators/hangman.git
+```
 
 ## backend
 

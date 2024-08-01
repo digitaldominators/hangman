@@ -1,9 +1,11 @@
 # Setup
 
 requirements python 3.12, npm (node 20+), git
+
 ```bash
 git clone https://github.com/digitaldominators/hangman.git
 ```
+
 ## backend
 
 install dependencies

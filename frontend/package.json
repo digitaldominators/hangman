@@ -18,7 +18,7 @@
   "dependencies": {
     "@barba/core": "^2.10.0",
     "@barba/prefetch": "^2.2.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "gsap": "^3.12.5",
     "moment": "^2.30.1",
     "toastify-js": "^1.12.0",

@@ -16,7 +16,7 @@
     "vite": "^5.3.5"
   },
   "dependencies": {
-    "@barba/core": "^2.10.2",
+    "@barba/core": "^2.10.3",
     "@barba/prefetch": "^2.2.0",
     "axios": "^1.7.3",
     "gsap": "^3.12.5",

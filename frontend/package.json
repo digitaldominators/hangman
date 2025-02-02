@@ -19,7 +19,7 @@
     "@barba/core": "^2.10.3",
     "@barba/prefetch": "^2.2.0",
     "axios": "^1.7.9",
-    "gsap": "^3.12.5",
+    "gsap": "^3.12.7",
     "moment": "^2.30.1",
     "toastify-js": "^1.12.0",
     "vite-plugin-handlebars": "^2.0.0"

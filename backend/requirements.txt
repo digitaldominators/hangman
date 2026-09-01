@@ -1,5 +1,5 @@
 Django==6.0.7
-djangorestframework==3.17.1
+djangorestframework==3.18.0
 python-dotenv==1.2.2
 gunicorn==26.2.0
 whitenoise==6.12.0

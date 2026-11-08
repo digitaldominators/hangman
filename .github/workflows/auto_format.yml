@@ -31,10 +31,15 @@ jobs:
         with:
           options: ''
           src: ${{ steps.changed-python-files.outputs.all_changed_files }}
-      - name: Format with Prettier
-        uses: actionsx/prettier@v2
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          args: ${{ steps.changed-files.outputs.all_changed_files }} --write --ignore-unknown
+          node-version: '20'
+      - name: Format with Prettier
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: npx --yes prettier@2.8.8 --write --ignore-unknown $CHANGED_FILES
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
